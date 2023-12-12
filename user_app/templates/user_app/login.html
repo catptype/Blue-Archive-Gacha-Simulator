@@ -1,0 +1,44 @@
+{% extends 'general_app/components/base.html' %} 
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="container bg-light p-5 form-layout">
+  <h3 class="text-center">Login account</h3>
+  <form method="POST" autocomplete="off" novalidate>
+    {% csrf_token %}
+    <div class="row debug-ok-layout">
+      <div class="col-10 offset-1 debug-dev-layout">
+        <div class="mb-3 debug-dev-layout">
+          <label>{{ form.username.label }}</label>
+          <div>{{ form.username }}</div>
+          {% if form.non_field_errors %}
+          <div class="text-danger">
+            {% for error in form.non_field_errors %} {{ error }} {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        <div class="mb-3 debug-dev-layout">
+          <label>{{ form.password.label }}</label>
+          <div>{{ form.password }}</div>
+        </div>
+        <div class="mb-3 debug-dev-layout">
+          <p class="mb-0">
+           <a href="{% url 'forget' %}">Forget password</a>
+          </p>
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary p-2 mb-3">Login</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row text-center debug-ok-layout">
+    <p class="mb-0">
+      Don't have an account? <a href="{% url 'register' %}">Register</a>
+    </p>
+  </div>
+</div>
+
+{% endblock %}

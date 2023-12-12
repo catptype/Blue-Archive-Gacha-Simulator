@@ -1,0 +1,11 @@
+{% extends 'general_app/components/base.html' %}
+
+{% block title %}Register complete{% endblock %}
+
+{% block content %}
+<div class="container bg-light p-5 text-center">
+    <h3>Registration Complete!</h3>
+    <p>Your account has been successfully created.</p>
+    <p><a href="{% url 'home' %}">Go to Home Page</a></p>
+</div>
+{% endblock %}

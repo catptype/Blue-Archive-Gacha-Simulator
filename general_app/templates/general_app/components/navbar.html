@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <div class="navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/' %}active disabled{% endif %}" href="{% url 'home' %}">Home</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'gacha' %}">Gacha</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/register' %}active disabled{% endif %}" href="{% url 'register' %}" >Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/login' %}active disabled{% endif %}" href="{% url 'login' %}">Login</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/about' %}active disabled{% endif %}" href="{% url 'about' %}">About</a>
+        </li>
+      </ul>
+    </div>
+    {% if user.is_authenticated %} {% if user.is_superuser %}
+    <div class="navbar-collapse justify-content-end">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+        </li>
+      </ul>
+    </div>
+    {% endif %} {% endif %}
+  </div>
+</nav>

@@ -1,0 +1,59 @@
+{% extends 'general_app/components/base.html' %} 
+
+{% block title %}Register{% endblock %} 
+
+{% block content %}
+
+<div class="container bg-light p-5 form-layout">
+  <h3 class="text-center">Create a new account</h3>
+  <form method="POST" autocomplete="off" novalidate>
+    {% csrf_token %}
+    <div class="row debug-ok-layout">
+      <div class="col-10 offset-1 debug-dev-layout">
+        <div class="mb-3 debug-dev-layout">
+          <label>{{ form.username.label }}</label>
+          <div>{{ form.username }}</div>
+          {% if form.username.errors %}
+          <div class="text-danger">
+            {% for error in form.username.errors %} {{ error }} {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        <div class="mb-3 debug-dev-layout">
+          <label>{{ form.password1.label }}</label>
+          <div>{{ form.password1 }}</div>
+        </div>
+        <div class="mb-3 debug-dev-layout">
+          <label>{{ form.password2.label }}</label>
+          <div>{{ form.password2 }}</div>
+          {% if form.password2.errors %}
+          <div class="text-danger">
+            {% for error in form.password2.errors %}
+            <p style="margin-bottom: 0px">{{ error }}</p>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        <div class="mb-3 debug-dev-layout">
+          {{ form.tos }}
+          <span style="font-size: small">{{ form.tos.label }}</span>
+          {% if form.tos.errors %}
+          <div class="text-danger">
+            {% for error in form.tos.errors %} {{ error }} {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary p-2 mb-3">Submit</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row text-center debug-ok-layout">
+    <p class="mb-0">
+      Already have an account? <a href="{% url 'login' %}">Login</a>
+    </p>
+  </div>
+</div>
+
+{% endblock %}

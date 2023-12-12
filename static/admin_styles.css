@@ -1,0 +1,20 @@
+
+#id_is_limited,
+#id_rarity {
+    display: flex;
+}
+
+.inline-radio label {
+    min-width: 80px;
+    width: 80px;
+}
+
+.inline-radio input[type="radio"] {
+    display: inline-block;
+    margin-right: 0.2rem; /* Optional: Add some spacing between the radio buttons */
+    margin-bottom: 0.2rem;
+}
+
+label[for=id_image] {
+    font-weight: bold;
+}
