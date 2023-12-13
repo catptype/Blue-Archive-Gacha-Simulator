@@ -8,12 +8,8 @@ def image_upload_path(instance, filename):
     filename = f'{instance.name}{version_str}_150{os.path.splitext(filename)[1]}'
     return os.path.join('portrait/', filename)
 
-def validate_school(value):
-    if value is None:
-        raise ValidationError('Please select a school.')
-
 class School(models.Model):
-    name = models.CharField(max_length=100, blank=False)
+    name = models.CharField(max_length=100, unique=True, blank=False)
 
     def get_student_names(self):
         return ', '.join(sorted(set(student.name for student in self.student_set.all())))
@@ -22,7 +18,6 @@ class School(models.Model):
         return self.name
     
 class Student(models.Model):
-    
     name = models.CharField(max_length=100, blank=False)
     version = models.CharField(max_length=50, blank=False, default='Original')
     rarity = models.PositiveIntegerField(choices=[(1, '★'), (2, '★★'), (3, '★★★')])
@@ -31,7 +26,7 @@ class Student(models.Model):
     image = models.ImageField(upload_to=image_upload_path, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.name}_{self.version}'
     
     def save(self, *args, **kwargs):
         try:
@@ -65,16 +60,27 @@ class Student(models.Model):
         except Student.DoesNotExist:
             pass
 
-    def clean_OLD(self):
-        # Find at least 1 object coresponding to student
-        student_record = Student.objects.filter(name=self.name).exclude(pk=self.pk).values().first()
-        if student_record:
-            student_school = School.objects.filter(id__in=[student_record['school_id']]).values().first()['name']
-            if str(self.school) != student_school:
-                raise ValidationError({'name': f'A student \'{self.name}\' already exists in \'{student_school}\' but you select \'{self.school}\'.'})
-
     class Meta:
         unique_together = ('name', 'version')
 
-class Banner(models.Model):
-    name = models.CharField(max_length=100, blank=False)
+
+    
+class GachaBanner(models.Model):
+    name = models.CharField(max_length=100, unique=True, blank=False)
+    rate_3_star = models.DecimalField(max_digits=4, decimal_places=1, blank=False)
+    rate_2_star = models.DecimalField(max_digits=4, decimal_places=1, blank=False)
+    rate_1_star = models.DecimalField(max_digits=4, decimal_places=1, blank=False)
+    is_pickup = models.ManyToManyField('Student', related_name='pickup', blank=True)
+    not_pickup = models.ManyToManyField('Student', related_name='not_pickup', blank=True)
+
+    def clean(self):
+        # Ensure that the sum of rates is equal to 100%
+        print(self.rate_3_star, self.rate_2_star, self.rate_1_star)
+        print(self.is_pickup.all())
+        total_rate = self.rate_3_star + self.rate_2_star + self.rate_1_star
+        if total_rate != 100.0:
+            raise ValidationError("MODEL The sum of rates must equal 100%.")
+        
+
+    def __str__(self):
+        return self.name
