@@ -44,7 +44,13 @@ class StudentAdminForm(forms.ModelForm):
 class GachaBannerAdminForm(forms.ModelForm):
 
     # Override widgets for rate fields
-    rate_widget = forms.TextInput(attrs={'type': 'number', 'step': '0.5', 'value': '0.0', 'min': '0.0', 'max': '100.0'})
+    rate_widget = forms.TextInput(attrs={
+        'type': 'number', 
+        'step': '0.5', 
+        'value': '0.0', 
+        'min': '0.0', 
+        'max': '100.0',
+    })
 
     rate_3_star = forms.DecimalField(widget=rate_widget)
     rate_2_star = forms.DecimalField(widget=rate_widget)
@@ -53,21 +59,17 @@ class GachaBannerAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['is_pickup'].label = 'Pickup 3★ Students'
         existing_not_pickup_id = [student.id for student in self.initial.get('not_pickup', [])]
+        self.fields['is_pickup'].label = 'Pickup 3★ Students'
         self.fields['is_pickup'].queryset = Student.objects.filter(rarity=3).exclude(id__in=existing_not_pickup_id).order_by('name')
 
-        self.fields['not_pickup'].label = 'Available Students'
         existing_pickup_id = [student.id for student in self.initial.get('is_pickup', [])]
+        self.fields['not_pickup'].label = 'Available Students'
         self.fields['not_pickup'].queryset = Student.objects.exclude(id__in=existing_pickup_id).order_by('-rarity', 'name', 'version')
     
 
     def clean(self):
         cleaned_data = super().clean()
-
-        rate_3_star = cleaned_data.get('rate_3_star')
-        rate_2_star = cleaned_data.get('rate_2_star')
-        rate_1_star = cleaned_data.get('rate_1_star')
 
         is_pickup = cleaned_data.get('is_pickup')
         not_pickup = cleaned_data.get('not_pickup')
@@ -79,7 +81,7 @@ class GachaBannerAdminForm(forms.ModelForm):
             raise ValidationError("The students in is_pickup and not_pickup.")
 
         # Ensure that the sum of rates is equal to 100%
-        total_rate = rate_3_star + rate_2_star + rate_1_star
+        total_rate = sum(cleaned_data.get(f'rate_{i}_star', 0) for i in [3, 2, 1])
         if total_rate != 100.0:
             raise ValidationError("The sum of rates must equal 100%.")
     
