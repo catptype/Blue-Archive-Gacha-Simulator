@@ -40,13 +40,14 @@ class StudentAdmin(admin.ModelAdmin):
     
     # Set field
     list_display = ['image_tag', 'name', 'version', 'rarity', 'school', 'is_limited', 'edit_button']
+    list_per_page = 10
     ordering = ['name']
 
     # Set search and filtering
     show_facets = admin.ShowFacets.ALWAYS
     search_fields = ['name']
-    list_filter = [RarityFilter, 'version', 'is_limited']
-    
+    list_filter = [RarityFilter, 'school', 'version', 'is_limited']
+
     # Custom field
     def image_tag(self, obj):
         if obj.image:
@@ -67,19 +68,52 @@ class StudentAdmin(admin.ModelAdmin):
 
 class GachaBannerAdmin(admin.ModelAdmin):
     form = GachaBannerAdminForm
-    list_display = ['name', 'pickup_list', 'not_pickup_list']
+    list_display = ['name', 'is_pickup_img','not_pickup_img']
+    list_per_page = 1
+    filter_horizontal = ('is_pickup', 'not_pickup')
 
-    def pickup_list(self, obj):
-        return ", ".join([student.name for student in obj.is_pickup.all()])
+    def get_student_images_html(self, students, rarity_symbol):
 
+        images_html = [
+            f'<div style="margin-bottom: 5px">'
+            f'<img src="{student.image.url}" alt="{student.name}_{student.version}" style="height:80px;">'
+            f'<figcaption>{student.name}{("_" + student.version if student.version != "Original" else "")}</figcaption>\n'
+            f'</div>'
+            for student in students
+        ]
+        
+        html = [
+            f'<div><h3>{rarity_symbol}</h3>'
+            f'<div style="justify-content: left;">'
+            f'<figure style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); text-align: center;">'
+            f'{''.join(images_html)}'
+            f'</figure>'
+            f'</div>'
+            f'</div>'
+        ]
+        return ''.join(html)
 
-    def not_pickup_list(self, obj):
-        return ", ".join([student.name for student in obj.not_pickup.all()])
+    def render_student_images(self, students):
+        images_html = []
 
-    pickup_list.short_description = 'Pickup'
-    not_pickup_list.short_description = 'Not pickup'
+        for i, student_query in enumerate(students):
+            if student_query:
+                images_html.extend(self.get_student_images_html(student_query, '★' * (3-i)))
 
+        return format_html(''.join(images_html))
 
+    def not_pickup_img(self, obj):
+        return self.render_student_images(
+            [obj.not_pickup.filter(rarity=r).order_by('name') for r in [3, 2, 1]],
+        )
+
+    def is_pickup_img(self, obj):
+        return self.render_student_images(
+            [obj.is_pickup.filter(rarity=r).order_by('name') for r in [3, 2, 1]],
+        )
+    
+    is_pickup_img.short_description = 'Pickup 3★ students'
+    not_pickup_img.short_description = 'Available students'
     
 admin.site.register(Student, StudentAdmin)
 admin.site.register(School, SchoolAdmin)

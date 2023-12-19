@@ -26,7 +26,9 @@ class Student(models.Model):
     image = models.ImageField(upload_to=image_upload_path, blank=True, null=True)
 
     def __str__(self):
-        return f'{self.name}_{self.version}'
+        limited = "_Limied" if self.is_limited else ""
+        version = f"_{self.version}" if self.version != "Original" else ""
+        return f'{self.name}{version}_{self.rarity}{limited}'
     
     def save(self, *args, **kwargs):
         try:
@@ -54,11 +56,13 @@ class Student(models.Model):
 
     def clean(self):
         try:
-            existing_student = Student.objects.exclude(pk=self.pk).get(name=self.name)
+            existing_student = Student.objects.exclude(pk=self.pk).get(name=self.name, version=self.version)
             if existing_student.school != self.school:
                 raise ValidationError({'name': f'A student \'{self.name}\' already exists in \'{existing_student.school}\' but you select \'{self.school}\'.'})
         except Student.DoesNotExist:
             pass
+        except Student.MultipleObjectsReturned:
+            raise ValidationError(f'A duplicate student entry was found. ({self.name}_{self.version})')
 
     class Meta:
         unique_together = ('name', 'version')
@@ -75,12 +79,9 @@ class GachaBanner(models.Model):
 
     def clean(self):
         # Ensure that the sum of rates is equal to 100%
-        print(self.rate_3_star, self.rate_2_star, self.rate_1_star)
-        print(self.is_pickup.all())
         total_rate = self.rate_3_star + self.rate_2_star + self.rate_1_star
         if total_rate != 100.0:
             raise ValidationError("MODEL The sum of rates must equal 100%.")
         
-
     def __str__(self):
         return self.name

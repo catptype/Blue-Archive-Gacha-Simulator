@@ -2,6 +2,7 @@ from django import forms
 from .models import Student, School, GachaBanner
 from django.forms import widgets
 from django.core.exceptions import ValidationError
+from django.contrib import admin
 
 class StudentAdminForm(forms.ModelForm):
     rarity = forms.TypedChoiceField(
@@ -13,6 +14,7 @@ class StudentAdminForm(forms.ModelForm):
     school = forms.ModelChoiceField(
         queryset=School.objects.all().order_by('name'),
         empty_label="Select school",  # Set the custom text for the blank choice
+        required=True,
     )
     is_limited = forms.TypedChoiceField(
         label="Is limited",
@@ -41,13 +43,24 @@ class StudentAdminForm(forms.ModelForm):
 
 class GachaBannerAdminForm(forms.ModelForm):
 
-
     # Override widgets for rate fields
     rate_widget = forms.TextInput(attrs={'type': 'number', 'step': '0.5', 'value': '0.0', 'min': '0.0', 'max': '100.0'})
 
     rate_3_star = forms.DecimalField(widget=rate_widget)
     rate_2_star = forms.DecimalField(widget=rate_widget)
     rate_1_star = forms.DecimalField(widget=rate_widget)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['is_pickup'].label = 'Pickup 3★ Students'
+        existing_not_pickup_id = [student.id for student in self.initial.get('not_pickup', [])]
+        self.fields['is_pickup'].queryset = Student.objects.filter(rarity=3).exclude(id__in=existing_not_pickup_id).order_by('name')
+
+        self.fields['not_pickup'].label = 'Available Students'
+        existing_pickup_id = [student.id for student in self.initial.get('is_pickup', [])]
+        self.fields['not_pickup'].queryset = Student.objects.exclude(id__in=existing_pickup_id).order_by('-rarity', 'name', 'version')
+    
 
     def clean(self):
         cleaned_data = super().clean()
