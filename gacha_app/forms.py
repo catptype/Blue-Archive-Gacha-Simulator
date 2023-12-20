@@ -1,45 +1,9 @@
 from django import forms
-from .models import Student, School, GachaBanner
-from django.forms import widgets
-from django.core.exceptions import ValidationError
 from django.contrib import admin
+from django.core.exceptions import ValidationError
 
-class StudentAdminForm(forms.ModelForm):
-    rarity = forms.TypedChoiceField(
-        choices=Student._meta.get_field('rarity').choices,
-        widget=forms.RadioSelect(attrs={'class': 'inline-radio'}),
-        coerce=int,
-        empty_value=None,
-    )
-    school = forms.ModelChoiceField(
-        queryset=School.objects.all().order_by('name'),
-        empty_label="Select school",  # Set the custom text for the blank choice
-        required=True,
-    )
-    is_limited = forms.TypedChoiceField(
-        label="Is limited",
-        choices=((True, 'Yes'), (False, 'No')),
-        widget=forms.RadioSelect(attrs={'class': 'inline-radio'}),
-        coerce=lambda x: x == 'True',  # Ensure True/False values are used
-        initial=False,
-    )
-    image = forms.ImageField(
-        label="Image",
-        widget=forms.ClearableFileInput(), 
-        required=False,
-    )
-
-    class Meta:
-        model = Student
-        fields = '__all__'
-        widgets = {
-            'rarity': widgets.RadioSelect,
-        }
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['image'].widget.template_name = 'admin/widgets/clearable_file_input_with_preview.html'
-        self.fields['image'].widget.attrs['class'] = 'custom-file-input'
+from .models import GachaBanner, GachaTransaction
+from student_app.models import Student
 
 class GachaBannerAdminForm(forms.ModelForm):
 
@@ -67,7 +31,6 @@ class GachaBannerAdminForm(forms.ModelForm):
         self.fields['not_pickup'].label = 'Available Students'
         self.fields['not_pickup'].queryset = Student.objects.exclude(id__in=existing_pickup_id).order_by('-rarity', 'name', 'version')
     
-
     def clean(self):
         cleaned_data = super().clean()
 
@@ -89,7 +52,20 @@ class GachaBannerAdminForm(forms.ModelForm):
         model = GachaBanner
         fields = '__all__'
 
-class StudentForm(forms.ModelForm):
+class GachaTransactionAdminForm(forms.ModelForm):
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        banner = cleaned_data.get('banner')
+        student = cleaned_data.get('student')
+
+        is_student_pickup = student in banner.is_pickup.all()
+        is_student_not_pickup = student in banner.not_pickup.all()
+
+        if not (is_student_pickup or is_student_not_pickup):
+            raise ValidationError(f'{student} is not in {banner}, CHEATER!')
+
     class Meta:
-        model = Student
+        model = GachaTransaction
         fields = '__all__'

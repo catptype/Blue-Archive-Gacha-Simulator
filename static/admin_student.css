@@ -1,0 +1,32 @@
+#id_is_limited,
+#id_rarity {
+    display: flex;
+}
+
+.inline-radio label {
+    min-width: 80px;
+    width: 80px;
+}
+
+.inline-radio input[type="radio"] {
+    display: inline-block;
+    margin-right: 0.2rem;
+    margin-bottom: 0.2rem;
+}
+
+label {
+    font-weight: bold;
+}
+
+/* Add a media query for responsiveness */
+@media (max-width: 800px) {
+    #id_is_limited,
+    #id_rarity {
+        flex-direction: column; /* Change to a column layout on small screens */
+    }
+
+    .inline-radio label {
+        min-width: auto;
+        width: 100%; /* Take up full width on small screens */
+    }
+}

@@ -1,3 +1,10 @@
+* {
+    outline: 1px solid red;
+    /*border: solid;
+    border-width: 1px;
+    border-color: red;*/
+}
+
 .form-layout{
     border-radius: 15px;
     width: 376px;
@@ -5,16 +12,4 @@
 
 .text-danger{
     font-size: 12px;
-}
-
-.debug-ok-layout{
-    border: solid;
-    border-width: 1px;
-    border-color: black;
-}
-
-.debug-dev-layout{
-    border: solid;
-    border-width: 1px;
-    border-color: red;
 }

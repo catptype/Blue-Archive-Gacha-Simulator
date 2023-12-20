@@ -8,9 +8,9 @@
   <h3 class="text-center">Login account</h3>
   <form method="POST" autocomplete="off" novalidate>
     {% csrf_token %}
-    <div class="row debug-ok-layout">
-      <div class="col-10 offset-1 debug-dev-layout">
-        <div class="mb-3 debug-dev-layout">
+    <div class="row ">
+      <div class="col-10 offset-1">
+        <div class="mb-3">
           <label>{{ form.username.label }}</label>
           <div>{{ form.username }}</div>
           {% if form.non_field_errors %}
@@ -19,11 +19,11 @@
           </div>
           {% endif %}
         </div>
-        <div class="mb-3 debug-dev-layout">
+        <div class="mb-3">
           <label>{{ form.password.label }}</label>
           <div>{{ form.password }}</div>
         </div>
-        <div class="mb-3 debug-dev-layout">
+        <div class="mb-3">
           <p class="mb-0">
            <a href="{% url 'forget' %}">Forget password</a>
           </p>
@@ -34,7 +34,7 @@
       </div>
     </div>
   </form>
-  <div class="row text-center debug-ok-layout">
+  <div class="row text-center">
     <p class="mb-0">
       Don't have an account? <a href="{% url 'register' %}">Register</a>
     </p>

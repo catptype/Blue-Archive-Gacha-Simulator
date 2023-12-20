@@ -1,0 +1,9 @@
+.student-grid {
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); 
+    text-align: center;
+}
+
+.student-item {
+    margin-bottom: 5px;
+}

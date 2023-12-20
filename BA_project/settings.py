@@ -35,9 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'gacha_app',
     'general_app', 
     'user_app',
+    'gacha_app',
+    'student_app',
 ]
 
 MIDDLEWARE = [
