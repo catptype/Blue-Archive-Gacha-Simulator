@@ -1,15 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from .models import Student
 
-# Create your views here.
-from .forms import StudentForm
-
-def add_student(request):
-    if request.method == 'POST':
-        form = StudentForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('gacha')
-    else:
-        form = StudentForm()
-    context = {'form': form}
-    return render(request, 'student_app/add_student.html', context)
+def student(request):
+    students = Student.objects.all().order_by('name')
+    context = {
+        'students': students
+    }
+    return render(request, 'student_app/student.html', context)

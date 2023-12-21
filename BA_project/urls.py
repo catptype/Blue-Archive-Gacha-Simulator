@@ -24,7 +24,7 @@ urlpatterns = [
     path(''      , include('general_app.urls')),
     path('gacha/', include('gacha_app.urls')),
     path('user/' , include('user_app.urls')),
-    #path('student/' , include('student_app.urls')),
+    path('student/' , include('student_app.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

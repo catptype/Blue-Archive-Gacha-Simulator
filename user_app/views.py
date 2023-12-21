@@ -45,3 +45,9 @@ def user_login(request):
 
 def forget(request):
     return render(request, 'user_app/forget.html')
+
+def dashboard(request):
+    return render(request, 'user_app/dashboard.html')
+
+def setting(request):
+    return render(request, 'user_app/setting.html')
