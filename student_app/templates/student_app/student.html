@@ -4,16 +4,16 @@
 
 {% block content %}
 <div class="container">
-<h3>STUDENT LIST</h3>
-<div class="student-grid">
-    {% for student in students %}
-        <div class="student-card">
-            {% if student.image %}
-                <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
-            {% endif %}
-            <p>{{ student.name }}{% if student.version.name != "Original" %}<br>({{ student.version.name }}){% endif %}</p>
-        </div>
-    {% endfor %}
-</div>
+    <h3>STUDENT LIST</h3>
+    <div class="student-grid">
+        {% for student in students %}
+            <div class="student-card">
+                {% if student.image %}
+                    <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
+                {% endif %}
+                <p>{{ student.name }}{% if student.version.name != "Original" %}<br>({{ student.version.name }}){% endif %}</p>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

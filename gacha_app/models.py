@@ -1,7 +1,15 @@
 
+import os
 from django.db import models
 from student_app.models import Student
 from django.contrib.auth import get_user_model
+
+def banner_image_path(instance, filename):
+    name = instance.name
+    extension = os.path.splitext(filename)[1]
+    filename = f'{name}{extension}'
+    return os.path.join('image/banner/')
+
 
 class GachaBanner(models.Model):
     name = models.CharField(max_length=100, unique=True, blank=False, null=False)
@@ -19,6 +27,14 @@ class GachaTransaction(models.Model):
     banner = models.ForeignKey(GachaBanner, on_delete=models.CASCADE)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     datetime = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def banner_name(self):
+        return self.banner.name
+
+    @property
+    def student_name(self):
+        return self.student.name
 
     def __str__(self):
         return f'{self.user}_{self.banner}_{self.student}'

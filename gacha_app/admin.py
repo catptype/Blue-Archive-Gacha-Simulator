@@ -60,7 +60,7 @@ class GachaBannerAdmin(admin.ModelAdmin):
     
     class Media:
         css = {
-            'all': ('admin_banner.css',),
+            'all': ('/static/css/admin_banner.css',),
         } 
 
 admin.site.register(GachaBanner, GachaBannerAdmin)

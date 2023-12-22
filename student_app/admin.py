@@ -50,7 +50,7 @@ class VersionAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': ('admin_banner.css',),
+            'all': ('/static/css/admin_banner.css',),
         }
 
 
@@ -83,7 +83,7 @@ class StudentAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': ('admin_student.css',),
+            'all': ('/static/css/admin_student.css',),
         }
 
 admin.site.register(Student, StudentAdmin)

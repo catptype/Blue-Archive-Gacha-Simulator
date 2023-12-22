@@ -1,5 +1,24 @@
 {% extends 'general_app/components/base.html' %}
+{% load static %}
 
 {% block title %}Gacha{% endblock %}
 
-{% block content %}GACHA PAGE{% endblock %}
+{% block content %}
+<div class="container">
+    <h3>GACHA PAGE</h3>
+    <div class="gacha-grid">
+        {% for banner in banners %}
+        <div class="gacha-banner">
+            <img src="{% static 'portrait_404.png' %}" alt="baner" style="width:400px; height:200px;">
+            <p>{{ banner.name }}</p>
+            <p>{{ banner.rate_3_star }}%</p>
+            <p>{{ banner.rate_2_star }}%</p>
+            <p>{{ banner.rate_1_star }}%</p>
+            <div class="d-grid">
+                <a href="{% url 'gacha_detail' gacha_id=banner.id %}" class="btn btn-primary p-2 mb-3">Details</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

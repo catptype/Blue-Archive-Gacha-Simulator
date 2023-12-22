@@ -4,10 +4,12 @@ from django.core.exceptions import ValidationError
 from PIL import Image
 from django.utils.html import mark_safe
 
-def image_upload_path(instance, filename):
-    version_str = f'_({instance.version})' if instance.version != 'Original' else ''
-    filename = f'{instance.name}{version_str}_150{os.path.splitext(filename)[1]}'
-    return os.path.join('portrait/', filename)
+def student_portrait_path(instance, filename):
+    name = instance.name
+    version = instance.version if instance.version != 'Original' else ''
+    extension = os.path.splitext(filename)[1]
+    filename = f'{name}_{version}_150{extension}'
+    return os.path.join('image/student/portrait/', filename)
 
 class Version(models.Model):
     name = models.CharField(max_length=100, unique=True, blank=False)
@@ -48,16 +50,23 @@ class Student(models.Model):
     rarity = models.PositiveIntegerField(choices=[(1, '★'), (2, '★★'), (3, '★★★')])
     school = models.ForeignKey(School, on_delete=models.CASCADE)
     is_limited = models.BooleanField(default=False)
-    image = models.ImageField(upload_to=image_upload_path, blank=True, null=True)
+    image = models.ImageField(upload_to=student_portrait_path, blank=True, null=True)
+
+    @property
+    def version_name(self):
+        return self.version.name
+    
+    @property
+    def school_name(self):
+        return self.school.name
 
     def __str__(self):
-        limited = "_Limied" if self.is_limited else ""
-        version = f"_{self.version}" if self.version != "Original" else ""
+        version = f'_{self.version_name}' if self.version_name != "Original" else ""
+        limited = "_Limited" if self.is_limited else ""
         return f'{self.name}{version}_{self.rarity}{limited}'
     
     def save(self, *args, **kwargs):
         try:
-            # Get the old instance to compare the images
             old_instance = Student.objects.get(pk=self.pk)
             old_image = old_instance.image
             if old_image and old_image != self.image:
@@ -80,14 +89,10 @@ class Student(models.Model):
             img.save(self.image.path)
 
     def clean(self):
-        try:
-            existing_student = Student.objects.exclude(pk=self.pk).get(name=self.name, version=self.version)
-            if existing_student.school != self.school:
-                raise ValidationError({'name': f'A student \'{self.name}\' already exists in \'{existing_student.school}\' but you select \'{self.school}\'.'})
-        except Student.DoesNotExist:
-            pass
-        except Student.MultipleObjectsReturned:
-            raise ValidationError(f'A duplicate student entry was found. ({self.name}_{self.version})')
+        query = Student.objects.exclude(pk=self.pk)
+        existing_student = query.filter(name=self.name).first()
+        if existing_student and existing_student.school != self.school:
+            raise ValidationError({'name': f'A student \'{self.name}\' already exists in \'{existing_student.school_name}\' but you select \'{self.school_name}\'.'})
 
     class Meta:
         unique_together = ('name', 'version')

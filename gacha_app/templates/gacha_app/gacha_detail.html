@@ -1,0 +1,40 @@
+{% extends 'general_app/components/base.html' %}
+{% load static %}
+
+{% block title %}Gacha detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3>GACHA DETAILS {{ banner.id }}</h3>
+    <img src="{% static 'portrait_404.png' %}" alt="banner" style="width:400px; height:200px;">
+    <p>{{ banner.name }}</p>
+    {% for rarity in rarities %}
+    <div>
+        <h4>{% for _ in "x"|rjust:rarity %}★{% endfor %}</h4>
+        {% if rarity == 3 and banner.is_pickup.all %}
+        <div class="student-grid">
+            {% for student in banner.is_pickup.all %}
+            <div class="student-card">
+                <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version_name }}">
+                <p>{{ student.name }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class="student-grid">
+            {% for student in banner.not_pickup.all %}
+            {% if student.rarity == rarity %}
+            <div class="student-card">
+                <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version_name }}">
+                <p>{{ student.name }}</p>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+    <button class="btn btn-primary p-2 mb-3">1 Draw</button>
+    <button class="btn btn-primary p-2 mb-3">10 Draw</button>
+
+</div>
+{% endblock %}
