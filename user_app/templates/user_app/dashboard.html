@@ -2,4 +2,11 @@
 
 {% block title %}Dashboard{% endblock %}
 
-{% block content %}DASHBOARD PAGE{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h3>DASHBOARD PAGE</h3>
+    <p>WELCOME {% if user.is_superuser %} ADMIN {% endif %} {{ user.username }}</p>
+</div>
+
+{% endblock %}
