@@ -17,10 +17,20 @@
     grid-gap: 10px;
 }
 
+.gacha-result-grid,
+.rarity-grid,
 .gacha-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
     grid-gap: 10px;
+}
+
+.rarity-grid,
+.gacha-grid {
+    grid-template-columns: repeat(3, 1fr); 
+}
+
+.gacha-result-grid {
+    grid-template-columns: repeat(5, 1fr); 
 }
 
 .student-card {

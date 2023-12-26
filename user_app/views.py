@@ -25,7 +25,9 @@ def register(request):
     else:
         form = CreateNewUserForm()
 
-    context = {'form':form}
+    context = {
+        'form': form,
+    }
     return render(request, 'user_app/register.html', context)
 
 def register_complete(request):
@@ -49,7 +51,9 @@ def user_login(request):
     else:
         form = LoginForm()
     
-    context = {'form':form}
+    context = {
+        'form': form,
+    }
     return render(request, 'user_app/login.html', context)
 
 def forget(request):

@@ -1,5 +1,6 @@
 {% extends 'general_app/components/base.html' %}
 {% load static %}
+{% load filters %}
 
 {% block title %}Gacha detail{% endblock %}
 
@@ -8,33 +9,42 @@
     <h3>GACHA DETAILS {{ banner.id }}</h3>
     <img src="{% static 'portrait_404.png' %}" alt="banner" style="width:400px; height:200px;">
     <p>{{ banner.name }}</p>
-    {% for rarity in rarities %}
-    <div>
-        <h4>{% for _ in "x"|rjust:rarity %}★{% endfor %}</h4>
-        {% if rarity == 3 and banner.is_pickup.all %}
-        <div class="student-grid">
-            {% for student in banner.is_pickup.all %}
-            <div class="student-card">
-                <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version_name }}">
-                <p>{{ student.name }}</p>
-            </div>
-            {% endfor %}
-        </div>
-        {% endif %}
-        <div class="student-grid">
-            {% for student in banner.not_pickup.all %}
-            {% if student.rarity == rarity %}
-            <div class="student-card">
-                <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version_name }}">
-                <p>{{ student.name }}</p>
+    
+    <div class="rarity-grid">
+        {% for rarity in rarities %}
+        <div>
+            <h4>{% for _ in "★"|rjust:rarity %}★{% endfor %} ({{ banner|get_rate:rarity }}%)</h4>
+            {% if rarity == 3 and banner.is_pickup.all %}
+            <div class="student-grid">
+                {% for student in banner.is_pickup.all %}
+                <div class="student-card">
+                    <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version_name }}">
+                    <p>{{ student.name }}</p>
+                </div>
+                {% endfor %}
             </div>
             {% endif %}
-            {% endfor %}
+            <div class="student-grid">
+                {% for student in banner.not_pickup.all %}
+                {% if student.rarity == rarity %}
+                <div class="student-card">
+                    <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version_name }}">
+                    <p>{{ student.name }}</p>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-    <button class="btn btn-primary p-2 mb-3">1 Draw</button>
-    <button class="btn btn-primary p-2 mb-3">10 Draw</button>
+    
+    <!-- Add buttons for 1 draw and 10 draw -->
+    <form method="post" action="{% url 'gacha_result' gacha_id=banner.id %}?id=123123">
+        {% csrf_token %}
+        <button class="btn btn-primary p-2 mb-3" type="submit" name="draw_1">1 Draw</button>
+        <button class="btn btn-primary p-2 mb-3" type="submit" name="draw_10">10 Draw</button>
+        <button class="btn btn-primary p-2 mb-3" type="submit" name="draw_100">100 Draw</button>
+    </form>
 
 </div>
 {% endblock %}
