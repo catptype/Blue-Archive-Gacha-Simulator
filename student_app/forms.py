@@ -1,6 +1,6 @@
 from django import forms
 from .models import Student, School
-from django.forms import widgets
+#from django.forms import widgets
 
 class StudentAdminForm(forms.ModelForm):
     rarity = forms.TypedChoiceField(

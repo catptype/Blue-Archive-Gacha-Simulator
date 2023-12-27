@@ -5,11 +5,11 @@
 
 {% block content %}
    <!-- Display drawn characters -->
-   {% if result %}
+   {% if drawn_students %}
    <div class="container">
     <h2>Draw Result:</h2>
     <div class="gacha-result-grid">
-        {% for student in result %}
+        {% for student in drawn_students %}
         <div class="student-card">
             <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version_name }}">
             <p>{{ student.name }}<br>({{ student.version_name}})<br>{% for _ in "★"|rjust:student.rarity %}★{% endfor %}</p>

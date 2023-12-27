@@ -1,8 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from student_app.models import Student
-
 from .models import GachaBanner, GachaTransaction
 from .forms import GachaBannerAdminForm, GachaTransactionAdminForm
 
