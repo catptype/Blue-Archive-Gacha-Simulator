@@ -1,16 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseForbidden
-from functools import wraps
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.template.loader import render_to_string
+from django.http import HttpResponse
 from .forms import CreateNewUserForm, LoginForm
+from gacha_app.models import GachaTransaction
 
-def user_authenticated(view_func):
-    @wraps(view_func)
-    def _wrapped_view(request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return HttpResponseForbidden('HTTP403: You do not have permission to access this page.')
-        return view_func(request, *args, **kwargs)
-    return _wrapped_view
+from .utils.user_authenticated import user_authenticated
 
 # Create your views here.
 def register(request):
@@ -67,5 +63,35 @@ def dashboard(request):
     return render(request, 'user_app/dashboard.html')
 
 @user_authenticated
-def setting(request):
-    return render(request, 'user_app/setting.html')
+def history(request):
+    transactions = GachaTransaction.objects.filter(user=request.user).order_by('-id')
+
+    # Get the current page number from the request's GET parameters
+    page = request.GET.get('page', 1)
+
+    # Use Django's Paginator to paginate the transactions
+    paginator = Paginator(transactions, 10)
+
+    try:
+        # Get the transactions for the requested page
+        transactions = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver the first page
+        transactions = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g., 9999), deliver the last page
+        transactions = paginator.page(paginator.num_pages)
+
+    context = {
+        'transactions': transactions,
+    }
+        
+    return render(request, 'user_app/history.html', context)
+
+@user_authenticated
+def statistic(request):
+    return render(request, 'user_app/statistic.html')
+
+@user_authenticated
+def change_password(request):
+    return render(request, 'user_app/change_password.html')

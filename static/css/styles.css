@@ -17,6 +17,7 @@
     grid-gap: 10px;
 }
 
+.transaction-grid,
 .gacha-result-grid,
 .rarity-grid,
 .gacha-grid {
@@ -29,6 +30,7 @@
     grid-template-columns: repeat(3, 1fr); 
 }
 
+.transaction-grid,
 .gacha-result-grid {
     grid-template-columns: repeat(5, 1fr); 
 }
@@ -72,3 +74,21 @@
     opacity: 1;
 }
 
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 1fr 4fr; 
+    grid-gap: 10px;
+}
+
+.dashboard-menu * {
+    display: block;
+}
+
+#dashboard-content {
+    display: grid;
+    place-items: center;
+}
+
+.pagination {
+    margin-top: 10px; /* Adjust the margin as needed */
+}

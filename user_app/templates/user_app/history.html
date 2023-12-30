@@ -1,0 +1,33 @@
+<h4>DASHBOARD HISTORY</h4>
+
+<div class="transaction-grid">
+    {% if transactions %}
+        {% for transaction in transactions %}
+        <div class="transaction-item">
+            <img src="{{ transaction.student.image.url }}" alt="">
+            <p><strong>Date:</strong> {{ transaction.formatted_datetime }}</p>
+            <p><strong>Banner:</strong> {{ transaction.banner.name }}</p>
+            <p><strong>Student:</strong> {{ transaction.student.name }}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No gacha transactions found.</p>
+    {% endif %}
+</div>
+
+<!-- Display pagination links -->
+<div class="pagination">
+    <span class="step-links">
+        {% if transactions.has_previous %}
+            <a href="#" onclick="loadHistory({{ transactions.previous_page_number }})">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ transactions.number }} of {{ transactions.paginator.num_pages }}.
+        </span>
+
+        {% if transactions.has_next %}
+            <a href="#" onclick="loadHistory({{ transactions.next_page_number }})">next</a>
+        {% endif %}
+    </span>
+</div>

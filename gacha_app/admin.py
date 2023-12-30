@@ -6,8 +6,13 @@ from .forms import GachaBannerAdminForm, GachaTransactionAdminForm
 
 class GachaTransactionAdmin(admin.ModelAdmin):
     form = GachaTransactionAdminForm
-    list_display = ['user', 'banner','student', 'datetime']
+    list_display = ['user', 'banner','student', 'custom_datetime']
     list_per_page = 20
+
+    def custom_datetime(self, obj):
+        return obj.datetime.strftime('%Y-%m-%d %H:%M:%S')
+    
+    custom_datetime.short_description = 'Datetime'
 
 class GachaBannerAdmin(admin.ModelAdmin):
     form = GachaBannerAdminForm

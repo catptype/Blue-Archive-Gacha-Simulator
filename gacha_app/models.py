@@ -28,6 +28,9 @@ class GachaTransaction(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     datetime = models.DateTimeField(auto_now_add=True)
 
+    def formatted_datetime(self):
+        return self.datetime.strftime('%Y-%m-%d %H:%M:%S')
+
     @property
     def banner_name(self):
         return self.banner.name

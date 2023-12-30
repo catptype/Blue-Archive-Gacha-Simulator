@@ -1,15 +1,10 @@
 import os
+from PIL import Image
 from django.db import models
 from django.core.exceptions import ValidationError
-from PIL import Image
 from django.utils.html import mark_safe
+from .utils import student_portrait_path
 
-def student_portrait_path(instance, filename):
-    name = instance.name
-    version = instance.version if instance.version != 'Original' else ''
-    extension = os.path.splitext(filename)[1]
-    filename = f'{name}_{version}_150{extension}'
-    return os.path.join('image/student/portrait/', filename)
 
 class Version(models.Model):
     name = models.CharField(max_length=100, unique=True, blank=False)
@@ -39,7 +34,7 @@ class School(models.Model):
     name = models.CharField(max_length=100, unique=True, blank=False)
 
     def get_student_names(self):
-        return ', '.join(sorted(set(student.name for student in self.student_set.all())))
+        return ', '.join(set(student.name for student in self.student_set.all().order_by('name')))
 
     def __str__(self):
         return self.name
