@@ -16,14 +16,14 @@
         </div>
         {% endfor %}    
     </div>
-    <!-- Add buttons for 1 draw and 10 draw -->
-    <form method="post" action="{% url 'gacha_result' gacha_id=banner.id %}?id=123123">
-        {% csrf_token %}
-        <button class="btn btn-primary p-2 mb-3" type="submit" name="draw_{{ num_draw }}">{{ num_draw }} Draw again</button>
-    </form>
-    <a href="{% url 'gacha_detail' gacha_id=banner.id %}" class="btn btn-primary p-2 mb-3">Go back</a>
-   </div>
+    <div>
+        <!-- Add buttons for 1 draw and 10 draw -->
+        <form method="post" action="{% url 'gacha_result' gacha_id=banner.id %}">
+            {% csrf_token %}
+            <button class="btn btn-primary p-2 mb-3" type="submit" name="draw" value="{{ num_draw }}">{{ num_draw }} Draw</button>
+        </form>
+        <a href="{% url 'gacha_detail' gacha_id=banner.id %}" class="btn btn-primary p-2 mb-3">Go back</a>
+    </div>
+    </div>
    {% endif %}
-
-   
 {% endblock %}

@@ -1,3 +1,6 @@
+# Read official docs
+# https://docs.djangoproject.com/en/5.0/howto/custom-template-tags/
+
 from django import template
 
 register = template.Library()

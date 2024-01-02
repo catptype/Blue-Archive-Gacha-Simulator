@@ -1,6 +1,6 @@
 {% extends 'general_app/components/base.html' %}
 {% load static %}
-{% load filters %}
+{% load filters %} <!-- Read custom template tags in filters.py -->
 
 {% block title %}Gacha detail{% endblock %}
 
@@ -39,11 +39,11 @@
     </div>
     
     <!-- Add buttons for 1 draw and 10 draw -->
-    <form method="post" action="{% url 'gacha_result' gacha_id=banner.id %}?id=123123">
+    <form method="post" action="{% url 'gacha_result' gacha_id=banner.id %}">
         {% csrf_token %}
-        <button class="btn btn-primary p-2 mb-3" type="submit" name="draw_1">1 Draw</button>
-        <button class="btn btn-primary p-2 mb-3" type="submit" name="draw_10">10 Draw</button>
-        <button class="btn btn-primary p-2 mb-3" type="submit" name="draw_100">100 Draw</button>
+        {% for num_draw in num_draws %}
+        <button class="btn btn-primary p-2 mb-3" type="submit" name="draw" value="{{ num_draw }}">{{ num_draw }} Draw</button>
+        {% endfor %}
     </form>
 
 </div>
