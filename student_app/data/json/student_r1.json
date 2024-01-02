@@ -1,0 +1,152 @@
+[
+    {
+        "name": "Asuna",
+        "version": "Original",
+        "school": "Millennium",
+        "image": "image/r1/Asuna.png"
+    },
+    {
+        "name": "Ayane",
+        "version": "Swimsuit",
+        "school": "Abydos",
+        "image": "image/r1/Ayane_Swimsuit.png"
+    },
+    {
+        "name": "Chinatsu",
+        "version": "Original",
+        "school": "Gehenna",
+        "image": "image/r1/Chinatsu.png"
+    },
+    {
+        "name": "Fubuki",
+        "version": "Original",
+        "school": "Valkyrie",
+        "image": "image/r1/Fubuki.png"
+    },
+    {
+        "name": "Haruka",
+        "version": "Original",
+        "school": "Gehenna",
+        "image": "image/r1/Haruka.png"
+    },
+    {
+        "name": "Hasumi",
+        "version": "Sport",
+        "school": "Trinity",
+        "image": "image/r1/Hasumi_Sport.png"
+    },
+    {
+        "name": "Hibiki",
+        "version": "Sport",
+        "school": "Millennium",
+        "image": "image/r1/Hibiki_Sport.png"
+    },
+    {
+        "name": "Izumi",
+        "version": "Swimsuit",
+        "school": "Gehenna",
+        "image": "image/r1/Izumi_Swimsuit.png"
+    },
+    {
+        "name": "Junko",
+        "version": "New-Year",
+        "school": "Gehenna",
+        "image": "image/r1/Junko_New-Year.png"
+    },
+    {
+        "name": "Juri",
+        "version": "Original",
+        "school": "Gehenna",
+        "image": "image/r1/Juri.png"
+    },
+    {
+        "name": "Koharu",
+        "version": "Swimsuit",
+        "school": "Trinity",
+        "image": "image/r1/Koharu_Swimsuit.png"
+    },
+    {
+        "name": "Kotama",
+        "version": "Original",
+        "school": "Millennium",
+        "image": "image/r1/Kotama.png"
+    },
+    {
+        "name": "Kotori",
+        "version": "Original",
+        "school": "Millennium",
+        "image": "image/r1/Kotori.png"
+    },
+    {
+        "name": "Michiru",
+        "version": "Original",
+        "school": "Hyakkiyako",
+        "image": "image/r1/Michiru.png"
+    },
+    {
+        "name": "Miyu",
+        "version": "Swimsuit",
+        "school": "SRT",
+        "image": "image/r1/Miyu_Swimsuit.png"
+    },
+    {
+        "name": "Nodoka",
+        "version": "Original",
+        "school": "Red Winter",
+        "image": "image/r1/Nodoka.png"
+    },
+    {
+        "name": "Pina",
+        "version": "Original",
+        "school": "Hyakkiyako",
+        "image": "image/r1/Pina.png"
+    },
+    {
+        "name": "Serina",
+        "version": "Original",
+        "school": "Trinity",
+        "image": "image/r1/Serina.png"
+    },
+    {
+        "name": "Shimiko",
+        "version": "Original",
+        "school": "Trinity",
+        "image": "image/r1/Shimiko.png"
+    },
+    {
+        "name": "Shizuko",
+        "version": "Swimsuit",
+        "school": "Hyakkiyako",
+        "image": "image/r1/Shizuko_Swimsuit.png"
+    },
+    {
+        "name": "Suzumi",
+        "version": "Original",
+        "school": "Trinity",
+        "image": "image/r1/Suzumi.png"
+    },
+    {
+        "name": "Tomoe",
+        "version": "Original",
+        "school": "Red Winter",
+        "image": "image/r1/Tomoe.png"
+    },
+    {
+        "name": "Tsurugi",
+        "version": "Swimsuit",
+        "school": "Trinity",
+        "image": "image/r1/Tsurugi_Swimsuit.png"
+    },
+    {
+        "name": "Yoshimi",
+        "version": "Original",
+        "school": "Trinity",
+        "image": "image/r1/Yoshimi.png"
+    },
+    {
+        "name": "Yuzu",
+        "version": "Maid",
+        "school": "Millennium",
+        "image": "image/r1/Yuzu_Maid.png"
+    }
+]

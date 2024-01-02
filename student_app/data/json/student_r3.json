@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Akane",
+        "version": "Bunny",
+        "school": "Millennium",
+        "is_limited": false,
+        "image": "image/r3/Akane_Bunny.png"
+    },
+    {
+        "name": "Ako",
+        "version": "Original",
+        "school": "Gehenna",
+        "is_limited": false,
+        "image": "image/r3/Ako.png"
+    }
+]
