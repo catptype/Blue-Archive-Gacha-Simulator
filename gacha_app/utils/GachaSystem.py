@@ -42,7 +42,7 @@ class GachaSystem:
                 num_pickup = len(students_pickup)             
                 all_students = students_pickup + students_not_pickup[drawn_rarity]
                 pickup_rates = [self.pickup_rate / num_pickup] * num_pickup
-                not_pickup_rates = [(self.draw_rates[drawn_rarity] - pickup_rates) / num_not_pickup] * num_not_pickup
+                not_pickup_rates = [(self.draw_rates[drawn_rarity] - self.pickup_rate) / num_not_pickup] * num_not_pickup
                 all_rates = pickup_rates + not_pickup_rates
             else:
                 all_students = students_not_pickup[drawn_rarity]
