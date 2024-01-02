@@ -10,9 +10,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.import_versions()
         self.import_schools()
-        self.import_students_r1()
-        self.import_students_r2()
-        self.import_students_r3()
+        self.import_students('student_app/data/json/student_r1.json')
+        self.import_students('student_app/data/json/student_r2.json')
+        self.import_students('student_app/data/json/student_r3.json')
         self.stdout.write(self.style.SUCCESS('Data imported successfully'))
     
     def student_portrait_processing(self, source, destination):
@@ -43,71 +43,14 @@ class Command(BaseCommand):
                     School.objects.create(name=name)
                     self.stdout.write(self.style.SUCCESS(f'Import {name} to Version model'))
 
-    def import_students_r1(self):
-        with open('student_app/data/json/student_r1.json') as file:
-            students_r1 = json.load(file)
-            for data in students_r1:
+    def import_students(self, json_file):
+        with open(json_file) as file:
+            students = json.load(file)
+            for data in students:
                 name = data['name']
                 version = Version.objects.get(name=data['version'])
                 school = School.objects.get(name=data['school'])
-                image_json = data['image']
-
-                if not Student.objects.filter(name=name, version=version).exists():
-                    
-                    image_source_path = os.path.join(settings.BASE_DIR, 'student_app', 'data', image_json)
-                    extension = os.path.splitext(image_source_path)[1]
-                    image_model_path = os.path.join('image', 'student', 'portrait', f'{name}_{version}_150{extension}')
-                    image_media_path = os.path.join(settings.MEDIA_ROOT, image_model_path)
-
-                    # Resize Image
-                    self.student_portrait_processing(image_source_path, image_media_path)
-                    
-                    Student.objects.create(
-                        name=name,
-                        version=version,
-                        rarity=1,
-                        school=school,
-                        is_limited=False,
-                        image=image_model_path
-                    )
-                    self.stdout.write(self.style.SUCCESS(f'Import {name}_{data['version']} to Student model'))
-
-    def import_students_r2(self):
-        with open('student_app/data/json/student_r2.json') as file:
-            students_r2 = json.load(file)
-            for data in students_r2:
-                name = data['name']
-                version = Version.objects.get(name=data['version'])
-                school = School.objects.get(name=data['school'])
-                image_json = data['image']
-
-                if not Student.objects.filter(name=name, version=version).exists():
-                    
-                    image_source_path = os.path.join(settings.BASE_DIR, 'student_app', 'data', image_json)
-                    extension = os.path.splitext(image_source_path)[1]
-                    image_model_path = os.path.join('image', 'student', 'portrait', f'{name}_{version}_150{extension}')
-                    image_media_path = os.path.join(settings.MEDIA_ROOT, image_model_path)
-
-                    # Resize Image
-                    self.student_portrait_processing(image_source_path, image_media_path)
-                    
-                    Student.objects.create(
-                        name=name,
-                        version=version,
-                        rarity=2,
-                        school=school,
-                        is_limited=False,
-                        image=image_model_path
-                    )
-                    self.stdout.write(self.style.SUCCESS(f'Import {name}_{data['version']} to Student model'))
-    
-    def import_students_r3(self):
-        with open('student_app/data/json/student_r3.json') as file:
-            students_r3 = json.load(file)
-            for data in students_r3:
-                name = data['name']
-                version = Version.objects.get(name=data['version'])
-                school = School.objects.get(name=data['school'])
+                rarity = data['rarity']
                 is_limited = data['is_limited']
                 image_json = data['image']
 
@@ -124,7 +67,7 @@ class Command(BaseCommand):
                     Student.objects.create(
                         name=name,
                         version=version,
-                        rarity=3,
+                        rarity=rarity,
                         school=school,
                         is_limited=is_limited,
                         image=image_model_path

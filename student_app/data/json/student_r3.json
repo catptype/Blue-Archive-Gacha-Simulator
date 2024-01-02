@@ -3,6 +3,7 @@
         "name": "Akane",
         "version": "Bunny",
         "school": "Millennium",
+        "rarity": 3,
         "is_limited": false,
         "image": "image/r3/Akane_Bunny.png"
     },
@@ -10,7 +11,904 @@
         "name": "Ako",
         "version": "Original",
         "school": "Gehenna",
+        "rarity": 3,
         "is_limited": false,
         "image": "image/r3/Ako.png"
+    },
+    {
+        "name": "Alice",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Alice.png"
+    },
+    {
+        "name": "Alice",
+        "version": "Maid",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Alice_Maid.png"
+    },
+    {
+        "name": "Aru",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Aru.png"
+    },
+    {
+        "name": "Aru",
+        "version": "New-Year",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Aru_New-Year.png"
+    },
+    {
+        "name": "Asuna",
+        "version": "Bunny",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Asuna_Bunny.png"
+    },
+    {
+        "name": "Atsuko",
+        "version": "Original",
+        "school": "Arius",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Atsuko.png"
+    },
+    {
+        "name": "Azusa",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Azusa.png"
+    },
+    {
+        "name": "Azusa",
+        "version": "Swimsuit",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Azusa_Swimsuit.png"
+    },
+    {
+        "name": "Cherino",
+        "version": "Original",
+        "school": "Red Winter",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Cherino.png"
+    },
+    {
+        "name": "Cherino",
+        "version": "Onsen",
+        "school": "Red Winter",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Cherino_Onsen.png"
+    },
+    {
+        "name": "Chihiro",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Chihiro.png"
+    },
+    {
+        "name": "Chinatsu",
+        "version": "Onsen",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Chinatsu_Onsen.png"
+    },
+    {
+        "name": "Chise",
+        "version": "Swimsuit",
+        "school": "Hyakkiyako",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Chise_Swimsuit.png"
+    },
+    {
+        "name": "Eimi",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Eimi.png"
+    },
+    {
+        "name": "Eimi",
+        "version": "Swimsuit",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Eimi_Swimsuit.png"
+    },
+    {
+        "name": "Fuuka",
+        "version": "New-Year",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Fuuka_New-Year.png"
+    },
+    {
+        "name": "Hanae",
+        "version": "Xmas",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Hanae_Xmas.png"
+    },
+    {
+        "name": "Hanako",
+        "version": "Swimsuit",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Hanako_Swimsuit.png"
+    },
+    {
+        "name": "Haruka",
+        "version": "New-Year",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Haruka_New-Year.png"
+    },
+    {
+        "name": "Haruna",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Haruna.png"
+    },
+    {
+        "name": "Haruna",
+        "version": "New-Year",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Haruna_New-Year.png"
+    },
+    {
+        "name": "Haruna",
+        "version": "Sport",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Haruna_Sport.png"
+    },
+    {
+        "name": "Hibiki",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Hibiki.png"
+    },
+    {
+        "name": "Hifumi",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Hifumi.png"
+    },
+    {
+        "name": "Hifumi",
+        "version": "Swimsuit",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Hifumi_Swimsuit.png"
+    },
+    {
+        "name": "Himari",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Himari.png"
+    },
+    {
+        "name": "Hina",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Hina.png"
+    },
+    {
+        "name": "Hina",
+        "version": "Swimsuit",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Hina_Swimsuit.png"
+    },
+    {
+        "name": "Hinata",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Hinata.png"
+    },
+    {
+        "name": "Hinata",
+        "version": "Swimsuit",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Hinata_Swimsuit.png"
+    },
+    {
+        "name": "Hiyori",
+        "version": "Original",
+        "school": "Arius",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Hiyori.png"
+    },
+    {
+        "name": "Hoshino",
+        "version": "Original",
+        "school": "Abydos",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Hoshino.png"
+    },
+    {
+        "name": "Hoshino",
+        "version": "Swimsuit",
+        "school": "Abydos",
+        "rarity": 3,
+        "is_limited": true,
+        "image": "image/r3/Hoshino_swimsuit.png"
+    },
+    {
+        "name": "Ichika",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Ichika.png"
+    },
+    {
+        "name": "Iori",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Iori.png"
+    },
+    {
+        "name": "Iori",
+        "version": "Swimsuit",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Iori_Swimsuit.png"
+    },
+    {
+        "name": "Iroha",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Iroha.png"
+    },
+    {
+        "name": "Izumi",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Izumi.png"
+    },
+    {
+        "name": "Izuna",
+        "version": "Original",
+        "school": "Hyakkiyako",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Izuna.png"
+    },
+    {
+        "name": "Izuna",
+        "version": "Swimsuit",
+        "school": "Hyakkiyako",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Izuna_Swimsuit.png"
+    },
+    {
+        "name": "Kaede",
+        "version": "Original",
+        "school": "Hyakkiyako",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Kaede.png"
+    },
+    {
+        "name": "Kaho",
+        "version": "Original",
+        "school": "Hyakkiyako",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Kaho.png"
+    },
+    {
+        "name": "Kanna",
+        "version": "Original",
+        "school": "Valkyrie",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Kanna.png"
+    },
+    {
+        "name": "Karin",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Karin.png"
+    },
+    {
+        "name": "Karin",
+        "version": "Bunny",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Karin_Bunny.png"
+    },
+    {
+        "name": "Kasumi",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Kasumi.png"
+    },
+    {
+        "name": "Kayoko",
+        "version": "New-Year",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Kayoko_New-Year.png"
+    },
+    {
+        "name": "Kazusa",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Kazusa.png"
+    },
+    {
+        "name": "Kikyou",
+        "version": "Original",
+        "school": "Hyakkiyako",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Kikyou.png"
+    },
+    {
+        "name": "Koharu",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Koharu.png"
+    },
+    {
+        "name": "Kokona",
+        "version": "Original",
+        "school": "Shanhaijing",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Kokona.png"
+    },
+    {
+        "name": "Kotori",
+        "version": "Cheerleader",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Kotori_Cheerleader.png"
+    },
+    {
+        "name": "Koyuki",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Koyuki.png"
+    },
+    {
+        "name": "Maki",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Maki.png"
+    },
+    {
+        "name": "Mari",
+        "version": "Sport",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Mari_Sport.png"
+    },
+    {
+        "name": "Marina",
+        "version": "Original",
+        "school": "Red Winter",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Marina.png"
+    },
+    {
+        "name": "Mashiro",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Mashiro.png"
+    },
+    {
+        "name": "Mashiro",
+        "version": "Swimsuit",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Mashiro_Swimsuit.png"
+    },
+    {
+        "name": "Megu",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Megu.png"
+    },
+    {
+        "name": "Meru",
+        "version": "Original",
+        "school": "Red Winter",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Meru.png"
+    },
+    {
+        "name": "Midori",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Midori.png"
+    },
+    {
+        "name": "Mika",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": true,
+        "image": "image/r3/Mika.png"
+    },
+    {
+        "name": "Mimori",
+        "version": "Original",
+        "school": "Hyakkiyako",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Mimori.png"
+    },
+    {
+        "name": "Mimori",
+        "version": "Swimsuit",
+        "school": "Hyakkiyako",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Mimori_Swimsuit.png"
+    },
+    {
+        "name": "Mina",
+        "version": "Original",
+        "school": "Shanhaijing",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Mina.png"
+    },
+    {
+        "name": "Mine",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Mine.png"
+    },
+    {
+        "name": "Minori",
+        "version": "Original",
+        "school": "Red Winter",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Minori.png"
+    },
+    {
+        "name": "Misaki",
+        "version": "Original",
+        "school": "Arius",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Misaki.png"
+    },
+    {
+        "name": "Miyako",
+        "version": "Original",
+        "school": "SRT",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Miyako.png"
+    },
+    {
+        "name": "Miyako",
+        "version": "Swimsuit",
+        "school": "SRT",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Miyako_Swimsuit.png"
+    },
+    {
+        "name": "Miyu",
+        "version": "Original",
+        "school": "SRT",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Miyu.png"
+    },
+    {
+        "name": "Moe",
+        "version": "Original",
+        "school": "SRT",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Moe.png"
+    },
+    {
+        "name": "Mutsuki",
+        "version": "New-Year",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Mutsuki_New-Year.png"
+    },
+    {
+        "name": "Nagisa",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Nagisa.png"
+    },
+    {
+        "name": "Natsu",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Natsu.png"
+    },
+    {
+        "name": "Neru",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Neru.png"
+    },
+    {
+        "name": "Neru",
+        "version": "Bunny",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Neru_Bunny.png"
+    },
+    {
+        "name": "Noa",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Noa.png"
+    },
+    {
+        "name": "Nodoka",
+        "version": "Onsen",
+        "school": "Red Winter",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Nodoka_Onsen.png"
+    },
+    {
+        "name": "Nonomi",
+        "version": "Swimsuit",
+        "school": "Abydos",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Nonomi_Swimsuit.png"
+    },
+    {
+        "name": "Reisa",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Reisa.png"
+    },
+    {
+        "name": "Renge",
+        "version": "Original",
+        "school": "Hyakkiyako",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Renge.png"
+    },
+    {
+        "name": "Rumi",
+        "version": "Original",
+        "school": "Shanhaijing",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Rumi.png"
+    },
+    {
+        "name": "Saki",
+        "version": "Original",
+        "school": "SRT",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Saki.png"
+    },
+    {
+        "name": "Saki",
+        "version": "Swimsuit",
+        "school": "SRT",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Saki_Swimsuit.png"
+    },
+    {
+        "name": "Sakurako",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Sakurako.png"
+    },
+    {
+        "name": "Saori",
+        "version": "Original",
+        "school": "Arius",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Saori.png"
+    },
+    {
+        "name": "Saya",
+        "version": "Original",
+        "school": "Shanhaijing",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Saya.png"
+    },
+    {
+        "name": "Saya",
+        "version": "Casual",
+        "school": "Shanhaijing",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Saya_Casual.png"
+    },
+    {
+        "name": "Sena",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Sena.png"
+    },
+    {
+        "name": "Serika",
+        "version": "New-Year",
+        "school": "Abydos",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Serika_New-Year.png"
+    },
+    {
+        "name": "Serina",
+        "version": "Xmas",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Serina_Xmas.png"
+    },
+    {
+        "name": "Shigure",
+        "version": "Original",
+        "school": "Red Winter",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Shigure.png"
+    },
+    {
+        "name": "Shigure",
+        "version": "Onsen",
+        "school": "Red Winter",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Shigure_Onsen.png"
+    },
+    {
+        "name": "Shiroko",
+        "version": "Original",
+        "school": "Abydos",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Shiroko.png"
+    },
+    {
+        "name": "Shiroko",
+        "version": "Riding",
+        "school": "Abydos",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Shiroko_Riding.png"
+    },
+    {
+        "name": "Shiroko",
+        "version": "Swimsuit",
+        "school": "Abydos",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Shiroko_Swimsuit.png"
+    },
+    {
+        "name": "Shun",
+        "version": "Original",
+        "school": "Shanhaijing",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Shun.png"
+    },
+    {
+        "name": "Shun",
+        "version": "Loli",
+        "school": "Shanhaijing",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Shun_Loli.png"
+    },
+    {
+        "name": "Sumire",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Sumire.png"
+    },
+    {
+        "name": "Toki",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Toki.png"
+    },
+    {
+        "name": "Toki",
+        "version": "Bunny",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Toki_Bunny.png"
+    },
+    {
+        "name": "Tsukuyo",
+        "version": "Original",
+        "school": "Hyakkiyako",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Tsukuyo.png"
+    },
+    {
+        "name": "Tsurugi",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Tsurugi.png"
+    },
+    {
+        "name": "Ui",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Ui.png"
+    },
+    {
+        "name": "Ui",
+        "version": "Swimsuit",
+        "school": "Trinity",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Ui_Swimsuit.png"
+    },
+    {
+        "name": "Utaha",
+        "version": "Cheerleader",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Utaha_Cheerleader.png"
+    },
+    {
+        "name": "Wakamo",
+        "version": "Original",
+        "school": "Hyakkiyako",
+        "rarity": 3,
+        "is_limited": true,
+        "image": "image/r3/Wakamo.png"
+    },
+    {
+        "name": "Wakamo",
+        "version": "Swimsuit",
+        "school": "Hyakkiyako",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Wakamo_Swimsuit.png"
+    },
+    {
+        "name": "Yukari",
+        "version": "Original",
+        "school": "Hyakkiyako",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Yukari.png"
+    },
+    {
+        "name": "Yuuka",
+        "version": "Sport",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Yuuka_Sport.png"
+    },
+    {
+        "name": "Yuzu",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Yuzu.png"
     }
 ]
