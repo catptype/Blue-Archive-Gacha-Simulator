@@ -15,65 +15,21 @@
             <!-- Gacha section -->
             <h4>GACHA</h4>
             <ul>
-                <li><a href="#" onclick="loadModule('history')">HISTORY</a></li>
-                <li><a href="#" onclick="loadModule('statistic')">STATISTIC</a></li>
+                <li><a href="?tab=history">HISTORY</a></li>
+                <li><a href="?tab=statistic">STATISTIC</a></li>
             </ul>
 
             <hr>
             <!-- Account section -->
             <h4>ACCOUNT SETTING</h4>
             <ul>
-                <li><a href="#" onclick="loadModule('change_password')">CHANGE PASSWORD</a></li>
+                <li><a href="?tab=change-password">CHANGE PASSWORD</a></li>
             </ul>
         </div>
-        <div>
-            <div id="loading-spinner" style="display:none;">Loading...</div>
-            <div class="dashboard-content" id="dashboard-content">DASHBOARD CONTENT</div>
+        <div class="dashboard-content">
+            {{ html_content }}
         </div>
     </div>
-
-    <script>
-        function loadModule(module) {
-            // You can customize the URL as needed, for example, by appending a query parameter
-            var url = '{% url "dashboard" %}' + '/' + module;
-            var contentDiv = document.getElementById('dashboard-content');
-            var spinner = document.getElementById('loading-spinner');
-
-            // Show loading spinner
-            //contentDiv.style.display = 'none';
-            spinner.style.display = 'block';
-            
-            // Use AJAX to load the content
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    // Hide loading spinner and display content
-                    spinner.style.display = 'none';
-                    //contentDiv.style.display = 'block';
-                    contentDiv.innerHTML = data;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    // Handle error and hide loading spinner
-                    spinner.style.display = 'none';
-                });
-        }
-
-        function loadHistory(page=1) {
-            var url = '{% url "history" %}?page=' + page;
-            var contentDiv = document.getElementById('dashboard-content');
-
-            // Use AJAX to load the content
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    contentDiv.innerHTML = data;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-    </script>
 </div>
 
 {% endblock %}

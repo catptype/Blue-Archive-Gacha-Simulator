@@ -4,7 +4,7 @@
     {% if transactions %}
         {% for transaction in transactions %}
         <div class="transaction-item">
-            <img src="{{ transaction.student.image.url }}" alt="">
+            <img src="{{ transaction.student.image.url }}" alt="{{ transaction.student.name }}_{{ transaction.student.version }}">
             <p><strong>Date:</strong> {{ transaction.formatted_datetime }}</p>
             <p><strong>Banner:</strong> {{ transaction.banner.name }}</p>
             <p><strong>Student:</strong> {{ transaction.student.name }}</p>
@@ -19,7 +19,7 @@
 <div class="pagination">
     <span class="step-links">
         {% if transactions.has_previous %}
-            <a href="#" onclick="loadHistory({{ transactions.previous_page_number }})">previous</a>
+            <a href="?tab={{ tab }}&page={{ previous_page }}">previous</a>
         {% endif %}
 
         <span class="current">
@@ -27,7 +27,7 @@
         </span>
 
         {% if transactions.has_next %}
-            <a href="#" onclick="loadHistory({{ transactions.next_page_number }})">next</a>
+            <a href="?tab={{ tab }}&page={{ next_page }}">next</a>
         {% endif %}
     </span>
 </div>

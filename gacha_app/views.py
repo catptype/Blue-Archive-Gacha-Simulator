@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseBadRequest
 
 from .models import GachaBanner
-from .utils.GachaSystem import GachaSystem
+from .utils import GachaSystem
 
 
 def gacha(request):
