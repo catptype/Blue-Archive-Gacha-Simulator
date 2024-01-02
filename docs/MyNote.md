@@ -82,28 +82,28 @@ class Student(models.Model):
 
 ```
 ### Based on form
-In case gacha banner, it is possible to do verification summation of (`rate_3_star`, `rate_2_star`, and `rate_1_star`) = 100 or not.
+In case gacha banner, it is possible to do verification summation of (`r3_rate`, `r2_rate`, and `r1_rate`) = 100 or not.
 
 ```python
 # models.py
 class GachaBanner(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    rate_3_star = models.DecimalField(max_digits=5, decimal_places=1)
-    rate_2_star = models.DecimalField(max_digits=5, decimal_places=1)
-    rate_1_star = models.DecimalField(max_digits=5, decimal_places=1)
+    r3_rate = models.DecimalField(max_digits=5, decimal_places=1)
+    r2_rate = models.DecimalField(max_digits=5, decimal_places=1)
+    r1_rate = models.DecimalField(max_digits=5, decimal_places=1)
     is_pickup = models.ManyToManyField('Student', related_name='pickup', blank=True)
     not_pickup = models.ManyToManyField('Student', related_name='not_pickup', blank=True)
 
     def clean(self):
         # Ensure that the sum of rates is equal to 100%
-        total_rate = self.rate_3_star + self.rate_2_star + self.rate_1_star
+        total_rate = self.r3_rate + self.r2_rate + self.r1_rate
         if total_rate != 100.0:
             raise ValidationError("The sum of rates must equal 100%.")
 ```
 
 However, it is impossible to verify both `is_pickup` and `not_pickup` fields do not contain same `student_id` because of `models.ManyToManyField` field.
 So, the verification will be occured in Forms instead of model.
-Note, the verification summation of (`rate_3_star`, `rate_2_star`, and `rate_1_star`) = 100 can be performed in form too.
+Note, the verification summation of (`r3_rate`, `r2_rate`, and `r1_rate`) = 100 can be performed in form too.
 ```python
 # forms.py
 from .models import GachaBanner
@@ -115,9 +115,9 @@ class GachaBannerAdminForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
 
-        rate_3_star = cleaned_data.get('rate_3_star')
-        rate_2_star = cleaned_data.get('rate_2_star')
-        rate_1_star = cleaned_data.get('rate_1_star')
+        r3_rate = cleaned_data.get('r3_rate')
+        r2_rate = cleaned_data.get('r2_rate')
+        r1_rate = cleaned_data.get('r1_rate')
 
         is_pickup = cleaned_data.get('is_pickup')
         not_pickup = cleaned_data.get('not_pickup')
@@ -129,7 +129,7 @@ class GachaBannerAdminForm(forms.ModelForm):
             raise ValidationError("The students in is_pickup and not_pickup.")
 
         # Ensure that the sum of rates is equal to 100%
-        total_rate = rate_3_star + rate_2_star + rate_1_star
+        total_rate = r3_rate + r2_rate + r1_rate
         if total_rate != 100.0:
             raise ValidationError("The sum of rates must equal 100%.")
 ```

@@ -1,5 +1,6 @@
 import random
 from django.contrib.auth import get_user_model
+
 from ..models import GachaTransaction
 from student_app.models import Student
 
@@ -9,9 +10,9 @@ class GachaSystem:
         self.banner = banner
         self.pickup_rate = 1.0
         self.draw_rates = {
-            3: float(banner.rate_3_star), 
-            2: float(banner.rate_2_star), 
-            1: float(banner.rate_1_star),
+            3: float(banner.r3_rate), 
+            2: float(banner.r2_rate), 
+            1: float(banner.r1_rate),
         }
         self.guarantee_rarity = {
             3: self.init_guarantee_rarity(3),
@@ -114,14 +115,14 @@ class GachaSystem:
     def set_draw_rates(self, preset=0):
         if preset == 0: # Default
             self.draw_rates.update({
-                3: float(self.banner.rate_3_star), 
-                2: float(self.banner.rate_2_star), 
-                1: float(self.banner.rate_1_star),
+                3: float(self.banner.r3_rate), 
+                2: float(self.banner.r2_rate), 
+                1: float(self.banner.r1_rate),
             })
         elif preset == 2: # Guarantee Rarity = 2
             self.draw_rates.update({
-                3: float(self.banner.rate_3_star), 
-                2: float(self.banner.rate_2_star + self.banner.rate_1_star), 
+                3: float(self.banner.r3_rate), 
+                2: float(self.banner.r2_rate + self.banner.r1_rate), 
                 1: 0.0,
             })
         elif preset == 3: # Guarantee Rarity = 2

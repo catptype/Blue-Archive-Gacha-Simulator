@@ -3,8 +3,13 @@ from PIL import Image
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.html import mark_safe
-from .utils import student_portrait_path
 
+def student_portrait_path(instance, filename):
+    name = instance.name
+    version = instance.version if instance.version != 'Original' else ''
+    extension = os.path.splitext(filename)[1]
+    filename = f'{name}_{version}_150{extension}'
+    return os.path.join('image/student/portrait/', filename)
 
 class Version(models.Model):
     name = models.CharField(max_length=100, unique=True, blank=False)
@@ -70,9 +75,9 @@ class Student(models.Model):
 
         except Student.DoesNotExist:
             old_image = None
-        
-        super(Student, self).save(*args, **kwargs)
 
+        super(Student, self).save(*args, **kwargs)
+    
         if self.image:
             img = Image.open(self.image.path)
             img_width, img_height = img.size

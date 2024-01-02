@@ -1,8 +1,8 @@
-
 import os
-from django.db import models
-from student_app.models import Student
 from django.contrib.auth import get_user_model
+from django.db import models
+
+from student_app.models import Student
 
 def banner_image_path(instance, filename):
     name = instance.name
@@ -10,12 +10,13 @@ def banner_image_path(instance, filename):
     filename = f'{name}{extension}'
     return os.path.join('image/banner/')
 
-
 class GachaBanner(models.Model):
     name = models.CharField(max_length=100, unique=True, blank=False, null=False)
-    rate_3_star = models.DecimalField(max_digits=4, decimal_places=1, blank=False)
-    rate_2_star = models.DecimalField(max_digits=4, decimal_places=1, blank=False)
-    rate_1_star = models.DecimalField(max_digits=4, decimal_places=1, blank=False)
+    image = models.ImageField(upload_to=banner_image_path, blank=True, null=True)
+    pickup_rate = models.DecimalField(max_digits=4, decimal_places=1, blank=False)
+    r3_rate = models.DecimalField(max_digits=4, decimal_places=1, blank=False)
+    r2_rate = models.DecimalField(max_digits=4, decimal_places=1, blank=False)
+    r1_rate = models.DecimalField(max_digits=4, decimal_places=1, blank=False)
     is_pickup = models.ManyToManyField(Student, related_name='pickup', blank=True)
     not_pickup = models.ManyToManyField(Student, related_name='not_pickup', blank=True)
 

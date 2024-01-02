@@ -15,9 +15,9 @@ class GachaBannerAdminForm(forms.ModelForm):
         'max': '100.0',
     })
 
-    rate_3_star = forms.DecimalField(widget=rate_widget)
-    rate_2_star = forms.DecimalField(widget=rate_widget)
-    rate_1_star = forms.DecimalField(widget=rate_widget)
+    r3_rate = forms.DecimalField(widget=rate_widget)
+    r2_rate = forms.DecimalField(widget=rate_widget)
+    r1_rate = forms.DecimalField(widget=rate_widget)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
