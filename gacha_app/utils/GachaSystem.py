@@ -14,8 +14,8 @@ class GachaSystem:
             1: float(banner.rate_1_star),
         }
         self.guarantee_rarity = {
-            3: self.set_countdown_rarity(3),
-            2: self.set_countdown_rarity(2),
+            3: self.init_guarantee_rarity(3),
+            2: self.init_guarantee_rarity(2),
         }
         
     def draw_gacha(self, num_draw):
@@ -55,25 +55,11 @@ class GachaSystem:
                 self.set_draw_rates(0)
 
             # Update guarantee countdown
-            if drawn_rarity == 3:
-                self.guarantee_rarity.update({
-                    3: 199,
-                    2: max(0, self.guarantee_rarity[2] - 1),
-                })
-            elif drawn_rarity == 2:
-                self.guarantee_rarity.update({
-                    3: max(0, self.guarantee_rarity[3] - 1),
-                    2: 9,
-                })
-            else:
-                self.guarantee_rarity.update({
-                    3: max(0, self.guarantee_rarity[3] - 1),
-                    2: max(0, self.guarantee_rarity[2] - 1),
-                })
+            self.update_guarantee_rarity(drawn_rarity)
             
         return drawn_students
     
-    def set_countdown_rarity(self, rarity):
+    def init_guarantee_rarity(self, rarity):
         if not self.user.is_authenticated and rarity == 3:
             return 199
         elif not self.user.is_authenticated and rarity == 2:
@@ -88,6 +74,23 @@ class GachaSystem:
                 return num_query - idx
 
         return max(num_query - 1 - len(queryset), 0)
+    
+    def update_guarantee_rarity(self, drawn_rarity):
+        if drawn_rarity == 3:
+            self.guarantee_rarity.update({
+                3: 199,
+                2: max(0, self.guarantee_rarity[2] - 1),
+            })
+        elif drawn_rarity == 2:
+            self.guarantee_rarity.update({
+                3: max(0, self.guarantee_rarity[3] - 1),
+                2: 9,
+            })
+        else:
+            self.guarantee_rarity.update({
+                3: max(0, self.guarantee_rarity[3] - 1),
+                2: max(0, self.guarantee_rarity[2] - 1),
+            })
 
     def save_transaction(self, drawn_students):
         if self.user.is_authenticated:
