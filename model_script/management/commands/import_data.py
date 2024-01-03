@@ -1,18 +1,21 @@
 import json
 import os
+from PIL import Image
+from django.conf import settings
 from django.core.management.base import BaseCommand
 from student_app.models import Version, School, Student
-from django.conf import settings
-from PIL import Image
+from gacha_app.models import GachaType, GachaBanner
 
 class Command(BaseCommand):
     help = 'Load data from JSON files into model'
     def handle(self, *args, **options):
         self.import_versions()
         self.import_schools()
-        self.import_students('student_app/data/json/student_r1.json')
-        self.import_students('student_app/data/json/student_r2.json')
-        self.import_students('student_app/data/json/student_r3.json')
+        self.import_gacha()
+        self.import_banner()
+        self.import_students('model_script/data/json/student_r1.json')
+        self.import_students('model_script/data/json/student_r2.json')
+        self.import_students('model_script/data/json/student_r3.json')
         self.stdout.write(self.style.SUCCESS('Data imported successfully'))
     
     def student_portrait_processing(self, source, destination):
@@ -25,8 +28,36 @@ class Command(BaseCommand):
         img.thumbnail(output_size)
         img.save(destination)
 
+    def import_banner(self):
+        with open('model_script/data/json/gacha_banner.json') as file:
+            banners = json.load(file)
+            for data in banners:
+                name = data['name']
+                banner_type = GachaType.objects.get(name=data['banner_type'])
+                if not GachaBanner.objects.filter(name=name).exists():
+                    GachaBanner.objects.create(
+                        name=name,
+                        banner_type=banner_type,
+                    )
+                    self.stdout.write(self.style.SUCCESS(f'Import {name} to GachaBanner model'))
+
+    def import_gacha(self):
+        with open('model_script/data/json/gacha_type.json') as file:
+            types = json.load(file)
+            for data in types:
+                name = data['name']
+                if not GachaType.objects.filter(name=name).exists():
+                    GachaType.objects.create(
+                        name=name,
+                        pickup_rate=data['pickup_rate'],
+                        r3_rate=data['r3_rate'],
+                        r2_rate=data['r2_rate'],
+                        r1_rate=data['r1_rate'],
+                    )
+                    self.stdout.write(self.style.SUCCESS(f'Import {name} to GachaType model'))
+
     def import_schools(self):
-        with open('student_app/data/json/version.json') as file:
+        with open('model_script/data/json/version.json') as file:
             versions = json.load(file)
             for data in versions:
                 name = data['name']
@@ -35,7 +66,7 @@ class Command(BaseCommand):
                     self.stdout.write(self.style.SUCCESS(f'Import {name} to School model'))
 
     def import_versions(self):
-        with open('student_app/data/json/school.json') as file:
+        with open('model_script/data/json/school.json') as file:
             schools = json.load(file)
             for data in schools:
                 name = data['name']
@@ -53,10 +84,8 @@ class Command(BaseCommand):
                 rarity = data['rarity']
                 is_limited = data['is_limited']
                 image_json = data['image']
-
-                if not Student.objects.filter(name=name, version=version).exists():
-                    
-                    image_source_path = os.path.join(settings.BASE_DIR, 'student_app', 'data', image_json)
+                if not Student.objects.filter(name=name, version=version).exists():                    
+                    image_source_path = os.path.join(settings.BASE_DIR, 'model_script', 'data', image_json)
                     extension = os.path.splitext(image_source_path)[1]
                     image_model_path = os.path.join('image', 'student', 'portrait', f'{name}_{version}_150{extension}')
                     image_media_path = os.path.join(settings.MEDIA_ROOT, image_model_path)

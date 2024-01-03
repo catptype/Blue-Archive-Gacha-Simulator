@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Standard Banner",
+        "banner_type": "Permanent"
+    },
+    {
+        "name": "Bunny Banner",
+        "banner_type": "Pickup"
+    },
+    {
+        "name": "Sport Banner",
+        "banner_type": "Pickup"
+    },
+    {
+        "name": "Swimsuit Banner",
+        "banner_type": "Pickup"
+    },
+    {
+        "name": "Limited Banner",
+        "banner_type": "Celebration"
+    }
+]

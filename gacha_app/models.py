@@ -23,25 +23,25 @@ class GachaType(models.Model):
 class GachaBanner(models.Model):
     name = models.CharField(max_length=100, unique=True, blank=False, null=False)
     image = models.ImageField(upload_to=banner_image_path, blank=True, null=True)
-    type = models.ForeignKey(GachaType, on_delete=models.CASCADE)
+    banner_type = models.ForeignKey(GachaType, on_delete=models.CASCADE)
     is_pickup = models.ManyToManyField(Student, related_name='pickup', blank=True)
     not_pickup = models.ManyToManyField(Student, related_name='not_pickup', blank=True)
 
     @property
     def pickup_rate(self):
-        return self.type.pickup_rate
+        return self.banner_type.pickup_rate
     
     @property
     def r3_rate(self):
-        return self.type.r3_rate
+        return self.banner_type.r3_rate
     
     @property
     def r2_rate(self):
-        return self.type.r2_rate
+        return self.banner_type.r2_rate
     
     @property
     def r1_rate(self):
-        return self.type.r1_rate
+        return self.banner_type.r1_rate
     
     def __str__(self):
         return self.name

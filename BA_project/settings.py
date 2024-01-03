@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'user_app',
     'gacha_app',
     'student_app',
+    'model_script',
 ]
 
 MIDDLEWARE = [
