@@ -1,11 +1,21 @@
+/* STUEDNT FORM */
 #id_is_limited,
 #id_rarity {
     display: flex;
+
+    @media (max-width: 800px) {
+        flex-direction: column;
+    }
 }
 
 .inline-radio label {
     min-width: 80px;
     width: 80px;
+
+    @media (max-width: 800px) {
+        min-width: auto;
+        width: 100%;
+    }
 }
 
 .inline-radio input[type="radio"] {
@@ -18,15 +28,28 @@ label {
     font-weight: bold;
 }
 
-/* Add a media query for responsiveness */
-@media (max-width: 800px) {
-    #id_is_limited,
-    #id_rarity {
-        flex-direction: column; /* Change to a column layout on small screens */
-    }
+/* DJANGO ADMIN PANEL: STUEDNT TABLE */
+.column-portrait,
+.column-name,
+.column-version,
+.column-rarity,
+.column-school,
+.column-is_limited {
+    width: 100px;
+}
 
-    .inline-radio label {
-        min-width: auto;
-        width: 100%; /* Take up full width on small screens */
-    }
+.portrait img {
+    width: auto; 
+    height: 80px;
+    object-fit: cover;
+}
+
+.edit-button {
+    padding: 5px 10px;
+    font-weight: bold; 
+    color: #fff !important;
+    background: #417690;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }

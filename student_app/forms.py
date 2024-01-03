@@ -1,5 +1,5 @@
 from django import forms
-from .models import Student, School
+from .models import Student, School, Version
 #from django.forms import widgets
 
 class StudentAdminForm(forms.ModelForm):
@@ -8,6 +8,11 @@ class StudentAdminForm(forms.ModelForm):
         widget=forms.RadioSelect(attrs={'class': 'inline-radio'}),
         coerce=int,
         empty_value=None,
+    )
+    version = forms.ModelChoiceField(
+        queryset=Version.objects.all(),
+        empty_label="Select version",  # Set the custom text for the blank choice
+        required=True,
     )
     school = forms.ModelChoiceField(
         queryset=School.objects.all().order_by('name'),
@@ -35,7 +40,6 @@ class StudentAdminForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['image'].widget.template_name = 'admin/widgets/student_preview.html'
         self.fields['image'].widget.attrs['class'] = 'custom-file-input'
-        self.fields['version'].widget.can_add_related = True
 
 class StudentForm(forms.ModelForm):
     class Meta:

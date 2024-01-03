@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
+from django.template.loader import render_to_string
 
 from .models import Student, School, Version
 from .forms import StudentAdminForm
@@ -30,36 +31,36 @@ class SchoolAdmin(admin.ModelAdmin):
     ordering = ['name'] 
 
     def get_student_names(self, obj):
-        return obj.get_student_names()
+        name_list = [student.name for student in obj.student_set.all().order_by('name')]
+        name_list = list(dict.fromkeys(name_list))
+        return ', '.join(name_list)
 
-    get_student_names.short_description = 'members'
+    get_student_names.short_description = 'Students'
 
 class VersionAdmin(admin.ModelAdmin):
     list_display = ['name', 'display_student_images']
     ordering = ['id']
 
     def display_student_images(self, obj):
-        student_names = obj.get_student_names()
-        return format_html(
-            f'<div class="student-grid">'
-            f'{student_names}'
-            f'</div>'
-        )
+        students = obj.student_set.all().order_by('name')
+        context = {
+            'students': students
+        }
+        return render_to_string('admin/student_version.html', context)
 
-    display_student_images.short_description = 'Members'
+    display_student_images.short_description = 'Students'
 
     class Media:
         css = {
             'all': ('/static/css/admin_banner.css',),
         }
 
-
 class StudentAdmin(admin.ModelAdmin):
     # Set form
     form = StudentAdminForm
     
     # Set field
-    list_display = ['image_tag', 'name', 'version', 'rarity', 'school', 'is_limited', 'edit_button']
+    list_display = ['portrait', 'name', 'version', 'rarity', 'school', 'is_limited', 'edit_button']
     list_per_page = 10
     ordering = ['name']
 
@@ -69,16 +70,26 @@ class StudentAdmin(admin.ModelAdmin):
     list_filter = [RarityFilter, 'school', 'version', 'is_limited']
 
     # Custom field
-    def image_tag(self, obj):
-        if obj.image:
-            return format_html(f'<img src="{obj.image.url}" style="width: auto; height:80px" />')
-        return 'No Image'
+    def portrait(self, obj):
+        name = obj.name
+        version = obj.version_name
+        image_url = obj.image.url
+        context = {
+            'name': name,
+            'version': version,
+            'image_url': image_url,
+        }
+        return render_to_string('admin/student_portrait.html', context)
 
     def edit_button(self, obj):
-        change_url = reverse('admin:%s_%s_change' %(obj._meta.app_label, obj._meta.model_name),  args=[obj.id])
-        return format_html(f'<a href="{change_url}" class="button" style="font-weight: bold; text-decoration: none; padding: 5px 10px">EDIT</a>')
+        app = obj._meta.app_label
+        model = obj._meta.model_name
+        edit_url = reverse(f'admin:{app}_{model}_change',  args=[obj.id])
+        context = {
+            'edit_url': edit_url
+        }
+        return render_to_string('admin/edit_button.html', context)
     
-    image_tag.short_description = 'Image'
     edit_button.short_description = ''
 
     class Media:

@@ -2,7 +2,6 @@ import os
 from PIL import Image
 from django.db import models
 from django.core.exceptions import ValidationError
-from django.utils.html import mark_safe
 
 def student_portrait_path(instance, filename):
     name = instance.name
@@ -14,32 +13,11 @@ def student_portrait_path(instance, filename):
 class Version(models.Model):
     name = models.CharField(max_length=100, unique=True, blank=False)
 
-    def get_student_names(self):
-        students = self.student_set.all().order_by('name')
-        images_html = []
-        for student in students:
-            try:
-                query = Student.objects.get(name=student.name, version=student.version)
-                image_url = query.image.url
-                images_html.extend([
-                    f'<div class="student-item">'
-                    f'<img src="{image_url}" alt="{student.name}" style="height: 80px">'
-                    f'<figcaption>{student.name}</figcaption>'
-                    f'</div>'
-                ])
-            except Student.DoesNotExist:
-                pass
-
-        return mark_safe(''.join(images_html))
-
     def __str__(self):
         return self.name
 
 class School(models.Model):
     name = models.CharField(max_length=100, unique=True, blank=False)
-
-    def get_student_names(self):
-        return ', '.join(set(student.name for student in self.student_set.all().order_by('name')))
 
     def __str__(self):
         return self.name

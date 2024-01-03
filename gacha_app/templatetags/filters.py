@@ -7,4 +7,8 @@ register = template.Library()
 
 @register.filter(name='get_rate')
 def get_rate(obj, rarity):
-    return getattr(obj, f'rate_{rarity}_star')
+    return getattr(obj, f'r{rarity}_rate')
+
+@register.filter(name='filter_rarity')
+def filter_rarity(obj, rarity):
+    return obj.filter(rarity=rarity)

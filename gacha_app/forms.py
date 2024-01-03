@@ -1,11 +1,10 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from .models import GachaBanner, GachaTransaction
+from .models import GachaBanner, GachaTransaction, GachaType
 from student_app.models import Student
 
-class GachaBannerAdminForm(forms.ModelForm):
-
+class GachaTypeAdminForm(forms.ModelForm):
     # Override widgets for rate fields
     rate_widget = forms.TextInput(attrs={
         'type': 'number', 
@@ -15,9 +14,34 @@ class GachaBannerAdminForm(forms.ModelForm):
         'max': '100.0',
     })
 
+    pickup_rate = forms.DecimalField(widget=rate_widget)
     r3_rate = forms.DecimalField(widget=rate_widget)
     r2_rate = forms.DecimalField(widget=rate_widget)
     r1_rate = forms.DecimalField(widget=rate_widget)
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        # Ensure that the sum of rates is equal to 100%
+        total_rate = sum(cleaned_data.get(f'r{i}_rate', 0) for i in [3, 2, 1])
+        if total_rate != 100.0:
+            raise ValidationError({
+                'r3_rate': f"The sum of rates must be 100%. (Current sum: {total_rate})",
+                'r2_rate': f"The sum of rates must be 100%. (Current sum: {total_rate})",
+                'r1_rate': f"The sum of rates must be 100%. (Current sum: {total_rate})",
+            })
+        
+        # Ensure that pickup_rate must less than r3_rate
+        if cleaned_data.get('pickup_rate') >= cleaned_data.get('r3_rate'):
+            raise ValidationError({
+                'pickup_rate': "The pickup rate must be less than the r3 rate ",
+            })
+        
+    class Meta:
+        model = GachaType
+        fields = '__all__'
+
+class GachaBannerAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -38,15 +62,12 @@ class GachaBannerAdminForm(forms.ModelForm):
 
         # Ensure that students in is_pickup and not_pickup are distinct
         common_students = is_pickup & not_pickup
-        print(common_students)
         if common_students:
-            raise ValidationError("The students in is_pickup and not_pickup.")
+            raise ValidationError({
+                'is_pickup': "A student cannot be marked for both pickup and not pickup.",
+                'not_pickup': "A student cannot be marked for both pickup and not pickup.",
+            })
 
-        # Ensure that the sum of rates is equal to 100%
-        total_rate = sum(cleaned_data.get(f'rate_{i}_star', 0) for i in [3, 2, 1])
-        if total_rate != 100.0:
-            raise ValidationError("The sum of rates must equal 100%.")
-    
     class Meta:
         model = GachaBanner
         fields = '__all__'

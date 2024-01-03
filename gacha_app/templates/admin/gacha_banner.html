@@ -1,0 +1,18 @@
+{% load filters %} <!-- Read custom template tags in filters.py -->
+
+{% if students %}
+<div>
+{% for rarity in rarities %}
+<h3>{% for _ in "★"|rjust:rarity %}★{% endfor %}</h3>
+<div class="student-grid">
+    {% for student in students|filter_rarity:rarity %}
+    <div class="student-item">
+        <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version }}"
+            style="height:80px;">
+        <figcaption>{{ student.name }}{% if student.version.name != "Original" %}_{{ student.version.name }}{% endif %}</figcaption>
+    </div>
+    {% endfor %}
+</div>
+{% endfor %}
+</div>
+{% endif %}
