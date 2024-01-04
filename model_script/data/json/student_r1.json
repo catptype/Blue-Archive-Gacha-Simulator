@@ -49,11 +49,11 @@
     },
     {
         "name": "Hibiki",
-        "version": "Sport",
+        "version": "Cheerleader",
         "school": "Millennium",
         "rarity": 1,
         "is_limited": false,
-        "image": "image/r1/Hibiki_Sport.png"
+        "image": "image/r1/Hibiki_Cheerleader.png"
     },
     {
         "name": "Izumi",

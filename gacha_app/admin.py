@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from django.template.loader import render_to_string
 
 from .models import GachaBanner, GachaTransaction, GachaType
@@ -7,6 +8,11 @@ from .forms import GachaBannerAdminForm, GachaTransactionAdminForm, GachaTypeAdm
 class GachaTypeAdmin(admin.ModelAdmin):
     form = GachaTypeAdminForm
     list_display = ['name', 'pickup_rate', 'r3_rate', 'r2_rate', 'r1_rate']
+
+    class Media:
+        css = {
+            'all': ('/static/css/admin-overrides.css',),
+        }
 
 class GachaTransactionAdmin(admin.ModelAdmin):
     form = GachaTransactionAdminForm
@@ -20,14 +26,26 @@ class GachaTransactionAdmin(admin.ModelAdmin):
 
 class GachaBannerAdmin(admin.ModelAdmin):
     form = GachaBannerAdminForm
-    list_display = ['name', 'rates', 'is_pickup_img','not_pickup_img']
+    list_display = ['name', 'rates', 'is_pickup_portrait','not_pickup_portrait']
     list_per_page = 1
     filter_horizontal = ('is_pickup', 'not_pickup')
 
     def rates(self, obj):
-        return f'3★: {obj.r3_rate}% | 2★: {obj.r2_rate}% | 1★: {obj.r1_rate}%'
+        return format_html(
+            f'<p>★★★: {obj.r3_rate}%</p>'
+            f'<p>★★: {obj.r2_rate}%</p>'
+            f'<p>★: {obj.r1_rate}%</p>'
+        )        
 
-    def not_pickup_img(self, obj):
+    def is_pickup_portrait(self, obj):
+        students = obj.is_pickup.all().order_by('name')
+        context = {
+            'students': students,
+            'rarities': [3],
+        }
+        return render_to_string('admin/gacha_banner.html', context)
+    
+    def not_pickup_portrait(self, obj):
         students = obj.not_pickup.all().order_by('name')
         context = {
             'students': students,
@@ -35,21 +53,14 @@ class GachaBannerAdmin(admin.ModelAdmin):
         }
         return render_to_string('admin/gacha_banner.html', context)
 
-    def is_pickup_img(self, obj):
-        students = obj.is_pickup.all().order_by('name')
-        context = {
-            'students': students,
-            'rarities': [3],
-        }
-        return render_to_string('admin/gacha_banner.html', context)
-
-    is_pickup_img.short_description = 'Pickup 3★ students'
-    not_pickup_img.short_description = 'Not pickup students'
+    is_pickup_portrait.short_description = 'Pickup 3★ students'
+    not_pickup_portrait.short_description = 'Not pickup students'
     
     class Media:
         css = {
-            'all': ('/static/css/admin_banner.css',),
+            'all': ('/static/css/admin-overrides.css',),
         }
+        js = ('/static/js/admin.js',)
 
 admin.site.register(GachaType, GachaTypeAdmin)
 admin.site.register(GachaBanner, GachaBannerAdmin)

@@ -4,6 +4,8 @@ from django.core.exceptions import ValidationError
 from .models import GachaBanner, GachaTransaction, GachaType
 from student_app.models import Student
 
+from django.contrib.admin.widgets import FilteredSelectMultiple
+
 class GachaTypeAdminForm(forms.ModelForm):
     # Override widgets for rate fields
     rate_widget = forms.TextInput(attrs={
@@ -43,8 +45,15 @@ class GachaTypeAdminForm(forms.ModelForm):
 
 class GachaBannerAdminForm(forms.ModelForm):
 
+    image = forms.ImageField(
+        label="Portrait",
+        widget=forms.ClearableFileInput(), 
+        required=False,
+    )
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['image'].widget.template_name = 'admin/widgets_banner.html'
 
         existing_not_pickup_id = [student.id for student in self.initial.get('not_pickup', [])]
         self.fields['is_pickup'].label = 'Pickup 3★ Students'
@@ -71,6 +80,10 @@ class GachaBannerAdminForm(forms.ModelForm):
     class Meta:
         model = GachaBanner
         fields = '__all__'
+        widgets = {
+            'is_pickup': FilteredSelectMultiple('★★★ students', is_stacked=False),
+            'not_pickup': FilteredSelectMultiple('students', is_stacked=False),
+        }
 
 class GachaTransactionAdminForm(forms.ModelForm):
 

@@ -1,0 +1,118 @@
+/*
+* {
+    outline: 1px solid red;
+}
+*/
+
+tr * {
+    vertical-align: middle;
+}
+
+label {
+    font-weight: bold;
+}
+
+.column-portrait,
+.column-name,
+.column-version,
+.column-rarity,
+.column-school,
+.column-is_limited,
+.column-rates,
+.column-pickup_rate,
+.column-r3_rate,
+.column-r2_rate,
+.comumn-r1_rate {
+    width: 8rem;
+}
+
+.column-is_pickup_portrait {
+    width: 15rem;
+}
+
+.edit-button {
+    padding: 5px 10px;
+    font-weight: bold; 
+    color: #fff !important;
+    background: #417690;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.student-flex {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 10px;
+
+    & .portrait {
+        flex: 0;
+    }
+
+    & figcaption {
+        text-align: center;
+    }
+}
+
+.portrait img {
+    width: 80px; 
+    object-fit: cover;
+}
+
+/* Student edit form style */
+#id_is_limited,
+#id_rarity {
+    display: flex;
+    
+    & div {
+        flex: 0;
+
+        & label {
+            min-width: 80px;
+            width: 80px;
+
+            & input {
+                display: inline-block;
+                margin-right: 0.2rem;
+                margin-bottom: 0.2rem;
+            }
+
+            @media (max-width: 800px) {
+                min-width: auto;
+                width: 100%;
+            }
+        }
+        
+    }
+
+    @media (max-width: 800px) {
+        flex-direction: column;
+    }
+}
+
+.portrait-edit-container {
+    display: grid;
+
+    & img {
+        height: 150px;
+    }
+
+    & button {
+        margin-top: 0.2rem;
+    }
+}
+
+.banner-edit-container {
+    display: grid;
+
+    & img {
+        width: 300px;
+        height: 150px;
+    }
+
+    & button {
+        margin-top: 0.2rem;
+    }
+}

@@ -1,12 +1,9 @@
-<!-- ADMIN STUDENT VERSION-->
-<div>
-    <div class="student-grid">
-        {% for student in students %}
-        <div class="student-item">
-            <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version }}"
-                style="height:80px;">
-            <figcaption>{{ student.name }}{% if student.version.name != "Original" %}_{{ student.version.name }}{% endif %}</figcaption>
-        </div>
-        {% endfor %}
+{% load static %}
+<div class="student-flex">
+    {% for student in students %}
+    <div class="portrait">
+        <img src="{% if student.image %}{{ student.image.url }}{% else %}{% static 'portrait_404.png' %}{% endif %}" alt="{{ student.name }}_{{ student.version }}">
+        <figcaption>{{ student.name }}</figcaption>
     </div>
+    {% endfor %}
 </div>

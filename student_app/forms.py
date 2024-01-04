@@ -1,11 +1,10 @@
 from django import forms
 from .models import Student, School, Version
-#from django.forms import widgets
 
 class StudentAdminForm(forms.ModelForm):
     rarity = forms.TypedChoiceField(
         choices=Student._meta.get_field('rarity').choices,
-        widget=forms.RadioSelect(attrs={'class': 'inline-radio'}),
+        widget=forms.RadioSelect(),
         coerce=int,
         empty_value=None,
     )
@@ -22,24 +21,23 @@ class StudentAdminForm(forms.ModelForm):
     is_limited = forms.TypedChoiceField(
         label="Is limited",
         choices=((True, 'Yes'), (False, 'No')),
-        widget=forms.RadioSelect(attrs={'class': 'inline-radio'}),
+        widget=forms.RadioSelect(),
         coerce=lambda x: x == 'True',  # Ensure True/False values are used
         initial=False,
     )
     image = forms.ImageField(
-        label="Image",
+        label="Portrait",
         widget=forms.ClearableFileInput(), 
         required=False,
     )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['image'].widget.template_name = 'admin/widgets_portrait.html'
+
     class Meta:
         model = Student
         fields = '__all__'
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['image'].widget.template_name = 'admin/widgets/student_preview.html'
-        self.fields['image'].widget.attrs['class'] = 'custom-file-input'
 
 class StudentForm(forms.ModelForm):
     class Meta:

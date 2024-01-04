@@ -1,0 +1,6 @@
+{% load static %}
+<div class="banner-edit-container">
+  <img id="banner-preview" src="{% if widget.value %}{{ widget.value.url }}{% else %}{% static 'portrait_404.png' %}{% endif %}" alt="Banner preview">
+  <input type="file" name="image" accept="image/*" id="id_image" onchange="previewImage(this, 'banner-preview', '{{ widget.value.url|safe }}')">
+  <button type="button" onclick="clearImage('banner-preview', '{{ widget.value.url|safe }}')">Clear</button>
+</div>

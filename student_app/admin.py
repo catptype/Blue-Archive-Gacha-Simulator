@@ -52,7 +52,7 @@ class VersionAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': ('/static/css/admin_banner.css',),
+            'all': ('/static/css/admin-overrides.css',),
         }
 
 class StudentAdmin(admin.ModelAdmin):
@@ -73,11 +73,11 @@ class StudentAdmin(admin.ModelAdmin):
     def portrait(self, obj):
         name = obj.name
         version = obj.version_name
-        image_url = obj.image.url
+        image = obj.image
         context = {
             'name': name,
             'version': version,
-            'image_url': image_url,
+            'image': image,
         }
         return render_to_string('admin/student_portrait.html', context)
 
@@ -94,8 +94,9 @@ class StudentAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': ('/static/css/admin_student.css',),
+            'all': ('/static/css/admin-overrides.css',),
         }
+        js = ('/static/js/admin.js',)
 
 admin.site.register(Student, StudentAdmin)
 admin.site.register(School, SchoolAdmin)
