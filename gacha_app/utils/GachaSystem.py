@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 
 from ..models import GachaTransaction
 from student_app.models import Student
+from user_app.models import ObtainedStudent
 
 class GachaSystem:
     def __init__(self, user, banner):
@@ -109,6 +110,19 @@ class GachaSystem:
             
             # Use bulk_create to insert all the records at once
             GachaTransaction.objects.bulk_create(transactions)
+        else:
+            pass
+
+    def update_collection(self, drawn_students):
+        if self.user.is_authenticated:
+            user_instance = get_user_model().objects.get(username=self.user.username)
+
+            for student_instance in drawn_students:
+                if not ObtainedStudent.objects.filter(user=user_instance, student=student_instance).exists():
+                    ObtainedStudent.objects.create(
+                        user=user_instance, 
+                        student=student_instance,
+                    )
         else:
             pass
 

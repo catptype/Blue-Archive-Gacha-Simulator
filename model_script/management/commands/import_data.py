@@ -5,17 +5,23 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 from student_app.models import Version, School, Student
 from gacha_app.models import GachaType, GachaBanner
+from user_app.models import Achievement
+from .utils import ImageProcessor
 
 class Command(BaseCommand):
     help = 'Load data from JSON files into model'
     def handle(self, *args, **options):
-        self.import_versions()
-        self.import_schools()
-        self.import_gacha()
-        self.import_banner()
-        self.import_students('model_script/data/json/student_r1.json')
-        self.import_students('model_script/data/json/student_r2.json')
-        self.import_students('model_script/data/json/student_r3.json')
+        basepath = os.path.join(settings.BASE_DIR, 'model_script', 'data', 'json')
+        self.import_achievement(os.path.join(basepath, 'achievement_club.json'))
+        self.import_achievement(os.path.join(basepath, 'achievement_version.json'))
+        self.import_achievement(os.path.join(basepath, 'achievement_limited.json'))
+        self.import_versions(os.path.join(basepath, 'student_version.json'))
+        self.import_schools(os.path.join(basepath, 'school.json'))
+        self.import_gachatype(os.path.join(basepath, 'gacha_type.json'))
+        self.import_banner(os.path.join(basepath, 'gacha_banner.json'))
+        self.import_students(os.path.join(basepath, 'student_r1.json'))
+        self.import_students(os.path.join(basepath, 'student_r2.json'))
+        self.import_students(os.path.join(basepath, 'student_r3.json'))
         self.stdout.write(self.style.SUCCESS('Data imported successfully'))
     
     def student_portrait_processing(self, source, destination):
@@ -28,8 +34,49 @@ class Command(BaseCommand):
         img.thumbnail(output_size)
         img.save(destination)
 
-    def import_banner(self):
-        with open('model_script/data/json/gacha_banner.json') as file:
+    def achievement_icon_processing(self, source, destination):
+        img = Image.open(source)
+        img_width, img_height = img.size
+        max_height = 150.0
+        height_percent = (max_height / float(img_height))
+        new_width = int((float(img_width) * float(height_percent)))
+        output_size = (new_width, max_height)
+        img.thumbnail(output_size)
+        img.save(destination)
+
+    def import_achievement(self, json_file):
+        with open(json_file) as file:
+            achievements = json.load(file)
+            for data in achievements:
+                name = data['name']
+                image_json = data['image']
+                if not Achievement.objects.filter(name=name).exists():
+
+                    if image_json:
+                        image_source_path = os.path.join(settings.BASE_DIR, 'model_script', 'data', image_json)
+                        extension = os.path.splitext(image_source_path)[1]
+                        image_model_path = os.path.join('image', 'achievement', f'{name}{extension}')
+                        image_media_path = os.path.join(settings.MEDIA_ROOT, image_model_path)
+
+                        # Resize Image
+                        ImageProcessor.resize_by_width(150.0, image_source_path, image_media_path)
+
+                        Achievement.objects.create(
+                            name=name,
+                            description=data['description'],
+                            criteria=data['criteria'],
+                            image=image_model_path,
+                        )
+                    else:
+                        Achievement.objects.create(
+                            name=name,
+                            description=data['description'],
+                            criteria=data['criteria'],
+                        )
+                    self.stdout.write(self.style.SUCCESS(f'Import {name} to Achievement model'))
+
+    def import_banner(self, json_file):
+        with open(json_file) as file:
             banners = json.load(file)
             for data in banners:
                 name = data['name']
@@ -41,8 +88,8 @@ class Command(BaseCommand):
                     )
                     self.stdout.write(self.style.SUCCESS(f'Import {name} to GachaBanner model'))
 
-    def import_gacha(self):
-        with open('model_script/data/json/gacha_type.json') as file:
+    def import_gachatype(self, json_file):
+        with open(json_file) as file:
             types = json.load(file)
             for data in types:
                 name = data['name']
@@ -56,22 +103,22 @@ class Command(BaseCommand):
                     )
                     self.stdout.write(self.style.SUCCESS(f'Import {name} to GachaType model'))
 
-    def import_schools(self):
-        with open('model_script/data/json/version.json') as file:
+    def import_schools(self, json_file):
+        with open(json_file) as file:
             versions = json.load(file)
             for data in versions:
                 name = data['name']
-                if not Version.objects.filter(name=name).exists():
-                    Version.objects.create(name=name)
+                if not School.objects.filter(name=name).exists():
+                    School.objects.create(name=name)
                     self.stdout.write(self.style.SUCCESS(f'Import {name} to School model'))
 
-    def import_versions(self):
-        with open('model_script/data/json/school.json') as file:
+    def import_versions(self, json_file):
+        with open(json_file) as file:
             schools = json.load(file)
             for data in schools:
                 name = data['name']
-                if not School.objects.filter(name=name).exists():
-                    School.objects.create(name=name)
+                if not Version.objects.filter(name=name).exists():
+                    Version.objects.create(name=name)
                     self.stdout.write(self.style.SUCCESS(f'Import {name} to Version model'))
 
     def import_students(self, json_file):
@@ -91,7 +138,8 @@ class Command(BaseCommand):
                     image_media_path = os.path.join(settings.MEDIA_ROOT, image_model_path)
 
                     # Resize Image
-                    self.student_portrait_processing(image_source_path, image_media_path)
+                    ImageProcessor.resize_by_height(150.0, image_source_path, image_media_path)
+                    #self.student_portrait_processing(image_source_path, image_media_path)
                     
                     Student.objects.create(
                         name=name,

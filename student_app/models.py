@@ -41,7 +41,7 @@ class Student(models.Model):
     def __str__(self):
         version = f'_{self.version_name}' if self.version_name != "Original" else ""
         limited = "_Limited" if self.is_limited else ""
-        return f'{self.name}{version}_{self.rarity}{limited}'
+        return f'{self.name}_{self.version_name}_{self.rarity}{limited}'
     
     def save(self, *args, **kwargs):
         try:

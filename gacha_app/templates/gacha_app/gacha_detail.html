@@ -9,7 +9,14 @@
     <h3>GACHA DETAILS {{ banner.id }}</h3>
     <img src="{% static 'portrait_404.png' %}" alt="banner" style="width:400px; height:200px;">
     <p>{{ banner.name }}</p>
-    
+    <!-- Add buttons for 1 draw and 10 draw -->
+    <form method="post" action="{% url 'gacha_result' gacha_id=banner.id %}">
+        {% csrf_token %}
+        {% for num_draw in num_draws %}
+        <button class="btn btn-primary p-2 mb-3" type="submit" name="draw" value="{{ num_draw }}">{{ num_draw }} Draw</button>
+        {% endfor %}
+    </form>
+    <!-- Students in banner -->
     <div class="rarity-grid">
         {% for rarity in rarities %}
         <div>
@@ -37,14 +44,5 @@
         </div>
         {% endfor %}
     </div>
-    
-    <!-- Add buttons for 1 draw and 10 draw -->
-    <form method="post" action="{% url 'gacha_result' gacha_id=banner.id %}">
-        {% csrf_token %}
-        {% for num_draw in num_draws %}
-        <button class="btn btn-primary p-2 mb-3" type="submit" name="draw" value="{{ num_draw }}">{{ num_draw }} Draw</button>
-        {% endfor %}
-    </form>
-
 </div>
 {% endblock %}

@@ -1,3 +1,4 @@
+/* Remove comment for debuging layout */
 /*
 * {
     outline: 1px solid red;
@@ -32,7 +33,7 @@ label {
 
 .edit-button {
     padding: 5px 10px;
-    font-weight: bold; 
+    font-weight: bold;
     color: #fff !important;
     background: #417690;
     border: none;
@@ -57,7 +58,7 @@ label {
 }
 
 .portrait img {
-    width: 80px; 
+    width: 80px;
     object-fit: cover;
 }
 
@@ -65,7 +66,7 @@ label {
 #id_is_limited,
 #id_rarity {
     display: flex;
-    
+
     & div {
         flex: 0;
 
@@ -84,7 +85,7 @@ label {
                 width: 100%;
             }
         }
-        
+
     }
 
     @media (max-width: 800px) {
