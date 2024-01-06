@@ -1,0 +1,17 @@
+{% load static %}
+
+<div>
+  <div class="student-flex">
+    {% for student in students %}
+    <div class="portrait">
+      <img
+        src="{% if student.image %}{{ student.image.url }}{% else %}{% static 'portrait_404.png' %}{% endif %}"
+        alt="{{ student.name }}_{{ student.version.name }}"
+      />
+      <figcaption>
+        {{ student.name }}{% if student.version.name != "Original" %}<br>({{ student.version.name }}){% endif %}
+      </figcaption>
+    </div>
+    {% endfor %}
+  </div>
+</div>

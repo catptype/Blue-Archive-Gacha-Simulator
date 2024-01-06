@@ -1,9 +1,12 @@
-# forms.py
 import re
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from django.contrib.admin.widgets import FilteredSelectMultiple
+
+from .models import Achievement
+from student_app.models import Student
 
 class CreateNewUserForm(UserCreationForm):
 
@@ -76,3 +79,24 @@ class LoginForm(AuthenticationForm):
         'invalid_login': "Invalid username or password.",
         'inactive': "This account is inactive.",
     }
+
+class AchievementAdminForm(forms.ModelForm):
+
+    image = forms.ImageField(
+        label="Achievement icon",
+        widget=forms.ClearableFileInput(), 
+        required=False,
+    )
+
+    #def __init__(self, *args, **kwargs):
+        #super().__init__(*args, **kwargs)
+        #existing_not_pickup_id = [student.id for student in self.initial.get('not_pickup', [])]
+        #self.fields['criteria'].label = 'Pickup 3★ Students'
+        #self.fields['criteria'].queryset = Student.objects.filter(rarity=3).exclude(id__in=existing_not_pickup_id).order_by('name')
+
+    class Meta:
+        model = Achievement
+        fields = '__all__'
+        widgets = {
+            'criteria': FilteredSelectMultiple('Criteria', is_stacked=False),
+        }

@@ -7,7 +7,7 @@ from .forms import GachaBannerAdminForm, GachaTransactionAdminForm, GachaTypeAdm
 
 class GachaTypeAdmin(admin.ModelAdmin):
     form = GachaTypeAdminForm
-    list_display = ['name', 'pickup_rate', 'r3_rate', 'r2_rate', 'r1_rate']
+    list_display = ['name', 'feature_rate', 'r3_rate', 'r2_rate', 'r1_rate']
 
     class Media:
         css = {
@@ -32,6 +32,7 @@ class GachaBannerAdmin(admin.ModelAdmin):
 
     def rates(self, obj):
         return format_html(
+            f'<p>feature: {obj.feature_rate}%</p>'
             f'<p>★★★: {obj.r3_rate}%</p>'
             f'<p>★★: {obj.r2_rate}%</p>'
             f'<p>★: {obj.r1_rate}%</p>'

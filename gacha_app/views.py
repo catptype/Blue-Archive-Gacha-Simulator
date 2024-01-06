@@ -34,9 +34,7 @@ def gacha_result(request, gacha_id):
         gacha_instance = GachaSystem(request.user, banner)
         drawn_students = gacha_instance.draw_gacha(num_draw)
         gacha_instance.save_transaction(drawn_students)
-        gacha_instance.update_collection(drawn_students)
 
-        # Prepare web context
         context = {
             'banner': banner,
             'gacha_id': gacha_id,

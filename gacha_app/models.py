@@ -12,7 +12,7 @@ def banner_image_path(instance, filename):
 
 class GachaType(models.Model):
     name = models.CharField(max_length=100, unique=True, blank=False, null=False)
-    pickup_rate = models.DecimalField(max_digits=4, decimal_places=1, blank=False)
+    feature_rate = models.DecimalField(max_digits=4, decimal_places=1, blank=False)
     r3_rate = models.DecimalField(max_digits=4, decimal_places=1, blank=False)
     r2_rate = models.DecimalField(max_digits=4, decimal_places=1, blank=False)
     r1_rate = models.DecimalField(max_digits=4, decimal_places=1, blank=False)
@@ -28,8 +28,8 @@ class GachaBanner(models.Model):
     not_pickup = models.ManyToManyField(Student, related_name='not_pickup', blank=True)
 
     @property
-    def pickup_rate(self):
-        return self.banner_type.pickup_rate
+    def feature_rate(self):
+        return self.banner_type.feature_rate
     
     @property
     def r3_rate(self):

@@ -45,34 +45,36 @@ class Command(BaseCommand):
         img.save(destination)
 
     def import_achievement(self, json_file):
+        
         with open(json_file) as file:
             achievements = json.load(file)
             for data in achievements:
                 name = data['name']
-                image_json = data['image']
+                description = data['description']
+                
+
                 if not Achievement.objects.filter(name=name).exists():
+                    # TO-DO Implement image later
+                    # image_source_path = os.path.join(settings.BASE_DIR, 'model_script', 'data', image_json)
+                    # extension = os.path.splitext(image_source_path)[1]
+                    # image_model_path = os.path.join('image', 'achievement', f'{name}{extension}')
+                    # image_media_path = os.path.join(settings.MEDIA_ROOT, image_model_path)
 
-                    if image_json:
-                        image_source_path = os.path.join(settings.BASE_DIR, 'model_script', 'data', image_json)
-                        extension = os.path.splitext(image_source_path)[1]
-                        image_model_path = os.path.join('image', 'achievement', f'{name}{extension}')
-                        image_media_path = os.path.join(settings.MEDIA_ROOT, image_model_path)
+                    # Resize Image
+                    # ImageProcessor.resize_by_width(150.0, image_source_path, image_media_path)
 
-                        # Resize Image
-                        ImageProcessor.resize_by_width(150.0, image_source_path, image_media_path)
+                    achievement = Achievement.objects.create(
+                        name=name,
+                        description=description,
+                    )
+                    
+                    criteria_list = data['criteria']
+                    for criteria in criteria_list:
+                        version = Version.objects.get(name=criteria['version'])
+                        student = Student.objects.get(name=criteria['student'], version=version)
+                        achievement.criteria.add(student)
 
-                        Achievement.objects.create(
-                            name=name,
-                            description=data['description'],
-                            criteria=data['criteria'],
-                            image=image_model_path,
-                        )
-                    else:
-                        Achievement.objects.create(
-                            name=name,
-                            description=data['description'],
-                            criteria=data['criteria'],
-                        )
+                    #achievement.save()
                     self.stdout.write(self.style.SUCCESS(f'Import {name} to Achievement model'))
 
     def import_banner(self, json_file):

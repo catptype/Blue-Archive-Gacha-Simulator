@@ -2,14 +2,12 @@ import random
 from django.contrib.auth import get_user_model
 
 from ..models import GachaTransaction
-from student_app.models import Student
-from user_app.models import ObtainedStudent
 
 class GachaSystem:
     def __init__(self, user, banner):
         self.user = user
         self.banner = banner
-        self.pickup_rate = 1.0
+        self.feature_rate = float(banner.feature_rate)
         self.draw_rates = {
             3: float(banner.r3_rate), 
             2: float(banner.r2_rate), 
@@ -43,8 +41,8 @@ class GachaSystem:
             if drawn_rarity == 3 and students_pickup:
                 num_pickup = len(students_pickup)             
                 all_students = students_pickup + students_not_pickup[drawn_rarity]
-                pickup_rates = [self.pickup_rate / num_pickup] * num_pickup
-                not_pickup_rates = [(self.draw_rates[drawn_rarity] - self.pickup_rate) / num_not_pickup] * num_not_pickup
+                pickup_rates = [self.feature_rate / num_pickup] * num_pickup
+                not_pickup_rates = [(self.draw_rates[drawn_rarity] - self.feature_rate) / num_not_pickup] * num_not_pickup
                 all_rates = pickup_rates + not_pickup_rates
             else:
                 all_students = students_not_pickup[drawn_rarity]
@@ -98,31 +96,12 @@ class GachaSystem:
         if self.user.is_authenticated:
             user_instance = get_user_model().objects.get(username=self.user.username)
 
-            # Create a list of GachaTransaction instances
-            transactions = [
-                GachaTransaction(
-                    user=user_instance,
-                    banner=self.banner,
-                    student=Student.objects.get(id=student_instance.id),
-                )
-                for student_instance in drawn_students
-            ]
-            
-            # Use bulk_create to insert all the records at once
-            GachaTransaction.objects.bulk_create(transactions)
-        else:
-            pass
-
-    def update_collection(self, drawn_students):
-        if self.user.is_authenticated:
-            user_instance = get_user_model().objects.get(username=self.user.username)
-
             for student_instance in drawn_students:
-                if not ObtainedStudent.objects.filter(user=user_instance, student=student_instance).exists():
-                    ObtainedStudent.objects.create(
-                        user=user_instance, 
-                        student=student_instance,
-                    )
+                GachaTransaction.objects.create(
+                    user=user_instance, 
+                    banner=self.banner,
+                    student=student_instance,
+                )
         else:
             pass
 
@@ -147,4 +126,3 @@ class GachaSystem:
             })
         else:
             raise ValueError("Mode can be 0, 2, and 3")
-

@@ -2,19 +2,19 @@
     {
         "name": "...Please praise me quickly.",
         "description": "I can imitate a rabbit a little. Pyon.",
-        "criteria": "Obtain Toki Bunny version",
+        "criteria": [{ "student": "Toki", "version": "Bunny" }],
         "image": null
     },
     {
         "name": "It's hot, even when I'm not moving at all...",
         "description": "It's so hot! I'm feeling parched in this heat...",
-        "criteria": "Obtain Hoshino Swimsuit version",
+        "criteria": [{ "student": "Hoshino", "version": "Swimsuit" }],
         "image": null
     },
     {
         "name": "I will eliminate your enemies with this. Heeheehee.",
         "description": "Heeheehee!",
-        "criteria": "Obtain Wakamo Original version",
+        "criteria": [{ "student": "Wakamo", "version": "Original" }],
         "image": null
     } 
 ]

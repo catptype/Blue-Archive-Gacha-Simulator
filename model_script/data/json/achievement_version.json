@@ -2,19 +2,34 @@
     {
         "name": "Bunny Chaser Aboard",
         "description": "",
-        "criteria": "Akane Asuna Karin Neru Toki Bunny version",
+        "criteria": [
+            { "student": "Akane",  "version": "Bunny" },
+            { "student": "Asuna",  "version": "Bunny" },
+            { "student": "Karin",  "version": "Bunny" },
+            { "student": "Neru",   "version": "Bunny" },
+            { "student": "Toki",   "version": "Bunny" }
+        ],
         "image": null
     },
     {
         "name": "On your mark @ Millennium",
         "description": "",
-        "criteria": "Hibiki Kotori Utaha Cheerleader version",
+        "criteria": [
+            { "student": "Hibiki",  "version": "Cheerleader" },
+            { "student": "Kotori",  "version": "Cheerleader" },
+            { "student": "Utaha",   "version": "Cheerleader" }
+        ],
         "image": null
     },
     {
         "name": "New Years' Rhapsody No. 68",
         "description": "",
-        "criteria": "Aru Haruka Kayoko Mutsuki New-Year version",
+        "criteria": [
+            { "student": "Aru",     "version": "New-Year" },
+            { "student": "Haruka",  "version": "New-Year" },
+            { "student": "Kayoko",  "version": "New-Year" },
+            { "student": "Mutsuki", "version": "New-Year" }
+        ],
         "image": null
     }
 ]

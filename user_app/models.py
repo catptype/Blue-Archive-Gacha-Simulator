@@ -12,8 +12,8 @@ def achievement_icon_path(instance, filename):
 
 class Achievement(models.Model):
     name = models.CharField(max_length=100, unique=True, blank=False)
-    description = models.TextField()
-    criteria = models.TextField()
+    description = models.TextField(blank=True, null=True)
+    criteria = models.ManyToManyField(Student, related_name='criteria', blank=True)
     image = models.ImageField(upload_to=achievement_icon_path, blank=True, null=True)
 
     def __str__(self):
