@@ -23,7 +23,7 @@ class Command(BaseCommand):
         self.import_achievement(os.path.join(basepath, 'achievement_version.json'))
         self.import_achievement(os.path.join(basepath, 'achievement_limited.json'))
         self.stdout.write(self.style.SUCCESS('Data imported successfully'))
-    
+
     def student_portrait_processing(self, source, destination):
         img = Image.open(source)
         img_width, img_height = img.size
@@ -45,14 +45,12 @@ class Command(BaseCommand):
         img.save(destination)
 
     def import_achievement(self, json_file):
-        
         with open(json_file) as file:
             achievements = json.load(file)
             for data in achievements:
                 name = data['name']
                 description = data['description']
                 
-
                 if not Achievement.objects.filter(name=name).exists():
                     # TO-DO Implement image later
                     # image_source_path = os.path.join(settings.BASE_DIR, 'model_script', 'data', image_json)
@@ -74,7 +72,6 @@ class Command(BaseCommand):
                         student = Student.objects.get(name=criteria['student'], version=version)
                         achievement.criteria.add(student)
 
-                    #achievement.save()
                     self.stdout.write(self.style.SUCCESS(f'Import {name} to Achievement model'))
 
     def import_banner(self, json_file):
@@ -141,7 +138,6 @@ class Command(BaseCommand):
 
                     # Resize Image
                     ImageProcessor.resize_by_height(150.0, image_source_path, image_media_path)
-                    #self.student_portrait_processing(image_source_path, image_media_path)
                     
                     Student.objects.create(
                         name=name,
