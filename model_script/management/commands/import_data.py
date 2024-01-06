@@ -12,9 +12,6 @@ class Command(BaseCommand):
     help = 'Load data from JSON files into model'
     def handle(self, *args, **options):
         basepath = os.path.join(settings.BASE_DIR, 'model_script', 'data', 'json')
-        self.import_achievement(os.path.join(basepath, 'achievement_club.json'))
-        self.import_achievement(os.path.join(basepath, 'achievement_version.json'))
-        self.import_achievement(os.path.join(basepath, 'achievement_limited.json'))
         self.import_versions(os.path.join(basepath, 'student_version.json'))
         self.import_schools(os.path.join(basepath, 'school.json'))
         self.import_gachatype(os.path.join(basepath, 'gacha_type.json'))
@@ -22,6 +19,9 @@ class Command(BaseCommand):
         self.import_students(os.path.join(basepath, 'student_r1.json'))
         self.import_students(os.path.join(basepath, 'student_r2.json'))
         self.import_students(os.path.join(basepath, 'student_r3.json'))
+        self.import_achievement(os.path.join(basepath, 'achievement_club.json'))
+        self.import_achievement(os.path.join(basepath, 'achievement_version.json'))
+        self.import_achievement(os.path.join(basepath, 'achievement_limited.json'))
         self.stdout.write(self.style.SUCCESS('Data imported successfully'))
     
     def student_portrait_processing(self, source, destination):
