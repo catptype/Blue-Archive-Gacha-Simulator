@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 
-from .utils import user_authenticated, get_history_content, get_statistic_content, get_change_password_content
+from .utils import user_authenticated, DashboardContent
 from .forms import CreateNewUserForm, LoginForm
 
 # Create your views here.
@@ -60,19 +60,31 @@ def dashboard(request):
     
     if tab == 'history':
         context = {
-            'html_content': get_history_content(request),
+            'html_content': DashboardContent.history(request),
         }
         return render(request, 'user_app/dashboard.html', context)
     
     elif tab == 'statistic':
         context = {
-            'html_content': get_statistic_content(request),
+            'html_content': DashboardContent.statistic(request),
+        }
+        return render(request, 'user_app/dashboard.html', context)
+    
+    elif tab == 'collection':
+        context = {
+            'html_content': DashboardContent.collection(request),
+        }
+        return render(request, 'user_app/dashboard.html', context)
+    
+    elif tab == 'achievement':
+        context = {
+            'html_content': DashboardContent.achievement(request),
         }
         return render(request, 'user_app/dashboard.html', context)
     
     elif tab == 'change-password':
         context = {
-            'html_content': get_change_password_content(request),
+            'html_content': DashboardContent.change_password(request),
         }
         return render(request, 'user_app/dashboard.html', context)
 

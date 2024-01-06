@@ -14,7 +14,7 @@
         <p>No gacha transactions found.</p>
     {% endif %}
 </div>
-
+{% if transactions %}
 <!-- Display pagination links -->
 <div class="pagination">
     <span class="step-links">
@@ -31,3 +31,4 @@
         {% endif %}
     </span>
 </div>
+{% endif %}
