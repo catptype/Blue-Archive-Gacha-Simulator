@@ -27,8 +27,17 @@ class RarityFilter(admin.SimpleListFilter):
             return queryset.filter(rarity=value)
 
 class SchoolAdmin(admin.ModelAdmin):
-    list_display = ['name', 'get_student_names']
+    list_display = ['name', 'logo', 'get_student_names']
     ordering = ['name'] 
+
+    def logo(self, obj):
+        name = obj.name
+        image = obj.image
+        context = {
+            'name': name,
+            'image': image,
+        }
+        return render_to_string('admin/school_logo.html', context)
 
     def get_student_names(self, obj):
         name_list = [student.name for student in obj.student_set.all().order_by('name')]
@@ -36,6 +45,11 @@ class SchoolAdmin(admin.ModelAdmin):
         return ', '.join(name_list)
 
     get_student_names.short_description = 'Students'
+
+    class Media:
+        css = {
+            'all': ('/static/css/admin-overrides.css',),
+        }
 
 class VersionAdmin(admin.ModelAdmin):
     list_display = ['name', 'display_student_images']

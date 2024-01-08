@@ -1,3 +1,4 @@
+import os
 from PIL import Image
 
 class ImageProcessor:
@@ -9,6 +10,7 @@ class ImageProcessor:
         percentage = (max_height / float(img_height))
         new_width = int((float(img_width) * float(percentage)))
         img.thumbnail((new_width, max_height))
+        os.makedirs(os.path.dirname(destination), exist_ok=True)
         img.save(destination)
 
     @staticmethod
@@ -19,4 +21,5 @@ class ImageProcessor:
         percentage = (max_width / float(img_width))
         new_height = int((float(img_height) * float(percentage)))
         img.thumbnail((max_width, new_height))
+        os.makedirs(os.path.dirname(destination), exist_ok=True)
         img.save(destination)

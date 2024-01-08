@@ -3,17 +3,31 @@
 {% block title %}Student list{% endblock %} 
 
 {% block content %}
-<div class="container">
-    <h3>STUDENT LIST</h3>
-    <div class="student-grid">
-        {% for student in students %}
-            <div class="student-card">
-                {% if student.image %}
-                    <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
+<div class="container bg-light">
+    <h1>STUDENT LIST</h1>
+    {% for school in schools %}
+    <div class="school-container">
+        <div class="school-header">
+            {% if school.image %}
+            <img src="{{ school.image.url }}" alt="{{ school.name }}">
+            {% endif %}
+            <h2>{{ school.name }}</h2>
+        </div>
+        <div class="student-grid ">
+            {% for student in students %}
+                {% if school.name == student.school_name %}
+                <div class="student-card r{{ student.rarity }}-bg">
+                    {% if student.image %}
+                        <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
+                    {% endif %}
+                    <div class="card-label">
+                        <span>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</span>
+                    </div>
+                </div>
                 {% endif %}
-                <p>{{ student.name }}{% if student.version.name != "Original" %}<br>({{ student.version.name }}){% endif %}</p>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
+    {% endfor %}
 </div>
 {% endblock %}

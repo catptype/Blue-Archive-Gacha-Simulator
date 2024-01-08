@@ -95,7 +95,7 @@ class Command(BaseCommand):
                 if not GachaType.objects.filter(name=name).exists():
                     GachaType.objects.create(
                         name=name,
-                        pickup_rate=data['pickup_rate'],
+                        feature_rate=data['feature_rate'],
                         r3_rate=data['r3_rate'],
                         r2_rate=data['r2_rate'],
                         r1_rate=data['r1_rate'],
@@ -107,8 +107,20 @@ class Command(BaseCommand):
             versions = json.load(file)
             for data in versions:
                 name = data['name']
+                image_json = data['image']
                 if not School.objects.filter(name=name).exists():
-                    School.objects.create(name=name)
+                    image_source_path = os.path.join(settings.BASE_DIR, 'model_script', 'data', image_json)
+                    extension = os.path.splitext(image_source_path)[1]
+                    image_model_path = os.path.join('image', 'school', 'logo', f'{name}{extension}')
+                    image_media_path = os.path.join(settings.MEDIA_ROOT, image_model_path)
+
+                    # Resize Image
+                    ImageProcessor.resize_by_height(150.0, image_source_path, image_media_path)
+
+                    School.objects.create(
+                        name=name,
+                        image=image_model_path,
+                    )
                     self.stdout.write(self.style.SUCCESS(f'Import {name} to School model'))
 
     def import_versions(self, json_file):

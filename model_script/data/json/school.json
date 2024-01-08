@@ -1,12 +1,42 @@
 [
-    {"name": "Abydos"},
-    {"name": "Arius"},
-    {"name": "Gehenna"},
-    {"name": "Hyakkiyako"},
-    {"name": "Millennium"},
-    {"name": "Red Winter"},
-    {"name": "Shanhaijing"},
-    {"name": "SRT"},
-    {"name": "Trinity"},
-    {"name": "Valkyrie"}
+    {
+        "name": "Abydos",
+        "image": "image/school/Abydos.png"
+    },
+    {
+        "name": "Arius",
+        "image": "image/school/Arius.png"
+    },
+    {
+        "name": "Gehenna",
+        "image": "image/school/Gehenna.png"
+    },
+    {
+        "name": "Hyakkiyako",
+        "image": "image/school/Hyakkiyako.png"
+    },
+    {
+        "name": "Millennium",
+        "image": "image/school/Millennium.png"
+    },
+    {
+        "name": "Red Winter",
+        "image": "image/school/RedWinter.png"
+    },
+    {
+        "name": "Shanhaijing",
+        "image": "image/school/Shanhaijing.png"
+    },
+    {
+        "name": "SRT",
+        "image": "image/school/SRT.png"
+    },
+    {
+        "name": "Trinity",
+        "image": "image/school/Trinity.png"
+    },
+    {
+        "name": "Valkyrie",
+        "image": "image/school/Valkyrie.png"
+    }
 ]

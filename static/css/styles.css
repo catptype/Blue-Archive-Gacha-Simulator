@@ -1,6 +1,106 @@
+:root {
+    --r1-bg: #5fdbff;
+    --r2-bg: #ffdf5e;
+    --r3-bg: #f6b4c6;
+    --rainbow-bg: linear-gradient(in hsl longer hue 45deg, red 0 0);
+    --gray: #dee2e6;
+}
+/*
 * {
     outline: 1px solid red;
 }
+*/
+
+header {
+    margin-bottom: 1rem;
+}
+
+footer {
+    margin-top: 1rem;
+}
+
+/* HOME SITE */
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
+/* STUDENT SITE*/
+.school-container {
+    border-radius: 15px;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    background-color: var(--gray);
+
+    & .school-header {
+        margin-bottom: 0.5rem;
+        margin-right: 0.5rem;
+        display: flex;
+        height: 50px;
+
+        & img {
+            height: 100%;
+            object-fit: scale-down;
+        }
+    }
+    
+    & .student-grid {    
+        display: flex;
+        flex-wrap: wrap;
+        grid-gap: 10px;
+    
+        & .student-card {
+            position: relative;
+            overflow: hidden;
+            width: 130px;
+            height: 150px;
+            padding: 0rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        
+            & img {
+                width: 100%;
+                height: 100%;
+                border-radius: inherit;
+                object-fit: cover;
+            }
+    
+            & .card-label {
+                font-size: small;
+                font-weight: 600;
+                color: black;
+                text-align: center;
+                width: 100%;
+                padding: 0.1rem 0;
+                border-bottom-left-radius: inherit;
+                border-bottom-right-radius: inherit;
+                transform: translateY(0%);            
+                background-color: rgba(248,249,250, 0.8);
+                transition: transform 0.3s;
+            }
+    
+            &:hover .card-label {
+                transform: translateY(-100%);
+            }
+                    
+        }
+    
+        & .r3-bg {
+            background-color: var(--r3-bg);
+        }
+    
+        & .r2-bg {
+            background-color: var(--r2-bg);
+        }
+    
+        & .r1-bg {
+            background-color: var(--r1-bg);
+        }  
+    }
+}
+
+
 
 .form-layout {
     border-radius: 15px;
@@ -11,11 +111,7 @@
     font-size: 12px;
 }
 
-.student-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
-    grid-gap: 10px;
-}
+
 
 .transaction-grid,
 .gacha-result-grid,
@@ -35,44 +131,9 @@
     grid-template-columns: repeat(5, 1fr); 
 }
 
-.student-card {
-    position: relative;
-    min-width: 100px;
-    height: 150px;
-    padding: 0.5rem;
-    border-radius: 15px;
-    background-color: rgb(117, 227, 255);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);    
-    color: white;
-}
 
-.student-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
 
-.student-card p {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: inherit;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* Animation */
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
 
-.student-card:hover p {
-    opacity: 1;
-}
 
 .dashboard-container {
     display: grid;

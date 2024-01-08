@@ -10,6 +10,12 @@ def student_portrait_path(instance, filename):
     filename = f'{name}_{version}_150{extension}'
     return os.path.join('image/student/portrait/', filename)
 
+def school_logo_path(instance, filename):
+    name = instance.name
+    extension = os.path.splitext(filename)[1]
+    filename = f'{name}{extension}'
+    return os.path.join('image/school/logo/', filename)
+
 class Version(models.Model):
     name = models.CharField(max_length=100, unique=True, blank=False)
 
@@ -18,9 +24,31 @@ class Version(models.Model):
 
 class School(models.Model):
     name = models.CharField(max_length=100, unique=True, blank=False)
+    image = models.ImageField(upload_to=school_logo_path, blank=True, null=True)
 
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):
+        try:
+            old_instance = School.objects.get(pk=self.pk)
+            old_image = old_instance.image
+            if old_image and old_image != self.image and os.path.isfile(old_image.path):
+                os.remove(old_image.path)
+
+        except School.DoesNotExist:
+            pass
+
+        super(School, self).save(*args, **kwargs)
+    
+        if self.image:
+            img = Image.open(self.image.path)
+            img_width, img_height = img.size
+            new_height = 150.0
+            percentage = (new_height / float(img_height))
+            new_width = int((float(img_width) * float(percentage)))
+            img.thumbnail((new_width, new_height))
+            img.save(self.image.path)
     
 class Student(models.Model):
     name = models.CharField(max_length=100, blank=False)
@@ -39,7 +67,6 @@ class Student(models.Model):
         return self.school.name
 
     def __str__(self):
-        version = f'_{self.version_name}' if self.version_name != "Original" else ""
         limited = "_Limited" if self.is_limited else ""
         return f'{self.name}_{self.version_name}_{self.rarity}{limited}'
     
@@ -47,23 +74,21 @@ class Student(models.Model):
         try:
             old_instance = Student.objects.get(pk=self.pk)
             old_image = old_instance.image
-            if old_image and old_image != self.image:
-                if os.path.isfile(old_image.path):
-                    os.remove(old_image.path)
+            if old_image and old_image != self.image and os.path.isfile(old_image.path):
+                os.remove(old_image.path)
 
         except Student.DoesNotExist:
-            old_image = None
+            pass
 
         super(Student, self).save(*args, **kwargs)
     
         if self.image:
             img = Image.open(self.image.path)
             img_width, img_height = img.size
-            max_height = 150.0
-            height_percent = (max_height / float(img_height))
-            new_width = int((float(img_width) * float(height_percent)))
-            output_size = (new_width, max_height)
-            img.thumbnail(output_size)
+            new_height = 150.0
+            percentage = (new_height / float(img_height))
+            new_width = int((float(img_width) * float(percentage)))
+            img.thumbnail((new_width, new_height))
             img.save(self.image.path)
 
     def clean(self):
