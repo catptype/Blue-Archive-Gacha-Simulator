@@ -6,19 +6,35 @@
 {% block content %}
    <!-- Display drawn characters -->
    {% if drawn_students %}
-   <div class="container">
-    <h2>Draw Result:</h2>
-    <div class="gacha-result-grid">
-        {% for student in drawn_students %}
-        <div class="student-card">
-            <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version_name }}">
-            <p>{{ student.name }}<br>({{ student.version_name}})<br>{% for _ in "★"|rjust:student.rarity %}★{% endfor %}</p>
+   <div class="container" id="gacha-result-container">
+    <div class="result-container">
+        <h2>Draw Result</h2>
+        <div class="result-grid">
+            {% for student in drawn_students %}
+            <div class="result-item">
+                <div class="item-bg">
+                    <img src="{% static 'image/gacha_bg.png' %}" alt="item_background">
+                    <div class="item-rarity">
+                        {% if student.rarity == 3 %}
+                        <img src="{% static 'image/gacha_r3.png' %}" alt="item_rarity3">
+                        {% elif student.rarity == 2 %}
+                        <img src="{% static 'image/gacha_r2.png' %}" alt="item_rarity2">
+                        {% else %}
+                        <img src="{% static 'image/gacha_r1.png' %}" alt="item_rarity1">
+                        {% endif %}
+                    </div>
+                    <div class="item-student">
+                        <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version_name }}">
+                <p>{{ student.name }}<br>({{ student.version_name}})<br>{% for _ in "★"|rjust:student.rarity %}★{% endfor %}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}    
         </div>
-        {% endfor %}    
     </div>
     <div>
         <!-- Add buttons for 1 draw and 10 draw -->
-        <form method="post" action="{% url 'gacha_result' gacha_id=banner.id %}">
+        <form method="POST" action="{% url 'gacha_result' gacha_id=banner.id %}">
             {% csrf_token %}
             <button class="btn btn-primary p-2 mb-3" type="submit" name="draw" value="{{ num_draw }}">{{ num_draw }} Draw</button>
         </form>

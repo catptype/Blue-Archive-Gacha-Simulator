@@ -5,41 +5,55 @@
 {% block title %}Gacha detail{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h3>GACHA DETAILS {{ banner.id }}</h3>
-    <img src="{% static 'portrait_404.png' %}" alt="banner" style="width:400px; height:200px;">
-    <p>{{ banner.name }}</p>
-    <!-- Add buttons for 1 draw and 10 draw -->
-    <form method="post" action="{% url 'gacha_result' gacha_id=banner.id %}">
-        {% csrf_token %}
-        {% for num_draw in num_draws %}
-        <button class="btn btn-primary p-2 mb-3" type="submit" name="draw" value="{{ num_draw }}">{{ num_draw }} Draw</button>
-        {% endfor %}
-    </form>
-    <!-- Students in banner -->
-    <div class="rarity-grid">
-        {% for rarity in rarities %}
-        <div>
-            <h4>{% for _ in "★"|rjust:rarity %}★{% endfor %} ({{ banner|get_rate:rarity }}%)</h4>
-            {% if rarity == 3 and banner.is_pickup.all %}
+<div class="container" id="gacha-detail-container">
+    <div class="containter-flex">
+        <!-- Gacha banner detail with draw buttons -->
+        <div class="banner-container">
+            <h1>{{ banner.name }}</h1>
+            <div class="banner-image">
+                <img src="{% static 'portrait_404.png' %}" alt="banner">
+            </div>
+            <!-- Add buttons for 1 draw and 10 draw -->
+            <form method="POST" action="{% url 'gacha_result' gacha_id=banner.id %}">
+                {% csrf_token %}
+                {% for num_draw in num_draws %}
+                <button class="btn btn-primary p-2 mb-3" type="submit" name="draw" value="{{ num_draw }}">{{ num_draw }} Draw</button>
+                {% endfor %}
+            </form>
+        </div>
+
+        {% if banner.is_pickup.all %}
+        <!-- All pickup students in banner -->
+        <div class="pickup-container">
+            <h2>Feature pick up ({{ banner.feature_rate }})</h2>
             <div class="student-grid">
                 {% for student in banner.is_pickup.all %}
                 <div class="student-card">
-                    <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version_name }}">
-                    <p>{{ student.name }}</p>
+                    <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
+                    <div class="card-label">
+                        <span>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</span>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
-            {% endif %}
+        </div>
+        {% endif %}
+        
+        <!-- All not pick up students in banner -->
+        {% for rarity in rarities %}
+        <div class="not-pickup-container">
+            <h2>{% for _ in "★"|rjust:rarity %}★{% endfor %} ({{ banner|get_rate:rarity }}%)</h2>
             <div class="student-grid">
-                {% for student in banner.not_pickup.all %}
-                {% if student.rarity == rarity %}
-                <div class="student-card">
-                    <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version_name }}">
-                    <p>{{ student.name }}</p>
+            {% for student in banner.not_pickup.all %}
+            {% if student.rarity == rarity %}
+            <div class="student-card">
+                <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
+                <div class="card-label">
+                    <span>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</span>
                 </div>
-                {% endif %}
-                {% endfor %}
+            </div>
+            {% endif %}
+            {% endfor %}
             </div>
         </div>
         {% endfor %}

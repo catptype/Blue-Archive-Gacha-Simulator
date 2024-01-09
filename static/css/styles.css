@@ -3,118 +3,215 @@
     --r2-bg: #ffdf5e;
     --r3-bg: #f6b4c6;
     --rainbow-bg: linear-gradient(in hsl longer hue 45deg, red 0 0);
-    --gray: #dee2e6;
+    --gray-lv1: rgba(128, 128, 128, 0.6);
+    --gray-lv2: rgba(255, 255, 255, 0.4);
+    --container-br: 15px; /* br = border-radius*/
+    --card-br: 15px; /* br = border-radius*/
+    --gap-size: 0.5rem;
 }
 
 * {
     outline: 1px solid red;
 }
 
-
 body, html {
     width: 100%;
     height: 100%;
     margin: 0;
+
 }
 
 body {
     display: flex;
     flex-direction: column;
+    background-image: url('../image/background.png');
+    background-size: cover;
+    background-attachment: fixed;
+    backdrop-filter: blur(4px);
 }
 
 header {
     margin-bottom: 1rem;
 }
 
-footer {
-    margin-top: 1rem;
+p {
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+}
+
+/* WEB COMPONENT SHARED SAME SETTING */
+#home-container,
+#student-container,
+#gacha-detail-container,
+#gacha-result-container {
+    padding: var(--gap-size);
+    border-radius: var(--container-br);
+    background-color: var(--gray-lv1);
+}
+
+.home-item,
+.footer,
+.school-container,
+.banner-container,
+.pickup-container,
+.not-pickup-container,
+.result-container {    
+    padding: var(--gap-size);
+    border-radius: var(--container-br);
+    background-color: var(--gray-lv2);
+}
+
+.student-grid {    
+    /*display: flex;*/
+    /*flex-wrap: wrap;*/
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    grid-gap: var(--gap-size);
+
+    & .student-card {
+        position: relative;
+        overflow: hidden;
+        width: 130px;
+        height: 150px;
+        border-radius: var(--card-br);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    
+        & img {
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            object-fit: cover;
+        }
+
+        & .card-label {
+            font-size: small;
+            font-weight: 600;
+            color: black;
+            text-align: center;
+            width: 100%;
+            padding: 0.1rem 0;
+            border-bottom-left-radius: inherit;
+            border-bottom-right-radius: inherit;
+            transform: translateY(0%);            
+            background-color: rgba(250,250,250, 0.8);
+            transition: transform 0.3s;
+        }
+
+        &:hover .card-label {
+            transform: translateY(-100%);
+        }
+                
+    }
+
+    & .r3-bg {
+        background-color: var(--r3-bg);
+    }
+
+    & .r2-bg {
+        background-color: var(--r2-bg);
+    }
+
+    & .r1-bg {
+        background-color: var(--r1-bg);
+    }  
+}
+
+.container-flex {       
+    display: flex;
+    flex-direction: column;
+    grid-gap: var(--gap-size);
 }
 
 /* HOME SITE */
-.home-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
+.container-flex {
+    & .home-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: var(--gap-size);
+    }
+
+    & .footer p {
+        text-align: center;
+    }
 }
 
 /* STUDENT SITE*/
-.container {
+#student-container {
+    overflow-y: auto;
+    
+    .school-container .school-header {
+        display: flex;
+        height: 50px;
+
+        & img {
+            margin-right: 0.5rem;
+            height: 100%;
+            object-fit: scale-down;
+        }
+
+        & h2 {
+            margin-top: 0.5rem;
+        }
+    }
+}
+
+/* GACHA MAIN SITE */
+
+/* GACHA DETAIL SITE*/
+#gacha-detail-container {
     overflow-y: auto;
 
-    .school-container {
-        border-radius: 15px;
-        margin: 0.5rem 0;
-        padding: 0.5rem;
-        background-color: var(--gray);
-    
-        & .school-header {
-            display: flex;
-            margin-bottom: 0.5rem;
-            height: 50px;
-
-            & h2 {
-                margin-top: 0.5rem;
-            }
-    
-            & img {
-                margin-right: 0.5rem;
-                height: 100%;
-                object-fit: scale-down;
-            }
+    .containter-flex .banner-container {
+        
+        & .banner-image {
+            width: 400px;
+            height: 200px;
         }
-        
-        & .student-grid {    
-            display: flex;
-            flex-wrap: wrap;
-            grid-gap: 10px;
-        
-            & .student-card {
+
+        & img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+/* GACHA RESULT PAGE */
+#gacha-result-container {
+    & .result-container {
+        & .result-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: var(--gap-size);
+
+            & .result-item {
                 position: relative;
-                overflow: hidden;
-                width: 130px;
-                height: 150px;
-                padding: 0rem;
-                border-radius: 15px;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-            
-                & img {
-                    width: 100%;
-                    height: 100%;
-                    border-radius: inherit;
-                    object-fit: cover;
-                }
-        
-                & .card-label {
-                    font-size: small;
-                    font-weight: 600;
-                    color: black;
-                    text-align: center;
-                    width: 100%;
-                    padding: 0.1rem 0;
-                    border-bottom-left-radius: inherit;
-                    border-bottom-right-radius: inherit;
-                    transform: translateY(0%);            
-                    background-color: rgba(248,249,250, 0.8);
-                    transition: transform 0.3s;
-                }
-        
-                &:hover .card-label {
-                    transform: translateY(-100%);
-                }
+                /*overflow: hidden;*/
+                width: 200px;
+                height: 256px;
+    
+                & .item-bg {    
+                    width: inherit;
+                    height: inherit;
+
+                    & img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                    & .item-rarity {
                         
+                        transform: translateY(-100%);  
+                        & img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                }
             }
-        
-            & .r3-bg {
-                background-color: var(--r3-bg);
-            }
-        
-            & .r2-bg {
-                background-color: var(--r2-bg);
-            }
-        
-            & .r1-bg {
-                background-color: var(--r1-bg);
-            }  
+
         }
     }
 }
