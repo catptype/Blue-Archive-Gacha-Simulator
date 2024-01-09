@@ -16,7 +16,7 @@
         <div class="student-grid ">
             {% for student in students %}
                 {% if school.name == student.school_name %}
-                <div class="student-card r{{ student.rarity }}-bg">
+                <div class="student-card">
                     {% if student.image %}
                         <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
                     {% endif %}

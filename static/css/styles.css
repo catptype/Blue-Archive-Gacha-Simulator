@@ -1,7 +1,4 @@
 :root {
-    --r1-bg: #5fdbff;
-    --r2-bg: #ffdf5e;
-    --r3-bg: #f6b4c6;
     --rainbow-bg: linear-gradient(in hsl longer hue 45deg, red 0 0);
     --gray-lv1: rgba(128, 128, 128, 0.6);
     --gray-lv2: rgba(255, 255, 255, 0.4);
@@ -62,9 +59,7 @@ p {
     background-color: var(--gray-lv2);
 }
 
-.student-grid {    
-    /*display: flex;*/
-    /*flex-wrap: wrap;*/
+.student-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     grid-gap: var(--gap-size);
@@ -101,20 +96,7 @@ p {
         &:hover .card-label {
             transform: translateY(-100%);
         }
-                
     }
-
-    & .r3-bg {
-        background-color: var(--r3-bg);
-    }
-
-    & .r2-bg {
-        background-color: var(--r2-bg);
-    }
-
-    & .r1-bg {
-        background-color: var(--r1-bg);
-    }  
 }
 
 .container-flex {       
@@ -177,45 +159,41 @@ p {
 }
 
 /* GACHA RESULT PAGE */
-#gacha-result-container {
-    & .result-container {
-        & .result-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            grid-gap: var(--gap-size);
+#gacha-result-container .result-container .result-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: var(--gap-size);
 
-            & .result-item {
-                position: relative;
-                /*overflow: hidden;*/
-                width: 200px;
-                height: 256px;
-    
-                & .item-bg {    
-                    width: inherit;
-                    height: inherit;
+    & .result-item {
+        position: relative;
+        /*overflow: hidden;*/
+        width: 200px;
+        height: 256px;
 
-                    & img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
+        & .item-bg {    
+            width: inherit;
+            height: inherit;
 
-                    & .item-rarity {
-                        
-                        transform: translateY(-100%);  
-                        & img {
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                        }
-                    }
-                }
+            & img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
             }
 
+            & .item-rarity {
+                
+                transform: translateY(-100%);  
+                & img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
         }
     }
 }
 
+/*
 .form-layout {
     border-radius: 15px;
     width: 376px;
@@ -224,8 +202,6 @@ p {
 .text-danger {
     font-size: 12px;
 }
-
-
 
 .transaction-grid,
 .gacha-result-grid,
@@ -244,7 +220,7 @@ p {
 .gacha-result-grid {
     grid-template-columns: repeat(5, 1fr); 
 }
-
+*/
 
 
 
