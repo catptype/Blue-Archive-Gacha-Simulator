@@ -1,33 +1,32 @@
 {% extends 'general_app/components/base.html' %} 
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/student-cards.css' %}">
+{% endblock %}
 
 {% block title %}Student list{% endblock %} 
 
 {% block content %}
 <div class="container" id="student-container">
     <h1>STUDENT LIST</h1>
-    {% for school in schools %}
-    <div class="school-container">
-        <div class="school-header">
-            {% if school.image %}
-            <img src="{{ school.image.url }}" alt="{{ school.name }}">
+    <div class="student-grid ">
+        {% for student in students %}
+        <div class="student-card">
+            {% if student.image %}
+            <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
             {% endif %}
-            <h2>{{ school.name }}</h2>
+            <div class="card-rarity">
+                {% for _ in ""|rjust:student.rarity %}<div class="star"></div>{% endfor %}
+            </div>
+            <div class="card-school">
+                <img src="{{ student.school.image.url }}" alt="{{ student.school_name }}">
+            </div>
+            <div class="card-label">
+                <p>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
+            </div>
         </div>
-        <div class="student-grid ">
-            {% for student in students %}
-                {% if school.name == student.school_name %}
-                <div class="student-card">
-                    {% if student.image %}
-                        <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
-                    {% endif %}
-                    <div class="card-label">
-                        <span>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</span>
-                    </div>
-                </div>
-                {% endif %}
-            {% endfor %}
-        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock %}

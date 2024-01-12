@@ -1,0 +1,8 @@
+:root {
+    --gray-lv1: rgba(128, 128, 128, 0.6);
+    --gray-lv2: rgba(255, 255, 255, 0.4);
+    --container-br: 15px; /* br = border-radius*/
+    --card-br: 15px; /* br = border-radius*/
+    --gap-size: 0.5rem;
+    --trans-dur: 0.3s;
+}

@@ -1,0 +1,72 @@
+/* @import url('layout-debuger.css'); */
+
+
+
+hr {
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.main-menu,
+.sub-menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.main-menu {
+    display: flex;
+    gap: 3rem;
+
+    & li > a {
+        text-decoration: none;
+        color: black;
+    }
+
+    & li.user-dropdown {
+        width: fit-content;
+        position: relative;
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+        justify-content: flex-start;
+
+        > .sub-menu {
+            display: none;
+            position: absolute;
+			top: 100%;
+			left: -1rem;
+			background-color: rgba(250,250,250, 0.8);
+			border-radius: .5rem;
+			padding: .5rem;
+            z-index: 999;
+
+            & a {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.5rem;
+                min-width: 10rem;
+                border-radius: .5rem;
+            }
+        }
+
+        &::after {
+            content: url('../icon/arrow-down.svg');
+        }
+
+        &:hover > .sub-menu {
+            display: block;
+        }
+    }
+}
+
+
