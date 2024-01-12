@@ -9,7 +9,7 @@ from user_app.models import Achievement
 from .utils import ImageProcessor
 
 class Command(BaseCommand):
-    help = 'Load data from JSON files into model'
+    help = 'Import data from JSON files into model'
     def handle(self, *args, **options):
         basepath = os.path.join(settings.BASE_DIR, 'model_script', 'data', 'json')
         self.import_versions(os.path.join(basepath, 'student_version.json'))
