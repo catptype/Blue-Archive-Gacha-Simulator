@@ -10,23 +10,41 @@
 {% block content %}
 <div class="container" id="student-container">
     <h1>STUDENT LIST</h1>
-    <div class="student-grid ">
-        {% for student in students %}
-        <div class="student-card">
-            {% if student.image %}
-            <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
-            {% endif %}
-            <div class="card-rarity">
-                {% for _ in ""|rjust:student.rarity %}<div class="star"></div>{% endfor %}
+    <div class="school-filter">
+        <div class="school-icon">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <div class="card-school">
-                <img src="{{ student.school.image.url }}" alt="{{ student.school_name }}">
-            </div>
-            <div class="card-label">
-                <p>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
-            </div>
+            <p>All</p>
+        </div>
+        {% for school in schools %}
+        <div class="school-icon">
+            <img src="{{ school.image.url }}" alt="school">
+            <p>{{ school.name }}</p>
         </div>
         {% endfor %}
+    </div>
+    <div class="student-container">
+        <div class="student-grid ">
+            {% for student in students %}
+            <div class="student-card">
+                {% if student.image %}
+                <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
+                {% endif %}
+                <div class="card-rarity">
+                    {% for _ in ""|rjust:student.rarity %}<div class="star"></div>{% endfor %}
+                </div>
+                <div class="card-school">
+                    <img src="{{ student.school.image.url }}" alt="{{ student.school_name }}">
+                </div>
+                <div class="card-label">
+                    <p>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}

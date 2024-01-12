@@ -43,7 +43,8 @@ p {
 
 .home-item,
 .footer,
-.school-container,
+.school-filter,
+.student-container,
 .banner-container,
 .pickup-container,
 .not-pickup-container,
@@ -76,20 +77,47 @@ p {
 
 /* STUDENT SITE*/
 #student-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-size);
     overflow-y: auto;
-    
-    .school-container .school-header {
+
+    & .school-filter {
         display: flex;
-        height: 50px;
+        flex-wrap: wrap;
+        gap: var(--gap-size);
 
-        & img {
-            margin-right: 0.5rem;
-            height: 100%;
-            object-fit: scale-down;
-        }
+        & .school-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: var(--gap-size);
+            width: fit-content;
+            height: 40px;
+            background-color: white;
+            border-radius: var(--container-br);
 
-        & h2 {
-            margin-top: 0.5rem;
+            > img {
+                margin-right: var(--gap-size);
+                height: 100%;
+                object-fit: scale-down;
+            }
+
+            > .hamburger {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 4px;
+                margin-right: var(--gap-size);
+
+                & span {
+                    width: 25px;
+                    height: 2px;
+                    background-color: black;
+                }
+            }
         }
     }
 }
