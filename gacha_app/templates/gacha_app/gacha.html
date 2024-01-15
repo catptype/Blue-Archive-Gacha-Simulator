@@ -4,18 +4,29 @@
 {% block title %}Gacha{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container" id="gacha-container">
     <h3>GACHA PAGE</h3>
-    <div class="gacha-grid">
+    <div class="gacha-slideshow">
         {% for banner in banners %}
         <div class="gacha-banner">
-            <img src="{% static 'portrait_404.png' %}" alt="baner" style="width:400px; height:200px;">
+            <a href="{% url 'gacha_detail' gacha_id=banner.id %}">
+                <img src="{% static 'portrait_404.png' %}" alt="{{ banner.name }}">
+            </a>
             <p>{{ banner.name }}</p>
-            <div class="d-grid">
-                <a href="{% url 'gacha_detail' gacha_id=banner.id %}" class="btn btn-primary p-2 mb-3">Details</a>
-            </div>
         </div>
+        {% endfor %}
+
+        <a class="prev" onclick="updateIndex(-1)">&#10094;</a>
+        <a class="next" onclick="updateIndex(1)">&#10095;</a>
+    </div>
+    <div style="text-align:center">
+        {% for idx in banner_idx %}
+        <span class="dot" onclick="showBanner({{ idx }})"></span>
         {% endfor %}
     </div>
 </div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/banner.js' %}"></script>
 {% endblock %}

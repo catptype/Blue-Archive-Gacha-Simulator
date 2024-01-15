@@ -3,7 +3,10 @@
 body, html {
     width: 100vw;
     height: 100vh;
-    margin: 0;
+}
+
+header {
+    background-color: var(--color-navbar);
 }
 
 body {
@@ -11,13 +14,13 @@ body {
     flex-direction: column;
     background-image: url('../image/background.png');
     background-size: cover;
-    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
     backdrop-filter: blur(4px);
 }
 
 header {
     margin-bottom: 1rem;
-    background-color: rgba(250,250,250, 0.8);
 }
 
 footer {
@@ -34,6 +37,7 @@ p {
 /* WEB COMPONENT SHARED SAME SETTING */
 #home-container,
 #student-container,
+#gacha-container,
 #gacha-detail-container,
 #gacha-result-container {
     padding: var(--gap-size);
@@ -43,7 +47,7 @@ p {
 
 .home-item,
 .footer,
-.school-filter,
+.school-icon,
 .student-container,
 .banner-container,
 .pickup-container,
@@ -56,14 +60,14 @@ p {
 
 
 
-.container-flex {       
+.container {
     display: flex;
     flex-direction: column;
     grid-gap: var(--gap-size);
 }
 
 /* HOME SITE */
-.container-flex {
+#home-container {
     & .home-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -77,9 +81,6 @@ p {
 
 /* STUDENT SITE*/
 #student-container {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-size);
     overflow-y: auto;
 
     & .school-filter {
@@ -89,40 +90,73 @@ p {
 
         & .school-icon {
             display: flex;
-            justify-content: center;
             align-items: center;
-            margin: 0;
-            padding: var(--gap-size);
             width: fit-content;
             height: 40px;
-            background-color: white;
-            border-radius: var(--container-br);
-
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            
             > img {
-                margin-right: var(--gap-size);
                 height: 100%;
                 object-fit: scale-down;
             }
 
-            > .hamburger {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 4px;
-                margin-right: var(--gap-size);
+            > p {
+                padding-left: var(--gap-size);
+            }
 
-                & span {
-                    width: 25px;
-                    height: 2px;
-                    background-color: black;
-                }
+            &.activated {
+                background-color: var(--color-primary);
             }
         }
     }
 }
 
 /* GACHA MAIN SITE */
+#gacha-container {
+
+    & .gacha-slideshow {
+        position: relative;
+        margin: auto;
+        padding: 0 2rem;
+
+        & .gacha-banner {
+            display: none;
+
+            & a > img {
+                width: 600px;
+                height: 300px;
+            }
+        }
+
+        & a.prev,
+        & a.next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            text-decoration: none;
+            padding: 0.5rem;
+        }
+
+        & a.prev {
+            left: 0;
+        }
+
+        & a.next {
+            right: 0;
+        }
+    }
+    & .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+}
 
 /* GACHA DETAIL SITE*/
 #gacha-detail-container {

@@ -29,6 +29,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: var(--gap-size);
+    position: relative;
+    overflow: hidden;
 
     & .student-card {
         position: relative;
@@ -37,6 +39,8 @@
         height: 150px;
         border-radius: var(--card-br);
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        opacity: 1;
+        transition: visibility 1s, opacity 1s;
     
         > img {
             width: 100%;
@@ -44,6 +48,16 @@
             border-radius: inherit;
             object-fit: cover;
             transform: scale(1.1);
+        }
+
+        &.hidden {
+            visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            opacity: 0;
         }
 
         & .card-rarity {
@@ -98,6 +112,7 @@
             border-top-right-radius: 0;
             transform: translateY(100%);
         }
+
         &:hover .card-rarity {
             width: fit-content;
         }

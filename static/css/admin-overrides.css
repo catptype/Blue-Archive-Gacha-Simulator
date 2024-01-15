@@ -1,11 +1,3 @@
-/* Remove comment for debuging layout */
-/*
-* {
-    outline: 1px solid red;
-}
-*/
-
-
 tr * {
     vertical-align: middle;
 }

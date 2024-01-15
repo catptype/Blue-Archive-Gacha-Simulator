@@ -6,22 +6,17 @@
 {% endblock %}
 
 {% block title %}Student list{% endblock %} 
-
+{% load static %}
 {% block content %}
 <div class="container" id="student-container">
-    <h1>STUDENT LIST</h1>
     <div class="school-filter">
-        <div class="school-icon">
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+        <div class="school-icon activated" id="all" onclick="selectSchool(this)">
+            <img src="{% static 'icons/all.svg' %}" alt="all">
             <p>All</p>
         </div>
         {% for school in schools %}
-        <div class="school-icon">
-            <img src="{{ school.image.url }}" alt="school">
+        <div class="school-icon" id="{{ school.name }}" onclick="selectSchool(this)">
+            <img src="{{ school.image.url }}" alt="{{ school.name }}">
             <p>{{ school.name }}</p>
         </div>
         {% endfor %}
@@ -29,7 +24,7 @@
     <div class="student-container">
         <div class="student-grid ">
             {% for student in students %}
-            <div class="student-card">
+            <div class="student-card" school="{{ student.school.name }}">
                 {% if student.image %}
                 <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
                 {% endif %}
@@ -48,3 +43,16 @@
     </div>
 </div>
 {% endblock %}
+
+{% block js %}
+<script src="{% static 'js/students.js' %}"></script>
+{% endblock %}
+
+
+<div class="student-grid ">
+    <div class="student-card"></div>
+    <div class="student-card hidden"></div>
+    <div class="student-card"></div>
+    <div class="student-card"></div>
+    <div class="student-card"></div>
+</div>
