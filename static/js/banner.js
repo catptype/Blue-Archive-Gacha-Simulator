@@ -1,28 +1,56 @@
-let bannerIdx = 1;
-showBanner(bannerIdx);
+const selectorContainer = document.getElementById("gacha-selector");
+const dots = document.getElementsByClassName("dot");
+const maxIdx = selectorContainer.children[0].children.length;
+let currentIndex = 0;
+var isExecuting = false;
+updateIndex(0)
 
-// Next/previous controls
-function updateIndex(n) {
-    showBanner(bannerIdx += n);
+function clearDots() {
+    for (let dot of dots) {
+    if (dot.classList.contains("actived"))
+      dot.classList.remove("actived");
+  }
 }
 
-// Thumbnail image controls
-function currentSlide(n) {
-    showBanner(bannerIdx = n);
+function updateIndex(idx) {
+    if (isExecuting) {
+        console.log('Gacha selector is scrolling ...');
+        return;
+    }
+    isExecuting = true;
+    currentIndex += idx;
+
+    if (currentIndex < 0) {
+        currentIndex = 0;
+    } else if (currentIndex >= maxIdx) {
+        currentIndex = maxIdx - 1;
+    }
+    clearDots()
+    dots[currentIndex].classList.add("actived");
+    selectorContainer.scrollLeft = currentIndex * selectorContainer.offsetWidth;
+    setTimeout(() => {
+        isExecuting = false;
+    }, 400);
 }
 
-function showBanner(n) {
-  let i;
-  let slides = document.getElementsByClassName("gacha-banner");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {bannerIdx = 1}
-  if (n < 1) {bannerIdx = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[bannerIdx-1].style.display = "block";
-  dots[bannerIdx-1].className += " active";
+function jumpIndex(idx) {
+    if (isExecuting) {
+        console.log('Gacha selector is scrolling ...');
+        return;
+    }
+    isExecuting = true;
+    currentIndex = idx;
+
+    if (currentIndex < 0) {
+        currentIndex = 0;
+    } else if (currentIndex >= maxIdx) {
+        currentIndex = maxIdx - 1;
+    }
+
+    clearDots()
+    dots[currentIndex].classList.add("actived");
+    selectorContainer.scrollLeft = currentIndex * selectorContainer.offsetWidth;
+    setTimeout(() => {
+        isExecuting = false;
+    }, 400);
 }

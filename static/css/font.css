@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'RoGSanSrfStd-Bd';
+    src: url('../fonts/RoGSanSrfStd-Bd.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    font-family: 'RoGSanSrfStd-Bd';
+}

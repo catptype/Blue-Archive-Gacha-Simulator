@@ -11,7 +11,7 @@ def gacha(request):
     banners = GachaBanner.objects.all()
     context = {
         'banners': banners,
-        'banner_idx': range(1, banners.count() + 1),
+        'banner_idx': range(banners.count()),
     }    
     return render(request, 'gacha_app/gacha.html', context)
 

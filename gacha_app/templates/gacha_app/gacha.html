@@ -1,27 +1,29 @@
 {% extends 'general_app/components/base.html' %}
 {% load static %}
+{% block css %}
 
+{% endblock %}
 {% block title %}Gacha{% endblock %}
 
 {% block content %}
-<div class="container" id="gacha-container">
-    <h3>GACHA PAGE</h3>
-    <div class="gacha-slideshow">
-        {% for banner in banners %}
-        <div class="gacha-banner">
-            <a href="{% url 'gacha_detail' gacha_id=banner.id %}">
-                <img src="{% static 'portrait_404.png' %}" alt="{{ banner.name }}">
-            </a>
-            <p>{{ banner.name }}</p>
-        </div>
-        {% endfor %}
-
-        <a class="prev" onclick="updateIndex(-1)">&#10094;</a>
-        <a class="next" onclick="updateIndex(1)">&#10095;</a>
+<div class="container parallelogram" id="gacha-container">
+    <div id="gacha-selector">
+        <ul>
+            {% for banner in banners %}
+            <li>
+                <a href="{% url 'gacha_detail' gacha_id=banner.id %}">
+                    <img src="{% static 'portrait_404.png' %}" alt="{{ banner.name }}">
+                </a>
+                <p>{{ banner.name }}</p>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
+    <button id="prev-btn" onclick="updateIndex(-1)">&#10094;</button>
+    <button id="next-btn" onclick="updateIndex(1)">&#10095;</button>
     <div style="text-align:center">
         {% for idx in banner_idx %}
-        <span class="dot" onclick="showBanner({{ idx }})"></span>
+        <span class="dot" onclick="jumpIndex({{ idx }})"></span>
         {% endfor %}
     </div>
 </div>

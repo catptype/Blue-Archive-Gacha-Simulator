@@ -1,6 +1,7 @@
 @import 'variables.css';
 
-body, html {
+body,
+html {
     width: 100vw;
     height: 100vh;
 }
@@ -24,23 +25,32 @@ header {
 }
 
 footer {
+
     margin-top: 1rem;
 }
 
 p {
     margin: 0;
     padding: 0;
-    font-weight: 600;
     color: black;
 }
 
 /* WEB COMPONENT SHARED SAME SETTING */
+.parallelogram {
+    overflow: hidden;
+    transform: skewX(var(--parallelogram-deg));
+
+    & .not-parallelogram {
+        transform: skewX(calc(var(--parallelogram-deg) * -1));
+    }
+}
+
 #home-container,
 #student-container,
 #gacha-container,
 #gacha-detail-container,
 #gacha-result-container {
-    padding: var(--gap-size);
+    padding: calc(var(--gap-size) * 1.5);
     border-radius: var(--container-br);
     background-color: var(--gray-lv1);
 }
@@ -52,13 +62,11 @@ p {
 .banner-container,
 .pickup-container,
 .not-pickup-container,
-.result-container {    
-    padding: var(--gap-size);
+.result-container {
+    padding: calc(var(--gap-size) * 1.5);
     border-radius: var(--container-br);
     background-color: var(--gray-lv2);
 }
-
-
 
 .container {
     display: flex;
@@ -95,13 +103,13 @@ p {
             height: 40px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            
-            > img {
+
+            >img {
                 height: 100%;
                 object-fit: scale-down;
             }
 
-            > p {
+            >p {
                 padding-left: var(--gap-size);
             }
 
@@ -114,38 +122,64 @@ p {
 
 /* GACHA MAIN SITE */
 #gacha-container {
-
-    & .gacha-slideshow {
-        position: relative;
+    & #gacha-selector {
+        display: flex;
         margin: auto;
-        padding: 0 2rem;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        white-space: nowrap;
+        scroll-behavior: smooth;
+        width: 700px;
 
-        & .gacha-banner {
+        &::-webkit-scrollbar {
             display: none;
+        }
 
-            & a > img {
-                width: 600px;
-                height: 300px;
+        > ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            scroll-snap-align: center;
+            display: flex;
+
+            & li {
+                width: 700px;
+                box-sizing: border-box;
+                text-align: center;
+                padding: 20px;
+                border: 1px solid #ccc;
+
+                & img {
+                    width: 600px;
+                    height: 300px;
+                    object-fit: cover;
+                }
             }
         }
-
-        & a.prev,
-        & a.next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            text-decoration: none;
-            padding: 0.5rem;
-        }
-
-        & a.prev {
-            left: 0;
-        }
-
-        & a.next {
-            right: 0;
-        }
     }
+
+    #prev-btn,
+    #next-btn {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+        cursor: pointer;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    #prev-btn {
+        left: 10px;
+    }
+      
+    #next-btn {
+        right: 10px;
+    }
+
     & .dot {
         cursor: pointer;
         height: 15px;
@@ -155,6 +189,10 @@ p {
         border-radius: 50%;
         display: inline-block;
         transition: background-color 0.6s ease;
+
+        &.actived {
+            background-color: var(--color-primary);
+        }
     }
 }
 
@@ -163,7 +201,7 @@ p {
     overflow-y: auto;
 
     .containter-flex .banner-container {
-        
+
         & .banner-image {
             width: 400px;
             height: 200px;
@@ -188,7 +226,7 @@ p {
         width: 200px;
         height: 256px;
 
-        & .item-bg {    
+        & .item-bg {
             width: inherit;
             height: inherit;
 
@@ -199,8 +237,9 @@ p {
             }
 
             & .item-rarity {
-                
-                transform: translateY(-100%);  
+
+                transform: translateY(-100%);
+
                 & img {
                     width: 100%;
                     height: 100%;
@@ -211,41 +250,9 @@ p {
     }
 }
 
-/*
-.form-layout {
-    border-radius: 15px;
-    width: 376px;
-}
-
-.text-danger {
-    font-size: 12px;
-}
-
-.transaction-grid,
-.gacha-result-grid,
-.rarity-grid,
-.gacha-grid {
-    display: grid;
-    grid-gap: 10px;
-}
-
-.rarity-grid,
-.gacha-grid {
-    grid-template-columns: repeat(3, 1fr); 
-}
-
-.transaction-grid,
-.gacha-result-grid {
-    grid-template-columns: repeat(5, 1fr); 
-}
-*/
-
-
-
-
 .dashboard-container {
     display: grid;
-    grid-template-columns: 1fr 4fr; 
+    grid-template-columns: 1fr 4fr;
     grid-gap: 10px;
 }
 
@@ -259,5 +266,6 @@ p {
 }
 
 .pagination {
-    margin-top: 10px; /* Adjust the margin as needed */
+    margin-top: 10px;
+    /* Adjust the margin as needed */
 }

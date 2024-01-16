@@ -29,8 +29,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: var(--gap-size);
-    position: relative;
-    overflow: hidden;
 
     & .student-card {
         position: relative;
@@ -43,11 +41,12 @@
         transition: visibility 1s, opacity 1s;
     
         > img {
+            position: absolute;
+            top: 10%;
             width: 100%;
             height: 100%;
-            border-radius: inherit;
             object-fit: cover;
-            transform: scale(1.1);
+            transform: skew(calc(var(--parallelogram-deg) * -1)) scale(1.3);
         }
 
         &.hidden {
@@ -66,7 +65,7 @@
             width: 15px;
             height: fit-content;
             overflow: hidden;
-            transform: translateX(-150%);
+            transform: skew(calc(var(--parallelogram-deg) * -1)) translateX(-150%);
             transition-delay: -50ms;
             
             & .star {
@@ -95,7 +94,7 @@
             right: 5%;
             width: fit-content;
             height: fit-content;
-            transform: translateX(150%) rotateZ(360deg);
+            transform: skew(calc(var(--parallelogram-deg) * -1)) translateX(150%) rotateZ(360deg);
 
             > img {
                 width: auto;
@@ -111,6 +110,10 @@
             border-top-left-radius: 0;
             border-top-right-radius: 0;
             transform: translateY(100%);
+
+            > p {
+                font-size: 10px;
+            }
         }
 
         &:hover .card-rarity {
@@ -119,11 +122,11 @@
         
         &:hover .card-rarity,
         &:hover .card-school {
-            transform: translateX(0%) rotateZ(0deg);
+            transform: skew(calc(var(--parallelogram-deg) * -1)) translateX(0%) rotateZ(0deg);
         }
 
         &:hover > img {
-            transform: scale(1.0)
+            transform: skew(calc(var(--parallelogram-deg) * -1)) scale(1.2);
         }
 
         &:hover .star {

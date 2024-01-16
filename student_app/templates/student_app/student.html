@@ -2,21 +2,22 @@
 {% load static %}
 
 {% block css %}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/layout-debugger.css' %}"> -->
 <link rel="stylesheet" type="text/css" href="{% static 'css/student-cards.css' %}">
 {% endblock %}
 
 {% block title %}Student list{% endblock %} 
 {% load static %}
 {% block content %}
-<div class="container" id="student-container">
+<div class="container parallelogram" id="student-container">
     <div class="school-filter">
         <div class="school-icon activated" id="all" onclick="selectSchool(this)">
-            <img src="{% static 'icons/all.svg' %}" alt="all">
+            <img class="not-parallelogram" src="{% static 'icons/all.svg' %}" alt="all">
             <p>All</p>
         </div>
         {% for school in schools %}
         <div class="school-icon" id="{{ school.name }}" onclick="selectSchool(this)">
-            <img src="{{ school.image.url }}" alt="{{ school.name }}">
+            <img class="not-parallelogram" src="{{ school.image.url }}" alt="{{ school.name }}">
             <p>{{ school.name }}</p>
         </div>
         {% endfor %}
