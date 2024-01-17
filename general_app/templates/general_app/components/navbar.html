@@ -7,7 +7,7 @@
     {% if user.is_authenticated %}
     <li class="user-dropdown">
       <a href="#">{{ user.username }}</a>
-      <ul class="sub-menu">
+      <ul class="sub-menu parallelogram">
         {% if user.is_superuser %}
         <li><a href="{% url 'admin:index' %}">Admin</a></li>
         <li><hr></li>

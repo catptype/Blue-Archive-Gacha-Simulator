@@ -1,62 +1,89 @@
 {% extends 'general_app/components/base.html' %}
+
 {% load static %}
-{% load filters %} <!-- Read custom template tags in filters.py -->
+{% load filters %}
 
 {% block title %}Gacha detail{% endblock %}
 
-{% block content %}
-<div class="container" id="gacha-detail-container">
-    <div class="containter-flex">
-        <!-- Gacha banner detail with draw buttons -->
-        <div class="banner-container">
-            <h1>{{ banner.name }}</h1>
-            <div class="banner-image">
-                <img src="{% static 'portrait_404.png' %}" alt="banner">
-            </div>
-            <!-- Add buttons for 1 draw and 10 draw -->
-            <form method="POST" action="{% url 'gacha_result' gacha_id=banner.id %}">
-                {% csrf_token %}
-                {% for num_draw in num_draws %}
-                <button class="btn btn-primary p-2 mb-3" type="submit" name="draw" value="{{ num_draw }}">{{ num_draw }} Draw</button>
-                {% endfor %}
-            </form>
-        </div>
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static '/css/gacha-style.css' %}">
+{% endblock %}
 
-        {% if banner.is_pickup.all %}
-        <!-- All pickup students in banner -->
-        <div class="pickup-container">
-            <h2>Feature pick up ({{ banner.feature_rate }})</h2>
-            <div class="student-grid">
+{% block content %}
+<div class="container parallelogram" id="gacha-detail-container">
+    <!-- Gacha banner detail with draw buttons -->
+    <div class="banner-container">
+        <h1>{{ banner.name }}</h1>
+        <div class="banner-image">
+            <img src="{% static 'portrait_404.png' %}" alt="banner">
+        </div>
+        <!-- Add buttons for 1 draw and 10 draw -->
+        <form method="POST" action="{% url 'gacha_result' gacha_id=banner.id %}">
+            {% csrf_token %}
+            {% for num_draw in num_draws %}
+            <button class="btn" type="submit" name="draw" value="{{ num_draw }}">
+                {% if num_draw == 1 %}
+                <span><img class="not-parallelogram" src="{% static 'image/gacha/draw01.png' %}" alt="{{num_draw}}draw"></span>
+                {% elif num_draw == 10 %}
+                <span><img class="not-parallelogram" src="{% static 'image/gacha/draw10.png' %}" alt="{{num_draw}}draw"></span>
+                {% endif %}
+                <p>{{ num_draw }} Draw</p>
+            </button>
+            {% endfor %}
+        </form>
+    </div>
+    {% if banner.is_pickup.all %}
+    <!-- All pickup students in banner -->
+    <div class="item-container" onclick="toggleVisible(this)">
+        <div class="rate-title">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <h2>Feature pick up ({{ banner.feature_rate }})</h2>            
+        </div>
+        <div class="detail-container hidden">
+            <div class="item-grid">
                 {% for student in banner.is_pickup.all %}
                 <div class="student-card">
                     <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
-                    <div class="card-label">
-                        <span>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</span>
-                    </div>
+                    <p>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
                 </div>
                 {% endfor %}
             </div>
         </div>
-        {% endif %}
-        
-        <!-- All not pick up students in banner -->
-        {% for rarity in rarities %}
-        <div class="not-pickup-container">
-            <h2>{% for _ in "★"|rjust:rarity %}★{% endfor %} ({{ banner|get_rate:rarity }}%)</h2>
-            <div class="student-grid">
-            {% for student in banner.not_pickup.all %}
-            {% if student.rarity == rarity %}
-            <div class="student-card">
-                <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
-                <div class="card-label">
-                    <span>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</span>
-                </div>
+    </div>
+    {% endif %}
+    
+    <!-- All not pick up students in banner -->
+    {% for rarity in rarities %}
+    <div class="item-container" onclick="toggleVisible(this)">
+        <div class="rate-title">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            {% endif %}
-            {% endfor %}
+            <h2>{% for _ in "★"|rjust:rarity %}★{% endfor %} ({{ banner|get_rate:rarity }}%)</h2>
+        </div>
+        <div class="detail-container hidden">
+            <div class="item-grid">
+                {% for student in banner.not_pickup.all %}
+                {% if student.rarity == rarity %}
+                <div class="student-card">
+                    <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
+                    <p>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
+                </div>
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
 </div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/detail-toggle.js' %}"></script>
 {% endblock %}

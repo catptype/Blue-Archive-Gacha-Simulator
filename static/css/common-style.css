@@ -1,0 +1,134 @@
+@import 'variables.css';
+
+html {
+    width: 100vw;
+    height: 100vh;
+
+    > body {
+        width: inherit;
+        height: inherit;
+        
+        display: flex;
+        flex-direction: column;
+        background-image: url('../image/background.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        backdrop-filter: blur(4px);
+
+        > header {
+            background-color: var(--color-navbar);
+            margin-bottom: 1rem;
+        }
+
+        > footer {
+            margin-top: 1rem;
+        }
+    }
+}
+
+p {
+    margin: 0;
+    padding: 0;
+    color: black;
+}
+
+/* WEB COMPONENT SHARED SAME SETTING */
+.parallelogram {
+    overflow: hidden;
+    transform: skewX(var(--parallelogram-deg));
+
+    & .not-parallelogram {
+        transform: skewX(calc(var(--parallelogram-deg) * -1));
+    }
+}
+
+#home-container,
+#student-container,
+#gacha-container,
+#gacha-detail-container,
+#gacha-result-container {
+    padding: calc(var(--gap-size) * 1.5);
+    border-radius: var(--container-br);
+    background-color: var(--gray-lv1);
+}
+
+.home-item,
+.footer,
+.school-icon,
+.student-container,
+.banner-container,
+.item-container,
+.result-container {
+    padding: calc(var(--gap-size) * 1.5);
+    border-radius: var(--container-br);
+    background-color: var(--gray-lv2);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    grid-gap: var(--gap-size);
+}
+
+
+
+
+
+
+
+/* GACHA RESULT PAGE */
+#gacha-result-container .result-container .result-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: var(--gap-size);
+
+    & .result-item {
+        position: relative;
+        /*overflow: hidden;*/
+        width: 200px;
+        height: 256px;
+
+        & .item-bg {
+            width: inherit;
+            height: inherit;
+
+            & img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            & .item-rarity {
+
+                transform: translateY(-100%);
+
+                & img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+}
+
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-gap: 10px;
+}
+
+.dashboard-menu * {
+    display: block;
+}
+
+#dashboard-content {
+    display: grid;
+    place-items: center;
+}
+
+.pagination {
+    margin-top: 10px;
+    /* Adjust the margin as needed */
+}

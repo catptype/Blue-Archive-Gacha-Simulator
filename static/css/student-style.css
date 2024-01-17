@@ -1,0 +1,34 @@
+@import 'variables.css';
+
+#student-container {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+
+    & .school-filter {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--gap-size);
+
+        & .school-icon {
+            display: flex;
+            align-items: center;
+            width: fit-content;
+            height: 40px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &.activated {
+                background-color: var(--color-primary);
+            }
+
+            > img {
+                height: 24px;
+                object-fit: scale-down;
+            }
+
+            > p {
+                padding-left: var(--gap-size);
+            }
+        }
+    }
+}

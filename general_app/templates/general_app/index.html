@@ -1,9 +1,12 @@
 {% extends 'general_app/components/base.html' %}
-
+{% load static %}
 {% block title %}Home{% endblock %}
 
-{% block content %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static '/css/home-style.css' %}">
+{% endblock %}
 
+{% block content %}
 <div class="container parallelogram" id="home-container">
   <div class="home-grid">
     <div class="home-item">

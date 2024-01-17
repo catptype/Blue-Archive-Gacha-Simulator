@@ -2,7 +2,9 @@
 {% load static %}
 
 {% block title %}Gacha Result{% endblock %}
-
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static '/css/gacha-style.css' %}">
+{% endblock %}
 {% block content %}
    <!-- Display drawn characters -->
    {% if drawn_students %}
