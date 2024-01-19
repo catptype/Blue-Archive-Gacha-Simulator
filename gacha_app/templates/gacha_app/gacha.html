@@ -4,12 +4,12 @@
 {% block title %}Gacha{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static '/css/gacha-style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static '/css/gacha-select-style.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="container parallelogram" id="gacha-container">
-    <div id="gacha-selector">
+    <div id="banner-selector">
         <ul>
             {% for banner in banners %}
             <li>

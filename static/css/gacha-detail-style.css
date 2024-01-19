@@ -5,92 +5,28 @@ h2 {
     padding: 0;
 }
 
-/* GACHA MAIN SITE */
-#gacha-container {
-    & #gacha-selector {
-        display: flex;
-        margin: auto;
-        overflow-x: scroll;
-        scroll-snap-type: x mandatory;
-        white-space: nowrap;
-        scroll-behavior: smooth;
-        width: 700px;
-
-        &::-webkit-scrollbar {
-            display: none;
-        }
-
-        >ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            scroll-snap-align: center;
-            display: flex;
-
-            & li {
-                width: 700px;
-                box-sizing: border-box;
-                text-align: center;
-                padding: 20px;
-                border: 1px solid #ccc;
-
-                & img {
-                    width: 600px;
-                    height: 300px;
-                    object-fit: cover;
-                }
-            }
-        }
-    }
-
-    #prev-btn,
-    #next-btn {
-        position: fixed;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 20px;
-        cursor: pointer;
-        background-color: #3498db;
-        color: #fff;
-        border: none;
-        padding: 10px;
-        border-radius: 5px;
-    }
-
-    #prev-btn {
-        left: 10px;
-    }
-
-    #next-btn {
-        right: 10px;
-    }
-
-    & .dot {
-        cursor: pointer;
-        height: 15px;
-        width: 15px;
-        margin: 0 2px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.6s ease;
-
-        &.actived {
-            background-color: var(--color-primary);
-        }
-    }
-}
-
-/* GACHA DETAIL SITE*/
 #gacha-detail-container {
     overflow-y: auto;
     scroll-behavior: smooth;
 
-    & .banner-container {
+    & .banner-detail {
+        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        > .go-back {
+            position: absolute;
+            top: var(--gap-size);
+            left: var(--gap-size);
+            padding: 0.5rem;
+            background: var(--color-primary);
+            border: 1px solid var(--color-border);
+            border-radius: 5px;
+            box-shadow: var(--color-shadow);
+            text-decoration: none;
+        }
 
         & .banner-image > img {
             width: 600px;
@@ -109,8 +45,6 @@ h2 {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: fit-content;
-                height: fit-content;
                 margin: 0;
                 padding: 0.5rem;
                 background: var(--color-primary);
@@ -119,7 +53,7 @@ h2 {
 
                 > span > img {
                     height: 60px;
-                    object-fit: scale-down;
+                    object-fit: cover;
                 }
 
                 > p {
@@ -134,16 +68,15 @@ h2 {
         display: flex;
         flex-direction: column;
         height: fit-content;
+        cursor: pointer;
         
         & .rate-title {
-            cursor: pointer;
             display: flex;
             justify-content: left;
             align-items: center;
             width: fit-content;
 
             > .hamburger {
-
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -179,10 +112,24 @@ h2 {
                     }
                 }
             }
+
+            > .stars {
+                display: flex;
+                
+                & .star {
+                    width: 2rem;
+                    height: 2rem;
+                    background-image: url('../image/star_rarity.png');
+                    background-size: 100% 100%;
+                }
+            }
         }
 
         & .detail-container {
-            
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-size);
+
             &.hidden {
                 display: none;
                 margin: 0;
@@ -196,6 +143,12 @@ h2 {
                 margin-top: calc(var(--gap-size) * 1.5);
             }
 
+            & .sub-header {
+                padding: 0.2rem 1.0rem;
+                border-radius: var(--container-br);
+                background-color: rgba(250,250,250, 0.8);
+            }
+
             > .item-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -205,9 +158,8 @@ h2 {
                     position: relative;
                     overflow: hidden;
                     width: 130px;
-                    height: 150px;
+                    height: 160px;
                     border-radius: var(--card-br);
-                    border: 1px solid var(--color-border);
                     box-shadow: var(--color-shadow);
                     
                     > img {
@@ -215,8 +167,57 @@ h2 {
                         position: absolute;
                         transform: skewX(calc(var(--parallelogram-deg) * -1)) scale(1.2);
                     }
-                    > p {
-                        font-size: 10px;
+
+                    > .rate-info,
+                    > .card-label {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: absolute;
+                        margin: 0;
+                        padding: 0.2rem;
+                        background-color: rgba(250,250,250, 0.8);
+                        backdrop-filter: blur(2px);
+
+                        > p {
+                            font-size: 10px;
+                        }
+                    }
+
+                    > .rate-info {
+                        width: 6ch;
+                        top: 5%;
+                        right: 5%;
+                        border-radius: var(--card-br);
+                    }
+
+                    > .card-label {
+                        width: 100%;
+                        bottom: 0;
+                        border-radius: 0 0 var(--card-br) var(--card-br);
+                    }
+                }
+
+                /* Override some properties for feature pick up */
+                &.pickup {
+                    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                    
+                    > .student-card {
+                        width: 160px;
+                        height: 190px;
+
+                        > img {
+                            top: 18%;
+                            left: 10%;
+                            transform: skewX(calc(var(--parallelogram-deg) * -1)) scale(1.5);
+                        }
+
+                        > .rate-info,
+                        > .card-label {
+                            > p {
+                                font-size: 12px;
+                            }
+                        }
                     }
                 }
             }

@@ -3,7 +3,6 @@
 
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/student-style.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/student-cards.css' %}">
 {% endblock %}
 
 {% block title %}Student list{% endblock %} 
@@ -22,7 +21,7 @@
         </div>
         {% endfor %}
     </div>
-    <div class="student-container">
+    <div class="student-info">
         <div class="student-grid ">
             {% for student in students %}
             <div class="student-card" school="{{ student.school.name }}">

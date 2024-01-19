@@ -33,7 +33,6 @@ p {
     color: black;
 }
 
-/* WEB COMPONENT SHARED SAME SETTING */
 .parallelogram {
     overflow: hidden;
     transform: skewX(var(--parallelogram-deg));
@@ -53,11 +52,12 @@ p {
     background-color: var(--gray-lv1);
 }
 
-.home-item,
-.footer,
+.home-item, 
+.home-footer,
 .school-icon,
-.student-container,
-.banner-container,
+.student-info,
+#banner-selector,
+.banner-detail,
 .item-container,
 .result-container {
     padding: calc(var(--gap-size) * 1.5);

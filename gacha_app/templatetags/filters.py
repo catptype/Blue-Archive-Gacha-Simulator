@@ -12,3 +12,14 @@ def get_rate(obj, rarity):
 @register.filter(name='filter_rarity')
 def filter_rarity(obj, rarity):
     return obj.filter(rarity=rarity)
+
+
+
+@register.filter(name='subtract_rate')
+def subtract_rate(value1, value2):
+    return value1 - value2
+
+@register.filter(name='divide_rate')
+def divide_rate(value1, value2):
+    result = value1 / value2
+    return round(result, 4)

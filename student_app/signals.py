@@ -41,6 +41,3 @@ def add_student_to_banner(sender, instance, created, **kwargs):
     elif instance.is_limited:
         banner = GachaBanner.objects.get(name='Limited Banner')
         banner.is_pickup.add(instance)
-
-    else:
-        raise ValueError(f"ERROR: Student {instance} in signal post_save")
