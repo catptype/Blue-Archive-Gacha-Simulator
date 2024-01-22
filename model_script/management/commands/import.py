@@ -19,9 +19,7 @@ class Command(BaseCommand):
         self.import_students(os.path.join(basepath, 'student_r1.json'))
         self.import_students(os.path.join(basepath, 'student_r2.json'))
         self.import_students(os.path.join(basepath, 'student_r3.json'))
-        self.import_achievement(os.path.join(basepath, 'achievement_club.json'))
-        self.import_achievement(os.path.join(basepath, 'achievement_version.json'))
-        self.import_achievement(os.path.join(basepath, 'achievement_limited.json'))
+        self.import_achievement(os.path.join(basepath, 'achievement.json'))
         self.stdout.write(self.style.SUCCESS('Data imported successfully'))
 
     def student_portrait_processing(self, source, destination):

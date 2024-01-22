@@ -59,19 +59,28 @@
                     left: 50%;
                     transform: translate(-49%, -49%) rotateY(90deg);
                     z-index: -1;
-                    border-radius: var(--card-br);
-                    box-shadow: var(--color-shadow);
-                    overflow: hidden;
+                    
+                    > .new-card {
+                        position: absolute;
+                        display: flex;
+                        height: 20px;
+                        top: -0px;
+                        right: -15px;
+                        z-index: 1;
+                        transform: rotateZ(35deg);
+                    }
 
                     > .student-card {
                         position: relative;
                         overflow: hidden;
                         width: 100%;
                         height: 100%;
+                        border-radius: var(--card-br);
+                        box-shadow: var(--color-shadow);
                         
-                        & .card-rarity,
-                        & .card-school,
-                        & .card-label {
+                        > .card-rarity,
+                        > .card-school,
+                        > .card-label {
                             display: flex;
                             justify-content: center;
                             align-items: center;
@@ -86,7 +95,7 @@
                             object-fit: cover;
                         }
 
-                        & .card-rarity {
+                        > .card-rarity {
                             top: 5%;
                             left: 5%;
                             width: fit-content;
@@ -101,7 +110,7 @@
                             }
                         }
 
-                        & .card-school {
+                        > .card-school {
                             top: 5%;
                             right: 5%;
                             width: fit-content;
@@ -116,7 +125,7 @@
                             }
                         }
 
-                        & .card-label {
+                        > .card-label {
                             bottom: 0%;
                             width: 100%;
                             border-top-left-radius: 0;
@@ -191,8 +200,22 @@
         }
 
         > p {
+            width: max-content;
             margin: 0;
             padding: 0 var(--gap-size);
+            font-size: auto;
         }
     }
+
+    & .message > p {
+        text-align: center;
+        
+        & span.star {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background-image: url('../image/star_rarity.png');
+            background-size: 100% 100%;
+        }
+    } 
 }

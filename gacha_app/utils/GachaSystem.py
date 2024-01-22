@@ -1,6 +1,7 @@
 import random
 from django.contrib.auth import get_user_model
 
+from user_app.models import ObtainedStudent
 from ..models import GachaTransaction
 
 class GachaSystem:
@@ -67,7 +68,7 @@ class GachaSystem:
 
         user_instance = get_user_model().objects.get(username=self.user.username)
         num_query = 10 if rarity == 2 else 200
-        queryset = GachaTransaction.objects.filter(user=user_instance).order_by('-id')[:num_query]
+        queryset = GachaTransaction.objects.filter(user=user_instance, banner=self.banner).order_by('-id')[:num_query]
 
         for idx, transaction in enumerate(queryset, start=1):
             if transaction.student.rarity == rarity:
@@ -126,3 +127,17 @@ class GachaSystem:
             })
         else:
             raise ValueError("Mode can be 0, 2, and 3")
+
+    def get_new_students(self, drawn_students):
+        new_students = set()
+
+        if self.user.is_authenticated:
+            current_obtain = ObtainedStudent.objects.filter(user=self.user)
+            for student in drawn_students:
+                if not current_obtain.filter(student=student).exists():
+                    new_students.add(student)
+        
+        return new_students
+    
+    def get_guarantee_rarity3(self):
+        return self.guarantee_rarity[3]

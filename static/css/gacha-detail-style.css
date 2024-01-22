@@ -15,6 +15,14 @@ h2 {
         justify-content: center;
         align-items: center;
 
+        & span.star {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background-image: url('../image/star_rarity.png');
+            background-size: 100% 100%;
+        }
+
         & .btn {
             display: flex;
             justify-content: center;

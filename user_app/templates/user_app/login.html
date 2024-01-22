@@ -1,43 +1,43 @@
-{% extends 'general_app/components/base.html' %} 
-
+{% extends 'general_app/components/base.html' %}
+{% load static %}
 {% block title %}Login{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/login-style.css' %}">
+{% endblock %}
 
 {% block content %}
 
-<div class="container bg-light p-5 form-layout">
-  <h3 class="text-center">Login account</h3>
-  <form method="POST" autocomplete="off" novalidate>
-    {% csrf_token %}
-    <div class="row ">
-      <div class="col-10 offset-1">
-        <div class="mb-3">
-          <label>{{ form.username.label }}</label>
-          <div>{{ form.username }}</div>
-          {% if form.non_field_errors %}
-          <div class="text-danger">
-            {% for error in form.non_field_errors %} {{ error }} {% endfor %}
-          </div>
-          {% endif %}
+<div class="container parallelogram" id="login-container">
+  <div class="login-content">
+    <h1>Login account</h1>
+    <form method="POST" autocomplete="off" novalidate>
+      {% csrf_token %}
+      <div class="username">
+        <div>{{ form.username }}</div>
+        {% if form.non_field_errors %}
+        <div class="text-danger">
+          {% for error in form.non_field_errors %} 
+          <p>{{ error }}</p>
+          {% endfor %}
         </div>
-        <div class="mb-3">
-          <label>{{ form.password.label }}</label>
-          <div>{{ form.password }}</div>
-        </div>
-        <div class="mb-3">
-          <p class="mb-0">
-           <a href="{% url 'forget' %}">Forget password</a>
-          </p>
-        </div>
-        <div class="d-grid">
-          <button type="submit" class="btn btn-primary p-2 mb-3">Login</button>
-        </div>
+        {% endif %}
       </div>
-    </div>
-  </form>
-  <div class="row text-center">
-    <p class="mb-0">
-      Don't have an account? <a href="{% url 'register' %}">Register</a>
-    </p>
+      <div class="password">
+        <div>{{ form.password }}</div>
+      </div>
+      <div class="forgot">
+        <a href="{% url 'forget' %}">Forget password</a>
+      </div>
+      <div class="login-btn">
+        <button type="submit" class="btn">Login</button>
+      </div>
+      <div class="register">
+        <p>
+          Don't have an account? <a href="{% url 'register' %}">Register</a>
+        </p>
+      </div>
+    </form>
   </div>
 </div>
 

@@ -6,7 +6,6 @@ from django.core.exceptions import ValidationError
 from django.contrib.admin.widgets import FilteredSelectMultiple
 
 from .models import Achievement
-from student_app.models import Student
 
 class CreateNewUserForm(UserCreationForm):
 
@@ -62,22 +61,32 @@ class CreateNewUserForm(UserCreationForm):
         fields = ['username', 'password1', 'password2', 'tos']
 
 class LoginForm(AuthenticationForm):
-        
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Override attibutes for form elements
+        self.fields['username'].widget.attrs['size'] = 24
+        self.fields['username'].widget.attrs['maxlength'] = 20
+        self.fields['username'].widget.attrs['placeholder'] = 'Username'
+
+        self.fields['password'].widget.attrs['size'] = 24
+        self.fields['password'].widget.attrs['maxlength'] = 20
+        self.fields['password'].widget.attrs['placeholder'] = 'Password'
+
     username = forms.CharField(
         max_length=20,
         label='Username',
-        widget=forms.TextInput(attrs={'size':'24', 'class':'inputText'}), # For controling, width size
+        widget=forms.TextInput(), # For controling, width size
     )
 
     password = forms.CharField(
         max_length=20,
         label='Password',
-        widget=forms.PasswordInput(attrs={'size':'24', 'class':'inputText'}), # For controling, width size
+        widget=forms.PasswordInput(), # For controling, width size
     )
 
     error_messages = {
-        'invalid_login': "Invalid username or password.",
-        'inactive': "This account is inactive.",
+        'invalid_login': "Invalid username or password."
     }
 
 class AchievementAdminForm(forms.ModelForm):
@@ -87,12 +96,6 @@ class AchievementAdminForm(forms.ModelForm):
         widget=forms.ClearableFileInput(), 
         required=False,
     )
-
-    #def __init__(self, *args, **kwargs):
-        #super().__init__(*args, **kwargs)
-        #existing_not_pickup_id = [student.id for student in self.initial.get('not_pickup', [])]
-        #self.fields['criteria'].label = 'Pickup 3★ Students'
-        #self.fields['criteria'].queryset = Student.objects.filter(rarity=3).exclude(id__in=existing_not_pickup_id).order_by('name')
 
     class Meta:
         model = Achievement

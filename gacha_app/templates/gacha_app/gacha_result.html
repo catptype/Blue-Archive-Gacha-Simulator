@@ -17,6 +17,11 @@
                 <div class="result-item" onclick="showCurrentItem(this)">
                     <img class="item-back" src="{% static 'image/gacha/gacha_bg.png' %}" alt="item_background">
                     <div class="item-mid">
+                        {% if student in new_students %}
+                        <div class="new-card">
+                            <img src="{% static 'image/gacha/new.png' %}" alt="new">
+                        </div>
+                        {% endif %}
                         <div class="student-card">
                             {% if student.image %}
                             <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
@@ -43,6 +48,12 @@
             </div>
             {% endfor %}    
         </div>
+
+        {% if is_auth %}
+        <div class="message">
+            <p>Guarantee <span class="star"></span><span class="star"></span><span class="star"></span> in {{ num_guarantee }} draw</p>
+        </div>
+        {% endif %}
 
         <div class="banner-controller" id="show-all">
             <button class="btn" onclick="showAllItems()">

@@ -1,0 +1,25 @@
+@import 'variables.css';
+
+#login-container {
+    width: fit-content;
+
+    & form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-size);
+    }
+
+    & .text-danger > p {
+        font-size: 0.8rem;
+        color: red;
+    }
+
+    & .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--color-primary);
+        border-color: var(--color-border);
+        box-shadow: var(--color-shadow);
+    }
+}
