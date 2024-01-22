@@ -48,12 +48,14 @@
             </div>
             {% endfor %}    
         </div>
-
-        {% if is_auth %}
+        
         <div class="message">
+            {% if is_auth %}
             <p>Guarantee <span class="star"></span><span class="star"></span><span class="star"></span> in {{ num_guarantee }} draw</p>
+            {% else %}
+            <p>GUEST MODE</p>
+            {% endif %}
         </div>
-        {% endif %}
 
         <div class="banner-controller" id="show-all">
             <button class="btn" onclick="showAllItems()">

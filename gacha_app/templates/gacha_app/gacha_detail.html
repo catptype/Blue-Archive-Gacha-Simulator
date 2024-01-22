@@ -24,6 +24,8 @@
         <!-- Message -->
         {% if is_auth %}
         <p>Guarantee <span class="star"></span><span class="star"></span><span class="star"></span> in {{ num_guarantee }} draw</p>
+        {% else %}
+        <p>GUEST MODE</p>
         {% endif %}
         <!-- Add buttons for 1 draw and 10 draw -->
         <form method="POST" action="{% url 'gacha_result' gacha_id=banner.id %}">
