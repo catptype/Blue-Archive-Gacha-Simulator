@@ -3,45 +3,77 @@
 
 {% block title %}Gacha Result{% endblock %}
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static '/css/gacha-style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static '/css/gacha-result-style.css' %}">
 {% endblock %}
 {% block content %}
    <!-- Display drawn characters -->
    {% if drawn_students %}
-   <div class="container" id="gacha-result-container">
-    <div class="result-container">
-        <h2>Draw Result</h2>
+   <div class="container parallelogram" id="gacha-result-container">
+
+    <div class="banner-result">
         <div class="result-grid">
             {% for student in drawn_students %}
-            <div class="result-item">
-                <div class="item-bg">
-                    <img src="{% static 'image/gacha_bg.png' %}" alt="item_background">
-                    <div class="item-rarity">
-                        {% if student.rarity == 3 %}
-                        <img src="{% static 'image/gacha_r3.png' %}" alt="item_rarity3">
-                        {% elif student.rarity == 2 %}
-                        <img src="{% static 'image/gacha_r2.png' %}" alt="item_rarity2">
-                        {% else %}
-                        <img src="{% static 'image/gacha_r1.png' %}" alt="item_rarity1">
-                        {% endif %}
+            <div class="item-overflow">
+                <div class="result-item" onclick="showCurrentItem(this)">
+                    <img class="item-back" src="{% static 'image/gacha/gacha_bg.png' %}" alt="item_background">
+                    <div class="item-mid">
+                        <div class="student-card">
+                            {% if student.image %}
+                            <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
+                            {% endif %}
+                            <div class="card-rarity">
+                                {% for _ in ""|rjust:student.rarity %}<div class="star"></div>{% endfor %}
+                            </div>
+                            <div class="card-school">
+                                <img src="{{ student.school.image.url }}" alt="{{ student.school_name }}">
+                            </div>
+                            <div class="card-label">
+                                <p>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
+                            </div>
+                        </div>                        
                     </div>
-                    <div class="item-student">
-                        <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version_name }}">
-                <p>{{ student.name }}<br>({{ student.version_name}})<br>{% for _ in "★"|rjust:student.rarity %}★{% endfor %}</p>
-                    </div>
+                    {% if student.rarity == 3 %}
+                    <img class="item-front" src="{% static 'image/gacha/gacha_r3.png' %}" alt="item_rarity3">
+                    {% elif student.rarity == 2 %}
+                    <img class="item-front" src="{% static 'image/gacha/gacha_r2.png' %}" alt="item_rarity2">
+                    {% else %}
+                    <img class="item-front" src="{% static 'image/gacha/gacha_r1.png' %}" alt="item_rarity1">
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}    
         </div>
-    </div>
-    <div>
-        <!-- Add buttons for 1 draw and 10 draw -->
-        <form method="POST" action="{% url 'gacha_result' gacha_id=banner.id %}">
-            {% csrf_token %}
-            <button class="btn btn-primary p-2 mb-3" type="submit" name="draw" value="{{ num_draw }}">{{ num_draw }} Draw</button>
-        </form>
-        <a href="{% url 'gacha_detail' gacha_id=banner.id %}" class="btn btn-primary p-2 mb-3">Go back</a>
+
+        <div class="banner-controller" id="show-all">
+            <button class="btn" onclick="showAllItems()">
+                <p>SHOW ALL</p>
+                <span><img class="not-parallelogram" src="{% static 'icons/forward.svg' %}" alt="{{num_draw}}draw"></span>
+            </button>
+        </div>  
+        
+        <div class="banner-controller hidden" id="draw-again">
+            <a href="{% url 'gacha_detail' gacha_id=banner.id %}" class="btn">
+                <span><img class="not-parallelogram" src="{% static 'icons/back.svg' %}" alt="Back"></span>
+                <p>Back</p>
+            </a>
+            <!-- Add buttons for 1 draw and 10 draw -->
+            <form method="POST" action="{% url 'gacha_result' gacha_id=banner.id %}">
+                {% csrf_token %}
+                <button class="btn" type="submit" name="draw" value="{{ num_draw }}">
+                    {% if num_draw == 1 %}
+                    <span><img class="not-parallelogram" src="{% static 'image/gacha/draw01.png' %}" alt="{{num_draw}}draw"></span>
+                    {% elif num_draw == 10 %}
+                    <span><img class="not-parallelogram" src="{% static 'image/gacha/draw10.png' %}" alt="{{num_draw}}draw"></span>
+                    {% endif %}
+                    <p>{{ num_draw }} Draw again</p>
+                </button>
+            </form>
+        </div>
     </div>
     </div>
    {% endif %}
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/gacha-result.js' %}"></script>
 {% endblock %}

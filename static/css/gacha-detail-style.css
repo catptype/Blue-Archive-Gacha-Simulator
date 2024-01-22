@@ -7,7 +7,6 @@ h2 {
 
 #gacha-detail-container {
     overflow-y: auto;
-    scroll-behavior: smooth;
 
     & .banner-detail {
         position: relative;
@@ -16,16 +15,32 @@ h2 {
         justify-content: center;
         align-items: center;
 
-        > .go-back {
-            position: absolute;
-            top: var(--gap-size);
-            left: var(--gap-size);
+        & .btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
             padding: 0.5rem;
             background: var(--color-primary);
-            border: 1px solid var(--color-border);
-            border-radius: 5px;
+            border-color: var(--color-border);
             box-shadow: var(--color-shadow);
-            text-decoration: none;
+
+            &#back {
+                position: absolute;
+                top: var(--gap-size);
+                left: var(--gap-size);
+                text-decoration: none;
+            }
+
+            > span > img {
+                height: 60px;
+                object-fit: cover;
+            }
+
+            > p {
+                margin: 0;
+                padding: 0 var(--gap-size);
+            }
         }
 
         & .banner-image > img {
@@ -40,37 +55,16 @@ h2 {
             justify-content: center;
             align-items: center;
             gap: var(--gap-size);
-
-            & .btn {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 0;
-                padding: 0.5rem;
-                background: var(--color-primary);
-                border-color: var(--color-border);
-                box-shadow: var(--color-shadow);
-
-                > span > img {
-                    height: 60px;
-                    object-fit: cover;
-                }
-
-                > p {
-                    margin: 0;
-                    padding: 0 var(--gap-size);
-                }
-            }
         }
     }
 
-    & .item-container {
+    & .banner-item {
         display: flex;
         flex-direction: column;
         height: fit-content;
-        cursor: pointer;
         
         & .rate-title {
+            cursor: pointer;
             display: flex;
             justify-content: left;
             align-items: center;
@@ -125,7 +119,7 @@ h2 {
             }
         }
 
-        & .detail-container {
+        & .detail-content {
             display: flex;
             flex-direction: column;
             gap: var(--gap-size);
@@ -133,10 +127,6 @@ h2 {
             &.hidden {
                 display: none;
                 margin: 0;
-                & * {
-                    width: 0;
-                    height: 0;
-                }
             }
 
             &:not(.hidden) {

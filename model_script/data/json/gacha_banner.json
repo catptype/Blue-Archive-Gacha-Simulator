@@ -4,7 +4,15 @@
         "banner_type": "Permanent"
     },
     {
+        "name": "Mixed Banner",
+        "banner_type": "Pickup"
+    },
+    {
         "name": "Bunny Banner",
+        "banner_type": "Pickup"
+    },
+    {
+        "name": "Holiday Banner",
         "banner_type": "Pickup"
     },
     {
@@ -12,7 +20,7 @@
         "banner_type": "Pickup"
     },
     {
-        "name": "Swimsuit Banner",
+        "name": "Summer Banner",
         "banner_type": "Pickup"
     },
     {

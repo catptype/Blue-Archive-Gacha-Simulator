@@ -58,7 +58,8 @@ p {
 .student-info,
 #banner-selector,
 .banner-detail,
-.item-container,
+.banner-item,
+.banner-result,
 .result-container {
     padding: calc(var(--gap-size) * 1.5);
     border-radius: var(--container-br);
@@ -69,48 +70,6 @@ p {
     display: flex;
     flex-direction: column;
     grid-gap: var(--gap-size);
-}
-
-
-
-
-
-
-
-/* GACHA RESULT PAGE */
-#gacha-result-container .result-container .result-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: var(--gap-size);
-
-    & .result-item {
-        position: relative;
-        /*overflow: hidden;*/
-        width: 200px;
-        height: 256px;
-
-        & .item-bg {
-            width: inherit;
-            height: inherit;
-
-            & img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            & .item-rarity {
-
-                transform: translateY(-100%);
-
-                & img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-            }
-        }
-    }
 }
 
 .dashboard-container {
