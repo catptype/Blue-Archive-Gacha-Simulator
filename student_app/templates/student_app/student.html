@@ -8,33 +8,33 @@
 {% block title %}Student list{% endblock %} 
 {% load static %}
 {% block content %}
-<div class="container parallelogram" id="student-container">
-    <div class="school-filter">
-        <div class="school-icon activated" id="all" onclick="selectSchool(this)">
+<div class="main-container flex-column parallelogram" id="student-container">
+    <div class="flex-wrap">
+        <div class="flex-center school-icon activated" id="all" onclick="selectSchool(this)">
             <img class="not-parallelogram" src="{% static 'icons/all.svg' %}" alt="all">
             <p>All</p>
         </div>
         {% for school in schools %}
-        <div class="school-icon" id="{{ school.name }}" onclick="selectSchool(this)">
+        <div class="flex-center school-icon" id="{{ school.name }}" onclick="selectSchool(this)">
             <img class="not-parallelogram" src="{{ school.image.url }}" alt="{{ school.name }}">
             <p>{{ school.name }}</p>
         </div>
         {% endfor %}
     </div>
-    <div class="student-info">
+    <div class="sub-container">
         <div class="student-grid ">
             {% for student in students %}
-            <div class="student-card" school="{{ student.school.name }}">
+            <div class="center-position student-card" school="{{ student.school.name }}">
                 {% if student.image %}
                 <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
                 {% endif %}
-                <div class="card-rarity">
+                <div class="flex-center card-rarity">
                     {% for _ in ""|rjust:student.rarity %}<div class="star"></div>{% endfor %}
                 </div>
-                <div class="card-school">
+                <div class="flex-center card-school">
                     <img src="{{ student.school.image.url }}" alt="{{ student.school_name }}">
                 </div>
-                <div class="card-label">
+                <div class="flex-center card-label">
                     <p>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
                 </div>
             </div>
@@ -47,12 +47,3 @@
 {% block js %}
 <script src="{% static 'js/students.js' %}"></script>
 {% endblock %}
-
-
-<div class="student-grid ">
-    <div class="student-card"></div>
-    <div class="student-card hidden"></div>
-    <div class="student-card"></div>
-    <div class="student-card"></div>
-    <div class="student-card"></div>
-</div>

@@ -6,6 +6,9 @@
     font-display: swap;
 }
 
-body {
+body,
+button,
+input {
     font-family: 'RoGSanSrfStd-Bd';
 }
+

@@ -1,13 +1,26 @@
 :root {
-    --gray-lv1: rgba(128, 128, 128, 0.6);
-    --gray-lv2: rgba(255, 255, 255, 0.4);
-    --container-br: 15px; /* br = border-radius*/
-    --card-br: 15px; /* br = border-radius*/
+    /* Color */
+    --primary-color: #5fdbff;
+    --hover-color: gold;
+    --shadow-color: 2px 2px 4px rgba(15, 25, 125, 0.5);
+    
+    /* navbar */
+    --navbar-color: rgba(250,250,250, 0.8);
+
+    /* Container */
+    --main-container-color: rgba(128, 128, 128, 0.6);
+    --sub-container-color: rgba(255, 255, 255, 0.4);
+    --container-br: 15px;
     --gap-size: 0.5rem;
+
+    /* Card */
+    --card-bg-color: rgba(250,250,250, 0.8);
+    --card-br: 15px;
+    --card-br-color: rgba(15, 25, 125, 0.5);
+    
+    /* Animation */
     --trans-dur: 0.3s;
-    --color-primary: #5fdbff;
-    --color-navbar: rgba(250,250,250, 0.8);
-    --color-border: rgba(15, 25, 125, 0.5);
-    --color-shadow: 2px 2px 4px -2px var(--color-border);
+
+    /* ETC */
     --parallelogram-deg: -10deg;
 }

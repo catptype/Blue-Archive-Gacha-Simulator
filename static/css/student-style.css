@@ -1,20 +1,21 @@
 @import 'variables.css';
 
-/* COMMON SETTING */
+/* COMMON STYLES */
 .card-rarity,
 .card-school,
 .card-label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: absolute;
     margin: 0;
+    background-color: var(--card-bg-color);
+}
+
+.card-rarity,
+.card-school {
     padding: 0.2rem;
-    background-color: rgba(250,250,250, 0.8);
     border-radius: var(--card-br);
 }
 
-/* ANIMATION SETTING */
+/* ANIMATION STYLES */
 .card-rarity,
 .card-school,
 .card-label,
@@ -31,50 +32,48 @@
     transition: background-color var(--trans-dur) ease;
 }
 
-
+/* PAGE STYLES */
 #student-container {
     overflow-y: auto;
 
-    & .school-filter {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--gap-size);
+    & .school-icon {
+        cursor: pointer;
+        width: fit-content;
+        height: 40px;
+        padding: calc(var(--gap-size) / 2) var(--gap-size);
+        border-radius: var(--container-br);
+        background-color: var(--sub-container-color);
 
-        & .school-icon {
-            display: flex;
-            align-items: center;
-            width: fit-content;
-            height: 40px;
-            cursor: pointer;
+        &.activated {
+            background-color: var(--primary-color);
+        }
 
-            &.activated {
-                background-color: var(--color-primary);
-            }
+        > img {
+            height: 24px;
+            object-fit: scale-down;
+        }
 
-            > img {
-                height: 24px;
-                object-fit: scale-down;
-            }
-
-            > p {
-                padding-left: var(--gap-size);
-            }
+        > p {
+            padding-left: var(--gap-size);
         }
     }
 
     & .student-grid {
+        --card-width: 130px;
+        --card-height: 150px;
+        --icon-size: 15px;
+
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 1fr));
         gap: var(--gap-size);
     
         & .student-card {
             position: relative;
             overflow: hidden;
-            width: 130px;
-            height: 150px;
+            width: var(--card-width);
+            height: var(--card-height);
             border-radius: var(--card-br);
-            box-shadow: var(--color-shadow);
-            opacity: 1;
+            box-shadow: var(--shadow-color);
         
             > img {
                 position: absolute;
@@ -86,27 +85,25 @@
             }
     
             &.hidden {
-                /* I cannot use display property for animation */
                 visibility: hidden; 
                 position: absolute;
-                /* Move away from screen */
                 top: -100vh;
                 left: -100vw;
                 opacity: 0;
             }
     
             & .card-rarity {
+                overflow: hidden;
                 top: 5%;
                 left: 5%;
-                width: 15px;
+                width: var(--icon-size);
                 height: fit-content;
-                overflow: hidden;
                 transform: skew(calc(var(--parallelogram-deg) * -1)) translateX(-150%);
                 transition-delay: -50ms;
                 
                 & .star {
-                    width: 15px;
-                    height: 15px;
+                    width: var(--icon-size);
+                    height: var(--icon-size);
                     background-image: url('../image/star_rarity.png');
                     background-size: 100% 100%;
                     transform: translateX(-300%) rotateZ(-360deg);
@@ -134,7 +131,7 @@
     
                 > img {
                     width: auto;
-                    height: 15px;
+                    height: var(--icon-size);
                     object-fit: cover;
                 }
             }
@@ -142,36 +139,35 @@
             & .card-label {
                 bottom: 0%;
                 width: 100%;
-                border-top-left-radius: 0;
-                border-top-right-radius: 0;
                 transform: translateY(100%);
     
                 > p {
                     font-size: 10px;
                 }
             }
-    
-            &:hover .card-rarity {
-                width: fit-content;
+
+            &:hover {
+                > img {
+                    transform: skew(calc(var(--parallelogram-deg) * -1)) scale(1.2);
+                }
+
+                & .card-rarity {
+                    width: fit-content;
+                }
+
+                & .card-rarity,
+                & .card-school {
+                    transform: skew(calc(var(--parallelogram-deg) * -1)) translateX(0%) rotateZ(0deg);
+                }
+
+                & .star {
+                    transform: translateX(0%) rotateZ(0deg);
+                }
+
+                & .card-label {
+                    transform: translateY(0%);
+                }
             }
-            
-            &:hover .card-rarity,
-            &:hover .card-school {
-                transform: skew(calc(var(--parallelogram-deg) * -1)) translateX(0%) rotateZ(0deg);
-            }
-    
-            &:hover > img {
-                transform: skew(calc(var(--parallelogram-deg) * -1)) scale(1.2);
-            }
-    
-            &:hover .star {
-                transform: translateX(0%) rotateZ(0deg);
-            }
-            
-            &:hover .card-label {
-                transform: translateY(0%);
-            }
-            
         }
     }
 }

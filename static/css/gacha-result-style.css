@@ -1,12 +1,102 @@
 @import 'variables.css';
-/* @import 'layout-debugger.css'; */
 
-.banner-result {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-size);
+/* COMPONENT */
+a {
+    text-decoration: none;
 }
 
+.btn {
+    cursor: pointer;
+    margin: 0;
+    padding: 0.5rem;
+    width: fit-content;
+    border: 1px solid var(--card-br-color);
+    border-radius: var(--container-br);
+    background-color: var(--primary-color);
+    box-shadow: var(--shadow-color);
+    transition: background-color var(--trans-dur) ease-in-out;
+
+    > img {
+        height: 60px;
+        object-fit: cover;
+    }
+
+    > p {
+        width: max-content;
+        margin: 0;
+        padding: 0 var(--gap-size);
+        font-size: auto;
+    }
+
+    &:hover {
+        background-color: var(--hover-color);
+    }
+}
+
+.student-card {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--card-br);
+    box-shadow: var(--shadow-color);
+    
+    > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    > .card-rarity,
+    > .card-school,
+    > .card-label {
+        position: absolute;
+        padding: 0.3rem;
+        background-color: var(--card-bg-color);
+    }
+
+    > .card-rarity {
+        top: 5%;
+        left: 5%;
+        width: fit-content;
+        height: fit-content;
+        border-radius: var(--card-br);
+
+        & .star {
+            width: 20px;
+            height: 20px;
+            background-image: url('../image/star_rarity.png');
+            background-size: 100% 100%;
+        }
+    }
+
+    > .card-school {
+        top: 5%;
+        right: 5%;
+        width: fit-content;
+        height: fit-content;
+        background-color: var(--card-bg-color);
+        border-radius: var(--card-br);
+
+        > img {
+            height: 20px;
+            object-fit: cover;
+        }
+    }
+
+    > .card-label {
+        bottom: 0%;
+        width: 100%;
+        padding: 0;
+
+        > p {
+            font-size: 14px;
+        }
+    }
+
+}
+
+/* PAGE STYLE */
 #gacha-result-container {
     overflow-y: auto;
 
@@ -15,7 +105,7 @@
         grid-template-columns: repeat(5, 1fr);
         gap: var(--gap-size);
 
-        & .item-overflow {
+        & .grid-overflow {
             position: relative;
             overflow: hidden;
             padding: calc(var(--gap-size) * 3);
@@ -25,20 +115,15 @@
                 position: relative;
                 width: 180px;
                 height: 230px;
-                top: 50%;
-                left: 50%;
                 transform: translate(-50%, -50%) skewX(calc(var(--parallelogram-deg) * -1)) rotateZ(20deg);
                 transition: transform 0.1s ease;
                 z-index: 1;
-
-                &:hover {
-                    transform: translate(-50%, -50%) skewX(calc(var(--parallelogram-deg) * -1)) rotateZ(0deg);
-                }
 
                 & .item-back,
                 & .item-front,
                 & .item-mid {
                     position: absolute;
+                    transition-property: transform;
                     transition-duration: var(--trans-dur);
                     transition-timing-function: ease-in-out;
                 }
@@ -51,12 +136,11 @@
                 }
 
                 & .item-back {
+                    transition-property: transform, opacity;
                     z-index: -2;
                 }
 
                 & .item-mid {
-                    top: 50%;
-                    left: 50%;
                     transform: translate(-49%, -49%) rotateY(90deg);
                     z-index: -1;
                     
@@ -69,78 +153,14 @@
                         z-index: 1;
                         transform: rotateZ(35deg);
                     }
-
-                    > .student-card {
-                        position: relative;
-                        overflow: hidden;
-                        width: 100%;
-                        height: 100%;
-                        border-radius: var(--card-br);
-                        box-shadow: var(--color-shadow);
-                        
-                        > .card-rarity,
-                        > .card-school,
-                        > .card-label {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            position: absolute;
-                            padding: 0.2rem;
-                            background-color: rgba(250,250,250, 0.8);
-                        }
-                        
-                        > img {
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                        }
-
-                        > .card-rarity {
-                            top: 5%;
-                            left: 5%;
-                            width: fit-content;
-                            height: fit-content;
-                            border-radius: var(--card-br);
-
-                            & .star {
-                                width: 20px;
-                                height: 20px;
-                                background-image: url('../image/star_rarity.png');
-                                background-size: 100% 100%;
-                            }
-                        }
-
-                        > .card-school {
-                            top: 5%;
-                            right: 5%;
-                            width: fit-content;
-                            height: fit-content;
-                            background-color: rgba(250,250,250, 0.8);
-                            border-radius: var(--card-br);
-
-                            > img {
-                                width: auto;
-                                height: 20px;
-                                object-fit: cover;
-                            }
-                        }
-
-                        > .card-label {
-                            bottom: 0%;
-                            width: 100%;
-                            border-top-left-radius: 0;
-                            border-top-right-radius: 0;
-
-                            > p {
-                                font-size: 16px;
-                            }
-                        }
-
-                    }
                 }
 
                 & .item-front {
                     z-index: 0;
+                }
+
+                &:hover {
+                    transform: translate(-50%, -50%) skewX(calc(var(--parallelogram-deg) * -1)) rotateZ(0deg);
                 }
 
                 &.showed {
@@ -183,29 +203,7 @@
         }
     }
 
-    & .btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-        padding: 0.5rem;
-        width: fit-content;
-        background: var(--color-primary);
-        border-color: var(--color-border);
-        box-shadow: var(--color-shadow);
-
-        > span > img {
-            height: 60px;
-            object-fit: cover;
-        }
-
-        > p {
-            width: max-content;
-            margin: 0;
-            padding: 0 var(--gap-size);
-            font-size: auto;
-        }
-    }
+    
 
     & .message > p {
         text-align: center;

@@ -42,7 +42,7 @@ def gacha_result(request, gacha_id):
         drawn_students = gacha_instance.draw_gacha(num_draw)
         new_students = gacha_instance.get_new_students(drawn_students)
         num_guarantee = gacha_instance.get_guarantee_rarity3()
-        # gacha_instance.save_transaction(drawn_students)
+        gacha_instance.save_transaction(drawn_students)
 
         context = {
             'banner': banner,

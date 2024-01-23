@@ -5,7 +5,7 @@
         grid-gap: var(--gap-size);
     }
 
-    & .footer p {
-        text-align: center;
+    & .home-footer > p {
+            text-align: center;
     }
 }

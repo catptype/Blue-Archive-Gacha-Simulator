@@ -8,25 +8,32 @@
 {% endblock %}
 
 {% block content %}
-<div class="container parallelogram" id="gacha-container">
-    <div id="banner-selector">
-        <ul>
-            {% for banner in banners %}
-            <li>
-                <a href="{% url 'gacha_detail' gacha_id=banner.id %}">
-                    <img src="{% static 'portrait_404.png' %}" alt="{{ banner.name }}">
-                </a>
-                <p>{{ banner.name }}</p>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <button id="prev-btn" onclick="updateIndex(-1)">&#10094;</button>
-    <button id="next-btn" onclick="updateIndex(1)">&#10095;</button>
-    <div style="text-align:center">
-        {% for idx in banner_idx %}
-        <span class="dot" onclick="jumpIndex({{ idx }})"></span>
-        {% endfor %}
+<div class="main-container parallelogram" id="gacha-selection-container">
+    <div class="gacha-selection-grid">
+        <div class="sub-container">
+            <div id="banner-selector">
+                <ul>
+                    {% for banner in banners %}
+                    <li>
+                        <a href="{% url 'gacha_detail' gacha_id=banner.id %}">
+                            <img src="{% static 'portrait_404.png' %}" alt="{{ banner.name }}">
+                        </a>
+                        <p>{{ banner.name }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="selection-controller">
+                {% for idx in banner_idx %}
+                <span class="dot" onclick="jumpIndex({{ idx }})"></span>
+                {% endfor %}
+                <button id="prev-btn" onclick="updateIndex(-1)">&#10094;</button>
+                <button id="next-btn" onclick="updateIndex(1)">&#10095;</button>
+            </div>
+        </div>
+        <div class="sub-container">
+            <p>SOME MESSAGE</p>
+        </div>
     </div>
 </div>
 {% endblock %}

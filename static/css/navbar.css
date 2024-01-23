@@ -28,7 +28,7 @@ nav {
                 position: absolute;
                 width: 100%;
                 top: 100%;
-                background-color: var(--color-navbar);
+                background-color: var(--navbar-color);
                 border-radius: var(--container-br);
                 padding: var(--gap-size);
                 z-index: 999;
@@ -42,7 +42,7 @@ nav {
                 }
 
                 & li:hover > a {
-                    background-color: var(--color-primary);
+                    background-color: var(--primary-color);
                 }
             }
 

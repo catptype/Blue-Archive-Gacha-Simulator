@@ -1,5 +1,8 @@
 @import 'variables.css';
-/* @import 'layout-debugger.css'; */
+
+* {
+    box-sizing: border-box;
+}
 
 html {
     width: 100vw;
@@ -8,6 +11,7 @@ html {
     > body {
         width: inherit;
         height: inherit;
+        margin: 0;
         
         display: flex;
         flex-direction: column;
@@ -18,7 +22,7 @@ html {
         backdrop-filter: blur(4px);
 
         > header {
-            background-color: var(--color-navbar);
+            background-color: var(--navbar-color);
             margin-bottom: 1rem;
         }
 
@@ -28,10 +32,48 @@ html {
     }
 }
 
-p {
+ul {
+    margin: 0;
+}
+
+p, h1, h2, h3 {
     margin: 0;
     padding: 0;
     color: black;
+}
+
+p {
+    line-height: 1.5rem;
+}
+
+.flex-left {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-size);
+}
+
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-size);
+}
+
+.center-position {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .parallelogram {
@@ -43,53 +85,16 @@ p {
     }
 }
 
-#home-container,
-#login-container,
-#student-container,
-#gacha-container,
-#gacha-detail-container,
-#gacha-result-container {
-    padding: calc(var(--gap-size) * 1.5);
+.main-container {
+    width: 70%;
+    margin: 0 auto;
+    padding: calc(var(--gap-size));
     border-radius: var(--container-br);
-    background-color: var(--gray-lv1);
-}
+    background-color: var(--main-container-color);
 
-.home-item, 
-.home-footer,
-.login-content,
-.school-icon,
-.student-info,
-#banner-selector,
-.banner-detail,
-.banner-item,
-.banner-result {
-    padding: calc(var(--gap-size) * 1.5);
-    border-radius: var(--container-br);
-    background-color: var(--gray-lv2);
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    grid-gap: var(--gap-size);
-}
-
-.dashboard-container {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    grid-gap: 10px;
-}
-
-.dashboard-menu * {
-    display: block;
-}
-
-#dashboard-content {
-    display: grid;
-    place-items: center;
-}
-
-.pagination {
-    margin-top: 10px;
-    /* Adjust the margin as needed */
+    & .sub-container {
+        padding: calc(var(--gap-size));
+        border-radius: var(--container-br);
+        background-color: var(--sub-container-color);
+    }
 }

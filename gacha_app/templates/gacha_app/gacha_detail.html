@@ -10,32 +10,32 @@
 {% endblock %}
 
 {% block content %}
-<div class="container parallelogram" id="gacha-detail-container">
+<div class="main-container flex-column parallelogram" id="gacha-detail-container">
     <!-- Gacha banner detail with draw buttons -->
-    <div class="banner-detail">
-        <a href="{% url 'gacha' %}" class="btn" id="back">
-            <span><img class="not-parallelogram" src="{% static 'icons/back.svg' %}" alt="Back" style="height:30px;"></span>
+    <div class="sub-container flex-center banner-detail">
+        <a href="{% url 'gacha' %}" class="flex-center btn" id="back">
+            <img class="not-parallelogram" src="{% static 'icons/back.svg' %}" alt="Back">
             <p>BACK</p>
         </a>
         <h1>{{ banner.name }}</h1>
         <div class="banner-image">
             <img src="{% static 'portrait_404.png' %}" alt="banner">
         </div>
-        <!-- Message -->
-        {% if is_auth %}
-        <p>Guarantee <span class="star"></span><span class="star"></span><span class="star"></span> in {{ num_guarantee }} draw</p>
-        {% else %}
-        <p>GUEST MODE</p>
-        {% endif %}
-        <!-- Add buttons for 1 draw and 10 draw -->
-        <form method="POST" action="{% url 'gacha_result' gacha_id=banner.id %}">
+        <div class="banner-message">
+            {% if is_auth %}
+            <p>Guarantee <span class="star"></span><span class="star"></span><span class="star"></span> in {{ num_guarantee }} draw</p>
+            {% else %}
+            <p>GUEST MODE</p>
+            {% endif %}
+        </div>
+        <form class="flex-center" method="POST" action="{% url 'gacha_result' gacha_id=banner.id %}">
             {% csrf_token %}
             {% for num_draw in num_draws %}
-            <button class="btn" type="submit" name="draw" value="{{ num_draw }}">
+            <button class="flex-center btn" type="submit" name="draw" value="{{ num_draw }}">
                 {% if num_draw == 1 %}
-                <span><img class="not-parallelogram" src="{% static 'image/gacha/draw01.png' %}" alt="{{num_draw}}draw"></span>
+                <img class="not-parallelogram" src="{% static 'image/gacha/draw01.png' %}" alt="{{num_draw}}draw">
                 {% elif num_draw == 10 %}
-                <span><img class="not-parallelogram" src="{% static 'image/gacha/draw10.png' %}" alt="{{num_draw}}draw"></span>
+                <img class="not-parallelogram" src="{% static 'image/gacha/draw10.png' %}" alt="{{num_draw}}draw">
                 {% endif %}
                 <p>{{ num_draw }} Draw</p>
             </button>
@@ -45,9 +45,9 @@
     
     <!-- All available students in banner -->
     {% for rarity in rarities %}
-    <div class="banner-item" id="rarity{{ rarity }}">
-        <div class="rate-title" onclick="toggleVisible('rarity{{ rarity }}')">
-            <div class="hamburger">
+    <div class="sub-container flex-column banner-info" id="rarity{{ rarity }}">
+        <div class="flex-left rate-title" onclick="toggleVisible('rarity{{ rarity }}')">
+            <div class="flex-center hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -59,17 +59,17 @@
             </div>
             <h2>({{ banner|get_rate:rarity }}%)</h2>
         </div>
-        <div class="detail-content hidden">
+        <div class="flex-column detail-content hidden">
             {% if rarity == 3 and banner.is_pickup.all %}
             <p class="sub-header">PICK UP ({{ banner.feature_rate }}%)</p>
             <div class="item-grid pickup">
                 {% for student in banner.is_pickup.all %}
-                <div class="student-card">
+                <div class="center-position student-card">
                     <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
-                    <div class="rate-info">
+                    <div class="flex-center rate-info">
                         <p>{{ banner.feature_rate|divide_rate:banner.is_pickup.all.count }}%</p>
                     </div>
-                    <div class="card-label">
+                    <div class="flex-center card-label">
                         <p>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
                     </div>
                 </div>
@@ -80,16 +80,16 @@
             <div class="item-grid">
                 {% with filtered_students=banner.not_pickup.all|filter_rarity:rarity %}
                 {% for student in filtered_students %}
-                <div class="student-card">
+                <div class="center-position student-card">
                     <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
-                    <div class="rate-info">
+                    <div class="flex-center rate-info">
                         {% if rarity == 3 %}
                         <p>{{ banner.r3_rate|subtract_rate:banner.feature_rate|divide_rate:filtered_students.count }}%</p>
                         {% else %}
                         <p>{{ banner|get_rate:rarity|divide_rate:filtered_students.count }}%</p>
                         {% endif %}
                     </div>
-                    <div class="card-label">
+                    <div class="flex-center card-label">
                         <p>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
                     </div>
                 </div>

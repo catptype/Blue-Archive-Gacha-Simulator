@@ -8,15 +8,15 @@
 
 {% block content %}
 
-<div class="container parallelogram" id="login-container">
-  <div class="login-content">
-    <h1>Login account</h1>
-    <form method="POST" autocomplete="off" novalidate>
+<div class="main-container parallelogram" id="login-container">
+  <div class="sub-container login-content">
+    <h1>Login</h1>
+    <form class="flex-column" method="POST" autocomplete="off" novalidate>
       {% csrf_token %}
       <div class="username">
-        <div>{{ form.username }}</div>
+        {{ form.username }}
         {% if form.non_field_errors %}
-        <div class="text-danger">
+        <div class="text-error">
           {% for error in form.non_field_errors %} 
           <p>{{ error }}</p>
           {% endfor %}
@@ -24,14 +24,12 @@
         {% endif %}
       </div>
       <div class="password">
-        <div>{{ form.password }}</div>
+        {{ form.password }}
       </div>
       <div class="forgot">
         <a href="{% url 'forget' %}">Forget password</a>
       </div>
-      <div class="login-btn">
-        <button type="submit" class="btn">Login</button>
-      </div>
+      <button type="submit" class="flex-center btn">Login</button>
       <div class="register">
         <p>
           Don't have an account? <a href="{% url 'register' %}">Register</a>

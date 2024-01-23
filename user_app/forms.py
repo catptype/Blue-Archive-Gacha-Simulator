@@ -65,11 +65,11 @@ class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Override attibutes for form elements
-        self.fields['username'].widget.attrs['size'] = 24
+        # self.fields['username'].widget.attrs['size'] = 24
         self.fields['username'].widget.attrs['maxlength'] = 20
         self.fields['username'].widget.attrs['placeholder'] = 'Username'
 
-        self.fields['password'].widget.attrs['size'] = 24
+        # self.fields['password'].widget.attrs['size'] = 24
         self.fields['password'].widget.attrs['maxlength'] = 20
         self.fields['password'].widget.attrs['placeholder'] = 'Password'
 
