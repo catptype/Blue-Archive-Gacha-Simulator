@@ -50,7 +50,7 @@
 
         > img {
             height: 24px;
-            object-fit: scale-down;
+            object-fit: cover;
         }
 
         > p {

@@ -26,7 +26,7 @@
             {% for student in students %}
             <div class="center-position student-card" school="{{ student.school.name }}">
                 {% if student.image %}
-                <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
+                <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}" loading="lazy">
                 {% endif %}
                 <div class="flex-center card-rarity">
                     {% for _ in ""|rjust:student.rarity %}<div class="star"></div>{% endfor %}
@@ -45,5 +45,5 @@
 {% endblock %}
 
 {% block js %}
-<script src="{% static 'js/students.js' %}"></script>
+<script defer src="{% static 'js/students.js' %}"></script>
 {% endblock %}
