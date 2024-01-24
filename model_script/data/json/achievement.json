@@ -53,6 +53,7 @@
         "criteria": [
             { "student": "Ayane",   "version": "Original" },
             { "student": "Hoshino", "version": "Original" },
+            { "student": "Nonomi",  "version": "Original" },
             { "student": "Serika",  "version": "Original" },
             { "student": "Shiroko", "version": "Original" }
         ],
@@ -63,10 +64,10 @@
         "name": "Disciplinary Committee",
         "description": "",
         "criteria": [
-            { "student": "Ako",   "version": "Original" },
+            { "student": "Ako",      "version": "Original" },
             { "student": "Chinatsu", "version": "Original" },
-            { "student": "Hina",  "version": "Original" },
-            { "student": "Iori",  "version": "Original" }
+            { "student": "Hina",     "version": "Original" },
+            { "student": "Iori",     "version": "Original" }
         ],
         "image": null
     },

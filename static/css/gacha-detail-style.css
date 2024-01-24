@@ -51,7 +51,7 @@ a {
         background-color: var(--card-bg-color);
 
         > p {
-            font-size: 12px;
+            font-size: 10px;
         }
     }
 

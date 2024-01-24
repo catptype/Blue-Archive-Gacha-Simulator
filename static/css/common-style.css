@@ -58,6 +58,12 @@ p {
     align-items: center;
 }
 
+.flex-right {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
 .flex-column {
     display: flex;
     flex-direction: column;

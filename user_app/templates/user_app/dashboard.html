@@ -1,15 +1,21 @@
 {% extends 'general_app/components/base.html' %}
-
+{% load static %}
 {% block title %}Dashboard{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/user-style.css' %}">
+{% endblock %}
 
 {% block content %}
 
-<div class="container">
-    <h2>DASHBOARD PAGE</h2>
-    <p>WELCOME {% if user.is_superuser %} ADMIN {% endif %} {{ user.username }}</p>
-    <div class="dashboard-container">
+<div class="main-container flex-column parallelogram" id="dashboard-container">
+    <div class="sub-container">
+        <h1>DASHBOARD PAGE</h1>
+        <p style="text-align: center;">WELCOME {% if user.is_superuser %} ADMIN {% endif %} {{ user.username }}</p>
+    </div>
+    <div class="dashboard-grid">
         <!-- Left column for menu -->
-        <div class="dashboard-menu">
+        <div class="sub-container">
             <h3>MENU</h3>
             <hr>
             <!-- Gacha section -->
@@ -28,7 +34,7 @@
                 <li><a href="?tab=change-password">CHANGE PASSWORD</a></li>
             </ul>
         </div>
-        <div class="dashboard-content">
+        <div class="sub-container">
             {{ html_content }}
         </div>
     </div>

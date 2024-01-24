@@ -3,40 +3,51 @@
 {% block title %}Login{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/login-style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/user-style.css' %}">
 {% endblock %}
 
 {% block content %}
-
 <div class="main-container parallelogram" id="login-container">
-  <div class="sub-container login-content">
+  <div class="flex-column sub-container" id="login-content">
     <h1>Login</h1>
     <form class="flex-column" method="POST" autocomplete="off" novalidate>
       {% csrf_token %}
-      <div class="username">
+      {% if form.non_field_errors %}
+      <div class="text-error">
+        {% for error in form.non_field_errors %} 
+        <p>{{ error }}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="input-field">
         {{ form.username }}
-        {% if form.non_field_errors %}
-        <div class="text-error">
-          {% for error in form.non_field_errors %} 
-          <p>{{ error }}</p>
-          {% endfor %}
-        </div>
+        {% if form.username.errors %}
+          <div class="text-error">
+            {% for error in form.username.errors %} 
+            <p>{{ error }}</p>
+            {% endfor %}
+          </div>
         {% endif %}
       </div>
-      <div class="password">
+      <div class="input-field">
         {{ form.password }}
+        {% if form.password.errors %}
+          <div class="text-error">
+            {% for error in form.password.errors %} 
+            <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
       </div>
-      <div class="forgot">
-        <a href="{% url 'forget' %}">Forget password</a>
-      </div>
+      <a href="{% url 'forget' %}">Forget password</a>
+      <hr>
       <button type="submit" class="flex-center btn">Login</button>
-      <div class="register">
-        <p>
-          Don't have an account? <a href="{% url 'register' %}">Register</a>
-        </p>
-      </div>
     </form>
+    <div class="flex-center">
+      <p>
+        Don't have an account? <a href="{% url 'register' %}">Register</a>
+      </p>
+    </div>
   </div>
 </div>
-
 {% endblock %}

@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.models import User
 
 from .utils import user_authenticated, DashboardContent
-from .forms import CreateNewUserForm, LoginForm
+from .forms import CreateNewUserForm, LoginForm, ForgotPasswordForm
 
 # Create your views here.
 def register(request):
@@ -23,7 +25,7 @@ def register(request):
     return render(request, 'user_app/register.html', context)
 
 def register_complete(request):
-    return render(request, 'user_app/register_complete.html')
+    return redirect('/')
 
 def user_logout(request):
     if request.user.is_authenticated:
@@ -49,6 +51,29 @@ def user_login(request):
     return render(request, 'user_app/login.html', context)
 
 def forget(request):
+    if request.method == 'POST':
+        form = ForgotPasswordForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            new_password = form.cleaned_data['password1']
+
+            # Retrieve the user and update the password
+            user = User.objects.get(username=username)
+            user.set_password(new_password)
+            user.save()
+
+            messages.success(request, 'Password updated successfully.')
+            return redirect('login')  # Redirect to your login page
+
+    else:
+        form = ForgotPasswordForm()
+    
+    context = {
+        'form': form,
+    }
+    return render(request, 'user_app/forgot.html', context)
+
+
     if request.user.is_authenticated:
         return redirect('/user/dashboard')
 
