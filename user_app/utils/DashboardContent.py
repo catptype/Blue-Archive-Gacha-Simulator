@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.utils.html import format_html
 from ..forms import ChangePasswordForm, ResetAccountForm
 from gacha_app.models import GachaTransaction
+from student_app.models import Student
 from ..models import ObtainedStudent, ObtainedAchievement
 
 class DashboardContent:
@@ -54,7 +55,18 @@ class DashboardContent:
     
     @staticmethod
     def collection(request):
-        context = {}
+        user_instance = User.objects.get(username=request.user)
+        all_students = Student.objects.all().order_by('name')
+        obtained_students = []
+        querysets = ObtainedStudent.objects.filter(user=user_instance)
+            
+        for query in querysets:
+            obtained_students.append(query.student)
+
+        context = {
+            'all_students': all_students,
+            'obtained_students': obtained_students,
+        }
         html_content = render_to_string('user_app/dashboard_content/collection.html', context)
         return html_content
     

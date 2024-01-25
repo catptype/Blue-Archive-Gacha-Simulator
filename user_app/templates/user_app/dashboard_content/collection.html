@@ -1,1 +1,27 @@
-<h4>COLLECTION</h4>
+{% load static %}
+<div id="collection">
+    <h2>COLLECTION ({{ obtained_students|length }}/{{ all_students.count }})</h2>
+    <div class="student-grid">
+        {% for student in all_students %}
+        <div class="center-position student-card">
+            {% if student.image %}
+            <img class="portrait" src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}" loading="lazy">
+            {% endif %}
+            <div class="flex-center not-parallelogram card-rarity">
+                {% for _ in ""|rjust:student.rarity %}<div class="star"></div>{% endfor %}
+            </div>
+            <div class="flex-center not-parallelogram card-school">
+                <img src="{{ student.school.image.url }}" alt="{{ student.school_name }}">
+            </div>
+            <div class="flex-center card-label">
+                <p>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
+            </div>
+            {% if not student in obtained_students %}
+            <div class="locked">
+                <img class="center-position" src="{% static 'image/lock.png' %}" alt="Not obtained">
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
