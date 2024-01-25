@@ -94,13 +94,19 @@ p {
 .main-container {
     width: 70%;
     margin: 0 auto;
-    padding: calc(var(--gap-size));
+    padding: var(--gap-size);
     border-radius: var(--container-br);
     background-color: var(--main-container-color);
 
     & .sub-container {
-        padding: calc(var(--gap-size));
+        height: 100%;
+        padding: var(--gap-size);
         border-radius: var(--container-br);
         background-color: var(--sub-container-color);
+    }
+
+    @media (max-width: 800px) {
+        width: 90%;
+        margin: 0 auto;
     }
 }

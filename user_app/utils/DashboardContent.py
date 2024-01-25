@@ -1,8 +1,13 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.loader import render_to_string
-
-from ..models import ObtainedAchievement, ObtainedStudent
+from django.contrib.auth.models import User
+from django.middleware.csrf import get_token
+from django.contrib.auth import update_session_auth_hash
+from django.http import HttpResponse
+from django.utils.html import format_html
+from ..forms import ChangePasswordForm, ResetAccountForm
 from gacha_app.models import GachaTransaction
+from ..models import ObtainedStudent, ObtainedAchievement
 
 class DashboardContent:
 
@@ -55,6 +60,50 @@ class DashboardContent:
     
     @staticmethod
     def change_password(request):
-        context = {}
+        if request.method == 'POST':
+            form = ChangePasswordForm(request.POST)
+            if form.is_valid():
+                new_password = form.cleaned_data['password1']
+                user_instance = User.objects.get(username=request.user)
+                user_instance.set_password(new_password)
+                user_instance.save()
+                update_session_auth_hash(request, user_instance)
+                return format_html('<h2>Change password successfully!</h2>')
+        else:
+            form = ChangePasswordForm()
+        
+        context = {
+            'form': form,
+            'csrf_token': get_token(request),
+        }
         html_content = render_to_string('user_app/dashboard_content/change_password.html', context)
         return html_content
+    
+    @staticmethod
+    def reset_account(request):
+        if request.method == 'POST':
+            form = ResetAccountForm(request.POST)
+            if form.is_valid():
+                user_instance = User.objects.get(username=request.user)
+
+                for model in [ObtainedStudent, ObtainedStudent, GachaTransaction]:
+                    queryset = model.objects.filter(user=user_instance)
+                    queryset.delete()
+                
+                return format_html('<h2>Reset account successfully!</h2>')
+        else:
+            form = ResetAccountForm()
+
+        context = {
+            'form': form,
+            'csrf_token': get_token(request),
+        }
+        html_content = render_to_string('user_app/dashboard_content/reset_account.html', context)
+        return html_content
+    
+    @staticmethod
+    def delete_account(request):
+        context = {}
+        html_content = render_to_string('user_app/dashboard_content/delete_account.html', context)
+        return html_content
+    

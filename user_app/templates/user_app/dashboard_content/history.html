@@ -1,9 +1,8 @@
-<h4>DASHBOARD HISTORY</h4>
-
-<div class="transaction-grid">
+<h2>DASHBOARD HISTORY</h2>
+<div class="history-grid">
     {% if transactions %}
         {% for transaction in transactions %}
-        <div class="transaction-item">
+        <div class="history-item">
             <img src="{{ transaction.student.image.url }}" alt="{{ transaction.student.name }}_{{ transaction.student.version }}">
             <p><strong>Date:</strong> {{ transaction.formatted_datetime }}</p>
             <p><strong>Banner:</strong> {{ transaction.banner.name }}</p>

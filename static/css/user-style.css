@@ -53,11 +53,29 @@ hr {
 
 /* DASHBOARD */
 #dashboard-container {
-    overflow: auto;
-    
-    & .dashboard-grid {
+    & .dashboard-grid {    
         display: grid;
         grid-template-columns: 1fr 4fr;
         gap: var(--gap-size);
+    
+        & .sub-container {
+            max-height: 60vh;
+            height: calc(max-height - var(--gap-size));
+            overflow-y: auto;
+        }
     }
 }
+
+#dashboard-content {
+    & h2 {
+        text-align: center;
+    }
+
+    > #password-form,
+    > #reset-form {
+        margin: auto;
+        width: fit-content;
+        padding: 25px;
+    }
+}
+

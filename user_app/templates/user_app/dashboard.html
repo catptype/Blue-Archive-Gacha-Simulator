@@ -7,19 +7,18 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="main-container flex-column parallelogram" id="dashboard-container">
     <div class="sub-container">
-        <h1>DASHBOARD PAGE</h1>
-        <p style="text-align: center;">WELCOME {% if user.is_superuser %} ADMIN {% endif %} {{ user.username }}</p>
+        <h1>DASHBOARD</h1>
     </div>
     <div class="dashboard-grid">
         <!-- Left column for menu -->
-        <div class="sub-container">
-            <h3>MENU</h3>
+        <div class="flex-column sub-container">
+            <h2>WELCOME</h2>
+            <p>{% if user.is_superuser %} ADMIN {% endif %} {{ user.first_name }}</p>
             <hr>
             <!-- Gacha section -->
-            <h4>GACHA</h4>
+            <h3>GACHA</h3>
             <ul>
                 <li><a href="?tab=history">HISTORY</a></li>
                 <li><a href="?tab=statistic">STATISTIC</a></li>
@@ -29,15 +28,18 @@
 
             <hr>
             <!-- Account section -->
-            <h4>ACCOUNT SETTING</h4>
+            <h3>ACCOUNT SETTING</h3>
             <ul>
                 <li><a href="?tab=change-password">CHANGE PASSWORD</a></li>
+                <li><a href="?tab=reset">RESET PROGRESS</a></li>
+                {% if not user.is_superuser %}
+                <li><a href="?tab=delete">DELETE ACCOUNT</a></li>
+                {% endif %}
             </ul>
         </div>
-        <div class="sub-container">
+        <div class="sub-container" id="dashboard-content">
             {{ html_content }}
         </div>
     </div>
 </div>
-
 {% endblock %}

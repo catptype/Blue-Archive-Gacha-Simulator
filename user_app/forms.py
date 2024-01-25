@@ -140,24 +140,28 @@ class ForgotPasswordForm(forms.Form):
 
     def clean(self):
         cleaned_data = super().clean()
-        username = cleaned_data.get('username', None)
-        first_name = cleaned_data.get('first_name', None)
-        password1 = cleaned_data.get('password1', None)
-        password2 = cleaned_data.get('password2', None)
+        username = cleaned_data.get('username')
+        first_name = cleaned_data.get('first_name')
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
 
         try:
             user_instance = User.objects.get(username=username, first_name=first_name)
+            
+            # Check form
+            if password1 and password2 and password1 != password2:
+                self.add_error('password1', 'Password do not match.')
+                self.add_error('password2', 'Password do not match.')
+                raise ValidationError('ERROR')
+
+            # Check previous password
             old_password = user_instance.password
             if check_password(password1, old_password) and password1 and password2:
                 raise ValidationError('New password exactly same as old password')
             
             # Validate the new password against AUTH_PASSWORD_VALIDATORS
-            validate_password(password1, user_instance)
-
-            # Check if the new passwords match
-            if password1 != password2 and password1 and password2:
-                self.add_error('password1', 'Password do not match.')
-                self.add_error('password2', 'Password do not match.')
+            if password1:
+                validate_password(password1, User)
 
         except User.DoesNotExist:
             if username and first_name:
@@ -191,8 +195,6 @@ class ForgotPasswordForm(forms.Form):
         help_text='Your password must be between 8 and 20 characters long.',
         error_messages={
             'required': 'This field is required.',
-            "password_too_common": "This password is too common.",
-            "password_entirely_numeric": "This password is entirely numeric.",
         }
     )
 
@@ -203,12 +205,82 @@ class ForgotPasswordForm(forms.Form):
         widget=forms.PasswordInput(render_value=True),
         help_text='Enter the same password as before, for verification.',
         error_messages={
+            'required': 'This field is required.',
             "password_mismatch": "The two password fields do not match.",
         },
+    )  
+
+class ChangePasswordForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Override attibutes for form elements
+        self.fields['password1'].widget.attrs['maxlength'] = 20
+        self.fields['password1'].widget.attrs['placeholder'] = 'New password'
+        self.fields['password2'].widget.attrs['maxlength'] = 20
+        self.fields['password2'].widget.attrs['placeholder'] = 'Confirm new password'
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
+
+        # Check form
+        if password1 and password2 and password1 != password2:
+            self.add_error('password1', 'Password do not match.')
+            self.add_error('password2', 'Password do not match.')
+            raise ValidationError('ERROR')
+
+        # Validate the new password against AUTH_PASSWORD_VALIDATORS
+        if password1:
+            validate_password(password1, User)
+
+    password1 = forms.CharField(
+        min_length=8,
+        max_length=20,
+        label='New password',
+        widget=forms.PasswordInput(render_value=True),
+        help_text='Your password must be between 8 and 20 characters long.',
+        error_messages={
+            'required': 'This field is required.',
+        }
     )
 
+    password2 = forms.CharField(
+        min_length=8,
+        max_length=20,
+        label='Confirm new password',
+        widget=forms.PasswordInput(render_value=True),
+        help_text='Enter the same password as before, for verification.',
+        error_messages={
+            'required': 'This field is required.',
+        },
+    )  
+
+class ResetAccountForm(forms.Form):
     
-    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Override attibutes for form elements
+        self.fields['confirm'].widget.attrs['maxlength'] = 3
+        self.fields['confirm'].widget.attrs['placeholder'] = "Enter 'YES' to proceed."
+
+    def clean(self):
+        cleaned_data = super().clean()
+        confirm = cleaned_data.get('confirm')
+
+        # Check form
+        if confirm != 'YES':
+            self.add_error('confirm', "Enter 'YES' to proceed.")
+            raise ValidationError('Reset account failed!')
+
+    confirm = forms.CharField(
+        max_length=3,
+        label='Confirm reset',
+        widget=forms.TextInput(),
+        help_text="Put word 'YES' to confirm reset",
+        required=False,
+    )
+
 class AchievementAdminForm(forms.ModelForm):
 
     image = forms.ImageField(

@@ -1,19 +1,24 @@
 {% load static %}
 <nav>
-  <ul>
+  <ul class="flex-center">
     <li><a href="{% url 'home' %}"><img src="{% static 'image/logo.png' %}" alt="logo" height="50px"></a></li>
     <li><a href="{% url 'student' %}">Student</a></li>
     <li><a href="{% url 'gacha' %}">Gacha</a></li>
     {% if user.is_authenticated %}
-    <li class="user-dropdown">
+    <li class="flex-center user-dropdown">
       <a href="#">{{ user.username }}</a>
       <ul class="sub-menu parallelogram">
         {% if user.is_superuser %}
-        <li><a href="{% url 'admin:index' %}">Admin</a></li>
+        <li><a href="{% url 'admin:index' %}">Superuser</a></li>
         <li><hr></li>
         {% endif %}
         <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-        <li><a href="{% url 'logout' %}">Logout</a></li>
+        <li>
+          <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" id="logout">Logout</button>
+          </form>
+        </li>
       </ul>
     </li>
     {% else %}

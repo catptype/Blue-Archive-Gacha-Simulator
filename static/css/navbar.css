@@ -1,4 +1,3 @@
-/* @import url('layout-debuger.css'); */
 @import url('variables.css');
 
 nav {
@@ -8,8 +7,6 @@ nav {
     padding: 0;
 
     & ul {
-        display: flex;
-        align-items: center;
         list-style: none;
         margin: 0;
         padding: 0;
@@ -20,8 +17,7 @@ nav {
 
         & li.user-dropdown {
             position: relative;
-            display: flex;
-            align-items: center;
+            width: 20ch; /* 20 char length = text field */
 
             > ul.sub-menu {
                 display: none;
@@ -35,6 +31,26 @@ nav {
 
                 & li > a {
                     padding: var(--gap-size);
+                    transition: background-color var(--trans-dur) ease;
+                }
+
+                & li > form {
+                    width: 100%;
+
+                    & #logout {
+                        cursor: pointer;
+                        width: 100%;
+                        padding: var(--gap-size);
+                        text-align: left;
+                        font-size: 1rem;
+                        border: none;
+                        background-color: rgba(0,0,0,0);
+                        transition: background-color var(--trans-dur) ease;
+    
+                        &:hover {
+                            background-color: var(--primary-color);
+                        }
+                    }
                 }
 
                 & hr {
