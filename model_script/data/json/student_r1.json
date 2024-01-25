@@ -56,6 +56,14 @@
         "image": "image/r1/Hibiki_Cheerleader.png"
     },
     {
+        "name": "Ibuki",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 1,
+        "is_limited": false,
+        "image": "image/r1/Ibuki.png"
+    },
+    {
         "name": "Izumi",
         "version": "Swimsuit",
         "school": "Gehenna",

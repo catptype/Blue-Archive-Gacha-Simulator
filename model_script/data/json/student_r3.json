@@ -16,6 +16,14 @@
         "image": "image/r3/Ako.png"
     },
     {
+        "name": "Ako",
+        "version": "Dress",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Ako_Dress.png"
+    },
+    {
         "name": "Alice",
         "version": "Original",
         "school": "Millennium",
@@ -241,6 +249,14 @@
     },
     {
         "name": "Hina",
+        "version": "Dress",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Hina_Dress.png"
+    },
+    {
+        "name": "Hina",
         "version": "Swimsuit",
         "school": "Gehenna",
         "rarity": 3,
@@ -462,6 +478,14 @@
         "rarity": 3,
         "is_limited": false,
         "image": "image/r3/Maki.png"
+    },
+    {
+        "name": "Makoto",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 3,
+        "is_limited": false,
+        "image": "image/r3/Makoto.png"
     },
     {
         "name": "Mari",
