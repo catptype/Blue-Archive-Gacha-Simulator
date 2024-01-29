@@ -101,7 +101,11 @@ def dashboard(request):
         return render(request, 'user_app/dashboard.html', context)
     
     elif tab == 'delete':
-        context = {'html_content': DashboardContent.delete_account(request)}
-        return render(request, 'user_app/dashboard.html', context)
+        delete_flag, html_content = DashboardContent.delete_account(request)
+        if delete_flag:
+            return redirect('/')
+        else:
+            context = {'html_content': html_content}
+            return render(request, 'user_app/dashboard.html', context)
     else:
         return render(request, 'user_app/dashboard.html')

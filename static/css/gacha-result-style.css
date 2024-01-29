@@ -97,7 +97,7 @@ a {
 }
 
 /* PAGE STYLE */
-#gacha-result-container {
+#gacha-result-container > .sub-container {
     overflow-y: auto;
 
     & .result-grid {

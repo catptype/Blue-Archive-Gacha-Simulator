@@ -59,7 +59,7 @@ hr {
         gap: var(--gap-size);
     
         & .sub-container {
-            max-height: 60vh;
+            max-height: 70vh;
             height: calc(max-height - var(--gap-size));
             overflow-y: auto;
         }
@@ -72,10 +72,65 @@ hr {
     }
 
     > #password-form,
-    > #reset-form {
+    > #reset-form,
+    > #delete-form {
         margin: auto;
         width: fit-content;
         padding: 25px;
+    }
+
+    > #history > table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+
+        & th, td {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        & .hilight {
+            color: var(--primary-color);
+            /* text-stroke: 1px black; may not support in some browser */
+            text-shadow: 
+                -1px -1px 0 black,  
+                 1px -1px 0 black,
+                -1px  1px 0 black,
+                 1px  1px 0 black;
+        }
+
+        & #history-student {
+
+            > img {
+                border-radius: var(--card-br);
+                box-shadow: var(--shadow-color);
+                
+                width: 65px;
+                height: 75px;
+                object-fit: cover;
+            }
+
+            > .stars {
+                --total-star-size: 60px;
+                width: var(--total-star-size);
+                justify-content: right;
+                margin-left: var(--gap-size);
+
+                & .star {
+                    width: calc(var(--total-star-size) / 3);
+                    height: calc(var(--total-star-size) / 3);
+                    background-image: url('../image/star_rarity.png');
+                    background-size: 100% 100%;
+                }
+            }
+
+            > p {
+                margin-left: var(--gap-size);
+                width: 8ch;
+                text-align: left;
+            }
+            
+        }
     }
 
     > #collection {
@@ -116,6 +171,7 @@ hr {
                         position: absolute;
                         width: calc(var(--card-width) / 2);
                         height: calc(var(--card-height) / 2);
+                        transform: skew(calc(var(--parallelogram-deg) * -1)) translate(-50%, -50%);
                         object-fit: cover;
                     }
                 }

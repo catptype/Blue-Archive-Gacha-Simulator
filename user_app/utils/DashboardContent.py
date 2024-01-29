@@ -3,9 +3,10 @@ from django.template.loader import render_to_string
 from django.contrib.auth.models import User
 from django.middleware.csrf import get_token
 from django.contrib.auth import update_session_auth_hash
-from django.http import HttpResponse
+from django.http import HttpResponseForbidden
 from django.utils.html import format_html
-from ..forms import ChangePasswordForm, ResetAccountForm
+from django.contrib.auth import logout
+from ..forms import ChangePasswordForm, ResetAccountForm, DeleteAccountForm
 from gacha_app.models import GachaTransaction
 from student_app.models import Student
 from ..models import ObtainedStudent, ObtainedAchievement
@@ -15,10 +16,10 @@ class DashboardContent:
     @staticmethod
     def history(request):
         tab = request.GET.get('tab', None)
-        transactions = GachaTransaction.objects.filter(user=request.user).order_by('-id')
+        transaction_queryset = GachaTransaction.objects.filter(user=request.user).order_by('-id')
 
         page = request.GET.get('page', 1)
-        paginator = Paginator(transactions, 10)
+        paginator = Paginator(transaction_queryset, 5)
 
         try:
             # Get the transactions for the requested page
@@ -115,7 +116,39 @@ class DashboardContent:
     
     @staticmethod
     def delete_account(request):
-        context = {}
-        html_content = render_to_string('user_app/dashboard_content/delete_account.html', context)
-        return html_content
+
+        def render_form(request, form): # Declare this function for avoid redundancy code
+            context = {
+                'form': form,
+                'csrf_token': get_token(request),
+            }
+            html_content = render_to_string('user_app/dashboard_content/delete_account.html', context)
+            return False, html_content
+
+        if request.user.is_superuser:
+            return False, format_html('') # Superuser cannot delete account
+
+        if request.method == 'POST':
+            form = DeleteAccountForm(request.POST)
+            if form.is_valid():
+                username_login = User.objects.get(username=request.user)
+                try:
+                    username_form = User.objects.get(username=form.cleaned_data['username'])
+                    if username_form != username_login:
+                        form.add_error('username', 'Username does not match your current account.')
+                        form.add_error(None, 'Delete account failed!')
+                        return render_form(request, form)
+
+                    logout(request)
+                    username_login.delete()
+                    return True, format_html('') 
+                
+                except User.DoesNotExist:
+                    form.add_error('username', 'Username does not match your current account.')
+                    form.add_error(None, 'Delete account failed!')
+                    return render_form(request, form)
+        else:
+            form = DeleteAccountForm()
+            
+        return render_form(request, form)
     

@@ -1,33 +1,59 @@
-<h2>DASHBOARD HISTORY</h2>
-<div class="history-grid">
+<div id="history" class="flex-column">
+    <h2>HISTORY</h2>
     {% if transactions %}
+    <table>
+        <tr>
+            <th>Date-time</th>
+            <th>Banner</th>
+            <th>Student</th>
+        </tr>
         {% for transaction in transactions %}
-        <div class="history-item">
-            <img src="{{ transaction.student.image.url }}" alt="{{ transaction.student.name }}_{{ transaction.student.version }}">
-            <p><strong>Date:</strong> {{ transaction.formatted_datetime }}</p>
-            <p><strong>Banner:</strong> {{ transaction.banner.name }}</p>
-            <p><strong>Student:</strong> {{ transaction.student.name }}</p>
-        </div>
+        <tr>
+            {% if transaction.student.rarity == 3 %}
+            <td class="hilight">{{ transaction.formatted_datetime }}</td>
+            <td class="hilight">{{ transaction.banner.name }}</td>
+            <td>
+                <div class="flex-center" id="history-student">
+                    <img src="{{ transaction.student.image.url }}" alt="{{ transaction.student.name }}_{{ transaction.student.version }}">
+                    <span class="stars flex-center">
+                        {% for _ in ""|rjust:transaction.student.rarity %}<div class="star"></div>{% endfor %}
+                    </span>
+                    <p class="hilight">{{ transaction.student.name }} ({{ transaction.student.version }})</p>
+                </div>
+            </td>
+            {% else %}
+            <td>{{ transaction.formatted_datetime }}</td>
+            <td>{{ transaction.banner.name }}</td>
+            <td>
+                <div class="flex-center" id="history-student">
+                    <img src="{{ transaction.student.image.url }}" alt="{{ transaction.student.name }}_{{ transaction.student.version }}">
+                    <span class="stars flex-center">
+                        {% for _ in ""|rjust:transaction.student.rarity %}<div class="star"></div>{% endfor %}
+                    </span>
+                    <p>{{ transaction.student.name }} ({{ transaction.student.version }})</p>
+                </div>
+            </td>
+            {% endif %}
+        </tr>
         {% endfor %}
+    </table>
+
+    <div class="flex-center">
+        <span>
+            {% if transactions.has_previous %}
+                <a href="?tab={{ tab }}&page={{ previous_page }}">previous</a>
+            {% endif %}
+    
+            <span>
+                Page {{ transactions.number }} of {{ transactions.paginator.num_pages }}.
+            </span>
+    
+            {% if transactions.has_next %}
+                <a href="?tab={{ tab }}&page={{ next_page }}">next</a>
+            {% endif %}
+        </span>
+    </div>
     {% else %}
         <p>No gacha transactions found.</p>
     {% endif %}
 </div>
-{% if transactions %}
-<!-- Display pagination links -->
-<div class="pagination">
-    <span class="step-links">
-        {% if transactions.has_previous %}
-            <a href="?tab={{ tab }}&page={{ previous_page }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ transactions.number }} of {{ transactions.paginator.num_pages }}.
-        </span>
-
-        {% if transactions.has_next %}
-            <a href="?tab={{ tab }}&page={{ next_page }}">next</a>
-        {% endif %}
-    </span>
-</div>
-{% endif %}

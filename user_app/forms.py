@@ -164,10 +164,7 @@ class ForgotPasswordForm(forms.Form):
                 validate_password(password1, User)
 
         except User.DoesNotExist:
-            if username and first_name:
-                raise ValidationError('Username and Display name not match.')
-
-        return cleaned_data
+            raise ValidationError('Username and Display name not match.')
     
     username = forms.CharField(
         max_length=20,
@@ -255,6 +252,41 @@ class ChangePasswordForm(forms.Form):
             'required': 'This field is required.',
         },
     )  
+
+class DeleteAccountForm(forms.Form):
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Override attibutes for form elements
+        self.fields['username'].widget.attrs['maxlength'] = 20
+        self.fields['username'].widget.attrs['placeholder'] = "Enter current 'Username' to proceed."
+        self.fields['confirm'].widget.attrs['maxlength'] = 3
+        self.fields['confirm'].widget.attrs['placeholder'] = "Enter 'YES' to proceed."
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        confirm = cleaned_data.get('confirm')
+
+        if confirm != 'YES':
+            self.add_error('confirm', "Enter 'YES' to proceed.")
+            raise ValidationError('Delete account failed!')
+    
+    username = forms.CharField(
+        max_length=20,
+        label='Username',
+        widget=forms.TextInput(), # For controling, width size
+        error_messages={
+            'required': "Enter current 'Username' to proceed.",
+        },
+    )
+
+    confirm = forms.CharField(
+        max_length=3,
+        label='Confirm delete',
+        widget=forms.TextInput(),
+        help_text="Put word 'YES' to confirm reset",
+        required=False,
+    )
 
 class ResetAccountForm(forms.Form):
     
