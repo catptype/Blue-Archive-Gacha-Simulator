@@ -11,6 +11,9 @@ from gacha_app.models import GachaTransaction
 from student_app.models import Student
 from ..models import ObtainedStudent, ObtainedAchievement
 
+from collections import Counter
+
+
 class DashboardContent:
 
     @staticmethod
@@ -45,16 +48,27 @@ class DashboardContent:
     @staticmethod
     def statistic(request):
         all_transactions = GachaTransaction.objects.filter(user=request.user).order_by('id')
-        first_r3_student = all_transactions.filter(student__rarity=3).first()
-        
+        r1_transactions = all_transactions.filter(student__rarity=1)
+        r2_transactions = all_transactions.filter(student__rarity=2)
+        r3_transactions = all_transactions.filter(student__rarity=3)
+
         rarity_counter = {
-            'r1': all_transactions.filter(student__rarity=1).count(),
-            'r2': all_transactions.filter(student__rarity=2).count(),
-            'r3': all_transactions.filter(student__rarity=3).count(),
+            'r1': r1_transactions.count(),
+            'r2': r2_transactions.count(),
+            'r3': r3_transactions.count(),
         }
+
+        # top3_students = {
+        #     'r1': Counter(rarity_counter['r1']).most_common(3),
+        #     'r2': Counter(rarity_counter['r2']).most_common(3),
+        #     'r3': Counter(rarity_counter['r3']).most_common(3),
+        # }
+
+        # print("TOP3")
+        # print(top3_students['r1'])
         
         context = {
-            'first_r3_student': first_r3_student,
+            'first_r3_student': r3_transactions.first(),
             'rarity_counter': rarity_counter,
             'total_draw': sum(rarity_counter.values()),
         }

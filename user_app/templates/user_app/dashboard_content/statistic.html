@@ -2,9 +2,7 @@
 {% load custom_tags %}
 <div class="flex-column" id="statistic">
     <div class="sub-container flex-column">
-        <h2 class="flex-center">THE FIRST OBTAINED&nbsp;
-            {% for _ in ""|rjust:3 %}<span class="star"></span>{% endfor %}
-        &nbsp;STUDENT</h2>
+        <h2>THE FIRST OBTAINED&nbsp;{% for _ in ""|rjust:3 %}<span class="star"></span>{% endfor %}&nbsp;STUDENT</h2>
         <div class="flex-center" id="first-info">
             {% if first_r3_student %}
             <div class="student-card">
@@ -19,53 +17,35 @@
             {% endif %}
         </div>
     </div>
-    <div class="sub-container">
-        <p>TOTAL DRAW: {{ total_draw }}</p>
+
+    <div class="sub-container flex-column" id="chart">
+        <h2>OBTAIN RATE</h2>
+        <div class="flex-center">
+            <div class="pie-chart" id="all-rarities" style="--r1:{{ rarity_counter.r1|percentage:total_draw }}%; --r2:{{ rarity_counter.r2|percentage:total_draw }}%; --r3:{{ rarity_counter.r3|percentage:total_draw }}%;">
+                <p>TOTAL</p>
+                <p>DRAW</p>
+                <p>{{ total_draw }}</p>
+            </div>
+            {% for rarity, value in rarity_counter.items %}
+            <div class="pie-chart" id="rarity{{ forloop.counter }}" style="--r{{ forloop.counter }}:{{ value|percentage:total_draw }}%;">
+                <p>{% for _ in ""|rjust:forloop.counter %}<span class="star"></span>{% endfor %}</p>
+                <p>{{ value }}</p>
+                <p>({{ value|percentage:total_draw }}%)</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
+
     <div class="statistic-grid">
-        <div class="sub-container">
-            <p>
-                {% for _ in ""|rjust:1 %}<span class="star"></span>{% endfor %} 
-                OBTAINED RATE: {{ rarity_counter.r1 }}
-                ({{ rarity_counter.r1|percentage:total_draw }}%)
-            </p>
+        <div class="sub-container flex-column">
+            <p>MOST OBTAINED&nbsp;{% for _ in ""|rjust:1 %}<span class="star"></span>{% endfor %}&nbsp;STUDENT</p>
         </div>
-        <div class="sub-container">
-            <p>
-                {% for _ in ""|rjust:2 %}<span class="star"></span>{% endfor %}
-                OBTAINED RATE: {{ rarity_counter.r2 }}
-                ({{ rarity_counter.r2|percentage:total_draw }}%)
-            </p>
+        <div class="sub-container flex-column">
+            <p>MOST OBTAINED&nbsp;{% for _ in ""|rjust:2 %}<span class="star"></span>{% endfor %}&nbsp;STUDENT</p>
         </div>
-        <div class="sub-container">
-            <p>
-                {% for _ in ""|rjust:3 %}<span class="star"></span>{% endfor %}
-                OBTAINED RATE: {{ rarity_counter.r3 }}
-                ({{ rarity_counter.r3|percentage:total_draw }}%)
-            </p>
+        <div class="sub-container flex-column">
+            <p>MOST OBTAINED&nbsp;{% for _ in ""|rjust:3 %}<span class="star"></span>{% endfor %}&nbsp;STUDENT</p>
         </div>
     </div>
-    <div class="sub-container flex-center">
-        <div class="pie-chart" style="--r1:{{ rarity_counter.r1|percentage:total_draw }}%; --r2:{{ rarity_counter.r2|percentage:total_draw }}%; --r3:{{ rarity_counter.r3|percentage:total_draw }}%;">
-            <p>TOTAL DRAW<br>{{ total_draw }}</p>
-        </div>
-        <div>
-            <p>
-                {% for _ in ""|rjust:1 %}<span class="star"></span>{% endfor %} 
-                OBTAINED RATE: {{ rarity_counter.r1 }}
-                ({{ rarity_counter.r1|percentage:total_draw }}%)
-            </p>
-            <p>
-                {% for _ in ""|rjust:2 %}<span class="star"></span>{% endfor %}
-                OBTAINED RATE: {{ rarity_counter.r2 }}
-                ({{ rarity_counter.r2|percentage:total_draw }}%)
-            </p>
-            <p>
-                {% for _ in ""|rjust:3 %}<span class="star"></span>{% endfor %}
-                OBTAINED RATE: {{ rarity_counter.r3 }}
-                ({{ rarity_counter.r3|percentage:total_draw }}%)
-            </p>
-        </div>
-        
-    </div>
+    
 </div>
