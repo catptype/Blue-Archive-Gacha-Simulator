@@ -1,6 +1,6 @@
 let allSchools = document.getElementsByClassName("school-icon");
 let allStudents = document.getElementsByClassName("student-card");
-const delay = 10;
+const delay = 300;
 var isExecuting = false;
 
 function selectSchool(element) {
@@ -41,20 +41,13 @@ function hideAllStudents() {
 }
 
 function showAllStudents() {
-    var i = 0;
-
     for (let student of allStudents) {
         if (student.classList.contains("hidden")) {
-            setTimeout(() => {
-                student.classList.remove("hidden");
-            }, i * delay);
-            i += 1;
+            student.classList.remove("hidden");
         }      
     }
 
-    setTimeout(() => {
-        isExecuting = false;
-    }, i * delay);
+    setTimeout(() => {isExecuting = false;}, delay);
 }
 
 function showStudents(school) {
@@ -62,14 +55,9 @@ function showStudents(school) {
 
     for (let student of allStudents) {
         if (student.getAttribute("school") === school) {
-            setTimeout(() => {
-                student.classList.remove("hidden");
-            }, i * delay);
-            i += 1;
+            student.classList.remove("hidden");
         }
     }
 
-    setTimeout(() => {
-        isExecuting = false;
-    }, i * delay);
+    setTimeout(() => {isExecuting = false;}, delay);
 }

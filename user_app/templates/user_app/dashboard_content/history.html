@@ -1,5 +1,4 @@
 <div id="history" class="flex-column">
-    <h2>HISTORY</h2>
     {% if transactions %}
     <table>
         <tr>
@@ -9,31 +8,19 @@
         </tr>
         {% for transaction in transactions %}
         <tr>
-            {% if transaction.student.rarity == 3 %}
-            <td class="hilight">{{ transaction.formatted_datetime }}</td>
-            <td class="hilight">{{ transaction.banner.name }}</td>
+            <td {% if transaction.student.rarity == 3 %}class="hilight"{% endif %}>{{ transaction.formatted_datetime }}</td>
+            <td {% if transaction.student.rarity == 3 %}class="hilight"{% endif %}>{{ transaction.banner.name }}</td>
             <td>
-                <div class="flex-center" id="history-student">
-                    <img src="{{ transaction.student.image.url }}" alt="{{ transaction.student.name }}_{{ transaction.student.version }}">
+                <div class="flex-center history-student">
+                    <div class="student-card">
+                        <img src="{{ transaction.student.image.url }}" alt="{{ transaction.student.name }}_{{ transaction.student.version }}">
+                    </div>
                     <span class="stars flex-center">
                         {% for _ in ""|rjust:transaction.student.rarity %}<div class="star"></div>{% endfor %}
                     </span>
-                    <p class="hilight">{{ transaction.student.name }} ({{ transaction.student.version }})</p>
+                    <p {% if transaction.student.rarity == 3 %}class="hilight"{% endif %}>{{ transaction.student.name }} ({{ transaction.student.version }})</p>
                 </div>
             </td>
-            {% else %}
-            <td>{{ transaction.formatted_datetime }}</td>
-            <td>{{ transaction.banner.name }}</td>
-            <td>
-                <div class="flex-center" id="history-student">
-                    <img src="{{ transaction.student.image.url }}" alt="{{ transaction.student.name }}_{{ transaction.student.version }}">
-                    <span class="stars flex-center">
-                        {% for _ in ""|rjust:transaction.student.rarity %}<div class="star"></div>{% endfor %}
-                    </span>
-                    <p>{{ transaction.student.name }} ({{ transaction.student.version }})</p>
-                </div>
-            </td>
-            {% endif %}
         </tr>
         {% endfor %}
     </table>

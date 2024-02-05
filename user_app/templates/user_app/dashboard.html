@@ -9,12 +9,12 @@
 {% block content %}
 <div class="main-container flex-column parallelogram" id="dashboard-container">
     <div class="sub-container">
-        <h1>DASHBOARD</h1>
+        {{ dashboard_title }}
     </div>
     <div class="dashboard-grid">
         <!-- Left column for menu -->
         <div class="flex-column sub-container">
-            <h2>WELCOME</h2>
+            <h2>USER</h2>
             <p>{% if user.is_superuser %} ADMIN {% endif %} {{ user.first_name }}</p>
             <hr>
             <!-- Gacha section -->

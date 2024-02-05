@@ -11,6 +11,9 @@
 <div class="main-container parallelogram" id="gacha-selection-container">
     <div class="gacha-selection-grid">
         <div class="sub-container">
+            <p>SOME MESSAGES</p>
+        </div>
+        <div class="sub-container">
             <div id="banner-selector">
                 <ul>
                     {% for banner in banners %}
@@ -23,16 +26,13 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div class="selection-controller">
+            <div id="selection-controller">
                 {% for idx in banner_idx %}
                 <span class="dot" onclick="jumpIndex({{ idx }})"></span>
                 {% endfor %}
                 <button id="prev-btn" onclick="updateIndex(-1)">&#10094;</button>
                 <button id="next-btn" onclick="updateIndex(1)">&#10095;</button>
             </div>
-        </div>
-        <div class="sub-container">
-            <p>SOME MESSAGE</p>
         </div>
     </div>
 </div>

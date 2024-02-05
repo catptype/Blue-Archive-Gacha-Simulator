@@ -1,6 +1,6 @@
 {% load static %}
 <div id="collection">
-    <h2>COLLECTION ({{ obtained_students|length }}/{{ all_students.count }})</h2>
+    <h2>Obtained ({{ obtained_students|length }}/{{ all_students.count }})</h2>
     <div class="student-grid">
         {% for student in all_students %}
         <div class="center-position student-card">

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponseNotAllowed
+from django.utils.html import format_html
 
 from .utils import user_authenticated, DashboardContent
 from .forms import CreateNewUserForm, LoginForm, ForgotPasswordForm
@@ -77,27 +78,45 @@ def dashboard(request):
     tab = request.GET.get('tab', None)
     
     if tab == 'history':
-        context = {'html_content': DashboardContent.history(request)}
+        context = {
+            'dashboard_title': format_html('<h1>HISTORY</h1>'),
+            'html_content': DashboardContent.history(request),
+        }
         return render(request, 'user_app/dashboard.html', context)
     
     elif tab == 'statistic':
-        context = {'html_content': DashboardContent.statistic(request)}
+        context = {
+            'dashboard_title': format_html('<h1>STATISTIC</h1>'),
+            'html_content': DashboardContent.statistic(request),
+        }
         return render(request, 'user_app/dashboard.html', context)
     
     elif tab == 'collection':
-        context = {'html_content': DashboardContent.collection(request)}
+        context = {
+            'dashboard_title': format_html('<h1>COLLECTION</h1>'),
+            'html_content': DashboardContent.collection(request),
+        }
         return render(request, 'user_app/dashboard.html', context)
     
     elif tab == 'achievement':
-        context = {'html_content': DashboardContent.achievement(request)}
+        context = {
+            'dashboard_title': format_html('<h1>ACHIEVEMENT</h1>'),
+            'html_content': DashboardContent.achievement(request),
+        }
         return render(request, 'user_app/dashboard.html', context)
     
     elif tab == 'change-password':
-        context = {'html_content': DashboardContent.change_password(request)}
+        context = {
+            'dashboard_title': format_html('<h1>CHANGE PASSWORD</h1>'),
+            'html_content': DashboardContent.change_password(request),
+        }
         return render(request, 'user_app/dashboard.html', context)
     
     elif tab == 'reset':
-        context = {'html_content': DashboardContent.reset_account(request)}
+        context = {
+            'dashboard_title': format_html('<h1>RESET ACCOUNT</h1>'),
+            'html_content': DashboardContent.reset_account(request),
+        }
         return render(request, 'user_app/dashboard.html', context)
     
     elif tab == 'delete':
@@ -105,7 +124,11 @@ def dashboard(request):
         if delete_flag:
             return redirect('/')
         else:
-            context = {'html_content': html_content}
+            context = {
+                'dashboard_title': format_html('<h1>DELETE ACCOUNT</h1>'),
+                'html_content': html_content,
+            }
             return render(request, 'user_app/dashboard.html', context)
     else:
-        return render(request, 'user_app/dashboard.html')
+        context = {'dashboard_title': format_html('<h1>WELCOME</h1>')}
+        return render(request, 'user_app/dashboard.html', context)

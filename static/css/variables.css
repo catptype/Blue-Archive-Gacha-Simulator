@@ -3,6 +3,10 @@
     --primary-color: #5fdbff;
     --hover-color: gold;
     --shadow-color: 2px 2px 4px rgba(15, 25, 125, 0.5);
+
+    --r1-color: #6BDFFF;
+    --r2-color: #FFE400;
+    --r3-color: #FEC1F5;
     
     /* navbar */
     --navbar-color: rgba(250,250,250, 0.8);

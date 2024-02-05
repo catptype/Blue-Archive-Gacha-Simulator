@@ -1,90 +1,97 @@
 @import 'variables.css';
 
 #gacha-selection-container {
-    --selector-width: 700px;
     > .gacha-selection-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: var(--gap-size);
 
-        & #banner-selector {
-            position: relative;
-            display: grid;
-            width: var(--selector-width);
-            margin: auto;
-            overflow-x: scroll;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            white-space: nowrap;
-            
-            &::-webkit-scrollbar {
-                display: none;
-            }
-    
-            > ul {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-                scroll-snap-align: start;
-                display: flex;
-    
-                & li {
-                    width: var(--selector-width);
-                    text-align: center;
-    
-                    & img {
-                        width: 600px;
-                        height: 300px;
-                        object-fit: cover;
-                    }
-                }
-            }
+        @media (max-width: 1200px) {
+            grid-template-columns: repeat(1, 1fr);
         }
-    
-        & .selection-controller {
-            position: relative;
-            text-align: center;
-
-            & .dot {
-                cursor: pointer;
-                height: 15px;
-                width: 15px;
-                margin: 0 2px;
-                border-radius: 50%;
-                border: 1px solid var(--card-br-color);
-                background: var(--sub-container-color);
-                box-shadow: var(--shadow-color);        
-                display: inline-block;
-                transition: background-color var(--trans-dur) ease;
-        
-                &.actived {
-                    background-color: var(--primary-color);
-                }
-            }
-
-            > #prev-btn,
-            > #next-btn {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-100%);
-                font-size: 20px;
-                cursor: pointer;
-                background-color: #3498db;
-                color: #fff;
-                border: none;
-                padding: 10px;
-                border-radius: 5px;
-            }
-
-            > #prev-btn {
-                left: 0;
-            }
-
-            > #next-btn {
-                right: 0;
-            }
-        }
-    }   
+    }
 }
 
+#banner-selector {
+    --selector-width: 700px;
 
+    position: relative;
+    display: grid;
+    width: var(--selector-width);
+    margin: auto;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+    
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    > ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        scroll-snap-align: start;
+        display: flex;
+
+        & li {
+            width: var(--selector-width);
+            text-align: center;
+
+            & img {
+                width: calc(var(--selector-width) - 100px);
+                height: calc((var(--selector-width) - 100px) / 2);
+                object-fit: cover;
+            }
+        }
+    }
+
+    @media (max-width: 1200px) {
+        --selector-width: 600px;
+    }
+}
+
+#selection-controller {
+    position: relative;
+    text-align: center;
+
+    & .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        border-radius: 50%;
+        border: 1px solid var(--card-br-color);
+        background: var(--sub-container-color);
+        box-shadow: var(--shadow-color);        
+        display: inline-block;
+        transition: background-color var(--trans-dur) ease;
+
+        &.actived {
+            background-color: var(--primary-color);
+        }
+    }
+
+    > #prev-btn,
+    > #next-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-100%);
+        font-size: 20px;
+        cursor: pointer;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    > #prev-btn {
+        left: 0;
+    }
+
+    > #next-btn {
+        right: 0;
+    }
+}

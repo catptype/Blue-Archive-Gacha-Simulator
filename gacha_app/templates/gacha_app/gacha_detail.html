@@ -65,7 +65,7 @@
             <div class="item-grid pickup">
                 {% for student in banner.is_pickup.all %}
                 <div class="center-position student-card">
-                    <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
+                    <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}" loading="lazy">
                     <div class="flex-center rate-info">
                         <p>{{ banner.feature_rate|divide_rate:banner.is_pickup.all.count }}%</p>
                     </div>
@@ -81,7 +81,7 @@
                 {% with filtered_students=banner.not_pickup.all|filter_rarity:rarity %}
                 {% for student in filtered_students %}
                 <div class="center-position student-card">
-                    <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
+                    <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}" loading="lazy">
                     <div class="flex-center rate-info">
                         {% if rarity == 3 %}
                         <p>{{ banner.r3_rate|subtract_rate:banner.feature_rate|divide_rate:filtered_students.count }}%</p>

@@ -44,7 +44,20 @@ class DashboardContent:
 
     @staticmethod
     def statistic(request):
-        context = {}
+        all_transactions = GachaTransaction.objects.filter(user=request.user).order_by('id')
+        first_r3_student = all_transactions.filter(student__rarity=3).first()
+        
+        rarity_counter = {
+            'r1': all_transactions.filter(student__rarity=1).count(),
+            'r2': all_transactions.filter(student__rarity=2).count(),
+            'r3': all_transactions.filter(student__rarity=3).count(),
+        }
+        
+        context = {
+            'first_r3_student': first_r3_student,
+            'rarity_counter': rarity_counter,
+            'total_draw': sum(rarity_counter.values()),
+        }
         html_content = render_to_string('user_app/dashboard_content/statistic.html', context)
         return html_content
     
