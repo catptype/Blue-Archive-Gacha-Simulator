@@ -1,18 +1,17 @@
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.template.loader import render_to_string
+from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.middleware.csrf import get_token
-from django.contrib.auth import update_session_auth_hash
-from django.http import HttpResponseForbidden
+from django.template.loader import render_to_string
 from django.utils.html import format_html
-from django.contrib.auth import logout
+
 from ..forms import ChangePasswordForm, ResetAccountForm, DeleteAccountForm
+from ..models import ObtainedStudent, ObtainedAchievement, Achievement
+
 from gacha_app.models import GachaTransaction
 from student_app.models import Student
-from ..models import ObtainedStudent, ObtainedAchievement
 
-from collections import Counter
-
+from django.db.models import Count
 
 class DashboardContent:
 
@@ -52,32 +51,47 @@ class DashboardContent:
         r2_transactions = all_transactions.filter(student__rarity=2)
         r3_transactions = all_transactions.filter(student__rarity=3)
 
-        rarity_counter = {
+        transaction_count = {
             'r1': r1_transactions.count(),
             'r2': r2_transactions.count(),
             'r3': r3_transactions.count(),
         }
 
-        # top3_students = {
-        #     'r1': Counter(rarity_counter['r1']).most_common(3),
-        #     'r2': Counter(rarity_counter['r2']).most_common(3),
-        #     'r3': Counter(rarity_counter['r3']).most_common(3),
-        # }
+        most_obtain = {}
 
-        # print("TOP3")
-        # print(top3_students['r1'])
-        
+        transaction_list = [r1_transactions,r2_transactions,r3_transactions]
+
+        for idx, transaction in enumerate(transaction_list, start=1):
+            data = []
+            queryset = transaction.values('student_id').annotate(count=Count('student_id')).order_by('-count')[:3]
+            for student in queryset:
+                top_student = Student.objects.get(id=student['student_id'])
+                counter = student['count']
+                data.append((top_student, counter))
+            most_obtain[f'r{idx}'] = data
+
         context = {
             'first_r3_student': r3_transactions.first(),
-            'rarity_counter': rarity_counter,
-            'total_draw': sum(rarity_counter.values()),
+            'transaction_count': transaction_count,
+            'total_draw': sum(transaction_count.values()),
+            'most_obtain': most_obtain,
         }
         html_content = render_to_string('user_app/dashboard_content/statistic.html', context)
         return html_content
     
     @staticmethod
     def achievement(request):
-        context = {}
+        user_instance = User.objects.get(username=request.user)
+        all_achievements = Achievement.objects.all().order_by('id')
+        obtained_achievements = []
+        querysets = ObtainedAchievement.objects.filter(user=user_instance)
+        for query in querysets:
+            obtained_achievements.append(query.achievement)
+
+        context = {
+            "all_achievements": all_achievements,
+            "obtained_achievements": obtained_achievements,
+        }
         html_content = render_to_string('user_app/dashboard_content/achievement.html', context)
         return html_content
     
@@ -126,7 +140,7 @@ class DashboardContent:
             if form.is_valid():
                 user_instance = User.objects.get(username=request.user)
 
-                for model in [ObtainedStudent, ObtainedStudent, GachaTransaction]:
+                for model in [ObtainedStudent, ObtainedAchievement, GachaTransaction]:
                     queryset = model.objects.filter(user=user_instance)
                     queryset.delete()
                 

@@ -50,18 +50,21 @@ p {
     display: flex;
     justify-content: left;
     align-items: center;
+    gap: var(--gap-size);
 }
 
 .flex-center {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: var(--gap-size);
 }
 
 .flex-right {
     display: flex;
     justify-content: right;
     align-items: center;
+    gap: var(--gap-size);
 }
 
 .flex-column {

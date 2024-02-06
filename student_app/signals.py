@@ -15,46 +15,36 @@ def remove_student_from_banner(sender, instance, **kwargs):
 @receiver(post_save, sender=Student)
 def add_student_to_banner(sender, instance, created, **kwargs):
     
-    def banner_update(banner_name):
-        is_rarity3 = instance.rarity == 3
-        banner = GachaBanner.objects.get(name=banner_name)
-        if is_rarity3:
-            banner.is_pickup.add(instance)
-        else:
-            banner.not_pickup.add(instance)
-    
-    # Comment code 
-    is_original = instance.version.name == 'Original'
-    is_bunny = instance.version.name == 'Bunny'
-    # is_camping = instance.version.name == 'Camping'
-    # is_casual = instance.version.name == 'Casual'
-    is_cheerleader = instance.version.name == 'Cheerleader'
-    # is_dress = instance.version.name == 'Dress'
-    # is_loli = instance.version.name == 'Loli'
-    # is_maid = instance.version.name == 'Maid'
-    is_new_year = instance.version.name == 'New-Year'
-    # is_onsen = instance.version.name == 'Onsen'
-    # is_riding = instance.version.name == 'Riding'
-    is_sport = instance.version.name == 'Sport'
-    is_swimsuit = instance.version.name == 'Swimsuit'
-    is_xmas = instance.version.name == 'Xmas'
-    # is_limited = instance.is_limited
+    version_banner_mapping = {
+        'Original':     'All Banners',
+        'Bunny' :       'Bunny Banner',
+        'Camping':      'Casual Banner',
+        'Casual':       'Casual Banner',
+        'Riding':       'Casual Banner',        
+        'Dress':        'Dress Banner',
+        'New-Year':     'Holiday Banner',
+        'Xmas':         'Holiday Banner',
+        'Loli':         'Loli Banner',
+        'Maid':         'Maid Banner',
+        'Onsen':        'Onsen Banner',
+        'Cheerleader':  'Sport Banner',
+        'Sport':        'Sport Banner',
+        'Swimsuit':     'Summer Banner',
+    }
 
-    if is_original:
+    version_name = instance.version.name
+    
+    if version_name == 'Original':
         for banner in GachaBanner.objects.all():
             banner.not_pickup.add(instance)
-
-    elif is_swimsuit:
-        banner_update('Summer Banner')
-
-    elif is_bunny:
-        banner_update('Bunny Banner')
-
-    elif is_sport or is_cheerleader:
-        banner_update('Sport Banner')
-    
-    elif is_new_year or is_xmas:
-        banner_update('Holiday Banner')
-    
     else:
-        banner_update('Mixed Banner')
+        banner_name = version_banner_mapping.get(version_name, 'No banner')
+        is_rarity3 = instance.rarity == 3
+        try:
+            banner = GachaBanner.objects.get(name=banner_name)
+            if is_rarity3:
+                banner.is_pickup.add(instance)
+            else:
+                banner.not_pickup.add(instance)
+        except GachaBanner.DoesNotExist:
+            print(f"The version '{version_name}' does not belong to any banner.")

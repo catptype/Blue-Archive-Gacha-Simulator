@@ -19,7 +19,11 @@
         </a>
         <h1>{{ banner.name }}</h1>
         <div class="banner-image">
-            <img src="{% static 'portrait_404.png' %}" alt="banner">
+            {% if banner.image %}
+            <img src="{{ banner.image.url }}" alt="{{ banner.name }}">
+            {% else %}
+            <img src="{% static '/image/gacha/banner_dummy.png' %}" alt="{{ banner.name }}">
+            {% endif %}
         </div>
         <div class="banner-message">
             {% if is_auth %}

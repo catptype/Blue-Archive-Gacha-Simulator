@@ -1,0 +1,25 @@
+{% load static %}
+<div id="achievement" class="flex-column">
+    <h2>Obtained ({{ obtained_achievements|length }}/{{ all_achievements.count }})</h2>
+    {% for achievement in all_achievements %}
+    <div class="flex-center sub-container">
+        <div class="flex-center" id="achievement-icon">
+            {% if achievement.image %}
+            <img src="{{ achievement.image.url }}" alt="{{ achievement.name }}">
+            {% else %}
+            <img src="{% static '/image/lock.png' %}" alt="{{ achievement.name }}">
+            {% endif %}
+        </div>
+        <div class="flex-center" id="achievement-description">
+            <p>{{ achievement.description }}</p>
+        </div>
+        <div class="flex-left" id="achievement-criteria">
+            {% for student in achievement.criteria.all %}
+            <div class="student-card">
+                <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version }}">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>

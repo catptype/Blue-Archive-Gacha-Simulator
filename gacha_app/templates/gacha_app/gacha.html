@@ -19,7 +19,11 @@
                     {% for banner in banners %}
                     <li>
                         <a href="{% url 'gacha_detail' gacha_id=banner.id %}">
-                            <img src="{% static 'portrait_404.png' %}" alt="{{ banner.name }}">
+                            {% if banner.image %}
+                            <img src="{{ banner.image }}" alt="{{ banner.name }}">
+                            {% else %}
+                            <img src="{% static '/image/gacha/banner_dummy.png' %}" alt="{{ banner.name }}">
+                            {% endif %}
                         </a>
                         <p>{{ banner.name }}</p>
                     </li>

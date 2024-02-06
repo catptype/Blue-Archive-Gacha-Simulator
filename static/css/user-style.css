@@ -142,6 +142,24 @@ hr {
 
     > #statistic {
 
+        & .student-card {
+            position: relative;
+            overflow: hidden;
+            width: 130px;
+            height: 150px;
+            border-radius: var(--card-br);
+            box-shadow: var(--shadow-color);
+
+            > img {
+                position: absolute;
+                top: 10%;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transform: skew(calc(var(--parallelogram-deg) * -1)) scale(1.2);
+            }
+        }
+
         & .star {
             display: inline-flex;
             background-image: url('../image/star_rarity.png');
@@ -165,23 +183,12 @@ hr {
 
         & #first-info {
             gap: 20px;
+        }
 
-            > .student-card {
-                position: relative;
-                overflow: hidden;
-                width: 130px;
-                height: 150px;
-                border-radius: var(--card-br);
-                box-shadow: var(--shadow-color);
-    
-                > img {
-                    position: absolute;
-                    top: 10%;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    transform: skew(calc(var(--parallelogram-deg) * -1)) scale(1.2);
-                }
+        & #top-info {
+            & .student-card {
+                width: 100px;
+                height: 120px;
             }
         }
 
@@ -191,21 +198,20 @@ hr {
             gap: var(--gap-size);
         }
 
-        
+        & .rank-icon > img {
+            width: 100px;
+        }
 
         & #chart {
 
             & .pie-chart {
-                --border:10px;
-    
-                position:relative;
+                --border: 10px;
+                position: relative;
                 width: 150px;
                 height: 150px;
                 display: inline-grid;
                 place-content: center;
                 margin: 10px;
-
-                
     
                 &:before{
                     content: "";
@@ -229,7 +235,7 @@ hr {
                     background: conic-gradient(
                         var(--r1-color) 0% var(--r1),
                         var(--r2-color) var(--r1) calc(var(--r1) + var(--r2)),
-                        var(--r3-color) calc(var(--r1) + var(--r2)) 100%,
+                        var(--r3-color) calc(var(--r1) + var(--r2)) calc(var(--r1) + var(--r2) + var(--r3)),
                         grey 0%
                     );
                 }
@@ -346,6 +352,39 @@ hr {
                     > p {
                         font-size: 10px;
                     }
+                }
+            }
+        }
+    }
+
+    > #achievement {
+        
+        & #achievement-icon > img {
+            width: 100px;
+        }
+
+        & #achievement-description {
+            width: 18ch;
+        }
+
+        & #achievement-criteria {
+            width: calc(550px + (var(--gap-size) * 4)); 
+
+            & .student-card {
+                position: relative;
+                overflow: hidden;
+                width: 110px;
+                height: 130px;
+                border-radius: var(--card-br);
+                box-shadow: var(--shadow-color);
+    
+                > img {
+                    position: absolute;
+                    top: 10%;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transform: skew(calc(var(--parallelogram-deg) * -1)) scale(1.2);
                 }
             }
         }

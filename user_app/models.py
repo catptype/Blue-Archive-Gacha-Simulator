@@ -50,6 +50,9 @@ class ObtainedAchievement(models.Model):
 
     def __str__(self):
         return f'{self.user.username} unlock {self.achievement.name}'
+    
+    class Meta:
+        unique_together = ['user', 'achievement']
 
 class ObtainedStudent(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
@@ -61,3 +64,6 @@ class ObtainedStudent(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+    class Meta:
+        unique_together = ['user', 'student']

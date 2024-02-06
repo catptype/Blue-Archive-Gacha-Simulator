@@ -7,5 +7,9 @@ register = template.Library()
 
 @register.filter(name='percentage')
 def divide_rate(value1, value2):
+    
+    if value2 == 0:
+        return round(0, 2)
+    
     result = (value1 / value2) * 100
     return round(result, 2)

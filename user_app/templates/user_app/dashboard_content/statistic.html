@@ -5,6 +5,7 @@
         <h2>THE FIRST OBTAINED&nbsp;{% for _ in ""|rjust:3 %}<span class="star"></span>{% endfor %}&nbsp;STUDENT</h2>
         <div class="flex-center" id="first-info">
             {% if first_r3_student %}
+            <img class="not-parallelogram" src="{% static '/image/ranking/first.png' %}" alt="first">
             <div class="student-card">
                 <img src="{{ first_r3_student.student.image.url }}" alt="{{ first_r3_student.student.name }}_{{ first_r3_student.student.version }}">
             </div>
@@ -13,7 +14,7 @@
                 <p>{{ first_r3_student.student.name }} ({{ first_r3_student.student.version }})</p>
             </div>
             {% else %}
-            <p>NO 3 STAR STUDENT</p>
+            <p>NO DATA</p>
             {% endif %}
         </div>
     </div>
@@ -21,12 +22,12 @@
     <div class="sub-container flex-column" id="chart">
         <h2>OBTAIN RATE</h2>
         <div class="flex-center">
-            <div class="pie-chart" id="all-rarities" style="--r1:{{ rarity_counter.r1|percentage:total_draw }}%; --r2:{{ rarity_counter.r2|percentage:total_draw }}%; --r3:{{ rarity_counter.r3|percentage:total_draw }}%;">
+            <div class="pie-chart" id="all-rarities" style="--r1:{{ transaction_count.r1|percentage:total_draw }}%; --r2:{{ transaction_count.r2|percentage:total_draw }}%; --r3:{{ transaction_count.r3|percentage:total_draw }}%;">
                 <p>TOTAL</p>
                 <p>DRAW</p>
                 <p>{{ total_draw }}</p>
             </div>
-            {% for rarity, value in rarity_counter.items %}
+            {% for rarity, value in transaction_count.items %}
             <div class="pie-chart" id="rarity{{ forloop.counter }}" style="--r{{ forloop.counter }}:{{ value|percentage:total_draw }}%;">
                 <p>{% for _ in ""|rjust:forloop.counter %}<span class="star"></span>{% endfor %}</p>
                 <p>{{ value }}</p>
@@ -36,16 +37,35 @@
         </div>
     </div>
 
-    <div class="statistic-grid">
+    <div class="statistic-grid" id="top-info">
+        {% for _, top3_students in most_obtain.items %}
         <div class="sub-container flex-column">
-            <p>MOST OBTAINED&nbsp;{% for _ in ""|rjust:1 %}<span class="star"></span>{% endfor %}&nbsp;STUDENT</p>
+            <h2>MOST OBTAINED<br>{% for _ in ""|rjust:forloop.counter %}<span class="star"></span>{% endfor %}&nbsp;STUDENTS</h2>
+            {% if top3_students %}
+            <div class="statistic-grid">
+                {% for student, count in top3_students %}
+                <div class="rank-icon flex-center not-parallelogram">
+                    {% if forloop.counter == 1 %}
+                    <img src="{% static '/image/ranking/rank1.png' %}" alt="rank1">
+                    {% elif forloop.counter == 2 %}
+                    <img src="{% static '/image/ranking/rank2.png' %}" alt="rank2">
+                    {% elif forloop.counter == 3 %}
+                    <img src="{% static '/image/ranking/rank3.png' %}" alt="rank3">
+                    {% endif %}
+                </div>
+                <div class="student-card center-position">
+                    <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version }}">
+                </div>
+                <div class="flex-center">
+                    <p>{{ count }} times</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>NO DATA</p>
+            {% endif %}
         </div>
-        <div class="sub-container flex-column">
-            <p>MOST OBTAINED&nbsp;{% for _ in ""|rjust:2 %}<span class="star"></span>{% endfor %}&nbsp;STUDENT</p>
-        </div>
-        <div class="sub-container flex-column">
-            <p>MOST OBTAINED&nbsp;{% for _ in ""|rjust:3 %}<span class="star"></span>{% endfor %}&nbsp;STUDENT</p>
-        </div>
+        {% endfor %}
     </div>
-    
+
 </div>

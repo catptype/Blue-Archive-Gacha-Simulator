@@ -22,7 +22,7 @@ def update_achievement(sender, instance, created, **kwargs):
     if created:
         user = instance.user
         unlocked_achievements = ObtainedAchievement.objects.filter(user=user)
-        locked_achievements = Achievement.objects.all().exclude(id__in=unlocked_achievements.values('id'))
+        locked_achievements = Achievement.objects.all().exclude(id__in=unlocked_achievements.values('achievement_id'))
 
         # Check which achivement can be unlocked
         for achievement in locked_achievements:
