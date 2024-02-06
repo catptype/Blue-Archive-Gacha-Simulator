@@ -2,9 +2,9 @@
 
 [![Python](https://img.shields.io/badge/Python-3.12.0-blue.svg)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-5.0-blue.svg)](https://www.djangoproject.com/)
-![HTML5](https://img.shields.io/badge/HTML-grey.svg)
-![CSS](https://img.shields.io/badge/CSS-grey.svg)
-![JavaScript](https://img.shields.io/badge/JavaScript-grey.svg)
+[![HTML5](https://img.shields.io/badge/HTML-grey.svg)]()
+[![CSS](https://img.shields.io/badge/CSS-grey.svg)]()
+[![JavaScript](https://img.shields.io/badge/JavaScript-grey.svg)]()
 [![SQLite](https://img.shields.io/badge/SQLite3-grey.svg)](https://www.sqlite.org/index.html)
 [![JSON](https://img.shields.io/badge/JSON-grey.svg)](https://www.json.org/)
 
@@ -35,8 +35,7 @@ A hobby project for self-learning in full-stack web development. This web applic
         - ~~**Registration & Login**~~ (Complete)
         - **Dashboard**
             - ~~**History**~~ (Complete)
-            - **Statistic**
-                - **TO-DO:** Add top3 obtained students
+            - ~~**Statistic**~~ (Complete)
             - ~~**Collection**~~ (Complete)
             - **Achievement**
                 - **TO-DO:** Add content site
@@ -51,8 +50,7 @@ A hobby project for self-learning in full-stack web development. This web applic
         - ~~**Registration & Login**~~ (Complete)
         - **Dashboard**
             - ~~**History**~~ (Complete)
-            - **Statistic**
-                - **TO-DO:** Develop system to retrieve top3 frequently obtain students
+            - ~~**Statistic**~~ (Complete)
             - ~~**Collection**~~ (Complete)
             - ~~**Achievement**~~ (Complete)
             - ~~**Change Password**~~ (Complete)
