@@ -2,9 +2,9 @@
 
 [![Python](https://img.shields.io/badge/Python-3.12.0-blue.svg)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-5.0-blue.svg)](https://www.djangoproject.com/)
-![HTML5](https://img.shields.io/badge/HTML-grey.svg)
-![CSS](https://img.shields.io/badge/CSS-grey.svg)
-![JavaScript](https://img.shields.io/badge/JavaScript-grey.svg)
+[![HTML5](https://img.shields.io/badge/HTML-grey.svg)]()
+[![CSS](https://img.shields.io/badge/CSS-grey.svg)]()
+[![JavaScript](https://img.shields.io/badge/JavaScript-grey.svg)]()
 [![SQLite](https://img.shields.io/badge/SQLite3-grey.svg)](https://www.sqlite.org/index.html)
 [![JSON](https://img.shields.io/badge/JSON-grey.svg)](https://www.json.org/)
 
