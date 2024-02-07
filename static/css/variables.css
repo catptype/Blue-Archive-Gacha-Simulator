@@ -9,7 +9,7 @@
     --r3-color: #FEC1F5;
     
     /* navbar */
-    --navbar-color: rgba(250,250,250, 0.8);
+    --navbar-color: rgba(250, 250, 250, 0.8);
 
     /* Container */
     --main-container-color: rgba(128, 128, 128, 0.6);
@@ -18,7 +18,10 @@
     --gap-size: 0.5rem;
 
     /* Card */
-    --card-bg-color: rgba(250,250,250, 0.8);
+    --card-width: 130px;
+    --card-height: 150px;
+    --card-icon-size: 15px;
+    --card-label-color: rgba(250, 250, 250, 0.8);
     --card-br: 15px;
     --card-br-color: rgba(15, 25, 125, 0.5);
     

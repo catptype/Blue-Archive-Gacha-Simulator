@@ -1,0 +1,48 @@
+#achievement {
+        
+    & #achievement-icon {
+        border: var(--card-br-color) 1px solid;
+        > img {
+            width: 100px;
+        }
+    }
+        
+    & #achievement-text {
+        width: 24ch;
+        gap: calc(var(--gap-size) / 2);
+
+        & hr {
+            margin: var(--gap-size) 0;
+            
+        }
+
+        > p.title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        > p.description {
+            font-size: 12px;
+        }
+    }
+
+    & #achievement-criteria {
+        width: calc(550px + (var(--gap-size) * 4)); 
+
+        & .student-card {
+            width: calc(var(--card-width) - 20px);
+            height: calc(var(--card-height) - 20px);
+
+            > .card-label {
+                font-size: 8.5px;
+            }
+
+            & .locked {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.75);
+            }
+        }
+    }
+}

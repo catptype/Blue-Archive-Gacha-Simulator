@@ -2,21 +2,27 @@
 <div id="achievement" class="flex-column">
     <h2>Obtained ({{ obtained_achievements|length }}/{{ all_achievements.count }})</h2>
     {% for achievement in all_achievements %}
-    <div class="flex-center sub-container">
+    <div class="flex-left sub-container">
         <div class="flex-center" id="achievement-icon">
             {% if achievement.image %}
-            <img src="{{ achievement.image.url }}" alt="{{ achievement.name }}">
+            <img src="{{ achievement.image.url }}" alt="{{ achievement.name }}" loading="lazy">
             {% else %}
             <img src="{% static '/image/lock.png' %}" alt="{{ achievement.name }}">
             {% endif %}
         </div>
-        <div class="flex-center" id="achievement-description">
+        <div class="flex-column" id="achievement-text">
+            <p class="title">{{ achievement.name }}</p>
+            <hr>
             <p>{{ achievement.description }}</p>
         </div>
         <div class="flex-left" id="achievement-criteria">
             {% for student in achievement.criteria.all %}
             <div class="student-card">
-                <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version }}">
+                <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version }}" loading="lazy">
+                <p class="card-label">{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
+                {% if not student in obtained_students %}
+                <div class="locked"></div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>

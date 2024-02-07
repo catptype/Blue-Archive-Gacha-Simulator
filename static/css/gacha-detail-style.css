@@ -1,82 +1,17 @@
 @import 'variables.css';
-
-/* COMPONENTS */
-a {
-    text-decoration: none;
-}
-
-.btn {
-    cursor: pointer;
-    margin: 0;
-    padding: 0.5rem;
-    background-color: var(--primary-color);
-    border: 1px solid var(--card-br-color);
-    border-radius: var(--container-br);
-    box-shadow: var(--shadow-color);
-    transition: background-color var(--trans-dur) ease-in-out;
-
-    > img {
-        height: 60px;
-        object-fit: cover;
-    }
-
-    > p {
-        margin: 0;
-        padding: 0 var(--gap-size);
-    }
-
-    &:hover {
-        background-color: var(--hover-color);
-    }
-}
-
-.student-card {
-    position: relative;
-    overflow: hidden;
-    width: 130px;
-    height: 160px;
-    border-radius: var(--card-br);
-    box-shadow: var(--shadow-color);
-    
-    > img {
-        top: 10%;
-        position: absolute;
-        transform: skewX(calc(var(--parallelogram-deg) * -1)) scale(1.2);
-    }
-
-    > .rate-info,
-    > .card-label {
-        position: absolute;
-        margin: 0;
-        background-color: var(--card-bg-color);
-
-        > p {
-            font-size: 10px;
-        }
-    }
-
-    > .rate-info {
-        width: 6ch;
-        top: 5%;
-        right: 5%;
-        border-radius: var(--card-br);
-    }
-
-    > .card-label {
-        width: 100%;
-        bottom: 0;
-    }
-}
+@import 'components.css';
+@import 'student-card.css';
 
 /* PAGE STYLE */
 #gacha-detail-container {
     overflow-y: auto;
 
-    & .banner-detail {
+    & #banner-detail {
         position: relative;
         flex-direction: column;
-
-        > #back {
+    
+        & #back {
+            gap: 0;
             position: absolute;
             top: var(--gap-size);
             left: var(--gap-size);
@@ -86,25 +21,19 @@ a {
                 height: 32px;
             }
         }
-
-        & .banner-image > img {
+    
+        & #banner-image > img {
             width: 600px;
             height: 300px;
             object-fit: cover;
         }
-
-        & .banner-message > p {
-            & span.star {
-                display: inline-block;
-                width: 15px;
-                height: 15px;
-                background-image: url('../image/star_rarity.png');
-                background-size: 100% 100%;
-            }
-        }
-
-        & form {
-            gap: var(--gap-size);
+    
+        & #banner-message .star {
+            display: inline-flex;
+            width: 15px;
+            height: 15px;
+            background-image: url('../image/star_rarity.png');
+            background-size: cover;
         }
     }
 
@@ -114,52 +43,19 @@ a {
         & .rate-title {
             cursor: pointer;
             width: fit-content;
-            gap: var(--gap-size);
 
-            > .hamburger {
-                flex-direction: column;
-                margin-right: var(--gap-size);
-                gap: 5px;
-                width: 2rem;
-                height: 2rem;
+            > #stars {
+                gap: 0;
 
-                & span {
-                    width: 25px;
-                    height: 2px;
-                    border-radius: 2px;
-                    background-color: black;
-                    transition: transform var(--trans-dur) ease-in-out;
-                }
-
-                &:not(.opened) span {
-                    transform: translateY(0) rotate(0deg);
-                }
-
-                &.opened span {
-                    &:nth-child(1) {
-                        transform: translateY(7px) rotate(45deg);
-                    }
-
-                    &:nth-child(2) {
-                        transform: scaleX(0);
-                    }
-
-                    &:nth-child(3) {
-                        transform: translateY(-7px) rotate(-45deg);
-                    }
-                }
-            }
-
-            > .stars {
-                display: flex;
-                
                 & .star {
-                    width: 2em;
-                    height: 2em;
+                    display: inline-flex;
+                    width: 2rem;
+                    height: 2rem;
                     background-image: url('../image/star_rarity.png');
-                    background-size: 100% 100%;
+                    background-size: cover;
                 }
             }
+            
         }
 
         & .detail-content {
@@ -175,33 +71,25 @@ a {
             & .sub-header {
                 padding: 0.2rem 1.0rem;
                 border-radius: var(--container-br);
-                background-color: var(--card-bg-color);
+                background-color: var(--card-label-color);
             }
 
             > .item-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 1fr));
                 gap: var(--gap-size);
 
                 /* Override some properties for feature pick up */
                 &.pickup {
-                    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                    grid-template-columns: repeat(auto-fill, minmax(calc(var(--card-width) + 30px), 1fr));
                     
                     > .student-card {
-                        width: 160px;
-                        height: 190px;
+                        width: calc(var(--card-width) + 30px);
+                        height: calc(var(--card-height) + 30px);
 
-                        > img {
-                            top: 18%;
-                            left: 10%;
-                            transform: skewX(calc(var(--parallelogram-deg) * -1)) scale(1.5);
-                        }
-
-                        > .rate-info,
+                        > .card-rate,
                         > .card-label {
-                            > p {
-                                font-size: 12px;
-                            }
+                            font-size: 12px;
                         }
                     }
                 }

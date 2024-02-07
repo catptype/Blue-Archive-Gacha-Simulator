@@ -15,61 +15,41 @@
 
       <div class="input-field">
         {{ form.username }}
-        {% if form.username.errors %}
-          <div class="text-error">
-            {% for error in form.username.errors %} 
-            <p>{{ error }}</p>
-            {% endfor %}
-          </div>
-        {% endif %}
+        {% for error in form.username.errors %} 
+        <p class="text-error">{{ error }}</p>
+        {% endfor %}
       </div>
 
       <div class="input-field">
         {{ form.first_name }}
-        {% if form.first_name.errors %}
-          <div class="text-error">
-            {% for error in form.first_name.errors %} 
-            <p>{{ error }}</p>
-            {% endfor %}
-          </div>
-        {% endif %}
+        {% for error in form.first_name.errors %} 
+        <p class="text-error">{{ error }}</p>
+        {% endfor %}
       </div>
 
       <div class="input-field">
         {{ form.password1 }}
-        {% if form.password1.errors %}
-          <div class="text-error">
-            {% for error in form.password1.errors %}
-            <p>{{ error }}</p>
-            {% endfor %}
-          </div>
-        {% endif %}
+        {% for error in form.password1.errors %}
+        <p class="text-error">{{ error }}</p>
+        {% endfor %}
       </div>
 
       <div class="input-field">
         {{ form.password2 }}
-        {% if form.password2.errors %}
-          <div class="text-error">
-            {% for error in form.password2.errors %}
-            <p>{{ error }}</p>
-            {% endfor %}
-          </div>
-        {% endif %}
+        {% for error in form.password2.errors %}
+        <p class="text-error">{{ error }}</p>
+        {% endfor %}
       </div>
 
       <div class="input-field">
         {{ form.tos }}
         <span>{{ form.tos.label }}</span>        
-        {% if form.tos.errors %}
-        <div class="text-error">
-          {% for error in form.tos.errors %}
-          <p>{{ error }}</p>
-          {% endfor %}
-        </div>
-        {% endif %}
+        {% for error in form.tos.errors %}
+        <p class="text-error">{{ error }}</p>
+        {% endfor %}
       </div>
       <hr>
-      <button type="submit" class="flex-center btn">Submit</button>
+      <button type="submit" class="btn">Submit</button>
     </form>
     <div class="flex-center">
       <p>

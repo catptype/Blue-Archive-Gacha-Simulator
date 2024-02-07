@@ -8,36 +8,35 @@
 {% endblock %}
 
 {% block content %}
-<div class="main-container parallelogram" id="gacha-selection-container">
-    <div class="gacha-selection-grid">
-        <div class="sub-container">
-            <p>SOME MESSAGES</p>
-        </div>
-        <div class="sub-container">
-            <div id="banner-selector">
-                <ul>
-                    {% for banner in banners %}
-                    <li>
-                        <a href="{% url 'gacha_detail' gacha_id=banner.id %}">
-                            {% if banner.image %}
-                            <img src="{{ banner.image }}" alt="{{ banner.name }}">
-                            {% else %}
-                            <img src="{% static '/image/gacha/banner_dummy.png' %}" alt="{{ banner.name }}">
-                            {% endif %}
-                        </a>
-                        <p>{{ banner.name }}</p>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div id="selection-controller">
-                {% for idx in banner_idx %}
-                <span class="dot" onclick="jumpIndex({{ idx }})"></span>
+<div class="main-container flex-column parallelogram">
+    <div class="sub-container flex-column">
+        <h2>Banner Selection</h2>
+        <div id="banner-selector">
+            <ul>
+                {% for banner in banners %}
+                <li>
+                    <a href="{% url 'gacha_detail' gacha_id=banner.id %}">
+                        {% if banner.image %}
+                        <img src="{{ banner.image }}" alt="{{ banner.name }}">
+                        {% else %}
+                        <img src="{% static '/image/gacha/banner_dummy.png' %}" alt="{{ banner.name }}">
+                        {% endif %}
+                    </a>
+                    <p>{{ banner.name }}</p>
+                </li>
                 {% endfor %}
-                <button id="prev-btn" onclick="updateIndex(-1)">&#10094;</button>
-                <button id="next-btn" onclick="updateIndex(1)">&#10095;</button>
-            </div>
+            </ul>
         </div>
+        <div id="selection-controller">
+            {% for idx in banner_idx %}
+            <span class="dot" onclick="jumpIndex({{ idx }})"></span>
+            {% endfor %}
+            <button id="prev-btn" onclick="updateIndex(-1)">&#10094;</button>
+            <button id="next-btn" onclick="updateIndex(1)">&#10095;</button>
+        </div>
+    </div>
+    <div class="sub-container">
+        <h2>Rules</h2>
     </div>
 </div>
 {% endblock %}

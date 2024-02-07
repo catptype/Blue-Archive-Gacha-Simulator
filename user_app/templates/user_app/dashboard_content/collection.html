@@ -5,21 +5,17 @@
         {% for student in all_students %}
         <div class="center-position student-card">
             {% if student.image %}
-            <img class="portrait" src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}" loading="lazy">
+            <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}" loading="lazy">
             {% endif %}
-            <div class="flex-center not-parallelogram card-rarity">
+            <div class="not-parallelogram card-rarity">
                 {% for _ in ""|rjust:student.rarity %}<div class="star"></div>{% endfor %}
             </div>
-            <div class="flex-center not-parallelogram card-school">
-                <img src="{{ student.school.image.url }}" alt="{{ student.school_name }}">
+            <div class="not-parallelogram card-school">
+                <img src="{{ student.school.image.url }}" alt="{{ student.school_name }}" loading="lazy">
             </div>
-            <div class="flex-center card-label">
-                <p>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
-            </div>
+            <p class="card-label">{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
             {% if not student in obtained_students %}
-            <div class="locked">
-                <img class="center-position" src="{% static 'image/lock.png' %}" alt="Not obtained">
-            </div>
+            <div class="locked"></div>
             {% endif %}
         </div>
         {% endfor %}

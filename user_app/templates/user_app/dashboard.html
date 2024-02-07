@@ -8,12 +8,12 @@
 
 {% block content %}
 <div class="main-container flex-column parallelogram" id="dashboard-container">
-    <div class="sub-container">
+    <div class="flex-center sub-container">
         {{ dashboard_title }}
     </div>
     <div class="dashboard-grid">
         <!-- Left column for menu -->
-        <div class="flex-column sub-container">
+        <div class="flex-column sub-container" id="dashboard-sidebar">
             <h2>USER</h2>
             <p>{% if user.is_superuser %} ADMIN {% endif %} {{ user.first_name }}</p>
             <hr>

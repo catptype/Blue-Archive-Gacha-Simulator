@@ -1,53 +1,6 @@
 [
     {
-        "type": "CLUB",
-        "name": "After School Sweets Club",
-        "description": "The Miracle 5000 cakes",
-        "criteria": [
-            { "student": "Airi",    "version": "Original" },
-            { "student": "Kazusa",  "version": "Original" },
-            { "student": "Natsu",   "version": "Original" },
-            { "student": "Yoshimi", "version": "Original" }
-        ],
-        "image": null
-    },
-    {
-        "type": "CLUB",
-        "name": "Arius Squad",
-        "description": "Vanitas Vanitatum, Et Omnia Vanitas",
-        "criteria": [
-            { "student": "Atsuko",  "version": "Original" },
-            { "student": "Hiyori",  "version": "Original" },
-            { "student": "Misaki",  "version": "Original" },
-            { "student": "Saori",   "version": "Original" }
-        ],
-        "image": null
-    },
-    {
-        "type": "CLUB",
-        "name": "Class No. 227",
-        "description": "Suspended students",
-        "criteria": [
-            { "student": "Nodoka",  "version": "Original" },
-            { "student": "Shigure", "version": "Original" }
-        ],
-        "image": null
-    },
-    {
-        "type": "CLUB",
-        "name": "Cleaning & Clearing",
-        "description": "Intelligence maid agency",
-        "criteria": [
-            { "student": "Akane",  "version": "Original" },
-            { "student": "Asuna",  "version": "Original" },
-            { "student": "Karin",  "version": "Original" },
-            { "student": "Neru",   "version": "Original" },
-            { "student": "Toki",   "version": "Original" }
-        ],
-        "image": null
-    },
-    {
-        "type": "CLUB",
+        "type": "Abydos Set",
         "name": "Countermeasure Council",
         "description": "",
         "criteria": [
@@ -60,7 +13,19 @@
         "image": null
     },
     {
-        "type": "CLUB",
+        "type": "Arius Set",
+        "name": "Arius Squad",
+        "description": "Vanitas Vanitatum, Et Omnia Vanitas",
+        "criteria": [
+            { "student": "Atsuko",  "version": "Original" },
+            { "student": "Hiyori",  "version": "Original" },
+            { "student": "Misaki",  "version": "Original" },
+            { "student": "Saori",   "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "type": "Gehenna Set",
         "name": "Disciplinary Committee",
         "description": "",
         "criteria": [
@@ -70,32 +35,8 @@
             { "student": "Iori",     "version": "Original" }
         ],
         "image": null
-    },
-    {
-        "type": "CLUB",
-        "name": "Engineering Club",
-        "description": "",
-        "criteria": [
-            { "student": "Hibiki",  "version": "Original" },
-            { "student": "Kotori",  "version": "Original" },
-            { "student": "Utaha",   "version": "Original" }
-        ],
-        "image": null
-    },
-    {
-        "type": "CLUB",
-        "name": "Game Development Club",
-        "description": "8-bit retro games",
-        "criteria": [
-            { "student": "Alice",   "version": "Original" },
-            { "student": "Midori",  "version": "Original" },
-            { "student": "Momoi",   "version": "Original" },
-            { "student": "Yuzu",    "version": "Original" }
-        ],
-        "image": null
-    },
-    {
-        "type": "CLUB",
+    },{
+        "type": "Gehenna Set",
         "name": "Gourmet Research Club",
         "description": "Eat or Die",
         "criteria": [
@@ -107,7 +48,7 @@
         "image": null
     },
     {
-        "type": "CLUB",
+        "type": "Gehenna Set",
         "name": "Handyman 68",
         "description": "Unwelcome School",
         "criteria": [
@@ -119,19 +60,7 @@
         "image": null
     },
     {
-        "type": "CLUB",
-        "name": "Justice Actualization Committee",
-        "description": "",
-        "criteria": [
-            { "student": "Hasumi",  "version": "Original" },
-            { "student": "Ichika",  "version": "Original" },
-            { "student": "Mashiro", "version": "Original" },
-            { "student": "Tsurugi", "version": "Original" }
-        ],
-        "image": null
-    },
-    {
-        "type": "CLUB",
+        "type": "Hyakkiyako Set",
         "name": "Ninjutsu Research Department",
         "description": "",
         "criteria": [
@@ -142,7 +71,97 @@
         "image": null
     },
     {
-        "type": "CLUB",
+        "type": "Millennium Set",
+        "name": "Cleaning & Clearing",
+        "description": "Intelligence maid agency",
+        "criteria": [
+            { "student": "Akane",  "version": "Original" },
+            { "student": "Asuna",  "version": "Original" },
+            { "student": "Karin",  "version": "Original" },
+            { "student": "Neru",   "version": "Original" },
+            { "student": "Toki",   "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "type": "Millennium Set",
+        "name": "Seminar",
+        "description": "",
+        "criteria": [
+            { "student": "Koyuki",  "version": "Original" },
+            { "student": "Noa",     "version": "Original" },
+            { "student": "Yuuka",   "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "type": "Millennium Set",
+        "name": "Engineering Club",
+        "description": "",
+        "criteria": [
+            { "student": "Hibiki",  "version": "Original" },
+            { "student": "Kotori",  "version": "Original" },
+            { "student": "Utaha",   "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "type": "Millennium Set",
+        "name": "Game Development Club",
+        "description": "8-bit retro games",
+        "criteria": [
+            { "student": "Alice",   "version": "Original" },
+            { "student": "Midori",  "version": "Original" },
+            { "student": "Momoi",   "version": "Original" },
+            { "student": "Yuzu",    "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "type": "Millennium Set",
+        "name": "Supernatural Phenomenon Task Force",
+        "description": "",
+        "criteria": [
+            { "student": "Eimi",    "version": "Original" },
+            { "student": "Himari",  "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "type": "Millennium Set",
+        "name": "Veritas",
+        "description": "Yuuka's weight is 100 KGs",
+        "criteria": [
+            { "student": "Chihiro", "version": "Original" },
+            { "student": "Hare",    "version": "Original" },
+            { "student": "Kotama",  "version": "Original" },
+            { "student": "Maki",    "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "type": "Red Winter Set",
+        "name": "Class No. 227",
+        "description": "Suspended students",
+        "criteria": [
+            { "student": "Nodoka",  "version": "Original" },
+            { "student": "Shigure", "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "type": "Red Winter Set",
+        "name": "Red Winter Secretariat",
+        "description": "",
+        "criteria": [
+            { "student": "Cherino", "version": "Original" },
+            { "student": "Marina",  "version": "Original" },
+            { "student": "Tomoe",   "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "type": "SRT Set",
         "name": "RABBIT Platoon",
         "description": "",
         "criteria": [
@@ -154,62 +173,52 @@
         "image": null
     },
     {
-        "type": "CLUB",
-        "name": "Red Winter Secretariat",
+        "type": "Trinity Set",
+        "name": "After School Sweets Club",
+        "description": "The Miracle 5000 cakes",
+        "criteria": [
+            { "student": "Airi",    "version": "Original" },
+            { "student": "Kazusa",  "version": "Original" },
+            { "student": "Natsu",   "version": "Original" },
+            { "student": "Yoshimi", "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "type": "Trinity Set",
+        "name": "Tea Party",
         "description": "",
         "criteria": [
-            { "student": "Cherino", "version": "Original" },
-            { "student": "Marina",  "version": "Original" },
-            { "student": "Tomoe",   "version": "Original" }
+            { "student": "Mika",   "version": "Original" },
+            { "student": "Nagisa",  "version": "Original" }
         ],
         "image": null
     },
     {
-        "type": "CLUB",
-        "name": "Rescue Knights",
-        "description": "Mine breaks and the Knights heal",
-        "criteria": [
-            { "student": "Hanae",   "version": "Original" },
-            { "student": "Mine",    "version": "Original" },
-            { "student": "Serina",  "version": "Original" }
-        ],
-        "image": null
-    },
-    {
-        "type": "CLUB",
-        "name": "Seminar",
+        "type": "Trinity Set",
+        "name": "Justice Actualization Committee",
         "description": "",
         "criteria": [
-            { "student": "Koyuki",  "version": "Original" },
-            { "student": "Noa",     "version": "Original" },
-            { "student": "Yuuka",   "version": "Original" }
+            { "student": "Hasumi",  "version": "Original" },
+            { "student": "Ichika",  "version": "Original" },
+            { "student": "Mashiro", "version": "Original" },
+            { "student": "Tsurugi", "version": "Original" }
         ],
         "image": null
     },
     {
-        "type": "CLUB",
-        "name": "Sisterhood",
-        "description": "Trinity intelligence network",
-        "criteria": [
-            { "student": "Hinata",   "version": "Original" },
-            { "student": "Mari",     "version": "Original" },
-            { "student": "Sakurako", "version": "Original" }
-        ],
-        "image": null
-    },
-    {
-        "type": "CLUB",
-        "name": "Supernatural Phenomenon Task Force",
+        "type": "Trinity Set",
+        "name": "Library Committee",
         "description": "",
         "criteria": [
-            { "student": "Eimi",    "version": "Original" },
-            { "student": "Himari",  "version": "Original" }
+            { "student": "Ui",  "version": "Original" },
+            { "student": "Shimiko", "version": "Original" }
         ],
         "image": null
     },
     {
-        "type": "CLUB",
-        "name": "Supplemental Classes Club",
+        "type": "Trinity Set",
+        "name": "Supplemental Lessons Club",
         "description": "Who is a betrayer?",
         "criteria": [
             { "student": "Azusa",   "version": "Original" },
@@ -220,18 +229,37 @@
         "image": null
     },
     {
-        "type": "CLUB",
-        "name": "Veritas",
-        "description": "Yuuka's weight is 100 KGs",
+        "type": "Trinity Set",
+        "name": "Trinity Vigilante Crew",
+        "description": "",
         "criteria": [
-            { "student": "Chihiro", "version": "Original" },
-            { "student": "Hare",    "version": "Original" },
-            { "student": "Kotama",  "version": "Original" },
-            { "student": "Maki",    "version": "Original" }
+            { "student": "Reisa", "version": "Original" },
+            { "student": "Suzumi",    "version": "Original" }
         ],
         "image": null
     },
-
+    {
+        "type": "Trinity Set",
+        "name": "Rescue Knights",
+        "description": "Mine will destroy and the knights will treat.",
+        "criteria": [
+            { "student": "Hanae",   "version": "Original" },
+            { "student": "Mine",    "version": "Original" },
+            { "student": "Serina",  "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "type": "Trinity Set",
+        "name": "Sisterhood",
+        "description": "Trinity intelligence network",
+        "criteria": [
+            { "student": "Hinata",   "version": "Original" },
+            { "student": "Mari",     "version": "Original" },
+            { "student": "Sakurako", "version": "Original" }
+        ],
+        "image": null
+    },
     {
         "type": "VERSION",
         "name": "Bunny Chaser Aboard",

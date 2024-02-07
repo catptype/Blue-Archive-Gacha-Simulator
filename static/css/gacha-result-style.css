@@ -1,188 +1,114 @@
 @import 'variables.css';
+@import 'components.css';
+@import 'student-card.css';
 
-/* COMPONENT */
-a {
-    text-decoration: none;
-}
-
-.btn {
-    cursor: pointer;
-    margin: 0;
-    padding: 0.5rem;
-    width: fit-content;
-    border: 1px solid var(--card-br-color);
-    border-radius: var(--container-br);
-    background-color: var(--primary-color);
-    box-shadow: var(--shadow-color);
-    transition: background-color var(--trans-dur) ease-in-out;
-
-    > img {
-        height: 60px;
-        object-fit: cover;
-    }
-
-    > p {
-        width: max-content;
-        margin: 0;
-        padding: 0 var(--gap-size);
-        font-size: auto;
-    }
-
-    &:hover {
-        background-color: var(--hover-color);
-    }
-}
-
-.student-card {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    border-radius: var(--card-br);
-    box-shadow: var(--shadow-color);
-    
-    > img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    > .card-rarity,
-    > .card-school,
-    > .card-label {
-        position: absolute;
-        padding: 0.3rem;
-        background-color: var(--card-bg-color);
-    }
-
-    > .card-rarity {
-        top: 5%;
-        left: 5%;
-        width: fit-content;
-        height: fit-content;
-        border-radius: var(--card-br);
-
-        & .star {
-            width: 20px;
-            height: 20px;
-            background-image: url('../image/star_rarity.png');
-            background-size: 100% 100%;
-        }
-    }
-
-    > .card-school {
-        top: 5%;
-        right: 5%;
-        width: fit-content;
-        height: fit-content;
-        background-color: var(--card-bg-color);
-        border-radius: var(--card-br);
-
-        > img {
-            height: 20px;
-            object-fit: cover;
-        }
-    }
-
-    > .card-label {
-        bottom: 0%;
-        width: 100%;
-        padding: 0;
-
-        > p {
-            font-size: 14px;
-        }
-    }
-
-}
-
-/* PAGE STYLE */
 #gacha-result-container > .sub-container {
     overflow-y: auto;
+    height: 100%;
 
-    & .result-grid {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: var(--gap-size);
+    & .grid-overflow {
+        position: relative;
+        overflow: hidden;
+        padding: calc(var(--gap-size) * 3);
 
-        & .grid-overflow {
+        & .result-item {
+            cursor: pointer;
             position: relative;
-            overflow: hidden;
-            padding: calc(var(--gap-size) * 3);
+            width: 180px;
+            height: 230px;
+            transform: translate(-50%, -50%) skewX(calc(var(--parallelogram-deg) * -1)) rotateZ(20deg);
+            transition: transform 0.1s ease;
+            z-index: 1;
 
-            & .result-item {
-                cursor: pointer;
-                position: relative;
-                width: 180px;
-                height: 230px;
-                transform: translate(-50%, -50%) skewX(calc(var(--parallelogram-deg) * -1)) rotateZ(20deg);
-                transition: transform 0.1s ease;
-                z-index: 1;
+            & .item-back,
+            & .item-front,
+            & .item-mid {
+                position: absolute;
+                transition-property: transform;
+                transition-duration: var(--trans-dur);
+                transition-timing-function: ease-in-out;
+            }
 
-                & .item-back,
-                & .item-front,
-                & .item-mid {
-                    position: absolute;
-                    transition-property: transform;
-                    transition-duration: var(--trans-dur);
-                    transition-timing-function: ease-in-out;
-                }
+            & .item-back,
+            & .item-front {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
 
-                & .item-back,
-                & .item-front {
+            & .item-back {
+                transition-property: transform, opacity;
+                z-index: -2;
+            }
+
+            & .item-mid {
+                transform: translate(-50%, -50%) rotateY(90deg);
+                z-index: -1;
+
+                /* Override card size for gacha results */
+                & .student-card {
                     width: 100%;
                     height: 100%;
-                    object-fit: cover;
+                    
+                    > img {
+                        transform: none;
+                    }
+
+                    & .card-rarity .star {
+                        width: 25px;
+                        height: 25px;
+                    }
+
+                    & .card-school > img {
+                        height: 25px;
+                    }
+
+                    & .card-label {
+                        padding: 0.2rem 0;
+                        font-size: 16px;
+                    }
+
                 }
+                
+                > .new-card {
+                    position: absolute;
+                    display: flex;
+                    height: 20px;
+                    top: -0px;
+                    right: -15px;
+                    z-index: 1;
+                    transform: rotateZ(35deg);
+                }
+            }
+
+            & .item-front {
+                z-index: 0;
+            }
+
+            &:hover {
+                transform: translate(-50%, -50%) skewX(calc(var(--parallelogram-deg) * -1)) rotateZ(0deg);
+            }
+
+            &.showed {
+                --delay: 150ms;
+                cursor: default;
+                transform: translate(-50%, -50%) skewX(calc(var(--parallelogram-deg) * -1)) rotateZ(0deg);
 
                 & .item-back {
-                    transition-property: transform, opacity;
-                    z-index: -2;
+                    transform: translateX(-100%);
+                    opacity: 0;
                 }
 
                 & .item-mid {
-                    transform: translate(-49%, -49%) rotateY(90deg);
-                    z-index: -1;
-                    
-                    > .new-card {
-                        position: absolute;
-                        display: flex;
-                        height: 20px;
-                        top: -0px;
-                        right: -15px;
-                        z-index: 1;
-                        transform: rotateZ(35deg);
-                    }
+                    transition-delay: calc(var(--trans-dur) + var(--delay));
+                    transform: translate(-50%, -50%) rotateY(0deg);
+                    width: 100%;
+                    height: 100%;
                 }
 
                 & .item-front {
-                    z-index: 0;
-                }
-
-                &:hover {
-                    transform: translate(-50%, -50%) skewX(calc(var(--parallelogram-deg) * -1)) rotateZ(0deg);
-                }
-
-                &.showed {
-                    --delay: 150ms;
-                    transform: translate(-50%, -50%) skewX(calc(var(--parallelogram-deg) * -1)) rotateZ(0deg);
-
-                    & .item-back {
-                        transform: translateX(-100%);
-                        opacity: 0;
-                    }
-
-                    & .item-mid {
-                        transition-delay: calc(var(--trans-dur) + var(--delay));
-                        transform: translate(-50%, -50%) rotateY(0deg);
-                        width: 100%;
-                        height: 100%;
-                    }
-
-                    & .item-front {
-                        transition-delay: var(--delay);
-                        transform: rotateY(90deg);
-                    }
+                    transition-delay: var(--delay);
+                    transform: rotateY(90deg);
                 }
             }
         }
@@ -203,17 +129,15 @@ a {
         }
     }
 
-    
-
     & .message > p {
         text-align: center;
         
-        & span.star {
-            display: inline-block;
+        & .star {
+            display: inline-flex;
             width: 15px;
             height: 15px;
             background-image: url('../image/star_rarity.png');
-            background-size: 100% 100%;
+            background-size: cover;
         }
     } 
 }

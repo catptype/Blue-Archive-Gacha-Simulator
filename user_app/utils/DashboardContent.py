@@ -84,13 +84,18 @@ class DashboardContent:
         user_instance = User.objects.get(username=request.user)
         all_achievements = Achievement.objects.all().order_by('id')
         obtained_achievements = []
-        querysets = ObtainedAchievement.objects.filter(user=user_instance)
-        for query in querysets:
+        obtained_students = []
+        
+        for query in ObtainedAchievement.objects.filter(user=user_instance):
             obtained_achievements.append(query.achievement)
+
+        for query in ObtainedStudent.objects.filter(user=user_instance):
+            obtained_students.append(query.student)
 
         context = {
             "all_achievements": all_achievements,
             "obtained_achievements": obtained_achievements,
+            'obtained_students': obtained_students,
         }
         html_content = render_to_string('user_app/dashboard_content/achievement.html', context)
         return html_content
@@ -100,9 +105,8 @@ class DashboardContent:
         user_instance = User.objects.get(username=request.user)
         all_students = Student.objects.all().order_by('name')
         obtained_students = []
-        querysets = ObtainedStudent.objects.filter(user=user_instance)
             
-        for query in querysets:
+        for query in ObtainedStudent.objects.filter(user=user_instance):
             obtained_students.append(query.student)
 
         context = {

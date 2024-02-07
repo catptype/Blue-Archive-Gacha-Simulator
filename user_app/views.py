@@ -17,15 +17,12 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('register_complete')
+            return render(request, 'user_app/register_complete.html')
     else:
         form = CreateNewUserForm()
 
     context = {'form': form}
     return render(request, 'user_app/register.html', context)
-
-def register_complete(request):
-    return redirect('/')
 
 def user_login(request):
     if request.user.is_authenticated:

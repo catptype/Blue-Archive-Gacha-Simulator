@@ -1,0 +1,37 @@
+#register-container,
+#register-complete-container,
+#login-container,
+#forget-container {
+    width: fit-content;
+
+    & h1 {
+        text-align: center;
+    }
+
+    & hr {
+        margin: var(--gap-size) 0;
+        border-color: black;
+    }
+}
+
+#register-content,
+#register-complete-content,
+#login-content,
+#forget-content {
+    padding: 25px;
+}
+
+#dashboard-content {
+    & hr {
+        margin: var(--gap-size) 0;
+        border-color: black;
+    }
+    
+    > #password-form,
+    > #reset-form,
+    > #delete-form {
+        margin: auto;
+        width: fit-content;
+        padding: 25px;
+    }
+}

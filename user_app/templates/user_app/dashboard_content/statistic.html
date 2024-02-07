@@ -8,18 +8,18 @@
             <img class="not-parallelogram" src="{% static '/image/ranking/first.png' %}" alt="first">
             <div class="student-card">
                 <img src="{{ first_r3_student.student.image.url }}" alt="{{ first_r3_student.student.name }}_{{ first_r3_student.student.version }}">
+                <p class="card-label">{{ first_r3_student.student.name }}{% if first_r3_student.student.version.name != "Original" %} ({{ first_r3_student.student.version.name }}){% endif %}</p>
             </div>
             <div>
                 <p>{{ first_r3_student.formatted_datetime }}</p>
-                <p>{{ first_r3_student.student.name }} ({{ first_r3_student.student.version }})</p>
             </div>
             {% else %}
-            <p>NO DATA</p>
+            <h2>NO DATA</h2>
             {% endif %}
         </div>
     </div>
 
-    <div class="sub-container flex-column" id="chart">
+    <div class="sub-container flex-column">
         <h2>OBTAIN RATE</h2>
         <div class="flex-center">
             <div class="pie-chart" id="all-rarities" style="--r1:{{ transaction_count.r1|percentage:total_draw }}%; --r2:{{ transaction_count.r2|percentage:total_draw }}%; --r3:{{ transaction_count.r3|percentage:total_draw }}%;">
@@ -37,12 +37,12 @@
         </div>
     </div>
 
-    <div class="statistic-grid" id="top-info">
+    <div class="grid-col3" id="top-info">
         {% for _, top3_students in most_obtain.items %}
         <div class="sub-container flex-column">
             <h2>MOST OBTAINED<br>{% for _ in ""|rjust:forloop.counter %}<span class="star"></span>{% endfor %}&nbsp;STUDENTS</h2>
             {% if top3_students %}
-            <div class="statistic-grid">
+            <div class="grid-col3">
                 {% for student, count in top3_students %}
                 <div class="rank-icon flex-center not-parallelogram">
                     {% if forloop.counter == 1 %}
@@ -55,6 +55,7 @@
                 </div>
                 <div class="student-card center-position">
                     <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version }}">
+                    <p class="card-label">{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
                 </div>
                 <div class="flex-center">
                     <p>{{ count }} times</p>
@@ -62,7 +63,7 @@
                 {% endfor %}
             </div>
             {% else %}
-            <p>NO DATA</p>
+            <h2>NO DATA</h2>
             {% endif %}
         </div>
         {% endfor %}

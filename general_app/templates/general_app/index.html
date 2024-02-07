@@ -2,14 +2,10 @@
 {% load static %}
 {% block title %}Home{% endblock %}
 
-{% block css %}
-<link rel="stylesheet" type="text/css" href="{% static '/css/home-style.css' %}">
-{% endblock %}
-
 {% block content %}
-<div class="main-container flex-column parallelogram" id="home-container">
-  <div class="home-grid">
-    <div class="sub-container home-item">
+<div class="main-container flex-column parallelogram" style="overflow-y: auto;">
+  <div class="grid-col2">
+    <div class="sub-container">
       <h1>Welcome, Sensei!</h1>
       <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat eius quo neque rerum? Dolorum tempore pariatur esse nobis sapiente. Quia explicabo accusantium autem laboriosam nobis velit earum eum maxime nam.</p>
       <h2>Features</h2>
@@ -19,13 +15,13 @@
         <li>Gacha simulator</li>
       </ul>
     </div>
-    <div class="sub-container home-item">
+    <div class="sub-container">
       <h3>What's new</h3>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ratione quod libero doloremque ipsum quos, qui, nihil quidem voluptas eligendi, necessitatibus ut iusto sunt eius repudiandae at ea magni aspernatur!</p>
     </div>
   </div>
-  <div class="sub-container home-footer">
-    <p>
+  <div class="sub-container">
+    <p style="text-align: center;">
       Designed, developed, and maintained by <span><a href="https://github.com/catptype">Catptype</a></span><br>
       This website is not affiliated with Nexon, Nexon Games or Yostar.<br>
       All game artwork, information and assets used in this database are the property and copyright of the respective authors.<br>

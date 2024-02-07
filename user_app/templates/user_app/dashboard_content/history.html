@@ -11,14 +11,14 @@
             <td {% if transaction.student.rarity == 3 %}class="hilight"{% endif %}>{{ transaction.formatted_datetime }}</td>
             <td {% if transaction.student.rarity == 3 %}class="hilight"{% endif %}>{{ transaction.banner.name }}</td>
             <td>
-                <div class="flex-center history-student">
+                <div class="flex-center">
                     <div class="student-card">
-                        <img src="{{ transaction.student.image.url }}" alt="{{ transaction.student.name }}_{{ transaction.student.version }}">
+                        <img src="{{ transaction.student.image.url }}" alt="{{ transaction.student.name }}_{{ transaction.student.version.name }}">
                     </div>
-                    <span class="stars flex-center">
+                    <span class="stars">
                         {% for _ in ""|rjust:transaction.student.rarity %}<div class="star"></div>{% endfor %}
                     </span>
-                    <p {% if transaction.student.rarity == 3 %}class="hilight"{% endif %}>{{ transaction.student.name }} ({{ transaction.student.version }})</p>
+                    <p {% if transaction.student.rarity == 3 %}class="hilight"{% endif %}>{{ transaction.student.name }} ({{ transaction.student.version.name }})</p>
                 </div>
             </td>
         </tr>

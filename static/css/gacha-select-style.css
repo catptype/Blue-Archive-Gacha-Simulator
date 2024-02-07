@@ -1,15 +1,7 @@
 @import 'variables.css';
 
-#gacha-selection-container {
-    > .gacha-selection-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: var(--gap-size);
-
-        @media (max-width: 1200px) {
-            grid-template-columns: repeat(1, 1fr);
-        }
-    }
+h2 {
+    text-align: center;
 }
 
 #banner-selector {
@@ -47,8 +39,24 @@
         }
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1000px) {
         --selector-width: 600px;
+    }
+
+    @media (max-width: 900px) {
+        --selector-width: 550px;
+    }
+
+    @media (max-width: 800px) {
+        --selector-width: 500px;
+    }
+
+    @media (max-width: 700px) {
+        --selector-width: 450px;
+    }
+
+    @media (max-width: 600px) {
+        --selector-width: 400px;
     }
 }
 

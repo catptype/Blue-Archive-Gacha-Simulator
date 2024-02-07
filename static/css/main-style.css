@@ -35,7 +35,7 @@ html {
 ul {
     margin: 0;
 }
-
+/* Text elemtents */
 p, h1, h2, h3 {
     margin: 0;
     padding: 0;
@@ -46,54 +46,69 @@ p {
     line-height: 1.5rem;
 }
 
-.flex-left {
+/* Flex display */
+.flex-left,
+.flex-center,
+.flex-right,
+.flex-column,
+.flex-wrap {
     display: flex;
-    justify-content: left;
-    align-items: center;
     gap: var(--gap-size);
+}
+
+.flex-left,
+.flex-center,
+.flex-right {
+    align-items: center;
+}
+
+.flex-left {
+    justify-content: left;
 }
 
 .flex-center {
-    display: flex;
     justify-content: center;
-    align-items: center;
-    gap: var(--gap-size);
 }
 
 .flex-right {
-    display: flex;
     justify-content: right;
-    align-items: center;
-    gap: var(--gap-size);
 }
 
 .flex-column {
-    display: flex;
     flex-direction: column;
-    gap: var(--gap-size);
 }
 
 .flex-wrap {
-    display: flex;
     flex-wrap: wrap;
-    gap: var(--gap-size);
 }
 
+/* Positioning */
 .center-position {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.parallelogram {
-    overflow: hidden;
-    transform: skewX(var(--parallelogram-deg));
-
-    & .not-parallelogram {
-        transform: skewX(calc(var(--parallelogram-deg) * -1));
-    }
+/* Grid styles */
+.grid-col2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: var(--gap-size);
 }
 
+.grid-col3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: var(--gap-size);
+}
+
+.grid-col5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: var(--gap-size);
+}
+
+/* Containers */
 .main-container {
     width: 70%;
     margin: 0 auto;
@@ -102,7 +117,6 @@ p {
     background-color: var(--main-container-color);
 
     & .sub-container {
-        height: 100%;
         padding: var(--gap-size);
         border-radius: var(--container-br);
         background-color: var(--sub-container-color);
@@ -111,5 +125,14 @@ p {
     @media (max-width: 800px) {
         width: 90%;
         margin: 0 auto;
+    }
+}
+
+.parallelogram {
+    overflow: hidden;
+    transform: skewX(var(--parallelogram-deg));
+
+    & .not-parallelogram {
+        transform: skewX(calc(var(--parallelogram-deg) * -1));
     }
 }

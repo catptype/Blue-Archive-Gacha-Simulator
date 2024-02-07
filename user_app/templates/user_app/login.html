@@ -12,36 +12,29 @@
     <h1>Login</h1>
     <form class="flex-column" method="POST" autocomplete="off" novalidate>
       {% csrf_token %}
-      {% if form.non_field_errors %}
-      <div class="text-error">
-        {% for error in form.non_field_errors %} 
-        <p>{{ error }}</p>
-        {% endfor %}
-      </div>
-      {% endif %}
+      
+      {% for error in form.non_field_errors %} 
+      <p class="text-error">{{ error }}</p>
+      {% endfor %}
+
       <div class="input-field">
         {{ form.username }}
-        {% if form.username.errors %}
-          <div class="text-error">
-            {% for error in form.username.errors %} 
-            <p>{{ error }}</p>
-            {% endfor %}
-          </div>
-        {% endif %}
+        {% for error in form.username.errors %} 
+        <p class="text-error">{{ error }}</p>
+        {% endfor %}
       </div>
+
       <div class="input-field">
         {{ form.password }}
-        {% if form.password.errors %}
-          <div class="text-error">
-            {% for error in form.password.errors %} 
-            <p>{{ error }}</p>
-            {% endfor %}
-          </div>
-        {% endif %}
+        {% for error in form.password.errors %} 
+        <p class="text-error">{{ error }}</p>
+        {% endfor %}
       </div>
+      
       <a href="{% url 'forget' %}">Forget password</a>
       <hr>
-      <button type="submit" class="flex-center btn">Login</button>
+      
+      <button type="submit" class="btn">Login</button>
     </form>
     <div class="flex-center">
       <p>

@@ -12,20 +12,20 @@
 {% block content %}
 <div class="main-container flex-column parallelogram" id="gacha-detail-container">
     <!-- Gacha banner detail with draw buttons -->
-    <div class="sub-container flex-center banner-detail">
+    <div class="sub-container flex-center" id="banner-detail">
         <a href="{% url 'gacha' %}" class="flex-center btn" id="back">
             <img class="not-parallelogram" src="{% static 'icons/back.svg' %}" alt="Back">
             <p>BACK</p>
         </a>
         <h1>{{ banner.name }}</h1>
-        <div class="banner-image">
+        <div id="banner-image">
             {% if banner.image %}
             <img src="{{ banner.image.url }}" alt="{{ banner.name }}">
             {% else %}
             <img src="{% static '/image/gacha/banner_dummy.png' %}" alt="{{ banner.name }}">
             {% endif %}
         </div>
-        <div class="banner-message">
+        <div id="banner-message">
             {% if is_auth %}
             <p>Guarantee <span class="star"></span><span class="star"></span><span class="star"></span> in {{ num_guarantee }} draw</p>
             {% else %}
@@ -50,19 +50,21 @@
     <!-- All available students in banner -->
     {% for rarity in rarities %}
     <div class="sub-container flex-column banner-info" id="rarity{{ rarity }}">
+
         <div class="flex-left rate-title" onclick="toggleVisible('rarity{{ rarity }}')">
-            <div class="flex-center hamburger">
+            <div class="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <div class="stars">
-                {% for _ in "★"|rjust:rarity %}
+            <div class="flex-center" id="stars">
+                {% for _ in ""|rjust:rarity %}
                 <div class="star"></div>
                 {% endfor %}
             </div>
             <h2>({{ banner|get_rate:rarity }}%)</h2>
         </div>
+
         <div class="flex-column detail-content hidden">
             {% if rarity == 3 and banner.is_pickup.all %}
             <p class="sub-header">PICK UP ({{ banner.feature_rate }}%)</p>
@@ -70,12 +72,8 @@
                 {% for student in banner.is_pickup.all %}
                 <div class="center-position student-card">
                     <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}" loading="lazy">
-                    <div class="flex-center rate-info">
-                        <p>{{ banner.feature_rate|divide_rate:banner.is_pickup.all.count }}%</p>
-                    </div>
-                    <div class="flex-center card-label">
-                        <p>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
-                    </div>
+                    <p class="card-prob">{{ banner.feature_rate|divide_rate:banner.is_pickup.all.count }}%</p>
+                    <p class="card-label">{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
                 </div>
                 {% endfor %}
             </div>
@@ -86,21 +84,18 @@
                 {% for student in filtered_students %}
                 <div class="center-position student-card">
                     <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}" loading="lazy">
-                    <div class="flex-center rate-info">
-                        {% if rarity == 3 %}
-                        <p>{{ banner.r3_rate|subtract_rate:banner.feature_rate|divide_rate:filtered_students.count }}%</p>
-                        {% else %}
-                        <p>{{ banner|get_rate:rarity|divide_rate:filtered_students.count }}%</p>
-                        {% endif %}
-                    </div>
-                    <div class="flex-center card-label">
-                        <p>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
-                    </div>
+                    {% if rarity == 3 %}
+                    <p class="card-prob">{{ banner.r3_rate|subtract_rate:banner.feature_rate|divide_rate:filtered_students.count }}%</p>
+                    {% else %}
+                    <p class="card-prob">{{ banner|get_rate:rarity|divide_rate:filtered_students.count }}%</p>
+                    {% endif %}
+                    <p class="card-label">{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
                 </div>
                 {% endfor %}
                 {% endwith %}
             </div>
         </div>
+
     </div>
     {% endfor %}
 </div>

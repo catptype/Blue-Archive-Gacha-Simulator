@@ -1,0 +1,93 @@
+#statistic {
+
+    & .star {
+        display: inline-flex;
+        background-image: url('../../image/star_rarity.png');
+        background-size: cover;
+    }
+
+    & h2, p {
+        text-align: center;
+    }
+
+    & h2 .star {
+        width: 20px;
+        height: 20px;
+    }
+
+    & p .star {
+        width: 16px;
+        height: 16px;
+    }
+
+    & #first-info {
+        gap: 20px;
+    }
+
+    & #top-info .student-card {
+        width: calc(var(--card-width) - 30px);
+        height: calc(var(--card-height) - 30px);
+    }
+
+    & .rank-icon > img {
+        width: 100px;
+    }
+
+    & .pie-chart {
+        --border: 10px;
+        position: relative;
+        width: 150px;
+        height: 150px;
+        display: inline-grid;
+        place-content: center;
+        margin: 10px;
+
+        &:before{
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            inset: 0;
+            -webkit-mask: radial-gradient(
+                farthest-side,
+                #0000 calc(99% - var(--border)),
+                #000 calc(100% - var(--border))
+            );
+
+            mask: radial-gradient(
+                farthest-side,
+                #0000 calc(99% - var(--border)),
+                #000 calc(100% - var(--border))
+            );
+        }
+
+        &#all-rarities:before {
+            background: conic-gradient(
+                var(--r1-color) 0% var(--r1),
+                var(--r2-color) var(--r1) calc(var(--r1) + var(--r2)),
+                var(--r3-color) calc(var(--r1) + var(--r2)) calc(var(--r1) + var(--r2) + var(--r3)),
+                grey 0%
+            );
+        }
+
+        &#rarity1:before {
+            background: conic-gradient(
+                var(--r1-color) 0% var(--r1),
+                grey 0%
+            );
+        }
+
+        &#rarity2:before {
+            background: conic-gradient(
+                var(--r2-color) 0% var(--r2),    
+                grey 0%
+            );
+        }
+
+        &#rarity3:before {
+            background: conic-gradient(
+                var(--r3-color) 0% var(--r3),  
+                grey 0%
+            );
+        }
+    }
+}

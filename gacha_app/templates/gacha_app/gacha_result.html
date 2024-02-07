@@ -10,7 +10,7 @@
    {% if drawn_students %}
    <div class="main-container parallelogram" id="gacha-result-container">
         <div class="sub-container flex-column">
-            <div class="result-grid">
+            <div class="grid-col5">
                 {% for student in drawn_students %}
                 <div class="grid-overflow">
                     <div class="center-position result-item" onclick="showCurrentItem(this)">
@@ -25,15 +25,13 @@
                                 {% if student.image %}
                                 <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}">
                                 {% endif %}
-                                <div class="flex-center card-rarity">
+                                <div class="card-rarity">
                                     {% for _ in ""|rjust:student.rarity %}<div class="star"></div>{% endfor %}
                                 </div>
-                                <div class="flex-center card-school">
+                                <div class="card-school">
                                     <img src="{{ student.school.image.url }}" alt="{{ student.school_name }}">
                                 </div>
-                                <div class="flex-center card-label">
-                                    <p>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
-                                </div>
+                                <p class="card-label">{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
                             </div>                        
                         </div>
                         {% if student.rarity == 3 %}
@@ -50,7 +48,7 @@
             
             <div class="message">
                 {% if is_auth %}
-                <p>Guarantee <span class="star"></span><span class="star"></span><span class="star"></span> in {{ num_guarantee }} draw</p>
+                <p>Guarantee&nbsp;<span class="star"></span><span class="star"></span><span class="star"></span>&nbsp;in {{ num_guarantee }} draw</p>
                 {% else %}
                 <p>GUEST MODE</p>
                 {% endif %}

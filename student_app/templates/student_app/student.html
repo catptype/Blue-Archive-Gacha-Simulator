@@ -6,36 +6,38 @@
 {% endblock %}
 
 {% block title %}Student list{% endblock %} 
-{% load static %}
+
 {% block content %}
-<div class="main-container flex-column parallelogram" id="student-container">
+<div class="main-container flex-column parallelogram">
+    <!-- Scholl filter -->
     <div class="flex-wrap">
-        <div class="flex-center school-icon activated" id="all" onclick="selectSchool(this)">
+        <div class="sub-container flex-center school-icon activated" id="all" onclick="selectSchool(this)">
             <img class="not-parallelogram" src="{% static 'icons/all.svg' %}" alt="all">
             <p>All</p>
         </div>
         {% for school in schools %}
-        <div class="flex-center school-icon" id="{{ school.name }}" onclick="selectSchool(this)">
+        <div class="sub-container flex-center school-icon" id="{{ school.name }}" onclick="selectSchool(this)">
             <img class="not-parallelogram" src="{{ school.image.url }}" alt="{{ school.name }}">
             <p>{{ school.name }}</p>
         </div>
         {% endfor %}
     </div>
+    <!-- Student list -->
     <div class="sub-container" id="student-content">
-        <div class="student-grid ">
+        <div class="student-grid">
             {% for student in students %}
-            <div class="center-position student-card" school="{{ student.school.name }}">
+            <div class="student-card" school="{{ student.school.name }}">
                 {% if student.image %}
                 <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}" loading="lazy">
                 {% endif %}
-                <div class="flex-center card-rarity">
-                    {% for _ in ""|rjust:student.rarity %}<div class="star"></div>{% endfor %}
-                </div>
-                <div class="flex-center card-school">
-                    <img src="{{ student.school.image.url }}" alt="{{ student.school_name }}">
-                </div>
-                <div class="flex-center card-label">
-                    <p>{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
+                <div class="hover-layout">
+                    <div class="card-rarity">
+                        {% for _ in ""|rjust:student.rarity %}<span class="star"></span>{% endfor %}
+                    </div>
+                    <div class="flex-center card-school">
+                        <img src="{{ student.school.image.url }}" alt="{{ student.school_name }}">
+                    </div>
+                    <p class="card-label">{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
                 </div>
             </div>
             {% endfor %}
