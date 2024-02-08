@@ -53,10 +53,6 @@ nav {
                     }
                 }
 
-                & hr {
-                    margin: var(--gap-size) 0;
-                }
-
                 & li:hover > a {
                     background-color: var(--primary-color);
                 }
@@ -102,4 +98,3 @@ nav {
         }
     }
 }
-

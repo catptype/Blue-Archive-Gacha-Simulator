@@ -2,31 +2,42 @@
 {% load static %}
 {% block title %}Home{% endblock %}
 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home-style.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="main-container flex-column parallelogram" style="overflow-y: auto;">
+<div class="main-container flex-column parallelogram" id="home-container">
   <div class="grid-col2">
-    <div class="sub-container">
-      <h1>Welcome, Sensei!</h1>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat eius quo neque rerum? Dolorum tempore pariatur esse nobis sapiente. Quia explicabo accusantium autem laboriosam nobis velit earum eum maxime nam.</p>
+    <div class="sub-container flex-column">
+      <div class="flex-left">
+        <img class="not-parallelogram" id="arona-portrait" src="{% static '/image/other/Arona.png' %}" alt="Arona">
+        <h1>Welcome, Sensei!</h1>
+      </div>
+      <p>This is an unofficial web application, serving as a Gacha Simulator for the mobile game Blue Archive, developed by Nexon Games and published by Yostar (Japan) and Nexon (Global).</p>      
+      <p>Have fun testing your luck with gacha draws without spending Pyroxene.</p>
       <h2>Features</h2>
       <ul>
-        <li>Account system</li>
-        <li>Student list</li>
-        <li>Gacha simulator</li>
+        <li><b>Gacha simulator</b> with pick-up rates similar to the mobile game</li>
+        <li><b>User account</b> for tracking information such as collections and achievements</li>
+        <li><b>Guest mode</b> allows you to have fun testing your luck</li>
+        <li>Full <b>student list</b> in the current game version</li>
+        <li><b>Open source</b> and <b>no collection of user information</b>, because this is a case study for full-stack web development</li>
       </ul>
     </div>
-    <div class="sub-container">
-      <h3>What's new</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ratione quod libero doloremque ipsum quos, qui, nihil quidem voluptas eligendi, necessitatibus ut iusto sunt eius repudiandae at ea magni aspernatur!</p>
+    <div class="sub-container" id="video-section">
+      <h2>SALTY</h2>
+      <video autoplay muted loop src="{% static '/video/gacha.mov' %}" type="video/mp4">
+    </video>
     </div>
   </div>
-  <div class="sub-container">
-    <p style="text-align: center;">
-      Designed, developed, and maintained by <span><a href="https://github.com/catptype">Catptype</a></span><br>
+  <div class="sub-container flex-column" id="footer">
+    <p>
+      Designed, developed, and maintained by <span><a href="https://github.com/catptype/">Catptype</a></span><br>
       This website is not affiliated with Nexon, Nexon Games or Yostar.<br>
-      All game artwork, information and assets used in this database are the property and copyright of the respective authors.<br>
-      Copyright © 2024. All rights reserved.
+      All assets used in this website are the property and copyright of the respective authors.
     </p>
+    <p>Source code: <span><a href="https://github.com/catptype/Blue-Archive-Gacha-Simulator">GitHub</a></span></p>
   </div>
 </div>
 {% endblock %}

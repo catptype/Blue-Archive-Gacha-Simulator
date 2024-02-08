@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseBadRequest
 
 from .models import GachaBanner
@@ -25,7 +25,7 @@ def gacha_detail(request, gacha_id):
         'num_guarantee': num_guarantee + 1,
         'is_auth': user_instance.is_authenticated,
     }
-    return render(request, 'gacha_app/gacha_detail.html', context)
+    return render(request, 'gacha_app/detail.html', context)
 
 def gacha_result(request, gacha_id):
     banner = get_object_or_404(GachaBanner, pk=gacha_id)
@@ -54,8 +54,7 @@ def gacha_result(request, gacha_id):
             'num_guarantee': num_guarantee + 1,
             'is_auth': user_instance.is_authenticated,
         }
-        return render(request, 'gacha_app/gacha_result.html', context)
+        return render(request, 'gacha_app/result.html', context)
     
     else:
         return HttpResponseBadRequest("SOMETHING WRONG")
-        return redirect('gacha_detail', gacha_id=gacha_id)

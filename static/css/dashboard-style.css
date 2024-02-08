@@ -1,0 +1,40 @@
+@import 'variables.css';
+@import 'components.css';
+@import 'student-card.css';
+@import 'dashboard-history.css';
+@import 'dashboard-statistic.css';
+@import 'dashboard-collection.css';
+@import 'dashboard-achievement.css';
+@import 'dashboard-setting.css';
+
+#dashboard-container {
+    & .dashboard-grid {    
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        gap: var(--gap-size);
+        overflow-y: auto;
+    
+        & #dashboard-sidebar,
+        & #dashboard-content {
+            overflow-y: auto;
+            height: 100%;
+
+            & #welcome,
+            & #error {
+                width: fit-content;
+                height: 350px;
+                margin: auto;
+                
+                > img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: scale-down;
+                }
+
+                > h2 {
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

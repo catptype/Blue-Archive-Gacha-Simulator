@@ -32,6 +32,11 @@ html {
     }
 }
 
+hr {
+    margin: var(--gap-size) 0;
+    border-color: black;
+}
+
 ul {
     margin: 0;
 }
@@ -84,28 +89,30 @@ p {
 
 /* Positioning */
 .center-position {
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
 /* Grid styles */
-.grid-col2 {
+.grid-col2, 
+.grid-col3,
+.grid-col5 {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     grid-gap: var(--gap-size);
+}
+
+.grid-col2 {
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .grid-col3 {
-    display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: var(--gap-size);
 }
 
 .grid-col5 {
-    display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-gap: var(--gap-size);
 }
 
 /* Containers */

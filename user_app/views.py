@@ -126,6 +126,20 @@ def dashboard(request):
                 'html_content': html_content,
             }
             return render(request, 'user_app/dashboard.html', context)
+    
+    elif tab is None:
+        html_content = DashboardContent.welcome(request)
+
+        context = {
+            'dashboard_title': format_html('<h1>WELCOME</h1>'),
+            'html_content': html_content,
+        }
+        return render(request, 'user_app/dashboard.html', context)
+    
     else:
-        context = {'dashboard_title': format_html('<h1>WELCOME</h1>')}
+        html_content = DashboardContent.not_found(request)
+        context = {
+            'dashboard_title': format_html('<h1>NOT FOUND</h1>'),
+            'html_content': html_content,
+        }
         return render(request, 'user_app/dashboard.html', context)

@@ -10,7 +10,7 @@
    {% if drawn_students %}
    <div class="main-container parallelogram" id="gacha-result-container">
         <div class="sub-container flex-column">
-            <div class="grid-col5">
+            <div class="{% if num_draw == 1 %}flex-center{% elif num_draw == 10 %}grid-col5{% endif %}">
                 {% for student in drawn_students %}
                 <div class="grid-overflow">
                     <div class="center-position result-item" onclick="showCurrentItem(this)">
@@ -48,7 +48,7 @@
             
             <div class="message">
                 {% if is_auth %}
-                <p>Guarantee&nbsp;<span class="star"></span><span class="star"></span><span class="star"></span>&nbsp;in {{ num_guarantee }} draw</p>
+                <p>Guarantee&nbsp;<span class="star"></span><span class="star"></span><span class="star"></span>&nbsp;in {{ num_guarantee }} draw{% if num_guarantee > 1 %}s{% endif %}.</p>
                 {% else %}
                 <p>GUEST MODE</p>
                 {% endif %}
@@ -57,12 +57,12 @@
             <div class="banner-controller" id="show-all">
                 <button class="flex-center btn" onclick="showAllItems()">
                     <p>SHOW ALL</p>
-                    <img class="not-parallelogram" src="{% static 'icons/forward.svg' %}" alt="{{num_draw}}draw">
+                    <img class="not-parallelogram" src="{% static 'icons/forward.svg' %}" alt="{{ num_draw }}draw">
                 </button>
             </div>  
             
             <div class="banner-controller hidden" id="draw-again">
-                <a href="{% url 'gacha_detail' gacha_id=banner.id %}" class="flex-center btn">
+                <a href="{% url 'gacha_detail' gacha_id=banner.id %}" class="flex-center btn" id="back">
                     <img class="not-parallelogram" src="{% static 'icons/back.svg' %}" alt="Back">
                     <p>Back</p>
                 </a>

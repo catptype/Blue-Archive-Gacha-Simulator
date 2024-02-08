@@ -1,0 +1,9 @@
+#dashboard-content {
+    > #password-form,
+    > #reset-form,
+    > #delete-form {
+        margin: auto;
+        width: fit-content;
+        padding: 25px;
+    }
+}

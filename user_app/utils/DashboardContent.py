@@ -16,6 +16,16 @@ from django.db.models import Count
 class DashboardContent:
 
     @staticmethod
+    def welcome(request):
+        html_content = render_to_string('user_app/dashboard/welcome.html')
+        return html_content
+
+    @staticmethod
+    def not_found(reuest):
+        html_content = render_to_string('user_app/dashboard/not_found.html')
+        return html_content
+
+    @staticmethod
     def history(request):
         tab = request.GET.get('tab', None)
         transaction_queryset = GachaTransaction.objects.filter(user=request.user).order_by('-id')
@@ -40,7 +50,7 @@ class DashboardContent:
             'transactions': transactions,
         }
 
-        html_content = render_to_string('user_app/dashboard_content/history.html', context)
+        html_content = render_to_string('user_app/dashboard/history.html', context)
 
         return html_content
 
@@ -76,7 +86,7 @@ class DashboardContent:
             'total_draw': sum(transaction_count.values()),
             'most_obtain': most_obtain,
         }
-        html_content = render_to_string('user_app/dashboard_content/statistic.html', context)
+        html_content = render_to_string('user_app/dashboard/statistic.html', context)
         return html_content
     
     @staticmethod
@@ -97,7 +107,7 @@ class DashboardContent:
             "obtained_achievements": obtained_achievements,
             'obtained_students': obtained_students,
         }
-        html_content = render_to_string('user_app/dashboard_content/achievement.html', context)
+        html_content = render_to_string('user_app/dashboard/achievement.html', context)
         return html_content
     
     @staticmethod
@@ -113,7 +123,7 @@ class DashboardContent:
             'all_students': all_students,
             'obtained_students': obtained_students,
         }
-        html_content = render_to_string('user_app/dashboard_content/collection.html', context)
+        html_content = render_to_string('user_app/dashboard/collection.html', context)
         return html_content
     
     @staticmethod
@@ -134,7 +144,7 @@ class DashboardContent:
             'form': form,
             'csrf_token': get_token(request),
         }
-        html_content = render_to_string('user_app/dashboard_content/change_password.html', context)
+        html_content = render_to_string('user_app/dashboard/change_password.html', context)
         return html_content
     
     @staticmethod
@@ -156,7 +166,7 @@ class DashboardContent:
             'form': form,
             'csrf_token': get_token(request),
         }
-        html_content = render_to_string('user_app/dashboard_content/reset_account.html', context)
+        html_content = render_to_string('user_app/dashboard/reset_account.html', context)
         return html_content
     
     @staticmethod
@@ -167,7 +177,7 @@ class DashboardContent:
                 'form': form,
                 'csrf_token': get_token(request),
             }
-            html_content = render_to_string('user_app/dashboard_content/delete_account.html', context)
+            html_content = render_to_string('user_app/dashboard/delete_account.html', context)
             return False, html_content
 
         if request.user.is_superuser:
@@ -196,4 +206,3 @@ class DashboardContent:
             form = DeleteAccountForm()
             
         return render_form(request, form)
-    

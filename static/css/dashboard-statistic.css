@@ -2,7 +2,7 @@
 
     & .star {
         display: inline-flex;
-        background-image: url('../../image/star_rarity.png');
+        background-image: url('../image/star_rarity.png');
         background-size: cover;
     }
 
