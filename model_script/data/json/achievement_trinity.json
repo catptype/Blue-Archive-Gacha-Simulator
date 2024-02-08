@@ -1,0 +1,82 @@
+[
+    {
+        "name": "After School Sweets Club",
+        "description": "",
+        "criteria": [
+            { "student": "Airi",    "version": "Original" },
+            { "student": "Kazusa",  "version": "Original" },
+            { "student": "Natsu",   "version": "Original" },
+            { "student": "Yoshimi", "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Justice Actualization Committee",
+        "description": "",
+        "criteria": [
+            { "student": "Hasumi",  "version": "Original" },
+            { "student": "Ichika",  "version": "Original" },
+            { "student": "Mashiro", "version": "Original" },
+            { "student": "Tsurugi", "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Library Committee",
+        "description": "",
+        "criteria": [
+            { "student": "Ui",  "version": "Original" },
+            { "student": "Shimiko", "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Rescue Knights",
+        "description": "Mine will destroy and the knights will treat.",
+        "criteria": [
+            { "student": "Hanae",   "version": "Original" },
+            { "student": "Mine",    "version": "Original" },
+            { "student": "Serina",  "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Sisterhood",
+        "description": "",
+        "criteria": [
+            { "student": "Hinata",   "version": "Original" },
+            { "student": "Mari",     "version": "Original" },
+            { "student": "Sakurako", "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Supplemental Lessons Club",
+        "description": "Who is a betrayer?",
+        "criteria": [
+            { "student": "Azusa",   "version": "Original" },
+            { "student": "Hanako",  "version": "Original" },
+            { "student": "Hifumi",  "version": "Original" },
+            { "student": "Koharu",  "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Tea Party",
+        "description": "",
+        "criteria": [
+            { "student": "Mika",   "version": "Original" },
+            { "student": "Nagisa",  "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Trinity Vigilante Crew",
+        "description": "",
+        "criteria": [
+            { "student": "Reisa", "version": "Original" },
+            { "student": "Suzumi",    "version": "Original" }
+        ],
+        "image": null
+    }
+]

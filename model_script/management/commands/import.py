@@ -12,14 +12,37 @@ class Command(BaseCommand):
     help = 'Import data from JSON files into model'
     def handle(self, *args, **options):
         basepath = os.path.join(settings.BASE_DIR, 'model_script', 'data', 'json')
+
+        student_json_list = [
+            'student_r1.json',
+            'student_r2.json',
+            'student_r3.json'
+        ]
+
+        achievement_json_list = [
+            'achievement_abydos.json',
+            'achievement_arius.json',
+            'achievement_gehenna.json',
+            'achievement_hyakkiyako.json',
+            'achievement_millennium.json',
+            'achievement_redwinter.json',
+            'achievement_shanhaijing.json',
+            'achievement_SRT.json',
+            'achievement_trinity.json',
+            'achievement_alternative.json',
+            'achievement_unique.json',
+        ]
+
         self.import_versions(os.path.join(basepath, 'student_version.json'))
         self.import_schools(os.path.join(basepath, 'school.json'))
         self.import_gachatype(os.path.join(basepath, 'gacha_type.json'))
         self.import_banner(os.path.join(basepath, 'gacha_banner.json'))
-        self.import_students(os.path.join(basepath, 'student_r1.json'))
-        self.import_students(os.path.join(basepath, 'student_r2.json'))
-        self.import_students(os.path.join(basepath, 'student_r3.json'))
-        self.import_achievement(os.path.join(basepath, 'achievement.json'))
+
+        for json_file in student_json_list:
+            self.import_students(os.path.join(basepath, json_file))
+
+        for json_file in achievement_json_list:            
+            self.import_achievement(os.path.join(basepath, json_file))
         self.stdout.write(self.style.SUCCESS('Data imported successfully'))
 
     def student_portrait_processing(self, source, destination):
