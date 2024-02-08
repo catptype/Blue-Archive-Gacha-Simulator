@@ -20,41 +20,94 @@ nav {
             width: 20ch; /* 20 char length = text field */
 
             > ul.sub-menu {
-                display: none;
+                visibility: hidden;
                 position: absolute;
                 width: 100%;
-                top: 100%;
-                background-color: var(--navbar-color);
+                top: 0;
+                left: 0;
+                background-color: var(--navbar-dropdown-color);
                 border-radius: var(--container-br);
                 padding: var(--gap-size);
-                z-index: 999;
+                z-index: 9;
+                opacity: 0;
+                transition: transform 80ms ease-in-out,
+                            opacity 80ms ease-out,
+                            visibility var(--trans-dur) ease-in-out;
 
-                & li > a {
-                    padding: var(--gap-size);
-                    transition: background-color var(--trans-dur) ease;
-                }
+                & li {
+                    position: relative;
 
-                & li > form {
-                    width: 100%;
-
-                    & #logout {
-                        cursor: pointer;
-                        width: 100%;
+                    > a {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        text-decoration: none;
                         padding: var(--gap-size);
-                        text-align: left;
-                        font-size: 1rem;
-                        border: none;
-                        background-color: rgba(0,0,0,0);
-                        transition: background-color var(--trans-dur) ease;
-    
-                        &:hover {
-                            background-color: var(--primary-color);
+                        color: black;
+                        z-index: 1;
+                        transition: transform calc(var(--trans-dur) * 0.2) ease;
+        
+                        &:hover { 
+                            transform: translateX(35px);
                         }
                     }
-                }
 
-                & li:hover > a {
-                    background-color: var(--primary-color);
+                    > form {
+                        width: 100%;
+    
+                        & #logout {
+                            position: relative;
+                            cursor: pointer;
+                            width: 100%;
+                            padding: var(--gap-size);
+                            text-align: left;
+                            font-size: 1rem;
+                            border: none;
+                            background-color: rgba(0,0,0,0);
+                            z-index: 1;
+                            transition: transform calc(var(--trans-dur) * 0.2) ease;
+            
+                            &:hover { 
+                                transform: translateX(35px);
+                            }
+                        }
+                    }
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        visibility: hidden;
+                        top: calc(var(--gap-size) / 2);
+                        left: 0;
+                        width: 40px;
+                        height: 40px;
+                        z-index: 1;
+                        background-image: url('../image/other/pyroxene.png');
+                        background-size: cover;
+                    }
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 0%;
+                        height: 100%;
+                        z-index: 0;
+                        background-color: var(--primary-color);
+                        transition: width var(--trans-dur) ease;
+                    }
+
+                    &:hover::before {
+                        visibility: visible;
+                    }
+    
+                    &:hover::after {
+                        width: 100%;
+                    }
                 }
             }
 
@@ -65,8 +118,10 @@ nav {
                 padding: 0;
             }
 
-            &:hover > .sub-menu {
-                display: block;
+            &:hover > ul.sub-menu {
+                visibility: visible;
+                opacity: 1;
+                transform: translateY(35px);
             }
         }
     }

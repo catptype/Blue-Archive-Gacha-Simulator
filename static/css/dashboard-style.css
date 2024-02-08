@@ -17,8 +17,76 @@
         & #dashboard-sidebar,
         & #dashboard-content {
             overflow-y: auto;
+            overflow-x: hidden;
             height: 100%;
+        }
 
+        & #dashboard-sidebar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: var(--gap-size);
+
+            & li {
+                position: relative;
+
+                > a {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    text-decoration: none;
+                    padding-left: 1.2rem;
+                    padding-top: 0.2rem;
+                    padding-bottom: 0.2rem;
+                    color: black;
+                    z-index: 1;
+                    transition: transform calc(var(--trans-dur) * 0.2) ease;
+    
+                    &:hover { 
+                        transform: translateX(20px);
+                    }
+                } 
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 0%;
+                    height: 100%;
+                    z-index: 0;
+                    background-color: var(--primary-color);
+                    transition: width var(--trans-dur) ease;
+                }
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    visibility: hidden;
+                    top: 0;
+                    left: 0;
+                    width: 30px;
+                    height: 30px;
+                    padding: 0.2rem;
+                    z-index: 1;
+                    background-image: url('../image/other/pyroxene.png');
+                    background-size: cover;
+                }
+
+                &:hover::before {
+                    visibility: visible;
+                }
+
+                &:hover::after {
+                    width: 100%;
+                }
+            }
+        }
+
+        & #dashboard-content {
             & #welcome,
             & #error {
                 width: fit-content;
