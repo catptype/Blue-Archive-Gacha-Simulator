@@ -44,31 +44,6 @@ class SchoolAdmin(admin.ModelAdmin):
     #         'all': ('/static/css/admin-overrides.css',),
     #     }
 
-# class SchoolAdmin_OLD(admin.ModelAdmin):
-#     list_display = ['name', 'logo', 'get_student_names']
-#     ordering = ['name'] 
-
-#     def logo(self, obj):
-#         name = obj.name
-#         image = obj.image
-#         context = {
-#             'name': name,
-#             'image': image,
-#         }
-#         return render_to_string('admin/school_logo.html', context)
-
-#     def get_student_names(self, obj):
-#         name_list = [student.name for student in obj.student_set.all().order_by('name')]
-#         name_list = list(dict.fromkeys(name_list))
-#         return ', '.join(name_list)
-
-#     get_student_names.short_description = 'Students'
-
-#     class Media:
-#         css = {
-#             'all': ('/static/css/admin-overrides.css',),
-#         }
-
 class VersionAdmin(admin.ModelAdmin):
     form = VersionAdminForm
     list_display = ['version_id', 'version_name', 'display_student_images']
@@ -85,25 +60,6 @@ class VersionAdmin(admin.ModelAdmin):
     
     display_student_images.short_description = 'Students'
 
-
-# class VersionAdmin_OLD(admin.ModelAdmin):
-#     list_display = ['name', 'display_student_images']
-#     ordering = ['id']
-
-#     def display_student_images(self, obj):
-#         students = obj.student_set.all().order_by('name')
-#         context = {
-#             'students': students
-#         }
-#         return render_to_string('admin/student_version.html', context)
-
-#     display_student_images.short_description = 'Students'
-
-#     class Media:
-#         css = {
-#             'all': ('/static/css/admin-overrides.css',),
-#         }
-
 class StudentAdmin(admin.ModelAdmin):
     form = StudentAdminForm
     list_display = ['student_id', 'student_portrait', 'student_name', 'version_id', 'student_rarity', 'school_id', 'student_is_limited', 'edit_button']
@@ -113,7 +69,6 @@ class StudentAdmin(admin.ModelAdmin):
     show_facets = admin.ShowFacets.ALWAYS
     search_fields = ['name']
     list_filter = [RarityFilter, 'school_id', 'version_id', 'student_is_limited']
-    # list_filter = ['school_id', 'version_id', 'student_is_limited']
 
     def student_portrait(self, obj:Student):
         context = {
@@ -131,49 +86,6 @@ class StudentAdmin(admin.ModelAdmin):
 
     student_portrait.short_description = 'Portrait'
     edit_button.short_description = ''
-
-# class StudentAdmin_OLD(admin.ModelAdmin):
-#     # Set form
-#     form = StudentAdminForm
-    
-#     # Set field
-#     list_display = ['portrait', 'name', 'version', 'rarity', 'school', 'is_limited', 'edit_button']
-#     list_per_page = 10
-#     ordering = ['name']
-
-#     # Set search and filtering
-#     show_facets = admin.ShowFacets.ALWAYS
-#     search_fields = ['name']
-#     list_filter = [RarityFilter, 'school', 'version', 'is_limited']
-
-#     # Custom field
-#     def portrait(self, obj):
-#         name = obj.name
-#         version = obj.version_name
-#         image = obj.image
-#         context = {
-#             'name': name,
-#             'version': version,
-#             'image': image,
-#         }
-#         return render_to_string('admin/student_portrait.html', context)
-
-#     def edit_button(self, obj):
-#         app = obj._meta.app_label
-#         model = obj._meta.model_name
-#         edit_url = reverse(f'admin:{app}_{model}_change',  args=[obj.id])
-#         context = {
-#             'edit_url': edit_url
-#         }
-#         return render_to_string('admin/edit_button.html', context)
-    
-#     edit_button.short_description = ''
-
-#     class Media:
-#         css = {
-#             'all': ('/static/css/admin-overrides.css',),
-#         }
-#         js = ('/static/js/admin.js',)
 
 admin.site.register(Student, StudentAdmin)
 admin.site.register(School, SchoolAdmin)
