@@ -42,9 +42,6 @@ def serve_school_image(request:HttpRequest, school_id:int):
             return HttpResponseNotFound("SVG not found in static files.")
         
         return FileResponse(open(svg_path, "rb"), content_type="image/png")
-
-        # return FileResponse(open(svg_path, "rb"), content_type="image/svg+xml")
-
     
     # Create a temporary file
     temp_file = tempfile.NamedTemporaryFile(delete=False)
@@ -57,7 +54,6 @@ def serve_school_image(request:HttpRequest, school_id:int):
     return response
 
 def serve_student_image(request:HttpRequest, student_id:int):
-
     try:
         student_obj = Student.objects.get(student_id=student_id)
         student_name = student_obj.name
@@ -74,9 +70,6 @@ def serve_student_image(request:HttpRequest, student_id:int):
             return HttpResponseNotFound("SVG not found in static files.")
         
         return FileResponse(open(svg_path, "rb"), content_type="image/png")
-
-        # return FileResponse(open(svg_path, "rb"), content_type="image/svg+xml")
-
     
     # Create a temporary file
     temp_file = tempfile.NamedTemporaryFile(delete=False)

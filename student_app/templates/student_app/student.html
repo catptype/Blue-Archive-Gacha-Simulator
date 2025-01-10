@@ -25,126 +25,171 @@
         overflow: hidden;
         background-color: #fff;
         transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+
+            & .character-image {
+                transform: scale(1.05);
+            }
+        }
+
+        &.r1-card:hover {
+            border-color: var(--r1-color);
+            box-shadow: 0 0 20px var(--r1-color), 0 0 30px rgba(107, 223, 255, 0.5);
+            
+            & .character-label {
+                background: linear-gradient(90deg, rgba(107, 223, 255, 0.9), rgba(0, 180, 255, 0.8));
+                color: white;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+            }
+        }
+
+        &.r2-card:hover {
+            border-color: var(--r2-color);
+            box-shadow: 0 0 20px var(--r2-color), 0 0 30px rgba(255, 228, 0, 0.5);
+        
+            & .character-label {
+                background: linear-gradient(90deg, rgba(255, 228, 0, 0.9), rgba(255, 170, 0, 0.8));
+                color: white;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+            }
+        }
+
+        &.r3-card:hover {
+            border-color: var(--r3-color);
+            box-shadow: 0 0 20px var(--r3-color), 0 0 30px rgba(254, 193, 245, 0.5);
+            
+            & .character-label {
+                background: linear-gradient(90deg, rgba(254, 193, 245, 0.9), rgba(245, 120, 220, 0.8));
+                color: white;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+            }
+        }
+
+        /* Card Image */
+        & .character-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        /* Card Label */
+        & .character-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px; /* Fixed height for uniformity */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding: 0 8px;
+            color: black; /* Default label text color */
+            font-weight: bold;
+            font-size: 1.1rem;
+            background-color: rgba(255, 255, 255, 0.9); /* Default white background */
+            text-shadow: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        
+            & span {
+                font-size: 0.9rem;
+                font-weight: normal;
+                margin-top: 2px;
+            }
+        }
+
+        /* Rarity and School Icons */
+        & .school-icon, 
+        & .rarity-stars {
+            position: absolute;
+            top: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            padding: 5px;
+        }
+
+        & .school-icon {
+            right: 10px;
+            width: 40px;
+            height: 40px;
+        }
+        
+        & .rarity-stars {
+            left: 10px;
+            border-radius: 15px;
+            display: flex;
+            gap: 2px;
+            align-items: center;
+            padding: 3px 8px;
+
+            & .star {
+                width: 20px;
+                height: 20px;
+                background-image: url({% static 'asset/star_rarity.png' %});
+                background-size: cover;
+            }
+        }
     }
 
-    .character-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    /* Filter Section */
+    .school-filter {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        border-radius: 12px;
+
+        &.activated {
+            border-color: #007BFF;
+            background-color: #f0f8ff;
+            transform: scale(1.05);
+            box-shadow: 0 3px 6px rgba(0, 123, 255, 0.3);
+        }
+
+        &:hover {
+            border-color: #FFE400;
+            background-color: #f0f8ff;
+            transform: scale(1.05);
+            box-shadow: 0 3px 6px rgba(0, 123, 255, 0.3);
+        }
     }
 
-    /* Card Glow Effects on Hover */
-    .r1-card:hover {
-        border-color: var(--r1-color);
-        box-shadow: 0 0 20px var(--r1-color), 0 0 30px rgba(107, 223, 255, 0.5);
+    @media (min-width: 1200px) {
+        .row-cols-xl-10 > * {
+            flex: 0 0 auto;
+            width: calc(100% / 10);
+        }
     }
 
-    .r2-card:hover {
-        border-color: var(--r2-color);
-        box-shadow: 0 0 20px var(--r2-color), 0 0 30px rgba(255, 228, 0, 0.5);
-    }
-
-    .r3-card:hover {
-        border-color: var(--r3-color);
-        box-shadow: 0 0 20px var(--r3-color), 0 0 30px rgba(254, 193, 245, 0.5);
-    }
-
-    /* Card Image */
-    .character-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-    }
-
-    .character-card:hover .character-image {
-        transform: scale(1.05);
-    }
-
-    /* Card Label */
-    .character-label {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 60px; /* Fixed height for uniformity */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        padding: 0 8px;
-        color: black; /* Default label text color */
-        font-weight: bold;
-        font-size: 1.1rem;
-        background-color: rgba(255, 255, 255, 0.9); /* Default white background */
-        text-shadow: none;
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    /* Hover State for Label */
-    .r1-card:hover .character-label {
-        background: linear-gradient(90deg, rgba(107, 223, 255, 0.9), rgba(0, 180, 255, 0.8));
-        color: white;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-    }
-
-    .r2-card:hover .character-label {
-        background: linear-gradient(90deg, rgba(255, 228, 0, 0.9), rgba(255, 170, 0, 0.8));
-        color: white;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-    }
-
-    .r3-card:hover .character-label {
-        background: linear-gradient(90deg, rgba(254, 193, 245, 0.9), rgba(245, 120, 220, 0.8));
-        color: white;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-    }
-
-    .character-label span {
-        font-size: 0.9rem;
-        font-weight: normal;
-        margin-top: 2px;
-    }
-
-    /* Rarity and School Icons */
-    .school-icon, .rarity-stars {
-        position: absolute;
-        top: 10px;
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 50%;
-        padding: 5px;
-    }
-
-    .school-icon {
-        right: 10px;
-        width: 40px;
-        height: 40px;
-    }
-
-    .rarity-stars {
-        left: 10px;
-        border-radius: 15px;
-        display: flex;
-        gap: 2px;
-        align-items: center;
-        padding: 3px 8px;
-    }
-
-    .star {
-        width: 20px;
-        height: 20px;
-        background-image: url({% static 'asset/star_rarity.png' %});
-        background-size: cover;
-    }
 </style>
 
-<div class="container-fluid container-lg mt-3">
+<div class="container-fluid p-3">
+    <!-- Filter Section -->
     <div class="row">
-        <div class="col p-3 overflow-y-scroll" style="height: 75vh;">
-            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-3">
-                
+        <div class="d-flex flex-wrap gap-3 mb-4 justify-content-center">
+            <div class="p-2 school-filter activated text-center" id="all" onclick="selectSchool(this)">
+                <img src="{% static 'icons/all.svg' %}" alt="All" class="mb-2" width="40">
+                <p class="m-0">All</p>
+            </div>
+            {% for school in schools %}
+            <div class="p-2 school-filter text-center" id="{{ school.name }}" onclick="selectSchool(this)">
+                <img src="{% url 'serve_school_image' school_id=school.pk %}" alt="{{ school.name }}" class="mb-2" width="40">
+                <p class="m-0">{{ school.name }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col p-3 overflow-y-scroll" style="height: 720px;">
+            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-10 g-3">
+
                 <!-- Loop render card -->
                 {% for student in students %}
                 <div class="col">
