@@ -1,12 +1,12 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from .models import GachaBanner, GachaTransaction, GachaType
+from .models import GachaBanner, GachaTransaction, GachaRatePreset
 from student_app.models import Student
 
 from django.contrib.admin.widgets import FilteredSelectMultiple
 
-class GachaTypeAdminForm(forms.ModelForm):
+class GachaRatePresetAdminForm(forms.ModelForm):
     # Override widgets for rate fields
     rate_widget = forms.TextInput(attrs={
         'type': 'number', 
@@ -16,10 +16,10 @@ class GachaTypeAdminForm(forms.ModelForm):
         'max': '100.0',
     })
 
-    pickup_rate = forms.DecimalField(widget=rate_widget)
-    r3_rate = forms.DecimalField(widget=rate_widget)
-    r2_rate = forms.DecimalField(widget=rate_widget)
-    r1_rate = forms.DecimalField(widget=rate_widget)
+    preset_feature_rate = forms.DecimalField(widget=rate_widget)
+    preset_r3_rate = forms.DecimalField(widget=rate_widget)
+    preset_r2_rate = forms.DecimalField(widget=rate_widget)
+    preset_r1_rate = forms.DecimalField(widget=rate_widget)
 
     def clean(self):
         cleaned_data = super().clean()
@@ -28,19 +28,19 @@ class GachaTypeAdminForm(forms.ModelForm):
         total_rate = sum(cleaned_data.get(f'r{i}_rate', 0) for i in [3, 2, 1])
         if total_rate != 100.0:
             raise ValidationError({
-                'r3_rate': f"The sum of rates must be 100%. (Current sum: {total_rate})",
-                'r2_rate': f"The sum of rates must be 100%. (Current sum: {total_rate})",
-                'r1_rate': f"The sum of rates must be 100%. (Current sum: {total_rate})",
+                'preset_r3_rate': f"The sum of rates must be 100%. (Current sum: {total_rate})",
+                'preset_r2_rate': f"The sum of rates must be 100%. (Current sum: {total_rate})",
+                'preset_r1_rate': f"The sum of rates must be 100%. (Current sum: {total_rate})",
             })
         
-        # Ensure that pickup_rate must less than r3_rate
-        if cleaned_data.get('pickup_rate') >= cleaned_data.get('r3_rate'):
+        # Ensure that preset_feature_rate must less than preset_r3_rate
+        if cleaned_data.get('preset_feature_rate') >= cleaned_data.get('preset_r3_rate'):
             raise ValidationError({
-                'pickup_rate': "The pickup rate must be less than the r3 rate ",
+                'preset_feature_rate': "The pickup rate must be less than the r3 rate ",
             })
         
     class Meta:
-        model = GachaType
+        model = GachaRatePreset
         fields = '__all__'
 
 class GachaBannerAdminForm(forms.ModelForm):

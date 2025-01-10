@@ -5,7 +5,7 @@ class Version(models.Model):
     version_name = models.CharField(max_length=100, unique=True, blank=False, verbose_name='Version')
 
     def __str__(self):
-        return f"{self.name}"
+        return f"[{self.id:03d}] {self.name}"
     
     @property
     def id(self):
@@ -24,7 +24,7 @@ class School(models.Model):
     school_image = models.BinaryField(null=True, verbose_name='Logo')
 
     def __str__(self) -> str:
-        return f"{self.name}"
+        return f"[{self.id:03d}] {self.name}"
     
     @property
     def id(self) -> int:
@@ -52,13 +52,20 @@ class Student(models.Model):
 
     def __str__(self) -> str:
         if self.is_limited:
-            return f"{self.id}: [{self.school}] {self.name} ({self.version}) ★"
+            return f"[{self.id:03d}] {self.school} {self.fullname} ★"
         else:
-            return f"{self.id}: [{self.school}] {self.name} ({self.version})"
+            return f"[{self.id:03d}] {self.school} {self.fullname}"
         
     @property
     def id(self) -> int:
         return self.student_id
+    
+    @property
+    def fullname(self) -> int:
+        if self.version.lower() == 'original':
+            return self.name
+        else:
+            return f"{self.name} ({self.version})"
     
     @property
     def name(self) -> str:

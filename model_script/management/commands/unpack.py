@@ -1,12 +1,9 @@
 import json
 import os
-from PIL import Image
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import BaseCommand
 from student_app.models import Version, School, Student
-from gacha_app.models import GachaType, GachaBanner
-from user_app.models import Achievement
 from .utils.Converter import Converter
 from .utils.TextProgressBar import TextProgressBar
 

@@ -2,12 +2,12 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.template.loader import render_to_string
 
-from .models import GachaBanner, GachaTransaction, GachaType
-from .forms import GachaBannerAdminForm, GachaTransactionAdminForm, GachaTypeAdminForm
+from .models import GachaBanner, GachaTransaction, GachaRatePreset
+from .forms import GachaBannerAdminForm, GachaTransactionAdminForm, GachaRatePresetAdminForm
 
-class GachaTypeAdmin(admin.ModelAdmin):
-    form = GachaTypeAdminForm
-    list_display = ['name', 'feature_rate', 'r3_rate', 'r2_rate', 'r1_rate']
+class GachaRatePresetAdmin(admin.ModelAdmin):
+    form = GachaRatePresetAdminForm
+    list_display = ['preset_id','preset_name', 'preset_feature_rate', 'preset_r3_rate', 'preset_r2_rate', 'preset_r1_rate']
 
     class Media:
         css = {
@@ -16,46 +16,56 @@ class GachaTypeAdmin(admin.ModelAdmin):
 
 class GachaTransactionAdmin(admin.ModelAdmin):
     form = GachaTransactionAdminForm
-    list_display = ['user', 'banner','student', 'custom_datetime']
+    list_display = ['transaction_id', 'user', 'banner', 'student', 'datetime']
     list_per_page = 20
 
-    def custom_datetime(self, obj):
-        return obj.datetime.strftime('%Y-%m-%d %H:%M:%S')
+    @admin.display(description='User')
+    def user(self, obj:GachaTransaction) -> str:
+        return obj.user
+
+    @admin.display(description='Banner')
+    def banner(self, obj:GachaTransaction) -> str:
+        return obj.banner_name
+
+    @admin.display(description='Student')
+    def student(self, obj:GachaTransaction) -> str:
+        return obj.student
     
-    custom_datetime.short_description = 'Datetime'
+    @admin.display(description='Datetime')
+    def datetime(self, obj:GachaTransaction) -> str:
+        return obj.datetime
 
 class GachaBannerAdmin(admin.ModelAdmin):
     form = GachaBannerAdminForm
-    list_display = ['name', 'rates', 'is_pickup_portrait','not_pickup_portrait']
+    list_display = ['banner_name', 'rates', 'is_pickup_portrait','not_pickup_portrait']
     list_per_page = 1
-    filter_horizontal = ('is_pickup', 'not_pickup')
+    filter_horizontal = ('banner_pickup', 'banner_non_pickup')
 
-    def rates(self, obj):
+    def rates(self, obj:GachaBanner):
         return format_html(
-            f'<p>feature: {obj.feature_rate}%</p>'
-            f'<p>★★★: {obj.r3_rate}%</p>'
-            f'<p>★★: {obj.r2_rate}%</p>'
-            f'<p>★: {obj.r1_rate}%</p>'
+            f'<p>feature: {obj.preset_id.feature}%</p>'
+            f'<p>★★★: {obj.preset_id.r3}%</p>'
+            f'<p>★★: {obj.preset_id.r2}%</p>'
+            f'<p>★: {obj.preset_id.r1}%</p>'
         )        
 
-    def is_pickup_portrait(self, obj):
-        students = obj.is_pickup.all().order_by('name')
+    @admin.display(description='Pickup 3★ students')
+    def is_pickup_portrait(self, obj:GachaBanner):
+        students = obj.banner_pickup.order_by('student_name')
         context = {
             'students': students,
             'rarities': [3],
         }
         return render_to_string('admin/gacha_banner.html', context)
     
-    def not_pickup_portrait(self, obj):
-        students = obj.not_pickup.all().order_by('name')
+    @admin.display(description='Not pickup students')
+    def not_pickup_portrait(self, obj:GachaBanner):
+        students = obj.banner_non_pickup.order_by('student_name')
         context = {
             'students': students,
             'rarities': [3,2,1],
         }
         return render_to_string('admin/gacha_banner.html', context)
-
-    is_pickup_portrait.short_description = 'Pickup 3★ students'
-    not_pickup_portrait.short_description = 'Not pickup students'
     
     class Media:
         css = {
@@ -63,6 +73,6 @@ class GachaBannerAdmin(admin.ModelAdmin):
         }
         js = ('/static/js/admin.js',)
 
-admin.site.register(GachaType, GachaTypeAdmin)
+admin.site.register(GachaRatePreset, GachaRatePresetAdmin)
 admin.site.register(GachaBanner, GachaBannerAdmin)
 admin.site.register(GachaTransaction, GachaTransactionAdmin)
