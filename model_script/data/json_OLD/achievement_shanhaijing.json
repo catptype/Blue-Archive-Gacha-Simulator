@@ -1,0 +1,11 @@
+[
+    {
+        "name": "Plum Blossom Garden",
+        "description": "",
+        "criteria": [
+            { "student": "Kokona",  "version": "Original" },
+            { "student": "Shun",    "version": "Original" }
+        ],
+        "image": null
+    }
+]

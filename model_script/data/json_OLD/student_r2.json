@@ -1,0 +1,186 @@
+[
+    {
+        "name": "Airi",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Airi.png"
+    },
+    {
+        "name": "Akane",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Akane.png"
+    },
+    {
+        "name": "Akari",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Akari.png"
+    },
+    {
+        "name": "Ayane",
+        "version": "Original",
+        "school": "Abydos",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Ayane.png"
+    },
+    {
+        "name": "Chise",
+        "version": "Original",
+        "school": "Hyakkiyako",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Chise.png"
+    },
+    {
+        "name": "Fuuka",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Fuuka.png"
+    },
+    {
+        "name": "Hanae",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Hanae.png"
+    },
+    {
+        "name": "Hanako",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Hanako.png"
+    },
+    {
+        "name": "Hare",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Hare.png"
+    },
+    {
+        "name": "Hasumi",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Hasumi.png"
+    },
+    {
+        "name": "Junko",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Junko.png"
+    },
+    {
+        "name": "Kayoko",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Kayoko.png"
+    },
+    {
+        "name": "Kirino",
+        "version": "Original",
+        "school": "Valkyrie",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Kirino.png"
+    },
+    {
+        "name": "Mari",
+        "version": "Original",
+        "school": "Trinity",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Mari.png"
+    },
+    {
+        "name": "Momiji",
+        "version": "Original",
+        "school": "Red Winter",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Momiji.png"
+    },
+    {
+        "name": "Momoi",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Momoi.png"
+    },
+    {
+        "name": "Mutsuki",
+        "version": "Original",
+        "school": "Gehenna",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Mutsuki.png"
+    },
+    {
+        "name": "Nonomi",
+        "version": "Original",
+        "school": "Abydos",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Nonomi.png"
+    },
+    {
+        "name": "Serika",
+        "version": "Original",
+        "school": "Abydos",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Serika.png"
+    },
+    {
+        "name": "Shizuko",
+        "version": "Original",
+        "school": "Hyakkiyako",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Shizuko.png"
+    },
+    {
+        "name": "Tsubaki",
+        "version": "Original",
+        "school": "Hyakkiyako",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Tsubaki.png"
+    },
+    {
+        "name": "Utaha",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Utaha.png"
+    },
+    {
+        "name": "Yuuka",
+        "version": "Original",
+        "school": "Millennium",
+        "rarity": 2,
+        "is_limited": false,
+        "image": "image/r2/Yuuka.png"
+    }
+]

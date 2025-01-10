@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Festival Management Council",
+        "description": "",
+        "criteria": [
+            { "student": "Pina",  "version": "Original" },
+            { "student": "Shizuko",  "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Hyakkaryouran",
+        "description": "",
+        "criteria": [
+            { "student": "Kikyou",  "version": "Original" },
+            { "student": "Renge",   "version": "Original" },
+            { "student": "Yukari",  "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Inner Discipline Club",
+        "description": "",
+        "criteria": [
+            { "student": "Kaede",   "version": "Original" },
+            { "student": "Mimori",  "version": "Original" },
+            { "student": "Kaede",   "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Ninjutsu Research Club",
+        "description": "",
+        "criteria": [
+            { "student": "Izuna",   "version": "Original" },
+            { "student": "Michiru", "version": "Original" },
+            { "student": "Tsukuyo", "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Yin-Yang Club",
+        "description": "",
+        "criteria": [
+            { "student": "Chise",   "version": "Original" },
+            { "student": "Kaho",    "version": "Original" }
+        ],
+        "image": null
+    }
+]

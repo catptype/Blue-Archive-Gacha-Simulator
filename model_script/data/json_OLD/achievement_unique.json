@@ -1,0 +1,35 @@
+[
+    {
+        "name": "All you need is critical",
+        "description": "Dealing 1,000,000 damage is easy, but unfortunately, it's just a dream.",
+        "criteria": [
+            { "student": "Ako",     "version": "Original" },
+            { "student": "Himari",  "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "...Please praise me quickly",
+        "description": "I can imitate a rabbit a little. Pyon.",
+        "criteria": [{ "student": "Toki", "version": "Bunny" }],
+        "image": null
+    },
+    {
+        "name": "I'm planning on eating two puddings after my meal!",
+        "description": "Two puddings.",
+        "criteria": [{ "student": "Nodoka", "version": "Onsen" }],
+        "image": null
+    },
+    {
+        "name": "It's hot, even when I'm not moving at all...",
+        "description": "It's so hot! I'm feeling parched in this heat...",
+        "criteria": [{ "student": "Hoshino", "version": "Swimsuit" }],
+        "image": null
+    },
+    {
+        "name": "I will eliminate your enemies with this",
+        "description": "Hee hee hee!",
+        "criteria": [{ "student": "Wakamo", "version": "Original" }],
+        "image": null
+    }
+]

@@ -3,41 +3,79 @@
 {% block title %}Home{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/home-style.css' %}">
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/home-style.css' %}"> -->
 {% endblock %}
 
 {% block content %}
-<div class="main-container flex-column parallelogram" id="home-container">
-  <div class="grid-col2">
-    <div class="sub-container flex-column">
-      <div class="flex-left">
-        <img class="not-parallelogram" id="arona-portrait" src="{% static '/image/other/Arona.png' %}" alt="Arona">
-        <h1>Welcome, Sensei!</h1>
+<style>
+  strong {
+      color: #5fdbff;
+      text-shadow: 
+          -1px -1px 0 black,  
+          1px -1px 0 black,
+          -1px  1px 0 black,
+          1px  1px 0 black;
+  }
+</style>
+
+<div class="container-fluid container-lg mt-2">
+  <!-- Outer Container -->
+  <div class="row row-cols-1 g-2">
+
+    <!-- Upper Row -->
+    <div class="col">
+      <div class="row row-cols-1 row-cols-lg-2 g-2">
+        <!-- Left -->
+        <div class="col">
+          <div class="d-flex flex-column p-3 border">
+            <div class="d-flex flex-wrap justify-content-start align-items-center mb-4 gap-2">
+              <div class="rounded-circle overflow-hidden position-relative" style="width: 100px; height: 100px;">
+                <img class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" src="{% static 'asset/other/Arona.png' %}" alt="Arona">
+              </div>
+              <h1 class="display-6">Welcome, Sensei!</h1>
+            </div>
+    
+            <p class="lead">
+              This is an unofficial web application, serving as a Gacha Simulator for the mobile game Blue Archive, developed by Nexon Games and published by Yostar (Japan) and Nexon (Global).
+            </p>
+            <p>Have fun with gacha draws without spending Pyroxene.</p>
+            
+            <h2 class="mt-2">Features</h2>
+            <ul class="">
+              <li><strong>Gacha simulator</strong> with pick-up rates similar to the mobile game</li>
+              <li><strong>User account</strong> for tracking information such as collections and achievements</li>
+              <li><strong>Guest mode</strong> allows you to have fun testing your luck</li>
+              <li>Full <strong>student list</strong> in the current game version</li>
+              <li><strong>Open source</strong> and <strong>no collection of user information</strong>, as this is a case study for full-stack web development</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Right -->
+        <div class="col">
+          <div class="p-3 h-100 border">
+            <h2 class="text-center">SALTY</h2>
+            <div class="ratio ratio-16x9">
+              <video autoplay muted loop class="w-100">
+                <source src="{% static 'video/gacha.mov' %}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </div>
       </div>
-      <p>This is an unofficial web application, serving as a Gacha Simulator for the mobile game Blue Archive, developed by Nexon Games and published by Yostar (Japan) and Nexon (Global).</p>      
-      <p>Have fun testing your luck with gacha draws without spending Pyroxene.</p>
-      <h2>Features</h2>
-      <ul>
-        <li><b>Gacha simulator</b> with pick-up rates similar to the mobile game</li>
-        <li><b>User account</b> for tracking information such as collections and achievements</li>
-        <li><b>Guest mode</b> allows you to have fun testing your luck</li>
-        <li>Full <b>student list</b> in the current game version</li>
-        <li><b>Open source</b> and <b>no collection of user information</b>, because this is a case study for full-stack web development</li>
-      </ul>
     </div>
-    <div class="sub-container" id="video-section">
-      <h2>SALTY</h2>
-      <video autoplay muted loop src="{% static '/video/gacha.mov' %}" type="video/mp4">
-    </video>
+
+    <!-- Below Row -->
+    <div class="col">
+      <div class="p-3 border text-center">
+        <p>
+          Designed, developed, and maintained by <a href="https://github.com/catptype/">Catptype</a><br>
+          This website is not affiliated with Nexon, Nexon Games, or Yostar.<br>
+          All assets used in this website are the property and copyright of the respective authors.
+        </p>
+        <p class="m-0">Source code: <a href="https://github.com/catptype/Blue-Archive-Gacha-Simulator">GitHub</a></p>
+      </div>
     </div>
-  </div>
-  <div class="sub-container flex-column" id="footer">
-    <p>
-      Designed, developed, and maintained by <span><a href="https://github.com/catptype/">Catptype</a></span><br>
-      This website is not affiliated with Nexon, Nexon Games or Yostar.<br>
-      All assets used in this website are the property and copyright of the respective authors.
-    </p>
-    <p>Source code: <span><a href="https://github.com/catptype/Blue-Archive-Gacha-Simulator">GitHub</a></span></p>
   </div>
 </div>
 {% endblock %}

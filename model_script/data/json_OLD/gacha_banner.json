@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Standard Banner",
+        "banner_type": "Permanent"
+    },
+    {
+        "name": "Bunny Banner",
+        "banner_type": "Pickup"
+    },
+    {
+        "name": "Casual Banner",
+        "banner_type": "Pickup"
+    },
+    {
+        "name": "Dress Banner",
+        "banner_type": "Pickup"
+    },
+    {
+        "name": "Holiday Banner",
+        "banner_type": "Pickup"
+    },
+    {
+        "name": "Loli Banner",
+        "banner_type": "Pickup"
+    },
+    {
+        "name": "Maid Banner",
+        "banner_type": "Pickup"
+    },
+    {
+        "name": "Onsen Banner",
+        "banner_type": "Pickup"
+    },
+    {
+        "name": "Sport Banner",
+        "banner_type": "Pickup"
+    },
+    {
+        "name": "Summer Banner",
+        "banner_type": "Pickup"
+    }
+]

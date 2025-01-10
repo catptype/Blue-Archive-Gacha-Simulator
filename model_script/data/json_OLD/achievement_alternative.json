@@ -1,0 +1,76 @@
+[
+    {
+        "name": "Abydos Resort Restoration Council",
+        "description": "",
+        "criteria": [
+            { "student": "Ayane",   "version": "Swimsuit" },
+            { "student": "Hoshino", "version": "Swimsuit" },
+            { "student": "Nonomi",  "version": "Swimsuit" },
+            { "student": "Shiroko", "version": "Swimsuit" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Bunny Chaser Aboard",
+        "description": "",
+        "criteria": [
+            { "student": "Akane",  "version": "Bunny" },
+            { "student": "Asuna",  "version": "Bunny" },
+            { "student": "Karin",  "version": "Bunny" },
+            { "student": "Neru",   "version": "Bunny" },
+            { "student": "Toki",   "version": "Bunny" }
+        ],
+        "image": null
+    },
+    {
+        "name": "New Years' Rhapsody No. 68",
+        "description": "",
+        "criteria": [
+            { "student": "Aru",     "version": "New-Year" },
+            { "student": "Haruka",  "version": "New-Year" },
+            { "student": "Kayoko",  "version": "New-Year" },
+            { "student": "Mutsuki", "version": "New-Year" }
+        ],
+        "image": null
+    },
+    {
+        "name": "On Your Mark @ Millennium",
+        "description": "",
+        "criteria": [
+            { "student": "Hibiki",  "version": "Cheerleader" },
+            { "student": "Kotori",  "version": "Cheerleader" },
+            { "student": "Utaha",   "version": "Cheerleader" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Operation Record of No. 227 Hot Spring Resort",
+        "description": "",
+        "criteria": [
+            { "student": "Nodoka",  "version": "Onsen" },
+            { "student": "Shigure", "version": "Onsen" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Rabbits Also Eat Shrimp",
+        "description": "But where can we find shrimp?",
+        "criteria": [
+            { "student": "Miyako",  "version": "Swimsuit" },
+            { "student": "Miyu",    "version": "Swimsuit" },
+            { "student": "Saki",    "version": "Swimsuit" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Summer Lessons Time",
+        "description": "",
+        "criteria": [
+            { "student": "Azusa",   "version": "Swimsuit" },
+            { "student": "Hanako",  "version": "Swimsuit" },
+            { "student": "Hifumi",  "version": "Swimsuit" },
+            { "student": "Koharu",  "version": "Swimsuit" }
+        ],
+        "image": null
+    }
+]

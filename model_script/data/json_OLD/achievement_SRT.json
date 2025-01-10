@@ -1,0 +1,13 @@
+[
+    {
+        "name": "RABBIT Platoon",
+        "description": "",
+        "criteria": [
+            { "student": "Miyako",  "version": "Original" },
+            { "student": "Miyu",    "version": "Original" },
+            { "student": "Moe",     "version": "Original" },
+            { "student": "Saki",    "version": "Original" }
+        ],
+        "image": null
+    }
+]

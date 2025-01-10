@@ -1,4 +1,2 @@
 {% load static %}
-<div class="portrait">
-    <img src="{% if image %}{{ image.url }}{% else %}{% static 'portrait_404.png' %}{% endif %}" alt="{{ name }}_{{ version }}">
-</div>
+<img src="{% url 'serve_student_image' student_id=student_id %}" alt="{{ student_name }}" loading="lazy" height="100px">

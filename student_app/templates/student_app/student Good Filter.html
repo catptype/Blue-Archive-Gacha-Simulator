@@ -1,0 +1,157 @@
+{% extends 'general_app/components/base.html' %} 
+{% load static %}
+
+{% block css %}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/student-style.css' %}"> -->
+{% endblock %}
+
+{% block title %}Student list{% endblock %} 
+
+{% block content %}
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f9f9f9;
+    }
+
+    :root {
+        --r1-color: #6BDFFF;
+        --r2-color: #FFE400;
+        --r3-color: #FEC1F5;
+    }
+
+    /* Filter Section */
+    .school-icon {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        border-radius: 12px;
+    }
+
+    .school-icon:hover, .school-icon.activated {
+        border-color: #007BFF;
+        background-color: #f0f8ff;
+        transform: scale(1.05);
+        box-shadow: 0 3px 6px rgba(0, 123, 255, 0.3);
+    }
+
+    /* Card Section */
+    .character-card {
+        position: relative;
+        overflow: hidden;
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 300px;
+    }
+
+    .character-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .character-card img {
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .character-card:hover img {
+        transform: scale(1.05);
+    }
+
+    /* Rarity Borders */
+    .r1-card {
+        border: 3px solid var(--r1-color);
+    }
+
+    .r2-card {
+        border: 3px solid var(--r2-color);
+    }
+
+    .r3-card {
+        border: 3px solid var(--r3-color);
+    }
+
+    /* Scrollbar Styling */
+    .custom-scroll {
+        overflow-y: auto;
+        height: 75vh;
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 10px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    /* Stars for Rarity */
+    .star {
+        width: 20px;
+        height: 20px;
+        background-image: url({% static 'asset/star_rarity.png' %});
+        background-size: cover;
+    }
+</style>
+
+<div class="container mt-4">
+    <!-- Filter Section -->
+    <div class="d-flex flex-wrap gap-3 mb-4 justify-content-center">
+        <div class="p-3 school-icon activated text-center" id="all" onclick="selectSchool(this)">
+            <img src="{% static 'icons/all.svg' %}" alt="All" class="mb-2" width="40">
+            <p class="m-0">All</p>
+        </div>
+        {% for school in schools %}
+        <div class="p-3 school-icon text-center" id="{{ school.name }}" onclick="selectSchool(this)">
+            <img src="{% url 'serve_school_image' school_id=school.pk %}" alt="{{ school.name }}" class="mb-2" width="40">
+            <p class="m-0">{{ school.name }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Character List -->
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 custom-scroll">
+        {% for student in students %}
+        <div class="col">
+            <div class="character-card r{{ student.rarity }}-card">
+                <img src="{% url 'serve_student_image' student_id=student.pk %}" alt="{{ student.name }}" class="w-100 h-100">
+                <div class="position-absolute top-0 start-0 m-2 d-flex align-items-center">
+                    {% for _ in ""|rjust:student.rarity %}
+                    <div class="star me-1"></div>
+                    {% endfor %}
+                </div>
+                <div class="position-absolute bottom-0 start-50 translate-middle-x bg-white text-center w-100 py-2">
+                    <h6 class="m-0">{{ student.name }} {% if student.version != "Original" %}({{ student.version }}){% endif %}</h6>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function selectSchool(element) {
+        document.querySelectorAll('.school-icon').forEach(icon => icon.classList.remove('activated'));
+        element.classList.add('activated');
+        // Add filter logic here (if needed)
+    }
+</script>
+{% endblock %}
+
+{% block js %}
+<!-- <script defer src="{% static 'js/students.js' %}"></script> -->
+{% endblock %}

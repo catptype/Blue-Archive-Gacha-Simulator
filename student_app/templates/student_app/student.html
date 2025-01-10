@@ -2,50 +2,185 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/student-style.css' %}">
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/student-style.css' %}"> -->
 {% endblock %}
 
 {% block title %}Student list{% endblock %} 
 
 {% block content %}
-<div class="main-container flex-column parallelogram">
-    <!-- Scholl filter -->
-    <div class="flex-wrap">
-        <div class="sub-container flex-center school-icon activated" id="all" onclick="selectSchool(this)">
-            <img class="not-parallelogram" src="{% static 'icons/all.svg' %}" alt="all">
-            <p>All</p>
-        </div>
-        {% for school in schools %}
-        <div class="sub-container flex-center school-icon" id="{{ school.name }}" onclick="selectSchool(this)">
-            <img class="not-parallelogram" src="{{ school.image.url }}" alt="{{ school.name }}">
-            <p>{{ school.name }}</p>
-        </div>
-        {% endfor %}
-    </div>
-    <!-- Student list -->
-    <div class="sub-container" id="student-content">
-        <div class="student-grid">
-            {% for student in students %}
-            <div class="student-card" school="{{ student.school.name }}">
-                {% if student.image %}
-                <img src="{{ student.image.url }}" alt="{{ student.name }}_{{ student.version.name }}" loading="lazy">
-                {% endif %}
-                <div class="hover-layout">
-                    <div class="card-rarity">
-                        {% for _ in ""|rjust:student.rarity %}<span class="star"></span>{% endfor %}
+<style>
+    :root {
+        --r1-color: #6BDFFF;
+        --r2-color: #FFE400;
+        --r3-color: #FEC1F5;
+    }
+
+    /* General Card Styling */
+    .character-card {
+        position: relative;
+        height: 350px; /* Card size */
+        border: 3px solid transparent;
+        border-radius: 12px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        background-color: #fff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .character-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Card Glow Effects on Hover */
+    .r1-card:hover {
+        border-color: var(--r1-color);
+        box-shadow: 0 0 20px var(--r1-color), 0 0 30px rgba(107, 223, 255, 0.5);
+    }
+
+    .r2-card:hover {
+        border-color: var(--r2-color);
+        box-shadow: 0 0 20px var(--r2-color), 0 0 30px rgba(255, 228, 0, 0.5);
+    }
+
+    .r3-card:hover {
+        border-color: var(--r3-color);
+        box-shadow: 0 0 20px var(--r3-color), 0 0 30px rgba(254, 193, 245, 0.5);
+    }
+
+    /* Card Image */
+    .character-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .character-card:hover .character-image {
+        transform: scale(1.05);
+    }
+
+    /* Card Label */
+    .character-label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60px; /* Fixed height for uniformity */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 0 8px;
+        color: black; /* Default label text color */
+        font-weight: bold;
+        font-size: 1.1rem;
+        background-color: rgba(255, 255, 255, 0.9); /* Default white background */
+        text-shadow: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Hover State for Label */
+    .r1-card:hover .character-label {
+        background: linear-gradient(90deg, rgba(107, 223, 255, 0.9), rgba(0, 180, 255, 0.8));
+        color: white;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .r2-card:hover .character-label {
+        background: linear-gradient(90deg, rgba(255, 228, 0, 0.9), rgba(255, 170, 0, 0.8));
+        color: white;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .r3-card:hover .character-label {
+        background: linear-gradient(90deg, rgba(254, 193, 245, 0.9), rgba(245, 120, 220, 0.8));
+        color: white;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .character-label span {
+        font-size: 0.9rem;
+        font-weight: normal;
+        margin-top: 2px;
+    }
+
+    /* Rarity and School Icons */
+    .school-icon, .rarity-stars {
+        position: absolute;
+        top: 10px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        padding: 5px;
+    }
+
+    .school-icon {
+        right: 10px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .rarity-stars {
+        left: 10px;
+        border-radius: 15px;
+        display: flex;
+        gap: 2px;
+        align-items: center;
+        padding: 3px 8px;
+    }
+
+    .star {
+        width: 20px;
+        height: 20px;
+        background-image: url({% static 'asset/star_rarity.png' %});
+        background-size: cover;
+    }
+</style>
+
+<div class="container-fluid container-lg mt-3">
+    <div class="row">
+        <div class="col p-3 overflow-y-scroll" style="height: 75vh;">
+            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-3">
+                
+                <!-- Loop render card -->
+                {% for student in students %}
+                <div class="col">
+                    <div class="character-card r{{ student.rarity }}-card">
+                        <!-- Card image -->
+                        <img class="character-image" src="{% url 'serve_student_image' student_id=student.pk %}" alt="{{ student.name }}_{{ student.version }}" loading="lazy">
+
+                        <!-- School icon -->
+                        <div class="school-icon">
+                            <img src="{% url 'serve_school_image' school_id=student.school_id.pk %}" alt="{{ student.school }}" class="img-fluid">
+                        </div>
+
+                        <!-- Rarity stars -->
+                        <div class="rarity-stars">
+                            {% for _ in ""|rjust:student.rarity %}
+                            <span class="star"></span>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Harmonized label -->
+                        <div class="character-label">
+                            {{ student.name }}
+                            {% if student.version != "Original" %}
+                            <span>({{ student.version }})</span>
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="flex-center card-school">
-                        <img src="{{ student.school.image.url }}" alt="{{ student.school_name }}">
-                    </div>
-                    <p class="card-label">{{ student.name }}{% if student.version.name != "Original" %} ({{ student.version.name }}){% endif %}</p>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
 </div>
+
 {% endblock %}
 
 {% block js %}
-<script defer src="{% static 'js/students.js' %}"></script>
+<!-- <script defer src="{% static 'js/students.js' %}"></script> -->
 {% endblock %}

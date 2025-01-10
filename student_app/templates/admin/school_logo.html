@@ -1,4 +1,2 @@
 {% load static %}
-<div class="school-logo">
-    <img src="{% if image %}{{ image.url }}{% else %}{% static 'portrait_404.png' %}{% endif %}" alt="{{ name }}">
-</div>
+<img src="{% url 'serve_school_image' school_id=school_id %}" alt="{{ school_name }}" loading="lazy" height="100px">

@@ -1,6 +1,24 @@
 @import 'variables.css';
 
 #home-container {
+    & #arona-portrait > img {
+        overflow: hidden;
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+    }
+
+    & strong {
+        color: var(--primary-color);
+        text-shadow: 
+            -1px -1px 0 black,  
+             1px -1px 0 black,
+            -1px  1px 0 black,
+             1px  1px 0 black;
+    }
+}
+
+/* #home-container {
     overflow-y: auto;
 
     & b {
@@ -42,4 +60,4 @@
     & #footer p {
         text-align: center;
     }
-}
+} */

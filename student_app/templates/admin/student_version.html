@@ -2,7 +2,7 @@
 <div class="student-flex">
     {% for student in students %}
     <div class="portrait">
-        <img src="{% if student.image %}{{ student.image.url }}{% else %}{% static 'portrait_404.png' %}{% endif %}" alt="{{ student.name }}_{{ student.version }}">
+        <img src="{% url 'serve_student_image' student_id=student.pk %}" alt="{{ student.name }}" loading="lazy" height="100px">
         <figcaption>{{ student.name }}</figcaption>
     </div>
     {% endfor %}

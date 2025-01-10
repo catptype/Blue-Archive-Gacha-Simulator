@@ -1,0 +1,73 @@
+[
+    {
+        "name": "Cleaning & Clearing",
+        "description": "",
+        "criteria": [
+            { "student": "Akane",  "version": "Original" },
+            { "student": "Asuna",  "version": "Original" },
+            { "student": "Karin",  "version": "Original" },
+            { "student": "Neru",   "version": "Original" },
+            { "student": "Toki",   "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Engineering Club",
+        "description": "",
+        "criteria": [
+            { "student": "Hibiki",  "version": "Original" },
+            { "student": "Kotori",  "version": "Original" },
+            { "student": "Utaha",   "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Game Development Club",
+        "description": "A hero party has been formed!",
+        "criteria": [
+            { "student": "Alice",   "version": "Original" },
+            { "student": "Midori",  "version": "Original" },
+            { "student": "Momoi",   "version": "Original" },
+            { "student": "Yuzu",    "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Seminar",
+        "description": "",
+        "criteria": [
+            { "student": "Koyuki",  "version": "Original" },
+            { "student": "Noa",     "version": "Original" },
+            { "student": "Yuuka",   "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Super Phenomenon Investigation Department",
+        "description": "Decagrammaton",
+        "criteria": [
+            { "student": "Eimi",    "version": "Original" },
+            { "student": "Himari",  "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Training Club",
+        "description": "",
+        "criteria": [
+            { "student": "Sumire",  "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Veritas",
+        "description": "Don't you know that Yuuka weighs 100 kilograms?",
+        "criteria": [
+            { "student": "Chihiro", "version": "Original" },
+            { "student": "Hare",    "version": "Original" },
+            { "student": "Kotama",  "version": "Original" },
+            { "student": "Maki",    "version": "Original" }
+        ],
+        "image": null
+    }
+]

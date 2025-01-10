@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Knowledge Liberation Frontline",
+        "description": "",
+        "criteria": [
+            { "student": "Meru",   "version": "Original" },
+            { "student": "Momiji", "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Red Winter Office",
+        "description": "",
+        "criteria": [
+            { "student": "Cherino", "version": "Original" },
+            { "student": "Marina",  "version": "Original" },
+            { "student": "Tomoe",   "version": "Original" }
+        ],
+        "image": null
+    },
+    {
+        "name": "Special Class No. 227",
+        "description": "",
+        "criteria": [
+            { "student": "Nodoka",  "version": "Original" },
+            { "student": "Shigure", "version": "Original" }
+        ],
+        "image": null
+    }
+]
