@@ -10,6 +10,8 @@
 
 A hobby project for self-learning in full-stack web development. This web application serves as a **Gacha Simulator** that connects its content to the mobile game, Blue Archive.
 
+**NOTE** This project is under overhualing. 
+
 ![Demo](https://raw.githubusercontent.com/catptype/Blue-Archive-Gacha-Simulator/main/docs/Demo.gif)
 
 ## Key Features
