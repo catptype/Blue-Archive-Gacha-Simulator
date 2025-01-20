@@ -4,14 +4,19 @@ from django.contrib.staticfiles import finders
 from django.http import JsonResponse, HttpRequest, HttpResponse, FileResponse, HttpResponseNotFound
 from django.shortcuts import render
 
-from .models import Student, School
+from .models import Student, School, Version
 
 #######################################
 #####   REQUEST -> HTTPRESPONSE   #####
 #######################################
 def student(request:HttpRequest) -> HttpResponse:
-    students = Student.objects.all().order_by('student_name')
-    schools = School.objects.all().order_by('school_name')
+    original_version = Version.objects.get(version_name="Original")
+    students = (
+        Student.objects
+        .filter(version_id=original_version)
+        .order_by('school_id', 'student_name')
+    )
+    schools = School.objects.order_by('school_name')
     context = {
         'students': students,
         'schools': schools,

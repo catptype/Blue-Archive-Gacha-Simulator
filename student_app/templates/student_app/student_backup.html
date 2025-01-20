@@ -3,7 +3,6 @@
 
 {% block css %}
 <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/student-style.css' %}"> -->
-<link rel="stylesheet" type="text/css" href="{% static 'css/layout-debugger.css' %}">
 {% endblock %}
 
 {% block title %}Student list{% endblock %} 
@@ -168,69 +167,60 @@
         }
     }
 
-    .nav-link.active {
-        font-weight: bold;
-        color: #000000; /* Bootstrap primary color */
-    }
-
 </style>
 
-<div class="container-xl p-3" data-bs-spy="scroll" data-bs-target="#schoolMenu" data-bs-offset="100" tabindex="0">
+<div class="container-xl p-3">
+    <!-- Filter Section -->
     <div class="row">
-        <!-- Sidebar -->
-        <nav id="schoolMenu" class="col-3 col-lg-2 d-md-block sidebar sticky-top vh-100">
-            <div class="position-sticky">
-                <ul class="nav p-1 flex-column gap-1">
-                    {% for school in schools %}
-                    <li class="nav-item d-flex bg-light rounded rounded-3">
-                        <img src="{% url 'serve_school_image' school_id=school.pk %}" alt="{{ school.name }}" width="40">
-                        <a class="nav-link flex-fill" href="#{{ school.name }}">{{ school.name }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
+        <div class="d-flex flex-wrap gap-3 mb-4 justify-content-center">
+            <div class="p-2 school-filter activated text-center" id="all" onclick="selectSchool(this)">
+                <img src="{% static 'icons/all.svg' %}" alt="All" class="mb-2" width="40">
+                <p class="m-0">All</p>
             </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="col-9 col-lg-10 px-4">
             {% for school in schools %}
-            <section id="{{ school.name }}" class="mb-3">
-                <h2>{{ school.name }}</h2>
-                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-3">
-                    {% for student in students %}
-                    {% if student.school == school.name %}
-                    <div class="col">
-                        <div class="character-card r{{ student.rarity }}-card">
-                            <!-- Card image -->
-                            <img class="character-image" src="{% url 'serve_student_image' student_id=student.pk %}" alt="{{ student.name }}_{{ student.version }}" loading="lazy">
+            <div class="p-2 school-filter text-center" id="{{ school.name }}" onclick="selectSchool(this)">
+                <img src="{% url 'serve_school_image' school_id=school.pk %}" alt="{{ school.name }}" class="mb-2" width="40">
+                <p class="m-0">{{ school.name }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col p-3" style="height: 720px;">
+            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-10 g-3">
 
-                            <!-- School icon -->
-                            <div class="school-icon">
-                                <img src="{% url 'serve_school_image' school_id=student.school_id.pk %}" alt="{{ student.school }}" class="img-fluid">
-                            </div>
+                <!-- Loop render card -->
+                {% for student in students %}
+                <div class="col">
+                    <div class="character-card r{{ student.rarity }}-card">
+                        <!-- Card image -->
+                        <img class="character-image" src="{% url 'serve_student_image' student_id=student.pk %}" alt="{{ student.name }}_{{ student.version }}" loading="lazy">
 
-                            <!-- Rarity stars -->
-                            <div class="rarity-stars">
-                                {% for _ in ""|rjust:student.rarity %}
-                                <span class="star"></span>
-                                {% endfor %}
-                            </div>
+                        <!-- School icon -->
+                        <div class="school-icon">
+                            <img src="{% url 'serve_school_image' school_id=student.school_id.pk %}" alt="{{ student.school }}" class="img-fluid">
+                        </div>
 
-                            <!-- Harmonized label -->
-                            <div class="character-label">
-                                {{ student.name }}
-                                {% if student.version != "Original" %}
-                                <span>({{ student.version }})</span>
-                                {% endif %}
-                            </div>
+                        <!-- Rarity stars -->
+                        <div class="rarity-stars">
+                            {% for _ in ""|rjust:student.rarity %}
+                            <span class="star"></span>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Harmonized label -->
+                        <div class="character-label">
+                            {{ student.name }}
+                            {% if student.version != "Original" %}
+                            <span>({{ student.version }})</span>
+                            {% endif %}
                         </div>
                     </div>
-                    {% endif %}
-                    {% endfor %}
                 </div>
-            </section>
-            {% endfor %}
-        </main>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
 
