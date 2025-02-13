@@ -1,0 +1,52 @@
+[
+    {
+        "type": "banner",
+        "name": "Standard",
+        "preset": "standard"
+    },
+    {
+        "type": "banner",
+        "name": "Bunny",
+        "preset": "pickup"
+    },
+    {
+        "type": "banner",
+        "name": "Causual",
+        "preset": "pickup"
+    },
+    {
+        "type": "banner",
+        "name": "Dress",
+        "preset": "pickup"
+    },
+    {
+        "type": "banner",
+        "name": "Holiday",
+        "preset": "pickup"
+    },
+    {
+        "type": "banner",
+        "name": "Loli",
+        "preset": "pickup"
+    },
+    {
+        "type": "banner",
+        "name": "Maid",
+        "preset": "pickup"
+    },
+    {
+        "type": "banner",
+        "name": "Onsen",
+        "preset": "pickup"
+    },
+    {
+        "type": "banner",
+        "name": "Sport",
+        "preset": "pickup"
+    },
+    {
+        "type": "banner",
+        "name": "Swimsuit",
+        "preset": "pickup"
+    }
+]
