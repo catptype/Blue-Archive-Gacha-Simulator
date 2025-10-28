@@ -1,4 +1,16 @@
-# Blue Archive Gacha Simulator
+# Blue Archive Gacha Simulator (Archived)
+
+**This repository is now archived and is no longer being maintained.**
+
+A newer, completely overhauled version of this project (V2) is available at the following repository:
+
+[**Blue-Archive-Gacha-Simulator-V2**](https://github.com/catptype/Blue-Archive-Gacha-Simulator-V2)
+
+Please use the V2 repository for the latest code, features, and updates.
+
+---
+
+## Original README
 
 [![Python](https://img.shields.io/badge/Python-3.12.0-blue.svg)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-5.0-blue.svg)](https://www.djangoproject.com/)
@@ -10,7 +22,7 @@
 
 A hobby project for self-learning in full-stack web development. This web application serves as a **Gacha Simulator** that connects its content to the mobile game, Blue Archive.
 
-**NOTE** This project is under overhualing. 
+**NOTE** This project is under overhauling.
 
 ![Demo](https://raw.githubusercontent.com/catptype/Blue-Archive-Gacha-Simulator/main/docs/Demo.gif)
 
@@ -64,5 +76,3 @@ A hobby project for self-learning in full-stack web development. This web applic
             - ~~**Student List**~~ (Complete)
             - **Achievement** (Not Complete)
                 - **TO-DO:** Add description and image files in JSON file
-                
-            
